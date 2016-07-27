@@ -1,0 +1,23 @@
+logging:
+  file: mennyei.log
+  path: /var/log
+  level: 
+    org.neo4j.ogm: DEBUG
+
+spring:
+  jackson:
+    date-format: yyyy.MM.dd HH:mm:ss
+    
+neo4j:
+  address: localhost
+  port: 7474
+  username: neo4j
+  password: admin
+
+---
+# Development profile specific settings
+spring:
+    profiles: development
+neo4j:
+  address: localhost
+  port: 7474

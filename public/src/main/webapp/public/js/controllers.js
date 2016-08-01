@@ -2,78 +2,69 @@ var controllers = angular.module('controllers', []);
 
 controllers
 		.controller(
-				'MemberProfileCtrl',
+				'ClubCtrl',
 				function($scope, $routeParams) {
-					$scope.projects = [
-							{
-								name : "Projekt1",
-								description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet in turpis in semper. Duis vel nulla efficitur, malesuada sapien et, volutpat eros. Vivamus bibendum dignissim porttitor. Mauris scelerisque mattis viverra."
-							},
-							{
-								name : "Projekt2",
-								description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet in turpis in semper. Duis vel nulla efficitur, malesuada sapien et, volutpat eros. Vivamus bibendum dignissim porttitor. Mauris scelerisque mattis viverra."
-							},
-							{
-								name : "Projekt3",
-								description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet in turpis in semper. Duis vel nulla efficitur, malesuada sapien et, volutpat eros. Vivamus bibendum dignissim porttitor. Mauris scelerisque mattis viverra."
-							},
-							{
-								name : "Projekt4",
-								description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet in turpis in semper. Duis vel nulla efficitur, malesuada sapien et, volutpat eros. Vivamus bibendum dignissim porttitor. Mauris scelerisque mattis viverra."
-							},
-							{
-								name : "Projekt5",
-								description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet in turpis in semper. Duis vel nulla efficitur, malesuada sapien et, volutpat eros. Vivamus bibendum dignissim porttitor. Mauris scelerisque mattis viverra."
-							}, ]
-					
 					$scope.categories = [ {
-						name : "Programming",
+						name : "Hazai",
 					}, {
-						name : "Documentation",
-					}, {
-						name : "Management",
-					}, {
-						name : "Language",
-					} ]
+						name : "Idegenbeli",
+					}]
 
-					$scope.labels = [ "Java", "Java Script", "C", "C++", "C#",
-							"PHP", "Scala", "Perl" ];
-					$scope.data = [ 300, 500, 100, 200, 150, 350, 20, 50 ];
+					$scope.labels = [ "Gyozelem", "Dontetlen", "Vereseg" ];
+					$scope.data = [ 10, 3, 1 ];
 
 					$scope.properties = [ {
-						name : "Name",
-						value : "Kiss Pista"
+						name : "Teljes nev",
+						value : "Vamosoroszi Kozsegi Sport Egyesulet"
 					}, {
-						name : "Age",
-						value : "29 years old"
+						name : "Alapitas",
+						value : "1965"
+					},  {
+						name : "Telepules",
+						value : "Vamosoroszi"
+					}]
+					
+					$scope.players = [ {
+						name : "Kis Pista",
+						age : 21,
+						position : "Vedo",
+						leg : "Jobb",
+						number : 10
 					}, {
-						name : "Title",
-						value : "Lead Developer"
+						name : "Kleinheisler Laszlo",
+						age : 22,
+						position : "Kapus",
+						leg : "Jobb",
+						number : 1
 					}, {
-						name : "Start date",
-						value : "2010.02.01"
+						name : "Gera Zoltan",
+						age : 23,
+						position : "Csatar",
+						leg : "Bal",
+						number : 9
 					}, {
-						name : "Actual projects",
-						value : "Project1, Project3"
+						name : "Nagy Adam",
+						age : 24,
+						position : "Kozeppalya",
+						leg : "Jobb/Bal",
+						number : 8
+					} ]
+					
+					$scope.clubs = [ {
+						name : "Vamosoroszi KSE",
+						point : 30,
+					}, {
+						name : "Tarpa SE",
+						point : 21,
+					}, {
+						name : "Kolcse",
+						point : 19,
+					}, {
+						name : "Milota",
+						point : 23,
 					} ]
 
 				});
-
-controllers.controller('MembersListCtrl', function($scope) {
-	$scope.members = [ {
-		name : "Kis Pista",
-		value : 1
-	}, {
-		name : "Kleinheisler Laszlo",
-		value : 2
-	}, {
-		name : "Gera Zoltan",
-		value : 3
-	}, {
-		name : "Nagy Adam",
-		value : 4
-	} ]
-});
 
 controllers.controller('NavbarCtrl', function($scope, $location) {
 	$scope.getClass = function(path) {

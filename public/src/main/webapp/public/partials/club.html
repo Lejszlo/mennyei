@@ -1,0 +1,81 @@
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<!-- 				<h3 class="panel-title">Skills</h3> -->
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="container-fluid">
+						<img data-src="public/images/8.jpg"
+							class="img-responsive img-circle" alt="Profile picture"
+							src="public/images/8.jpg" data-holder-rendered="true"
+							style="width: 200px; height: 200px;">
+						<blockquote>
+							<!-- 							<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."</p> -->
+						</blockquote>
+						<table class="table">
+							<tr ng-repeat="property in properties">
+								<td>{{property.name + ":"}}</td>
+								<td>{{property.value}}</td>
+							</tr>
+						</table>
+						<div style="margin-bottom: 20px">
+							<!-- 							<div class="btn-group" role="group" aria-label="..."> -->
+							<!-- 								<button type="button" class="btn btn-default" ng-repeat="category in categories">{{category.name}}</button> -->
+							<!-- 							</div> -->
+						</div>
+						<canvas id="doughnut" class="chart chart-doughnut"
+							chart-legend="true" chart-data="data" chart-labels="labels"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Jatekosok</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-hover table-striped table-responsive">
+					<tr>
+						<td>Nev</td>
+						<td>Kor</td>
+						<td>Poszt</td>
+						<td>Lab</td>
+						<td>Mez szam</td>
+					</tr>
+					<tr ng-repeat="player in players">
+						<td>{{player.name}}</td>
+						<td>{{player.age}}</td>
+						<td>{{player.position}}</td>
+						<td>{{player.leg}}</td>
+						<td>{{player.number}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Tabella</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-hover table-striped table-responsive">
+					<tr>
+						<td>#</td>
+						<td>Csapat</td>
+						<td>P</td>
+					</tr>
+					<tr ng-repeat="club in clubs | orderBy : '-point'">
+						<td>{{$index + 1}}</td>
+						<td>{{club.name}}</td>
+						<td>{{club.point}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

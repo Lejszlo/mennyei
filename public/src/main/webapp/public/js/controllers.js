@@ -4,12 +4,6 @@ controllers
 		.controller(
 				'ClubCtrl',
 				function($scope, $routeParams) {
-					$scope.categories = [ {
-						name : "Hazai",
-					}, {
-						name : "Idegenbeli",
-					}]
-
 					$scope.labels = [ "Gyozelem", "Dontetlen", "Vereseg" ];
 					$scope.data = [ 10, 3, 1 ];
 
@@ -56,16 +50,16 @@ controllers
 					
 					$scope.clubs = [ {
 						name : "Vamosoroszi KSE",
-						point : 30,
+						point : 30
 					}, {
 						name : "Tarpa SE",
-						point : 21,
+						point : 21
 					}, {
 						name : "Kolcse",
-						point : 19,
+						point : 19
 					}, {
 						name : "Milota",
-						point : 23,
+						point : 23
 					} ]
 
 				});

@@ -11,20 +11,12 @@
 							class="img-responsive img-circle" alt="Profile picture"
 							src="public/images/8.jpg" data-holder-rendered="true"
 							style="width: 200px; height: 200px;">
-						<blockquote>
-							<!-- 							<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."</p> -->
-						</blockquote>
 						<table class="table">
 							<tr ng-repeat="property in properties">
 								<td>{{property.name + ":"}}</td>
 								<td>{{property.value}}</td>
 							</tr>
 						</table>
-						<div style="margin-bottom: 20px">
-							<!-- 							<div class="btn-group" role="group" aria-label="..."> -->
-							<!-- 								<button type="button" class="btn btn-default" ng-repeat="category in categories">{{category.name}}</button> -->
-							<!-- 							</div> -->
-						</div>
 						<canvas id="doughnut" class="chart chart-doughnut"
 							chart-legend="true" chart-data="data" chart-labels="labels"></canvas>
 					</div>
@@ -40,11 +32,12 @@
 			<div class="panel-body">
 				<table class="table table-hover table-striped table-responsive">
 					<tr>
-						<td>Nev</td>
-						<td>Kor</td>
-						<td>Poszt</td>
-						<td>Lab</td>
-						<td>Mez szam</td>
+						<th>Nev</th>
+						<th>Kor</th>
+						<th>Poszt</th>
+						<th>Lab</th>
+						<th>Mez szam</th>
+						<th>MMA index</th>
 					</tr>
 					<tr ng-repeat="player in players">
 						<td>{{player.name}}</td>
@@ -52,6 +45,7 @@
 						<td>{{player.position}}</td>
 						<td>{{player.leg}}</td>
 						<td>{{player.number}}</td>
+						<td>{{player.mennyeiIndex}}</td>
 					</tr>
 				</table>
 			</div>

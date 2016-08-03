@@ -2,23 +2,29 @@
 	<div class="col-md-3">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<!-- 				<h3 class="panel-title">Skills</h3> -->
+				<h3 class="panel-title"><span class="glyphicon glyphicon-home"></span> Adatlap</h3>
 			</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="container-fluid">
-						<img data-src="public/images/8.jpg"
-							class="img-responsive img-circle" alt="Profile picture"
-							src="public/images/8.jpg" data-holder-rendered="true"
-							style="width: 200px; height: 200px;">
-						<table class="table">
-							<tr ng-repeat="property in properties">
-								<td>{{property.name + ":"}}</td>
-								<td>{{property.value}}</td>
-							</tr>
-						</table>
-						<canvas id="doughnut" class="chart chart-doughnut"
-							chart-legend="true" chart-data="data" chart-labels="labels"></canvas>
+						<div class="row" style="margin-bottom: 20px;">
+							<img data-src="{{crest}}"
+								class="img-responsive img-rounded center-block"
+								alt="Crest picture" src="{{crest}}" data-holder-rendered="true"
+								style="width: 200px; height: 200px;">
+						</div>
+						<div class="row">
+							<table class="table">
+								<tr ng-repeat="property in properties">
+									<td>{{property.name + ":"}}</td>
+									<td>{{property.value}}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="row">
+							<canvas id="doughnut" class="chart chart-doughnut"
+								chart-legend="true" chart-data="data" chart-labels="labels"></canvas>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -27,7 +33,26 @@
 	<div class="col-md-6">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title">Jatekosok</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-wrench"></span> Szakmai stab</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-hover table-striped table-responsive">
+					<tr>
+						<th>Nev</th>
+						<th>Kor</th>
+						<th>Beosztas</th>
+					</tr>
+					<tr ng-repeat="stuff in stuffs">
+						<td>{{stuff.name}}</td>
+						<td>{{stuff.age}}</td>
+						<td>{{stuff.title}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Jatekosok</h3>
 			</div>
 			<div class="panel-body">
 				<table class="table table-hover table-striped table-responsive">
@@ -47,6 +72,30 @@
 						<td>{{player.number}}</td>
 						<td>{{player.mennyeiIndex}}</td>
 					</tr>
+					<tr ng-repeat="player in players">
+						<td>{{player.name}}</td>
+						<td>{{player.age}}</td>
+						<td>{{player.position}}</td>
+						<td>{{player.leg}}</td>
+						<td>{{player.number}}</td>
+						<td>{{player.mennyeiIndex}}</td>
+					</tr>
+					<tr ng-repeat="player in players">
+						<td>{{player.name}}</td>
+						<td>{{player.age}}</td>
+						<td>{{player.position}}</td>
+						<td>{{player.leg}}</td>
+						<td>{{player.number}}</td>
+						<td>{{player.mennyeiIndex}}</td>
+					</tr>
+					<tr ng-repeat="player in players">
+						<td>{{player.name}}</td>
+						<td>{{player.age}}</td>
+						<td>{{player.position}}</td>
+						<td>{{player.leg}}</td>
+						<td>{{player.number}}</td>
+						<td>{{player.mennyeiIndex}}</td>
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -54,20 +103,68 @@
 	<div class="col-md-3">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title">Tabella</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-bell"></span> Kovetkezo merkozes</h3>
+			</div>
+			<div class="panel-body">
+
+<!-- 				<h2 class="text-danger">{{nextMatch.date}}</h2> -->
+				<h3>
+					{{nextMatch.home}} (1.) <small>vs</small> {{nextMatch.away}} (2.)
+				</h3>
+				<table class="table table-condensed" style="font-size: 14px">
+					<tbody>
+						<tr>
+							<td>Helyszin:</td>
+							<td>{{nextMatch.place}}</td>
+						</tr>
+						<tr>
+							<td>Kezdes:</td>
+							<td>{{nextMatch.time}}</td>
+						</tr>
+						<tr>
+							<td>Jatekvezetok:</td>
+							<td>{{nextMatch.refree}}</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-align-justify"></span> Tabella | {{competition.name}}</h3>
 			</div>
 			<div class="panel-body">
 				<table class="table table-hover table-striped table-responsive">
-					<tr>
-						<td>#</td>
-						<td>Csapat</td>
-						<td>P</td>
-					</tr>
-					<tr ng-repeat="club in clubs | orderBy : '-point'">
-						<td>{{$index + 1}}</td>
-						<td>{{club.name}}</td>
-						<td>{{club.point}}</td>
-					</tr>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Csapat</th>
+							<th>P</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="club in clubs | orderBy : '-point'">
+							<td>{{$index + 1}}</td>
+							<td>{{club.name}}</td>
+							<td>{{club.point}}</td>
+						</tr>
+						<tr ng-repeat="club in clubs | orderBy : '-point'">
+							<td>{{$index + 1}}</td>
+							<td>{{club.name}}</td>
+							<td>{{club.point}}</td>
+						</tr>
+						<tr ng-repeat="club in clubs | orderBy : '-point'">
+							<td>{{$index + 1}}</td>
+							<td>{{club.name}}</td>
+							<td>{{club.point}}</td>
+						</tr>
+						<tr ng-repeat="club in clubs | orderBy : '-point'">
+							<td>{{$index + 1}}</td>
+							<td>{{club.name}}</td>
+							<td>{{club.point}}</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 		</div>

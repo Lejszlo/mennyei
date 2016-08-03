@@ -2,3 +2,5 @@
 *.settings*
 .classpath*
 .project
+public/.factorypath
+public/.tern-project

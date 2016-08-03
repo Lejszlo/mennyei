@@ -5,6 +5,7 @@
 		<groupId>com.hajdu</groupId>
 		<artifactId>mennyei</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../mennyei</relativePath>
 	</parent>
 	<artifactId>public</artifactId>
 	<packaging>war</packaging>
@@ -25,8 +26,6 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-
-		
 	</dependencies>
 
 	<build>
@@ -34,12 +33,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
+				<version>${spring.boot}</version>
 			</plugin>
 		</plugins>
 	</build>

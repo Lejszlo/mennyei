@@ -1,4 +1,4 @@
-var phonecatApp = angular.module('phonecatApp', [ "chart.js", 'ngRoute', 'controllers', 'filters' ]);
+var phonecatApp = angular.module('phonecatApp', [ 'ngRoute', 'controllers' ]);
 
 phonecatApp.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/clubs/:clubsId', {

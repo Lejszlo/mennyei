@@ -11,22 +11,13 @@ controllers.controller('ClubCtrl', function($scope, $routeParams) {
 	$scope.data = [ 10, 3, 1 ];
 	$scope.crest = "static/images/crest/szszbm/222px-Vámosoroszi_címere.jpg";
 
-	$scope.properties = [ {
-		name : "Teljes nev",
-		value : "Vamosoroszi Kozsegi Sport Egyesulet"
-	}, {
-		name : "Alapitas",
-		value : "1965"
-	}, {
-		name : "Telepules",
-		value : "Vamosoroszi"
-	}, {
-		name : "Telefonszam",
-		value : "+36 70 123 45 67"
-	}, {
-		name : "Email",
-		value : "vamosoroszi@teszt.hu"
-	} ]
+	$scope.club = {
+		name : "Vamosoroszi Kozsegi Sport Egyesulet",
+		foundation : "1965",
+		city : "Vamosoroszi",
+		phone : "+36 70 123 45 67",
+		mail : "vamosoroszi@teszt.hu",
+	}
 
 	$scope.competition = {
 		name : "Kelet-mo. megye II. felnott",

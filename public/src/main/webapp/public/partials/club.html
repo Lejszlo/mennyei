@@ -2,29 +2,48 @@
 	<div class="col-md-3">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-home"></span> Adatlap</h3>
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-home"></span> Adatlap
+				</h3>
 			</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="container-fluid">
-						<div class="row" style="margin-bottom: 20px;">
-							<img data-src="{{crest}}"
-								class="img-responsive img-rounded center-block"
-								alt="Crest picture" src="{{crest}}" data-holder-rendered="true"
-								style="width: 200px; height: 200px;">
-						</div>
-						<div class="row">
-							<table class="table">
-								<tr ng-repeat="property in properties">
-									<td>{{property.name + ":"}}</td>
-									<td>{{property.value}}</td>
-								</tr>
-							</table>
-						</div>
-						<div class="row">
-							<canvas id="doughnut" class="chart chart-doughnut"
-								chart-legend="true" chart-data="data" chart-labels="labels"></canvas>
-						</div>
+						<img data-src="{{crest}}" class="img-responsive img-rounded center-block" alt="Crest picture" src="{{crest}}" data-holder-rendered="true"
+							style="width: 200px; height: 200px;">
+						<table class="table">
+							<tr>
+								<td><strong>Nev</strong></td>
+								<td>{{club.name}}</td>
+							</tr>
+							<tr>
+								<td><strong>Telepules</strong></td>
+								<td>{{club.city}}</td>
+							</tr>
+							<tr>
+								<td><strong>Telefonszam</strong></td>
+								<td>{{club.phone}}</td>
+							</tr>
+							<tr>
+								<td><strong>Email</strong></td>
+								<td><a>{{club.mail}}</a></td>
+							</tr>
+							<tr>
+								<td><strong>Bajnoksag</strong></td>
+								<td>Kelet-Mo. Megyei II.</td>
+							</tr>
+							<tr>
+								<td><strong>Forma</strong></td>
+								<td>
+									<span class="label label-success">W</span>
+									<span class="label label-success">W</span>
+									<span class="label label-danger">L</span>
+									<span class="label label-warning">D</span>
+									<span class="label label-danger">L</span>
+								</td>
+							</tr>
+						</table>
+						<canvas id="doughnut" class="chart chart-doughnut" chart-legend="true" chart-data="data" chart-labels="labels"></canvas>
 					</div>
 				</div>
 			</div>
@@ -33,7 +52,9 @@
 	<div class="col-md-6">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-wrench"></span> Szakmai stab</h3>
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-wrench"></span> Szakmai stab
+				</h3>
 			</div>
 			<div class="panel-body">
 				<table class="table table-hover table-striped table-responsive">
@@ -52,7 +73,9 @@
 		</div>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Jatekosok</h3>
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-user"></span> Jatekosok
+				</h3>
 			</div>
 			<div class="panel-body">
 				<table class="table table-hover table-striped table-responsive">
@@ -65,7 +88,7 @@
 						<th>MMA index</th>
 					</tr>
 					<tr ng-repeat="player in players">
-						<td>{{player.name}}</td>
+						<td>{{player.name}} <span class="label label-danger">2</span></td>
 						<td>{{player.age}}</td>
 						<td>{{player.position}}</td>
 						<td>{{player.leg}}</td>
@@ -89,7 +112,7 @@
 						<td>{{player.mennyeiIndex}}</td>
 					</tr>
 					<tr ng-repeat="player in players">
-						<td>{{player.name}}</td>
+						<td>{{player.name}} <span class="label label-warning">2</span></td>
 						<td>{{player.age}}</td>
 						<td>{{player.position}}</td>
 						<td>{{player.leg}}</td>
@@ -103,11 +126,9 @@
 	<div class="col-md-3">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-bell"></span> Kovetkezo merkozes</h3>
+				<a class="panel-title"><span class="glyphicon glyphicon-bell"></span> Kovetkezo merkozes</a>
 			</div>
 			<div class="panel-body">
-
-<!-- 				<h2 class="text-danger">{{nextMatch.date}}</h2> -->
 				<h3>
 					{{nextMatch.home}} (1.) <small>vs</small> {{nextMatch.away}} (2.)
 				</h3>
@@ -127,12 +148,16 @@
 						</tr>
 					</tbody>
 				</table>
-
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-sm btn-success">Tovabbi reszletek</button>
 			</div>
 		</div>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-align-justify"></span> Tabella | {{competition.name}}</h3>
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-align-justify"></span> Tabella | {{competition.name}}
+				</h3>
 			</div>
 			<div class="panel-body">
 				<table class="table table-hover table-striped table-responsive">

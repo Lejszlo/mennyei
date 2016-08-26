@@ -69,16 +69,43 @@ controllers.controller('ClubCtrl', function($scope, $routeParams) {
 
 	$scope.clubs = [ {
 		name : "Vamosoroszi KSE",
-		point : 30,
+		point : 6,
 	}, {
-		name : "Tarpa SE",
-		point : 21,
+		name : "Tisztaberek SE",
+		point : 6,
 	}, {
-		name : "Kolcse",
-		point : 19,
+		name : "Tarpa SC",
+		point : 4,
 	}, {
-		name : "Milota",
-		point : 23,
+		name : "Csenger FC",
+		point : 4,
+	}, {
+		name : "Nyircsaholy USE",
+		point : 4,
+	}, {
+		name : "Szatmarcseke KSE",
+		point : 4,
+	}, {
+		name : "Csenger FC",
+		point : 4,
+	}, {
+		name : "Csenger FC",
+		point : 4,
+	}, {
+		name : "Csenger FC",
+		point : 4,
+	}, {
+		name : "Csenger FC",
+		point : 4,
+	}, {
+		name : "Csenger FC",
+		point : 4,
+	}, {
+		name : "Csenger FC",
+		point : 4,
+	}, {
+		name : "Csenger FC",
+		point : 4,
 	} ]
 
 	$scope.nextMatch = {
@@ -101,14 +128,9 @@ controllers.controller('NavbarCtrl', function($scope, $location) {
 	}
 });
 
-controllers.controller('BlogCtrl', function($scope, $http) {
-	$http.get('blog/get').success(function(data) {
-		$scope.blogPosts = data;
-	});
-});
 
-controllers.controller('BlogPostCtrl', function($scope, $routeParams, $http) {
-	$http.get('blog/get/' + $routeParams.blogPostId).success(function(data) {
-		$scope.blogPost = data;
-	});
-});
+//controllers.controller('BlogPostCtrl', function($scope, $routeParams, $http) {
+//	$http.get('blog/get/' + $routeParams.blogPostId).success(function(data) {
+//		$scope.blogPost = data;
+//	});
+//});

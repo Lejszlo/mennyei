@@ -57,14 +57,11 @@ controllers.controller('ClubCtrl', function($scope, $routeParams) {
 	$scope.stuffs = [ {
 		name : "Kis Pista",
 		age : 21,
-		title : "Edzo",
-		leg : "Jobb",
-		number : 10,
-		mennyeiIndex : 66
+		title : "Edzo"
 	}, {
 		name : "Kleinheisler Laszlo",
 		age : 22,
-		title : "Igazgato",
+		title : "Igazgato"
 	} ]
 
 	$scope.clubs = [ {
@@ -86,26 +83,32 @@ controllers.controller('ClubCtrl', function($scope, $routeParams) {
 		name : "Szatmarcseke KSE",
 		point : 4,
 	}, {
-		name : "Csenger FC",
-		point : 4,
+		name : "Kolcse SE",
+		point : 3,
 	}, {
-		name : "Csenger FC",
-		point : 4,
+		name : "Merk-Vallaj NSE",
+		point : 3,
 	}, {
-		name : "Csenger FC",
-		point : 4,
+		name : "Tiszakorod SE",
+		point : 3,
 	}, {
-		name : "Csenger FC",
-		point : 4,
+		name : "Tyukod FC",
+		point : 3,
 	}, {
-		name : "Csenger FC",
-		point : 4,
+		name : "Nyirmeggyes Sportklub",
+		point : 2,
 	}, {
-		name : "Csenger FC",
-		point : 4,
+		name : "Nabrad SE",
+		point : 1,
 	}, {
-		name : "Csenger FC",
-		point : 4,
+		name : "Milota SE",
+		point : 1,
+	}, {
+		name : "Csengersimaert KHE",
+		point : 1,
+	}, {
+		name : "Nagydobosi LSE",
+		point : 0,
 	} ]
 
 	$scope.nextMatch = {

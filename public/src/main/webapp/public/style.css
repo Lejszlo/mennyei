@@ -9,3 +9,11 @@ a {
     height: 60px;
     background-color: #f5f5f5;
 }
+
+.last-turn-match-card {
+	cursor: pointer;
+}
+
+.last-turn-match-card:hover {
+	border-color: green;
+}

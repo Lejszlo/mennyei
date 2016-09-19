@@ -1,0 +1,186 @@
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-home"></span> Adatlap
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="container-fluid">
+						<img data-src="{{crest}}" class="img-responsive img-rounded center-block" alt="Crest picture" src="{{crest}}" data-holder-rendered="true"
+							style="width: 200px; height: 200px;">
+						<table class="table">
+							<tr>
+								<td><strong>Nev</strong></td>
+								<td>{{club.name}}</td>
+							</tr>
+							<tr>
+								<td><strong>Telepules</strong></td>
+								<td>{{club.city}}</td>
+							</tr>
+							<tr>
+								<td><strong>Telefonszam</strong></td>
+								<td>{{club.phone}}</td>
+							</tr>
+							<tr>
+								<td><strong>Email</strong></td>
+								<td><a>{{club.mail}}</a></td>
+							</tr>
+							<tr>
+								<td><strong>Bajnoksag</strong></td>
+								<td>Kelet-Mo. Megyei II.</td>
+							</tr>
+							<tr>
+								<td><strong>Forma</strong></td>
+								<td><span class="label label-success">W</span> <span class="label label-success">W</span> <span class="label label-danger">L</span> <span
+									class="label label-warning">D</span> <span class="label label-danger">L</span></td>
+							</tr>
+						</table>
+						<canvas id="doughnut" class="chart chart-doughnut" chart-legend="true" chart-data="data" chart-labels="labels"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-wrench"></span> Szakmai stab
+				</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-hover table-striped table-responsive">
+					<tr>
+						<th>Nev</th>
+						<th>Kor</th>
+						<th>Beosztas</th>
+					</tr>
+					<tr ng-repeat="stuff in stuffs">
+						<td>{{stuff.name}}</td>
+						<td>{{stuff.age}}</td>
+						<td>{{stuff.title}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-sm btn-success">Tovabbi reszletek</button>
+			</div>
+		</div>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-user"></span> Jatekosok
+				</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-hover table-striped table-responsive">
+					<tr>
+						<th>Nev</th>
+						<th>Kor</th>
+						<th>Poszt</th>
+						<th>Lab</th>
+						<th>Mez szam</th>
+						<th>MMA index</th>
+					</tr>
+					<tr ng-repeat="player in players">
+						<td>{{player.name}} <span class="label label-danger">2</span></td>
+						<td>{{player.age}}</td>
+						<td>{{player.position}}</td>
+						<td>{{player.leg}}</td>
+						<td>{{player.number}}</td>
+						<td>{{player.mennyeiIndex}}</td>
+					</tr>
+					<tr ng-repeat="player in players">
+						<td>{{player.name}}</td>
+						<td>{{player.age}}</td>
+						<td>{{player.position}}</td>
+						<td>{{player.leg}}</td>
+						<td>{{player.number}}</td>
+						<td>{{player.mennyeiIndex}}</td>
+					</tr>
+					<tr ng-repeat="player in players">
+						<td>{{player.name}}</td>
+						<td>{{player.age}}</td>
+						<td>{{player.position}}</td>
+						<td>{{player.leg}}</td>
+						<td>{{player.number}}</td>
+						<td>{{player.mennyeiIndex}}</td>
+					</tr>
+					<tr ng-repeat="player in players">
+						<td>{{player.name}} <span class="label label-warning">2</span></td>
+						<td>{{player.age}}</td>
+						<td>{{player.position}}</td>
+						<td>{{player.leg}}</td>
+						<td>{{player.number}}</td>
+						<td>{{player.mennyeiIndex}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-sm btn-success">Tovabbi reszletek</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading" >
+				<a class="panel-title"><span class="glyphicon glyphicon-bell"></span> Kovetkezo merkozes</a>
+			</div>
+			<div class="panel-body">
+				<h3>
+					{{nextMatch.home}} (1.) <small>vs</small> {{nextMatch.away}} (2.)
+				</h3>
+				<table class="table table-condensed" style="font-size: 14px">
+					<tbody>
+						<tr>
+							<td>Helyszin:</td>
+							<td>{{nextMatch.place}}</td>
+						</tr>
+						<tr>
+							<td>Kezdes:</td>
+							<td>{{nextMatch.time}}</td>
+						</tr>
+						<tr>
+							<td>Jatekvezetok:</td>
+							<td>{{nextMatch.refree}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-sm btn-success">Tovabbi reszletek</button>
+			</div>
+		</div>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<a class="panel-title" ng-href="#/competation/1">
+					<span class="glyphicon glyphicon-align-justify"></span> Tabella | {{competition.name}}
+				</a>
+			</div>
+			<div class="panel-body">
+				<table class="table table-hover table-striped table-responsive">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Csapat</th>
+							<th>P</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="club in clubs | orderBy : '-point'">
+							<td>{{$index + 1}}</td>
+							<td>{{club.name}}</td>
+							<td>{{club.point}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<a ng-href="#/competation/1" class="btn btn-sm btn-success">Tovabbi reszletek</a>
+			</div>
+		</div>
+	</div>
+</div>

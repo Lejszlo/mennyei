@@ -14,6 +14,34 @@ a {
 	cursor: pointer;
 }
 
-.last-turn-match-card:hover {
-/* 	border-color: green; */
+body {
+    padding-top: 70px;
+    background-color: #EEEEEE;
+}
+
+.footer {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+}
+
+.nav-pills > li {
+    background-color: #FFFFFF;
+    border-radius: 0px;
+}
+
+.nav-pills > li > a {
+    font-size: 16px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    /* Remove the padding we set earlier */
+    .masthead,
+    .marketing,
+    .footer {
+        padding-right: 0;
+        padding-left: 0;
+    }
 }

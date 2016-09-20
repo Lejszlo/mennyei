@@ -1,74 +1,48 @@
-<div class="container-fluid">
-    <div class="row" style="background-color:#FFFFFF; padding-left: 20px">
-        <div class="col-md-4">
-            <h1><img data-src="{{crest}}" class="img-responsive img-thumbnail" alt="Crest picture"
-                     src="{{crest}}" data-holder-rendered="true"
-                     style="width: 100px; height: 100px;"> Vámosoroszi KSE</h1>
-        </div>
-        <div class="col-md-8" style="height: 100px; vertical-align:middle;">
-            <div class="container">
-                <nav>
-                    <ul class="nav nav-pills nav-justified">
-                        <li role="presentation" class="active"><a href=""><span class="glyphicon glyphicon-user"></span>
-                            Játékosok</a></li>
-                        <li role="presentation"><a href="">Mérkőzések</a></li>
-                        <li role="presentation"><a href="">Tabella</a></li>
-                        <li role="presentation"><a href="">Downloads</a></li>
-                        <li role="presentation"><a href="">About</a></li>
-                        <li role="presentation"><a href="">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <div class="container" style="background-color:#FFFFFF; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1); margin-top: 20px">
-        <div class="row">
-            <div class="panel panel-primary" style="border: 0px;">
-                <div class="panel-body">
-                    <table class="table table-hover table-striped table-responsive">
-                        <tr>
-                            <th>Nev</th>
-                            <th>Kor</th>
-                            <th>Poszt</th>
-                            <th>Lab</th>
-                            <th>Mez szam</th>
-                            <th>MMA index</th>
-                        </tr>
-                        <tr ng-repeat="player in players">
-                            <td>{{player.name}} <span class="label label-danger">2</span></td>
-                            <td>{{player.age}}</td>
-                            <td>{{player.position}}</td>
-                            <td>{{player.leg}}</td>
-                            <td>{{player.number}}</td>
-                            <td>{{player.mennyeiIndex}}</td>
-                        </tr>
-                        <tr ng-repeat="player in players">
-                            <td>{{player.name}}</td>
-                            <td>{{player.age}}</td>
-                            <td>{{player.position}}</td>
-                            <td>{{player.leg}}</td>
-                            <td>{{player.number}}</td>
-                            <td>{{player.mennyeiIndex}}</td>
-                        </tr>
-                        <tr ng-repeat="player in players">
-                            <td>{{player.name}}</td>
-                            <td>{{player.age}}</td>
-                            <td>{{player.position}}</td>
-                            <td>{{player.leg}}</td>
-                            <td>{{player.number}}</td>
-                            <td>{{player.mennyeiIndex}}</td>
-                        </tr>
-                        <tr ng-repeat="player in players">
-                            <td>{{player.name}} <span class="label label-warning">2</span></td>
-                            <td>{{player.age}}</td>
-                            <td>{{player.position}}</td>
-                            <td>{{player.leg}}</td>
-                            <td>{{player.number}}</td>
-                            <td>{{player.mennyeiIndex}}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+<div class="row">
+    <div class="panel panel-primary" style="border: 0px;">
+        <div class="panel-body">
+            <table class="table table-hover table-striped table-responsive">
+                <tr>
+                    <th>Nev</th>
+                    <th>Kor</th>
+                    <th>Poszt</th>
+                    <th>Lab</th>
+                    <th>Mez szam</th>
+                    <th>MMA index</th>
+                </tr>
+                <tr ng-repeat="player in players">
+                    <td>{{player.name}} <span class="label label-danger">2</span></td>
+                    <td>{{player.age}}</td>
+                    <td>{{player.position}}</td>
+                    <td>{{player.leg}}</td>
+                    <td>{{player.number}}</td>
+                    <td>{{player.mennyeiIndex}}</td>
+                </tr>
+                <tr ng-repeat="player in players">
+                    <td>{{player.name}}</td>
+                    <td>{{player.age}}</td>
+                    <td>{{player.position}}</td>
+                    <td>{{player.leg}}</td>
+                    <td>{{player.number}}</td>
+                    <td>{{player.mennyeiIndex}}</td>
+                </tr>
+                <tr ng-repeat="player in players">
+                    <td>{{player.name}}</td>
+                    <td>{{player.age}}</td>
+                    <td>{{player.position}}</td>
+                    <td>{{player.leg}}</td>
+                    <td>{{player.number}}</td>
+                    <td>{{player.mennyeiIndex}}</td>
+                </tr>
+                <tr ng-repeat="player in players">
+                    <td>{{player.name}} <span class="label label-warning">2</span></td>
+                    <td>{{player.age}}</td>
+                    <td>{{player.position}}</td>
+                    <td>{{player.leg}}</td>
+                    <td>{{player.number}}</td>
+                    <td>{{player.mennyeiIndex}}</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

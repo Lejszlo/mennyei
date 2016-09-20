@@ -1,28 +1,9 @@
 var controllers = angular.module('controllers', []);
 
 controllers.controller('ClubCtrl', function($scope, $routeParams) {
-	$scope.categories = [ {
-		name : "Hazai",
-	}, {
-		name : "Idegenbeli",
-	} ]
-
 	$scope.labels = [ "Gyozelem", "Dontetlen", "Vereseg" ];
 	$scope.data = [ 10, 3, 1 ];
 	$scope.crest = "static/images/crest/szszbm/222px-Vámosoroszi_címere.jpg";
-
-	$scope.club = {
-		name : "Vamosoroszi Kozsegi Sport Egyesulet",
-		foundation : "1965",
-		city : "Vamosoroszi",
-		phone : "+36 70 123 45 67",
-		mail : "vamosoroszi@teszt.hu",
-	}
-
-	$scope.competition = {
-		name : "Kelet-mo. megye II. felnott",
-		state : "Szabolcs Szatmar Bereg megye"
-	}
 
 	$scope.players = [ {
 		name : "Kis Pista",
@@ -53,73 +34,6 @@ controllers.controller('ClubCtrl', function($scope, $routeParams) {
 		number : 8,
 		mennyeiIndex : 75
 	} ]
-
-	$scope.stuffs = [ {
-		name : "Kis Pista",
-		age : 21,
-		title : "Edzo"
-	}, {
-		name : "Kleinheisler Laszlo",
-		age : 22,
-		title : "Igazgato"
-	} ]
-
-	$scope.clubs = [ {
-		name : "Vamosoroszi KSE",
-		point : 6,
-	}, {
-		name : "Tisztaberek SE",
-		point : 6,
-	}, {
-		name : "Tarpa SC",
-		point : 4,
-	}, {
-		name : "Csenger FC",
-		point : 4,
-	}, {
-		name : "Nyircsaholy USE",
-		point : 4,
-	}, {
-		name : "Szatmarcseke KSE",
-		point : 4,
-	}, {
-		name : "Kolcse SE",
-		point : 3,
-	}, {
-		name : "Merk-Vallaj NSE",
-		point : 3,
-	}, {
-		name : "Tiszakorod SE",
-		point : 3,
-	}, {
-		name : "Tyukod FC",
-		point : 3,
-	}, {
-		name : "Nyirmeggyes Sportklub",
-		point : 2,
-	}, {
-		name : "Nabrad SE",
-		point : 1,
-	}, {
-		name : "Milota SE",
-		point : 1,
-	}, {
-		name : "Csengersimaert KHE",
-		point : 1,
-	}, {
-		name : "Nagydobosi LSE",
-		point : 0,
-	} ]
-
-	$scope.nextMatch = {
-		home : "Vamosoroszi",
-		away : "Milota",
-		place : "Vamosoroszi sportpalya",
-		date : "3 Nap 6 Ora 22 perc",
-		time : "18:00",
-		refree : "Vak Varju"
-	}
-
 });
 
 controllers.controller('NavbarCtrl', function($scope, $location) {

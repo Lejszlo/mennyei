@@ -1,6 +1,6 @@
 var competitionModule = angular.module('competitionModule', []);
 
-competitionModule.controller('CompetitionCtrl', function($scope, $routeParams) {
+competitionModule.controller('tableCtrl', function($scope) {
 	$scope.calculatePositionHighlights = function(index) {
 		if(index == 0) {
 			return "success";

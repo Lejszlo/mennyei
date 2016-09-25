@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="panel panel-primary" style="border: 0px;">
+        <div class="panel-body">
+            <table class="table table-hover table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Nev</th>
+                        <th>Kor</th>
+                        <th>Poszt</th>
+                        <th>Lab</th>
+                        <th>Mez szam</th>
+                        <th>MMA index</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="player in players">
+                        <td>{{player.name}} <span class="label label-danger">2</span></td>
+                        <td>{{player.age}}</td>
+                        <td>{{player.position}}</td>
+                        <td>{{player.leg}}</td>
+                        <td>{{player.number}}</td>
+                        <td>{{player.mennyeiIndex}}</td>
+                    </tr>
+                    <tr ng-repeat="player in players">
+                        <td>{{player.name}}</td>
+                        <td>{{player.age}}</td>
+                        <td>{{player.position}}</td>
+                        <td>{{player.leg}}</td>
+                        <td>{{player.number}}</td>
+                        <td>{{player.mennyeiIndex}}</td>
+                    </tr>
+                    <tr ng-repeat="player in players">
+                        <td>{{player.name}}</td>
+                        <td>{{player.age}}</td>
+                        <td>{{player.position}}</td>
+                        <td>{{player.leg}}</td>
+                        <td>{{player.number}}</td>
+                        <td>{{player.mennyeiIndex}}</td>
+                    </tr>
+                    <tr ng-repeat="player in players">
+                        <td>{{player.name}} <span class="label label-warning">2</span></td>
+                        <td>{{player.age}}</td>
+                        <td>{{player.position}}</td>
+                        <td>{{player.leg}}</td>
+                        <td>{{player.number}}</td>
+                        <td>{{player.mennyeiIndex}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

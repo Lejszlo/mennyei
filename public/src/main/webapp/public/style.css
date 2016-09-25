@@ -1,6 +1,6 @@
 a {
-	text-decoration: none !important;
-	cursor: pointer;
+    text-decoration: none !important;
+    cursor: pointer;
 }
 
 .footer {
@@ -11,7 +11,7 @@ a {
 }
 
 .last-turn-match-card {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 body {
@@ -35,13 +35,32 @@ body {
     font-size: 16px;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    /* Remove the padding we set earlier */
-    .masthead,
-    .marketing,
-    .footer {
-        padding-right: 0;
-        padding-left: 0;
-    }
+.matchTable > thead > tr > th {
+    text-align: center;
 }
+
+.matchTable > tbody > tr {
+    cursor: pointer;
+}
+
+.matchTable > tbody > tr > td {
+    line-height: 50px;
+    text-align: center;
+}
+
+td.matchResult {
+    width: 5px;
+}
+
+.clubMainContainer {
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    min-height: 700px
+}
+
+.bold {
+    font-weight: bold;
+}
+
+

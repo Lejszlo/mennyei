@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="col-md-10">
+		<div class="panel panel-primary">
+			<div class="panel-heading"></div>
+			<div class="panel-body">
+				<table class="table table-hover table-striped table-responsive">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Csapat</th>
+							<td>Forma</td>
+							<th>M</th>
+							<th>Gy</th>
+							<th>D</th>
+							<th>V</th>
+							<th>LG</th>
+							<th>KG</th>
+							<th>GK</th>
+							<th>P</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-class='calculatePositionHighlights($index)' ng-repeat="club in clubs | orderBy : '-point'">
+							<td>{{$index + 1}}.</td>
+							<td><strong>{{club.name}}</strong></td>
+							<td><span class="label label-success">W</span> <span class="label label-success">W</span> <span class="label label-danger">L</span> <span
+								class="label label-warning">D</span> <span class="label label-danger">L</span></td>
+							<td>{{club.match}}</td>
+							<td>{{club.win}}</td>
+							<td>{{club.draw}}</td>
+							<td>{{club.lose}}</td>
+							<td>{{club.goalScored}}</td>
+							<td>{{club.goalConcerd}}</td>
+							<td>{{club.goalScored - club.goalConcerd}}</td>
+							<td>{{club.win * 3 + club.draw}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<small>M: merkozesek, Gy: Gyozelem, D: Dontetlen, V: Vereseg, LG: Lott Golok, KG: Kapott Golok, GK: GolKulonbseg, P: pont</small>
+			</div>
+		</div>
+	</div>
+</div>

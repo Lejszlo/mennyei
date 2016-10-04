@@ -8,9 +8,8 @@
 	<name>mennyei</name>
 
 	<modules>
-		<module>../admin</module>
-		<module>../public</module>
-		<module>../core</module>
+		<module>public</module>
+		<module>discovery</module>
 	</modules>
 
 	<properties>
@@ -33,6 +32,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
 				<version>${spring.boot}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
+				<version>1.0.3.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

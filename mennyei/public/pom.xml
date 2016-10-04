@@ -7,8 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../mennyei</relativePath>
 	</parent>
-	<artifactId>core</artifactId>
-	<name>core</name>
+	<artifactId>public</artifactId>
+	<packaging>war</packaging>
+	<name>public</name>
 
 	<dependencies>
 		<dependency>
@@ -16,13 +17,20 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot}</version>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

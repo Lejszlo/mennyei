@@ -31,6 +31,7 @@ a {
 	color: #93c54b;
 	cursor: pointer;
 	font-size: small;
+	margin: 2px 0 2px 0;
 }
 
 .list-group-item:hover {

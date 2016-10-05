@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="panel panel-primary" style="border: 0px;">
+        <div class="panel-body">
+            <p><strong><img data-src="static/images/picto/trophy.png"
+                             class="img-rounded"
+                             alt="Klub"
+                             src="static/images/picto/trophy.png"
+                             data-holder-rendered="true"
+                             style="width: 25px; height: 25px;"> Megyei II. osztály - Kelet-Magyarország csoport - 2015/2016</strong></p>
+            <table class="table table-striped table-condensed table-responsive matchTable">
+                <thead>
+                    <tr>
+                        <th># forduló</th>
+                        <th>Dátum</th>
+                        <th>Idopont</th>
+                        <th colspan="2">Hazai</th>
+                        <th>Eredmény</th>
+                        <th colspan="2">Vendég</th>
+                        <th>Reszletek</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="match in matches" ng-class="match.state == 'next' ? 'info' : ''">
+                    <td style="width: 5%"><strong>{{$index + 1}}.</strong></td>
+                    <td style="width: 15%; text-align: left"><span class="glyphicon glyphicon-calendar"></span> {{match.date}}</td>
+                    <td style="width: 15%; text-align: left"><span class="glyphicon glyphicon-time" style="margin-left: 10px"></span> {{match.time}}</td>
+                    <td ><img data-src="{{match.homeLogo}}"
+                             class="img-rounded"
+                             alt="Klub"
+                             src="{{match.homeLogo}}"
+                             data-holder-rendered="true"
+                             style="width: 40px; height: 40px;"></td>
+                    <td ng-class="match.homeResult == 'win' ? 'bold' : ''">{{match.home}}</td>
+                    <td class="matchResult"><strong>{{match.homeScore}} : {{match.awayScore}}</strong></td>
+                    <td ng-class="match.awayResult == 'win' ? 'bold' : ''">{{match.away}}</td>
+                    <td><img data-src="{{match.awayLogo}}"
+                             class="img-rounded"
+                             alt="Klub"
+                             src="{{match.awayLogo}}"
+                             data-holder-rendered="true"
+                             style="width: 40px; height: 40px;"></td>
+                    <td><a ng-href="#/competation/1/matches/1" ng-class="match.state == 'played' ? 'btn btn-primary btn-xs' : 'hidden'">Jelentés</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

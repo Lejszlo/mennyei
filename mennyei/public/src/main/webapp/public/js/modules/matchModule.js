@@ -304,84 +304,6 @@ matchModule.controller('nextMatchesCtrl', function ($scope) {
         time: "2016.11.13 Vasárnap 13:00",
         result: "",
         state: "notplayed"
-    },{
-        turn: 10,
-        homeId: 999,
-        home: "Vámosoroszi",
-        homeLogo: "static/images/crest/szszbm/vamosoroszi_big.jpg",
-        homeScore: "",
-        awayId: 111,
-        away: "Csenger",
-        awayLogo: "static/images/crest/szszbm/csenger_big.jpg",
-        awayScore: "",
-        time: "2016.11.13 Vasárnap 13:00",
-        result: "",
-        state: "notplayed"
-    },{
-        turn: 10,
-        homeId: 999,
-        home: "Vámosoroszi",
-        homeLogo: "static/images/crest/szszbm/vamosoroszi_big.jpg",
-        homeScore: "",
-        awayId: 111,
-        away: "Csenger",
-        awayLogo: "static/images/crest/szszbm/csenger_big.jpg",
-        awayScore: "",
-        time: "2016.11.13 Vasárnap 13:00",
-        result: "",
-        state: "notplayed"
-    },{
-        turn: 10,
-        homeId: 999,
-        home: "Vámosoroszi",
-        homeLogo: "static/images/crest/szszbm/vamosoroszi_big.jpg",
-        homeScore: "",
-        awayId: 111,
-        away: "Csenger",
-        awayLogo: "static/images/crest/szszbm/csenger_big.jpg",
-        awayScore: "",
-        time: "2016.11.13 Vasárnap 13:00",
-        result: "",
-        state: "notplayed"
-    },{
-        turn: 10,
-        homeId: 999,
-        home: "Vámosoroszi",
-        homeLogo: "static/images/crest/szszbm/vamosoroszi_big.jpg",
-        homeScore: "",
-        awayId: 111,
-        away: "Csenger",
-        awayLogo: "static/images/crest/szszbm/csenger_big.jpg",
-        awayScore: "",
-        time: "2016.11.13 Vasárnap 13:00",
-        result: "",
-        state: "notplayed"
-    },{
-        turn: 29,
-        homeId: 999,
-        home: "Vámosoroszi",
-        homeLogo: "static/images/crest/szszbm/vamosoroszi_big.jpg",
-        homeScore: "",
-        awayId: 111,
-        away: "Csenger",
-        awayLogo: "static/images/crest/szszbm/csenger_big.jpg",
-        awayScore: "",
-        time: "2016.11.13 Vasárnap 13:00",
-        result: "",
-        state: "notplayed"
-    },{
-        turn: 30,
-        homeId: 999,
-        home: "Vámosoroszi",
-        homeLogo: "static/images/crest/szszbm/vamosoroszi_big.jpg",
-        homeScore: "",
-        awayId: 111,
-        away: "Csenger",
-        awayLogo: "static/images/crest/szszbm/csenger_big.jpg",
-        awayScore: "",
-        time: "2016.11.13 Vasárnap 13:00",
-        result: "",
-        state: "notplayed"
     }]
 
     $scope.resultClasses = function(match) {
@@ -392,6 +314,10 @@ matchModule.controller('nextMatchesCtrl', function ($scope) {
         }
     }
 });
+
+matchModule.controller('matchDetailsCtrl', function ($scope) {
+
+})
 
 function getClass(result) {
     if(result == "win") {

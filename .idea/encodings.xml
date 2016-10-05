@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/public/src/main/webapp/public/js/modules/clubModule.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/src/main/webapp/public/js/modules/matchModule.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/src/main/webapp/public/partials/club.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/public/src/main/webapp/public/partials/match/details.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/src/main/webapp/public/partials/matches.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/src/main/webapp/public/partials/players.html" charset="UTF-8" />
   </component>

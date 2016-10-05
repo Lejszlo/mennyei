@@ -14,6 +14,39 @@ a {
     cursor: pointer;
 }
 
+.nav > li.dropdown.open {
+    position: static;
+}
+.nav > li.dropdown.open .dropdown-menu {
+    display:table; width: 100%; text-align: center; left:0; right:0;
+}
+.dropdown-menu>li {
+    display: table-cell;
+}
+
+.list-group-item {
+	padding: 5px !important;
+	background-color: #3e3f3a !important;
+	border: none;
+	color: #93c54b;
+	cursor: pointer;
+	font-size: small;
+}
+
+.list-group-item:hover {
+	padding: 5px !important;
+	background-color: #93c54b !important;
+	border: none;
+	color: #3e3f3a;
+}
+
+.list-group-item.active {
+	padding: 5px !important;
+	background-color: #93c54b !important;
+	border: none;
+	color: #3e3f3a;
+}
+
 body {
     padding-top: 70px;
     background-color: #EEEEEE;

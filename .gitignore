@@ -4,3 +4,6 @@
 .project
 public/.factorypath
 public/.tern-project
+*.idea*
+*.iml*
+*target*

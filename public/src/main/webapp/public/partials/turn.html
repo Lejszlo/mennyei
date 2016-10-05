@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="panel panel-primary" style="border: 0px;">
+        <div class="panel-body">
+            <table class="table table-hover table-striped table-responsive">
+                <thead>
+                <tr><th colspan="5"><h4>2016.09.21. SZOMBAT</h4></th></tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="match in matches0921">
+                    <td class="matchHomeLogo"><img data-src="{{match.homeLogo}}"
+                                                   class="img-rounded"
+                                                   alt="Klub"
+                                                   src="{{match.homeLogo}}"
+                                                   data-holder-rendered="true"
+                                                   style="width: 50px; height: 50px;"></td>
+                    <td class="matchHome match">{{match.home}} ({{match.homePos}}.)
+                    </td>
+                    <td class="matchDate text-primary"><strong>{{match.time}}</strong></td>
+                    <td class="matchAway match">{{match.away }} ({{match.awayPos}}.)
+                    </td>
+                    <td class="matchAwayLogo"><img data-src="{{match.awayLogo}}"
+                                                   class="img-rounded"
+                                                   alt="Klub"
+                                                   src="{{match.awayLogo}}"
+                                                   data-holder-rendered="true"
+                                                   style="width: 50px; height: 50px;"></td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table table-hover table-striped table-responsive">
+                <thead>
+                <tr><th colspan="5"><h4>2016.09.22. VASÁRNAP</h4></th></tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="match in matches0922">
+                    <td  class="matchHomeLogo"><img data-src="{{match.homeLogo}}"
+                                                    class="img-rounded"
+                                                    alt="Klub"
+                                                    src="{{match.homeLogo}}"
+                                                    data-holder-rendered="true"
+                                                    style="width: 50px; height: 50px;"></td>
+                    <td class="matchHome match">{{match.home}} ({{match.homePos}}.)
+                    </td>
+                    <td class="matchDate text-primary"><strong>{{match.time}}</strong></td>
+                    <td class="matchAway match">{{match.away }} ({{match.awayPos}}.)
+                    </td>
+                    <td class="matchAwayLogo"><img data-src="{{match.awayLogo}}"
+                                                   class="img-rounded"
+                                                   alt="Klub"
+                                                   src="{{match.awayLogo}}"
+                                                   data-holder-rendered="true"
+                                                   style="width: 50px; height: 50px;"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

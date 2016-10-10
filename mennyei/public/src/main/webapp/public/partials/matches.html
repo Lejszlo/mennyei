@@ -16,7 +16,7 @@
                         <th colspan="2">Hazai</th>
                         <th>Eredmény</th>
                         <th colspan="2">Vendég</th>
-                        <th>Reszletek</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,7 +25,7 @@
                     <td style="width: 15%; text-align: left"><span class="glyphicon glyphicon-calendar"></span> {{match.date}}</td>
                     <td style="width: 15%; text-align: left"><span class="glyphicon glyphicon-time" style="margin-left: 10px"></span> {{match.time}}</td>
                     <td ><img data-src="{{match.homeLogo}}"
-                             class="img-rounded"
+                             class="img-thumbnail"
                              alt="Klub"
                              src="{{match.homeLogo}}"
                              data-holder-rendered="true"
@@ -34,12 +34,12 @@
                     <td class="matchResult"><strong>{{match.homeScore}} : {{match.awayScore}}</strong></td>
                     <td ng-class="match.awayResult == 'win' ? 'bold' : ''">{{match.away}}</td>
                     <td><img data-src="{{match.awayLogo}}"
-                             class="img-rounded"
+                             class="img-thumbnail"
                              alt="Klub"
                              src="{{match.awayLogo}}"
                              data-holder-rendered="true"
                              style="width: 40px; height: 40px;"></td>
-                    <td><a ng-href="#/competation/1/matches/1" ng-class="match.state == 'played' ? 'btn btn-primary btn-xs' : 'hidden'">Jelentés</a></td>
+                    <td><a ng-href="#/competation/1/matches/1" ng-class="match.state == 'played' ? 'btn btn-success btn-xs' : 'hidden'">Jegyzokonyv</a></td>
                 </tr>
                 </tbody>
             </table>

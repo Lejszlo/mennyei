@@ -129,4 +129,10 @@ td.matchResult {
     text-align: center;
 }
 
+.matchDetails > dt {
+	width: 100px;
+}
 
+.matchDetails > dd {
+	margin-left: 120px; 
+}

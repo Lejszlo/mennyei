@@ -1,4 +1,4 @@
-package publicweb;
+package com.mennyei;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

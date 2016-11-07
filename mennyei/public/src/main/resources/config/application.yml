@@ -1,8 +1,6 @@
 logging:
   file: mennyei.log
   path: /var/log
-  level: 
-    org.neo4j.ogm: DEBUG
 
 spring:
   jackson:

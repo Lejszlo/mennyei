@@ -1,17 +1,11 @@
 package com.mennyei.core.transfer.infrastructure;
 
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.mennyei.core.transfer.aggregator.Transfer;
 import com.mennyei.core.transfer.service.TransferRepository;
 
-@Repository
-public class TransferMemoryDao implements TransferRepository {
-
-	@Override
-	public void save(Transfer transfer) {
-		// TODO Auto-generated method stub
-	}
+public interface TransferMemoryDao extends TransferRepository, JpaRepository<Transfer, Long> {
 
 }

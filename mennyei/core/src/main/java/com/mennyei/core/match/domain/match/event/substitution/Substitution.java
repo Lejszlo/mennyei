@@ -1,7 +1,7 @@
 package com.mennyei.core.match.domain.match.event.substitution;
 
 import com.mennyei.core.match.domain.match.event.MatchEvent;
-import com.mennyei.core.player.Player;
+import com.mennyei.core.player.domain.Player;
 
 public class Substitution extends MatchEvent {
 	private Player inner;

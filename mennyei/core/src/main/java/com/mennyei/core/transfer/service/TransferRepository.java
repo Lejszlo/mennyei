@@ -7,5 +7,5 @@ import com.mennyei.core.transfer.aggregator.Transfer;
 @Repository
 public interface TransferRepository {
 
-	void save(Transfer transfer);
+	Transfer save(Transfer transfer);
 }

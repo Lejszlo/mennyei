@@ -13,20 +13,5 @@ public class PlayerWithStats {
 	
 	private int age;
 	
-	private int yellowCardAmount;
-	
-	private int redCardAmount;
-	
-	private int scoredGoalAmount;
-	
-	private int playedMinute;
-	
-	private int playedMatches;
-	
-	private int substitutionIn;
-	
-	private int substitutionOut;
-	
-	private int starter;
-	
+	private PlayerMatchStatisticData matchStatisticData;
 }

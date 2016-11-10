@@ -1,4 +1,4 @@
-package com.mennyei.core.match;
+package com.mennyei.core.match.domain;
 
 import lombok.Builder;
 import lombok.Getter;

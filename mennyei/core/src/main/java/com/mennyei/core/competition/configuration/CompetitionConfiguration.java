@@ -12,7 +12,7 @@ import io.eventuate.EventuateAggregateStore;
 public class CompetitionConfiguration {
 
 	@Bean
-	public CompetitionRepository clubRepository(EventuateAggregateStore eventStore) {
+	public CompetitionRepository competitionRepository(EventuateAggregateStore eventStore) {
 		return new CompetitionRepository(CompetitionAggregator.class, eventStore);
 	}
 	

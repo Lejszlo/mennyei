@@ -1,27 +1,17 @@
 package com.mennyei.core.team.domain;
 
-import javax.persistence.Id;
-
 import com.mennyei.core.team.commands.ClubCommand;
 
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Builder
+@Data
 public class Club extends ReflectiveMutableCommandProcessingAggregate<Club, ClubCommand> {
 	
-	@Setter
-	@Id
-	private Long id;
-	
-	@Getter
-	@Setter
 	private String fullName;
 	
-	@Getter
-	@Setter
 	private String shortName;
 	
 //	private Set<Player> players;

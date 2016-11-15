@@ -2,9 +2,6 @@ package com.mennyei.core.player.domain;
 
 import java.time.LocalDate;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,8 +9,6 @@ import lombok.Data;
 @Builder
 public class Player {
 	
-	@Id
-	@GeneratedValue
 	private Long id;
 
 	private String name;

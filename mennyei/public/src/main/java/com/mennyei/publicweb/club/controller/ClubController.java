@@ -1,6 +1,7 @@
 package com.mennyei.publicweb.club.controller;
 
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class ClubController {
 	
 	
 	@GetMapping("/{clubId}/players")
-	public Set<PlayerMatchStatisticData> getClubPlayers(@PathVariable("clubId") Club club, @PathVariable("competationId") Competition competation) {
+	public Set<PlayerMatchStatisticData> getClubPlayers(@PathVariable("clubId") Club club, @PathVariable("competationId") Competition competation) throws InterruptedException, ExecutionException {
 		
 		fillDatabase.fillTestMemoryDB();
 		

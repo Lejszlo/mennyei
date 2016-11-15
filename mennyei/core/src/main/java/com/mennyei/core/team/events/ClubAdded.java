@@ -8,7 +8,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class ClubRegistered implements Event {
+public class ClubAdded implements Event {
 
 	private Club club;
 	

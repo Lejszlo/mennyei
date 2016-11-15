@@ -7,7 +7,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class CompetationRegistered implements CompetitionEvent {
+public class CompetationAdded implements CompetitionEvent {
 
 	private Competition competition;
 	

@@ -5,7 +5,7 @@ import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mennyei.core.team.commands.RegisterClubCommand;
+import com.mennyei.core.team.commands.AddClubCommand;
 import com.mennyei.core.team.domain.Club;
 import com.mennyei.core.team.domain.ClubAggregate;
 import com.mennyei.core.team.infrastructure.ClubRepository;
@@ -19,7 +19,7 @@ public class ClubService {
 	private ClubRepository clubRepository;
 
 	public CompletableFuture<EntityWithIdAndVersion<ClubAggregate>> registerClub(Club club) {
-		return clubRepository.save(RegisterClubCommand.builder().club(club).build());
+		return clubRepository.save(AddClubCommand.builder().club(club).build());
 	}
 
 }

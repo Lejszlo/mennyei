@@ -9,7 +9,7 @@ import lombok.Value;
 @Value
 @EqualsAndHashCode(callSuper=false)
 @Builder
-public class RegisterCompetitionCommand extends CompetitionCommand {
+public class AddCompetitionCommand extends CompetitionCommand {
 	
 	private Competition competition;
 }

@@ -1,0 +1,15 @@
+package com.mennyei.core.competition.commands;
+
+import com.mennyei.core.competition.domain.Competition;
+
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
+
+@Value
+@EqualsAndHashCode(callSuper=false)
+@Builder
+public class RegisterCompetitionCommand extends CompetitionCommand {
+	
+	private Competition competition;
+}

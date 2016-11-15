@@ -4,19 +4,21 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 import com.mennyei.core.match.domain.match.event.MatchEvent;
-import com.mennyei.core.team.domain.Team;
+import com.mennyei.core.team.domain.Club;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class Match {
 	private LocalDateTime matchDate;
 	
 	private Result result;
 	
-	private Team home;
+	private Club home;
 	
-	private Team away;
+	private Club away;
 	
 	private Set<MatchEvent> events;
 	

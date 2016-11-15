@@ -19,10 +19,9 @@ public class PlayerMatchStatisticService {
 		return PlayerMatchStatisticData.builder()
 										.yellowCardAmount(matchPlayerStatisticService.getCardEventsByPlayer(match, player, CardEventType.YELLOW).size())
 										.redCardAmount(matchPlayerStatisticService.getCardEventsByPlayer(match, player, CardEventType.RED).size())
-										.substitutionIn(matchPlayerStatisticService.getSubstutuionInEventsByPlayer(match, player).size())
-										.substitutionOut(matchPlayerStatisticService.getSubstutuionOutEventsByPlayer(match, player).size())
+										.substitutionIn(matchPlayerStatisticService.playerWasSubstutuionIn(match, player))
+										.substitutionOut(matchPlayerStatisticService.playerWasSubstutuionOut(match, player))
 										.build();
-		
 	}
 	
 }

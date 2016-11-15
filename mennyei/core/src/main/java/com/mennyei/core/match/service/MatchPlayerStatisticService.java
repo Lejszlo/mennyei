@@ -1,5 +1,6 @@
 package com.mennyei.core.match.service;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,21 +36,31 @@ public class MatchPlayerStatisticService {
 	}
 	
 	@NonNull
-	public Set<MatchEvent> getSubstutuionInEventsByPlayer(Match match, Player player) {
+	public Optional<Substitution> getSubstutuionInEventsByPlayer(Match match, Player player) {
 		Set<MatchEvent> events = getEventsByPlayer(match, player, MatchEventType.SUBSTITUTION);
 		return events.stream()
 						.map(event -> (Substitution) event)
 						.filter(event -> player.equals(event.getInner()))
-						.collect(Collectors.toSet());
+						.findFirst();
 	}
 	
 	@NonNull
-	public Set<MatchEvent> getSubstutuionOutEventsByPlayer(Match match, Player player) {
+	public int playerWasSubstutuionIn(Match match, Player player) {
+		return getSubstutuionInEventsByPlayer(match, player).isPresent() ? 1 : 0;
+	}
+	
+	@NonNull
+	public Optional<Substitution> getSubstutuionOutEventsByPlayer(Match match, Player player) {
 		Set<MatchEvent> events = getEventsByPlayer(match, player, MatchEventType.SUBSTITUTION);
 		return events.stream()
 						.map(event -> (Substitution) event)
 						.filter(event -> player.equals(event.getOuter()))
-						.collect(Collectors.toSet());
+						.findFirst();
+	}
+	
+	@NonNull
+	public int playerWasSubstutuionOut(Match match, Player player) {
+		return getSubstutuionOutEventsByPlayer(match, player).isPresent() ? 1 : 0;
 	}
 	
 }

@@ -1,25 +1,19 @@
-package com.mennyei.core.transfer.aggregator;
+package com.mennyei.core.transfer.domain;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.mennyei.core.player.domain.Player;
-import com.mennyei.core.team.domain.Team;
+import com.mennyei.core.team.domain.Club;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
 public class Transfer {
 	
 	@Id
@@ -29,10 +23,10 @@ public class Transfer {
 	private LocalDate transferDate;
 	
 	@ManyToOne
-	private Team sourceTeam;
+	private Club sourceTeam;
 	
 	@ManyToOne
-	private Team targetTeam;
+	private Club targetTeam;
 
 	@ManyToOne
 	private Player player;

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mennyei.core.FillDatabase;
-import com.mennyei.publicweb.club.dto.PlayerWithStats;
+import com.mennyei.core.competition.domain.Competition;
+import com.mennyei.core.team.domain.Club;
+import com.mennyei.publicweb.club.dto.PlayerMatchStatisticData;
 import com.mennyei.publicweb.club.service.ClubService;
 
 
@@ -25,11 +27,11 @@ public class ClubController {
 	
 	
 	@GetMapping("/{clubId}/players")
-	public Set<PlayerWithStats> getClubPlayers(@PathVariable Long clubId) {
+	public Set<PlayerMatchStatisticData> getClubPlayers(@PathVariable("clubId") Club club, @PathVariable("competationId") Competition competation) {
 		
-		fillDatabase.fillTeam();
+		fillDatabase.fillTestMemoryDB();
 		
-		return clubService.getClubPlayers(clubId);
+		return clubService.getClubPlayersWithMatchStatisticDatas(club, competation);
 	}
 	
 }

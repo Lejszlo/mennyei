@@ -5,10 +5,6 @@ logging:
 spring:
   jackson:
     date-format: yyyy.MM.dd HH:mm:ss
-   
-eventuate:
-  apiKeyId: S1HNE4I1WT6H14VE4AXCKWEHX
-  apiKeySecret: I402QEvjYdWI/MshyVgId2e64enBrOghpnz/RHT0/Z8
     
 ---
 # Development profile specific settings

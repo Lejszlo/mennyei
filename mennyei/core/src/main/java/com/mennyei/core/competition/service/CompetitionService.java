@@ -11,7 +11,7 @@ import com.mennyei.core.competition.commands.AddCompetitionCommand;
 import com.mennyei.core.competition.commands.RegisterClubCommand;
 import com.mennyei.core.competition.domain.Competition;
 import com.mennyei.core.competition.domain.CompetitionAggregator;
-import com.mennyei.core.competition.infrastructure.CompetitionRepository;
+import com.mennyei.core.competition.infrastructure.CompetitionAggregateRepository;
 
 import io.eventuate.EntityWithIdAndVersion;
 
@@ -19,7 +19,7 @@ import io.eventuate.EntityWithIdAndVersion;
 public class CompetitionService {
 
 	@Autowired
-	private CompetitionRepository competitionRepository;
+	private CompetitionAggregateRepository competitionRepository;
 
 	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> registerCompetition(Competition competition) {
 		return competitionRepository.save(AddCompetitionCommand.builder().competition(competition).build());

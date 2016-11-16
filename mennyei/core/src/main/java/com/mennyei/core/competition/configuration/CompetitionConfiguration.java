@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.mennyei.core.competition.domain.CompetitionAggregator;
-import com.mennyei.core.competition.infrastructure.CompetitionRepository;
+import com.mennyei.core.competition.infrastructure.CompetitionAggregateRepository;
 
 import io.eventuate.EventuateAggregateStore;
 
@@ -12,8 +12,8 @@ import io.eventuate.EventuateAggregateStore;
 public class CompetitionConfiguration {
 
 	@Bean
-	public CompetitionRepository competitionRepository(EventuateAggregateStore eventStore) {
-		return new CompetitionRepository(CompetitionAggregator.class, eventStore);
+	public CompetitionAggregateRepository competitionRepository(EventuateAggregateStore eventStore) {
+		return new CompetitionAggregateRepository(CompetitionAggregator.class, eventStore);
 	}
 	
 }

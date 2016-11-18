@@ -9,7 +9,7 @@ import com.mennyei.core.competition.commands.AddCompetitionCommand;
 import com.mennyei.core.competition.commands.CompetitionCommand;
 import com.mennyei.core.competition.commands.RegisterClubCommand;
 import com.mennyei.core.competition.events.ClubRegistered;
-import com.mennyei.core.competition.events.CompetationAdded;
+import com.mennyei.core.competition.events.CompetitionAdded;
 
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
@@ -19,7 +19,7 @@ public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAgg
 	private Set<String> clubIds = new HashSet<>();
 	
 	public List<Event> process(AddCompetitionCommand addCompetitionCommand) {
-		return Arrays.asList(CompetationAdded.builder().competition(addCompetitionCommand.getCompetition()).build());
+		return Arrays.asList(CompetitionAdded.builder().competition(addCompetitionCommand.getCompetition()).build());
 	}
 	
 	public List<Event> process(RegisterClubCommand registerClubCommand) {
@@ -27,10 +27,10 @@ public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAgg
 	}
 	
 	public void apply(ClubRegistered clubRegistered) {
-		//TODO check the competition club amount limit
 		clubIds.addAll(clubRegistered.getClubIds());
 	}
 	
+	public void apply(CompetitionAdded competationAdded) {}
 	
 	
 	

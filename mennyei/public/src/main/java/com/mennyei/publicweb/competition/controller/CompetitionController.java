@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mennyei.core.FillDatabase;
 import com.mennyei.publicweb.competition.dto.CompetitionClubListQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
 
@@ -17,10 +18,13 @@ public class CompetitionController {
 	
 	@Autowired
 	private CompetitionMongoRepository competitionMongoRepository;
+	
+	@Autowired
+	private FillDatabase fillDatabase;
 
-	@GetMapping("/competition/{competitionId}/")
-	public CompetitionClubListQuery getCompetation(@PathVariable("competationId") Long competationId) throws InterruptedException, ExecutionException {
+	@GetMapping("/{competitionId}/")
+	public CompetitionClubListQuery getCompetation(@PathVariable("competitionId") Long competationId) throws InterruptedException, ExecutionException {
+		fillDatabase.fillTestMemoryDB();
 		return competitionMongoRepository.findAll().get(0);
 	}
-	
 }

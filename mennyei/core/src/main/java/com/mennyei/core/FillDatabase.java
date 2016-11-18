@@ -21,7 +21,7 @@ public class FillDatabase {
 	
 	public void fillTestMemoryDB() throws InterruptedException, ExecutionException {
 		Competition competition = Competition.builder().name("Kelet Magyarország").build();
-		String competitionId = competitionService.registerCompetition(competition).get().getEntityId();
+		String competitionId = competitionService.addCompetition(competition).get().getEntityId();
 		
 		
 		Club vamosoroszi = Club.builder().fullName("Vámosoroszi").shortName("VKSE").build();

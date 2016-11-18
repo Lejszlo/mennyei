@@ -1,15 +1,22 @@
 package com.mennyei.core.competition.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
 
-@Data
 @Builder
+@Value
+@AllArgsConstructor
 public class Competition {
 	
 //	private List<Turn> turns = new ArrayList<>();
 	
 	private String name;
+	
+//	@JsonPOJOBuilder(withPrefix = "")
+//	public static final class CompetitionBuilder {
+//		
+//	}
 	
 //	private Set<Club> teams;
 

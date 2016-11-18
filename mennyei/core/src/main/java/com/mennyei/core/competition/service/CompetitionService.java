@@ -21,7 +21,7 @@ public class CompetitionService {
 	@Autowired
 	private CompetitionAggregateRepository competitionRepository;
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> registerCompetition(Competition competition) {
+	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> addCompetition(Competition competition) {
 		return competitionRepository.save(AddCompetitionCommand.builder().competition(competition).build());
 	}
 

@@ -3,6 +3,7 @@ package com.mennyei.publicweb.competition.service;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.mennyei.core.competition.domain.Competition;
 import com.mennyei.core.competition.events.ClubRegistered;
@@ -14,7 +15,8 @@ import io.eventuate.DispatchedEvent;
 import io.eventuate.EventHandlerMethod;
 import io.eventuate.EventSubscriber;
 
-@EventSubscriber(id="clubsQueryWorkflow")
+@EventSubscriber(id="clubs")
+@Component
 public class ClubsQueryWorkflow {
 	
 	@Autowired

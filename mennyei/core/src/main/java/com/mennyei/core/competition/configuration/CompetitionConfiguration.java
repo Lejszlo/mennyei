@@ -1,12 +1,10 @@
 package com.mennyei.core.competition.configuration;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 import com.mennyei.core.competition.domain.CompetitionAggregator;
 import com.mennyei.core.competition.infrastructure.CompetitionAggregateRepository;
-
 import io.eventuate.EventuateAggregateStore;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class CompetitionConfiguration {

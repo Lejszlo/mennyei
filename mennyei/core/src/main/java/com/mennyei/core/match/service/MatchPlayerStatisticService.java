@@ -1,11 +1,5 @@
 package com.mennyei.core.match.service;
 
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import com.mennyei.core.match.domain.Match;
 import com.mennyei.core.match.domain.match.event.MatchEvent;
 import com.mennyei.core.match.domain.match.event.MatchEventType;
@@ -13,8 +7,12 @@ import com.mennyei.core.match.domain.match.event.card.CardEvent;
 import com.mennyei.core.match.domain.match.event.card.CardEventType;
 import com.mennyei.core.match.domain.match.event.substitution.Substitution;
 import com.mennyei.core.player.domain.Player;
-
 import lombok.NonNull;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class MatchPlayerStatisticService {

@@ -1,9 +1,9 @@
 package com.mennyei.core.competition.commands;
 
-import java.util.Set;
-
 import lombok.Builder;
 import lombok.Value;
+
+import java.util.Set;
 
 @Builder
 @Value

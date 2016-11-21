@@ -2,7 +2,6 @@ package com.mennyei.core.team.infrastructure;
 
 import com.mennyei.core.team.commands.ClubCommand;
 import com.mennyei.core.team.domain.ClubAggregate;
-
 import io.eventuate.AggregateRepository;
 import io.eventuate.EventuateAggregateStore;
 

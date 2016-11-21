@@ -2,7 +2,6 @@ package com.mennyei.core.competition.infrastructure;
 
 import com.mennyei.core.competition.commands.CompetitionCommand;
 import com.mennyei.core.competition.domain.CompetitionAggregator;
-
 import io.eventuate.AggregateRepository;
 import io.eventuate.EventuateAggregateStore;
 

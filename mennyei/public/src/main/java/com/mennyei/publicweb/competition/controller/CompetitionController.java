@@ -1,16 +1,16 @@
 package com.mennyei.publicweb.competition.controller;
 
-import java.util.concurrent.ExecutionException;
-
+import com.mennyei.core.FillDatabase;
+import com.mennyei.publicweb.competition.dto.CompetitionQuery;
+import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mennyei.core.FillDatabase;
-import com.mennyei.publicweb.competition.dto.CompetitionClubListQuery;
-import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RequestMapping("/competition/")
 @RestController
@@ -22,9 +22,13 @@ public class CompetitionController {
 	@Autowired
 	private FillDatabase fillDatabase;
 
-	@GetMapping("/{competitionId}/")
-	public CompetitionClubListQuery getCompetation(@PathVariable("competitionId") Long competationId) throws InterruptedException, ExecutionException {
+	@GetMapping("/filldatabase")
+	public void filldatabase() throws InterruptedException, ExecutionException {
 		fillDatabase.fillTestMemoryDB();
-		return competitionMongoRepository.findAll().get(0);
+	}
+
+	@GetMapping("/{competitionId}")
+	public List<CompetitionQuery> getCompetation(@PathVariable("competitionId") String competationId)  {
+		return competitionMongoRepository.findAll();
 	}
 }

@@ -1,12 +1,11 @@
 package com.mennyei.core.transfer.domain;
 
-import java.time.LocalDate;
-
 import com.mennyei.core.player.domain.Player;
 import com.mennyei.core.team.domain.Club;
-
 import lombok.Builder;
 import lombok.Data;
+
+import java.time.LocalDate;
 
 @Data
 @Builder

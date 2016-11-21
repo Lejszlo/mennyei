@@ -1,21 +1,20 @@
 package com.mennyei.core;
 
-import java.util.concurrent.ExecutionException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.mennyei.core.competition.domain.Competition;
 import com.mennyei.core.competition.service.CompetitionService;
 import com.mennyei.core.team.domain.Club;
 import com.mennyei.core.team.service.ClubService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class FillDatabase {
 	
 	@Autowired
 	private CompetitionService competitionService;
-	
+
 	@Autowired
 	private ClubService clubService;
 	
@@ -25,7 +24,7 @@ public class FillDatabase {
 		
 		
 		Club vamosoroszi = Club.builder().fullName("Vámosoroszi").shortName("VKSE").build();
-		String clubId = clubService.registerClub(vamosoroszi).get().getEntityId();
+		String clubId = clubService.addClub(vamosoroszi).get().getEntityId();
 		
 		competitionService.registerClubToCompetition(competitionId, clubId).get();
 		

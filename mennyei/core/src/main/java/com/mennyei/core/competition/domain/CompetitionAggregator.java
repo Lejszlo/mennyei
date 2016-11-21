@@ -1,20 +1,21 @@
 package com.mennyei.core.competition.domain;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.mennyei.core.competition.commands.AddCompetitionCommand;
 import com.mennyei.core.competition.commands.CompetitionCommand;
 import com.mennyei.core.competition.commands.RegisterClubCommand;
 import com.mennyei.core.competition.events.ClubRegistered;
 import com.mennyei.core.competition.events.CompetitionAdded;
-
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAggregate<CompetitionAggregator, CompetitionCommand> {
+
+	private String name;
 
 	private Set<String> clubIds = new HashSet<>();
 	

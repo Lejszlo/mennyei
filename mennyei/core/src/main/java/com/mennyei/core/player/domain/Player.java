@@ -1,9 +1,9 @@
 package com.mennyei.core.player.domain;
 
-import java.time.LocalDate;
-
 import lombok.Builder;
 import lombok.Data;
+
+import java.time.LocalDate;
 
 @Data
 @Builder

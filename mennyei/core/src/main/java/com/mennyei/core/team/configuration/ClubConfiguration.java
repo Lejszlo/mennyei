@@ -1,12 +1,10 @@
 package com.mennyei.core.team.configuration;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 import com.mennyei.core.team.domain.ClubAggregate;
 import com.mennyei.core.team.infrastructure.ClubRepository;
-
 import io.eventuate.EventuateAggregateStore;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ClubConfiguration {

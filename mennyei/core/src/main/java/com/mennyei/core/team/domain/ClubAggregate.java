@@ -1,19 +1,23 @@
 package com.mennyei.core.team.domain;
 
-import java.util.List;
-
 import com.mennyei.core.team.commands.AddClubCommand;
 import com.mennyei.core.team.commands.ClubCommand;
 import com.mennyei.core.team.events.ClubAdded;
-
 import io.eventuate.Event;
 import io.eventuate.EventUtil;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 
+import java.util.List;
+
+
 public class ClubAggregate extends ReflectiveMutableCommandProcessingAggregate<ClubAggregate, ClubCommand> {
-	
-	public List<Event> process(AddClubCommand registerClubCommand) {
-		return EventUtil.events(ClubAdded.builder().club(registerClubCommand.getClub()).build());
+
+	private String fullName;
+
+	private String shortName;
+
+	public List<Event> process(AddClubCommand addClubCommand) {
+		return EventUtil.events(ClubAdded.builder().club(addClubCommand.getClub()).build());
 	}
 	
 	public void apply(ClubAdded clubAdded) {}

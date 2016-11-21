@@ -1,11 +1,10 @@
 package com.mennyei.core.competition.domain;
 
-import java.util.Set;
-
 import com.mennyei.core.match.domain.Match;
-
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.Set;
 
 @Data
 @Builder

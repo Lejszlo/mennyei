@@ -1,23 +1,21 @@
 package com.mennyei.core.transfer.domain;
 
-import com.mennyei.core.player.domain.Player;
-import com.mennyei.core.team.domain.Club;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
 
 import java.time.LocalDate;
 
-@Data
+@Value
 @Builder
+@AllArgsConstructor
 public class Transfer {
-	
-	private Long id;
-	
+
 	private LocalDate transferDate;
 	
-	private Club sourceTeam;
+	private String sourceTeamId;
 	
-	private Club targetTeam;
+	private String targetTeamId;
 
-	private Player player;
+	private String playerId;
 }

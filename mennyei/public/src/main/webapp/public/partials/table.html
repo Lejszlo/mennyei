@@ -23,17 +23,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-class='calculatePositionHighlights($index)' ng-repeat="club in clubs | orderBy : '-point'">
+                <tr ng-class='calculatePositionHighlights($index)' ng-repeat="clubInfo in clubs | orderBy : '-point'">
                     <td>{{$index + 1}}</td>
-                    <td>{{club.name}}</td>
-                    <td>{{club.match}}</td>
-                    <td>{{club.win}}</td>
-                    <td>{{club.draw}}</td>
-                    <td>{{club.lose}}</td>
-                    <td>{{club.goalScored}}</td>
-                    <td>{{club.goalConcerd}}</td>
-                    <td>{{club.goalScored - club.goalConcerd}}</td>
-                    <td>{{club.win * 3 + club.draw}}</td>
+                    <td>{{clubInfo.name}}</td>
+                    <td>{{clubInfo.match}}</td>
+                    <td>{{clubInfo.win}}</td>
+                    <td>{{clubInfo.draw}}</td>
+                    <td>{{clubInfo.lose}}</td>
+                    <td>{{clubInfo.goalScored}}</td>
+                    <td>{{clubInfo.goalConcerd}}</td>
+                    <td>{{clubInfo.goalScored - clubInfo.goalConcerd}}</td>
+                    <td>{{clubInfo.win * 3 + clubInfo.draw}}</td>
                 </tr>
                 </tbody>
             </table>

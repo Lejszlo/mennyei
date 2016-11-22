@@ -1,7 +1,7 @@
 package com.mennyei.core.match.domain;
 
+import com.mennyei.core.club.domain.ClubInfo;
 import com.mennyei.core.match.domain.match.event.MatchEvent;
-import com.mennyei.core.team.domain.Club;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,9 +15,9 @@ public class Match {
 	
 	private Result result;
 	
-	private Club home;
+	private ClubInfo home;
 	
-	private Club away;
+	private ClubInfo away;
 	
 	private Set<MatchEvent> events;
 	

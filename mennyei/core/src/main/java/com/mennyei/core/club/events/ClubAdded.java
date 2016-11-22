@@ -1,6 +1,6 @@
-package com.mennyei.core.team.events;
+package com.mennyei.core.club.events;
 
-import com.mennyei.core.team.domain.Club;
+import com.mennyei.core.club.domain.ClubInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
@@ -10,6 +10,6 @@ import lombok.Value;
 @AllArgsConstructor
 public class ClubAdded implements ClubEvent {
 
-	private Club club;
+	private ClubInfo clubInfo;
 	
 }

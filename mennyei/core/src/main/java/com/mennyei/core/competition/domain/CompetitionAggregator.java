@@ -8,18 +8,18 @@ import com.mennyei.core.competition.events.CompetitionAdded;
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAggregate<CompetitionAggregator, CompetitionCommand> {
 
-	private String name;
+	private Competition competition;
 
 	private Set<String> clubIds = new HashSet<>();
 	
 	public List<Event> process(AddCompetitionCommand addCompetitionCommand) {
+		if(addCompetitionCommand.getCompetition().equals(competition)) {
+			return Collections.emptyList();
+		}
 		return Arrays.asList(CompetitionAdded.builder().competition(addCompetitionCommand.getCompetition()).build());
 	}
 	
@@ -31,8 +31,8 @@ public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAgg
 		clubIds.addAll(clubRegistered.getClubIds());
 	}
 	
-	public void apply(CompetitionAdded competationAdded) {}
-	
-	
-	
+	public void apply(CompetitionAdded competationAdded) {
+		competition = competationAdded.getCompetition();
+	}
+
 }

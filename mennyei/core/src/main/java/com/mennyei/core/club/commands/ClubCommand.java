@@ -1,4 +1,4 @@
-package com.mennyei.core.team.commands;
+package com.mennyei.core.club.commands;
 
 import io.eventuate.Command;
 

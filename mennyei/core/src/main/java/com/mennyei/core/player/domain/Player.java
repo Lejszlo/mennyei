@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -15,6 +13,6 @@ public class Player {
 	
 	private Integer number;
 
-	private LocalDate birthday;
+	private String birthday;
 
 }

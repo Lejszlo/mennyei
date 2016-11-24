@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -39,9 +40,9 @@ public class FillDatabase {
 		
 		competitionService.registerClubToCompetition(competitionId, clubId).get();
 
-		String playerId = playerService.addPlayer(Player.builder().name("Hajdu László").number(10).birthday(LocalDate.now()).build()).get().getEntityId();
+		String playerId = playerService.addPlayer(Player.builder().name("Hajdu László").number(10).birthday(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))).build()).get().getEntityId();
 
-		transferService.transferPlayer(Transfer.builder().transferDate(LocalDate.now()).targetTeamId(clubId).playerId(playerId).build());
+		transferService.transferPlayer(Transfer.builder().transferDate(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))).targetTeamId(clubId).playerId(playerId).build());
 	}
 	
 }

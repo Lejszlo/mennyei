@@ -2,8 +2,6 @@ package com.mennyei.publicweb.club.dto;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
-
 /**
  * Created by lejsz on 2016. 11. 22..
  */
@@ -14,6 +12,6 @@ public class PlayerQuery {
 
     private Integer number;
 
-    private LocalDate birthday;
+    private String birthday;
 
 }

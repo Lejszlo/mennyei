@@ -1,6 +1,5 @@
 package com.mennyei.core.club.events;
 
-import com.mennyei.core.transfer.domain.Transfer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
@@ -13,6 +12,6 @@ import lombok.Value;
 @AllArgsConstructor
 public class PlayerAddedToClub implements ClubEvent {
 
-    private Transfer transfer;
+    private String playerId;
 
 }

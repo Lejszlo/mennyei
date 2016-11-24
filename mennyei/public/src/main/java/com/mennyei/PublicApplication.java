@@ -1,7 +1,7 @@
 package com.mennyei;
 
 import io.eventuate.javaclient.spring.EnableEventHandlers;
-import io.eventuate.javaclient.spring.httpstomp.EventuateHttpStompClientConfiguration;
+import io.eventuate.javaclient.spring.jdbc.EventuateJdbcEventStoreConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @EnableEventHandlers
 @EnableMongoRepositories
-@Import({EventuateHttpStompClientConfiguration.class})
+@Import(EventuateJdbcEventStoreConfiguration.class)
 public class PublicApplication {
 	
 	public static void main(String[] args) {

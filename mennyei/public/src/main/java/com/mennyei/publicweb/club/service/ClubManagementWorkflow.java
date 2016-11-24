@@ -4,6 +4,7 @@ import com.mennyei.core.club.events.ClubAdded;
 import com.mennyei.core.transfer.domain.Transfer;
 import com.mennyei.core.transfer.events.PlayerTransferred;
 import com.mennyei.publicweb.club.dto.ClubQuery;
+import com.mennyei.publicweb.club.dto.PlayerQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.club.infrastructure.PlayerQueryMongoRepository;
 import io.eventuate.DispatchedEvent;
@@ -43,10 +44,11 @@ public class ClubManagementWorkflow {
         PlayerTransferred event = dispatchedEvent.getEvent();
         Transfer transfer = event.getTransfer();
         ClubQuery targetClubQuery = clubMongoRepository.findOne(transfer.getTargetTeamId());
-        targetClubQuery.getPlayers().add(playerQueryMongoRepository.findOne(transfer.getPlayerId()));
-        ClubQuery sourceClubQuery = clubMongoRepository.findOne(transfer.getSourceTeamId());
-        sourceClubQuery.getPlayers().add(playerQueryMongoRepository.findOne(transfer.getPlayerId()));
+        PlayerQuery playerQuery = playerQueryMongoRepository.findOne(transfer.getPlayerId());
+        targetClubQuery.getPlayers().add(playerQuery);
+        //ClubQuery sourceClubQuery = clubMongoRepository.findOne(transfer.getSourceTeamId());
+        //sourceClubQuery.getPlayers().remove(playerQueryMongoRepository.findOne(transfer.getPlayerId()));
         clubMongoRepository.save(targetClubQuery);
-        clubMongoRepository.save(sourceClubQuery);
+        //clubMongoRepository.save(sourceClubQuery);
     }
 }

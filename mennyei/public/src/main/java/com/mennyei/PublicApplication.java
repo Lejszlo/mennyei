@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @EnableEventHandlers
 @EnableMongoRepositories
-@Import(EventuateJdbcEventStoreConfiguration.class)
+@Import({EventuateJdbcEventStoreConfiguration.class})
 public class PublicApplication {
 	
 	public static void main(String[] args) {

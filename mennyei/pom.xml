@@ -19,8 +19,8 @@
 	</properties>
 
 	<modules>
-		<module>mennyei.public</module>
-		<module>mennyei.core</module>
+		<module>public</module>
+		<module>core</module>
 	</modules>
 
 	<repositories>

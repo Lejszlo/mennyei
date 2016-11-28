@@ -1,14 +1,16 @@
 package com.mennyei.core.club.service;
 
-import com.mennyei.core.club.commands.AddClubCommand;
-import com.mennyei.core.club.domain.ClubInfo;
-import com.mennyei.core.club.domain.ClubAggregate;
-import com.mennyei.core.club.infrastructure.ClubAggregateRepository;
-import io.eventuate.EntityWithIdAndVersion;
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.CompletableFuture;
+import com.mennyei.core.club.commands.AddClubCommand;
+import com.mennyei.core.club.domain.ClubAggregate;
+import com.mennyei.core.club.domain.ClubInfo;
+import com.mennyei.core.club.infrastructure.ClubAggregateRepository;
+
+import io.eventuate.EntityWithIdAndVersion;
 
 @Service
 public class ClubService {

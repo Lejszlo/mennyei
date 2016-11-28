@@ -11,29 +11,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="playerStat in players">
-                        <td>{{playerStat.player.name}}</td>
-                        <td>{{playerStat.age}}</td>
-                        <td>{{playerStat.player.birthday}}</td>
-                        <td>{{playerStat.player.number}}</td>
-                    </tr>
-                    <tr ng-repeat="playerStat in players">
-                        <td>{{playerStat.player.name}}</td>
-                        <td>{{playerStat.age}}</td>
-                        <td>{{playerStat.player.birthday}}</td>
-                        <td>{{playerStat.player.number}}</td>
-                    </tr>
-                    <tr ng-repeat="playerStat in players">
-                        <td>{{playerStat.player.name}}</td>
-                        <td>{{playerStat.age}}</td>
-                        <td>{{playerStat.player.birthday}}</td>
-                        <td>{{playerStat.player.number}}</td>
-                    </tr>
-                    <tr ng-repeat="playerStat in players">
-                        <td>{{playerStat.player.name}}</td>
-                        <td>{{playerStat.age}}</td>
-                        <td>{{playerStat.player.birthday}}</td>
-                        <td>{{playerStat.player.number}}</td>
+                    <tr ng-repeat="player in players">
+                        <td>{{player.name}}</td>
+                        <td>{{player.age}}</td>
+                        <td>{{player.birthday}}</td>
+                        <td>{{player.number}}</td>
                     </tr>
                 </tbody>
             </table>

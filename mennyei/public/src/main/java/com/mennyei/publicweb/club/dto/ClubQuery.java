@@ -21,6 +21,8 @@ public class ClubQuery {
 
     private String fullName;
 
+    private String urlName;
+
     @DBRef
     private Set<PlayerQuery> players = new HashSet<>();
 

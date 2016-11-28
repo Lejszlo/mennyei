@@ -1,16 +1,16 @@
 package com.mennyei.publicweb.club.controller;
 
-import com.mennyei.core.FillDatabase;
-import com.mennyei.core.club.domain.ClubInfo;
-import com.mennyei.publicweb.club.dto.PlayerMatchStatisticData;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
+import com.mennyei.publicweb.club.dto.PlayerQuery;
+import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 
 
 @RequestMapping("/clubs/")
@@ -19,12 +19,12 @@ public class ClubController {
 	
 	
 	@Autowired
-	private FillDatabase fillDatabase;
+	private ClubQueryMongoRepository clubQueryMongoRepository;
 	
 	
-	@GetMapping("/{clubId}/players")
-	public Set<PlayerMatchStatisticData> getClubPlayers(@PathVariable("clubId") ClubInfo clubInfo) throws InterruptedException, ExecutionException {
-		return null;
+	@GetMapping("/{clubUrlName}/players")
+	public Set<PlayerQuery> getClubPlayers(@PathVariable("clubUrlName") String clubUrlName) throws InterruptedException, ExecutionException {
+		return clubQueryMongoRepository.findByUrlName(clubUrlName).getPlayers();
 	}
 	
 }

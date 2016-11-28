@@ -1,5 +1,9 @@
 package com.mennyei.publicweb.club.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.mennyei.core.club.domain.ClubInfo;
 import com.mennyei.core.club.events.ClubAdded;
 import com.mennyei.core.transfer.domain.Transfer;
 import com.mennyei.core.transfer.events.PlayerTransferred;
@@ -7,11 +11,11 @@ import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.club.dto.PlayerQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.club.infrastructure.PlayerQueryMongoRepository;
+import com.mennyei.publicweb.util.ClubUrlNameUtil;
+
 import io.eventuate.DispatchedEvent;
 import io.eventuate.EventHandlerMethod;
 import io.eventuate.EventSubscriber;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by lejsz on 2016. 11. 21..
@@ -31,10 +35,12 @@ public class ClubManagementWorkflow {
     public void create(DispatchedEvent<ClubAdded> dispatchedEvent) {
         ClubAdded event = dispatchedEvent.getEvent();
         String clubId = dispatchedEvent.getEntityId();
+        ClubInfo clubInfo = event.getClubInfo();
         ClubQuery competitionListQuery = ClubQuery.builder()
                 .id(clubId)
-                .shortName(event.getClubInfo().getShortName())
-                .fullName(event.getClubInfo().getFullName())
+                .shortName(clubInfo.getShortName())
+                .fullName(clubInfo.getFullName())
+                .urlName(ClubUrlNameUtil.convertClubNameToUniqUrlFrendly(clubInfo.getFullName()))
                 .build();
         clubMongoRepository.save(competitionListQuery);
     }

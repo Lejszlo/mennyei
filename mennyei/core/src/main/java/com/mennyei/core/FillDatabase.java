@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mennyei.core.club.domain.ClubInfo;
 import com.mennyei.core.club.service.ClubService;
-import com.mennyei.core.competition.domain.Competition;
+import com.mennyei.core.competition.domain.CompetitionInfo;
 import com.mennyei.core.competition.service.CompetitionService;
 import com.mennyei.core.player.domain.Player;
 import com.mennyei.core.player.service.PlayerService;
@@ -31,7 +31,7 @@ public class FillDatabase {
 	private PlayerService playerService;
 	
 	public void fillTestMemoryDB() throws InterruptedException, ExecutionException {
-		Competition competition = Competition.builder().name("Kelet Magyarország").build();
+		CompetitionInfo competition = CompetitionInfo.builder().name("Kelet Magyarország").build();
 		String competitionId = competitionService.addCompetition(competition).get().getEntityId();
 		
 		ClubInfo vamosoroszi = ClubInfo.builder().fullName("Vámosoroszi Községi Sport Egyesület").shortName("VKSE").build();

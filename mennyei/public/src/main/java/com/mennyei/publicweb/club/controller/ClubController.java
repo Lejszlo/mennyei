@@ -17,10 +17,8 @@ import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 @RestController
 public class ClubController {
 	
-	
 	@Autowired
 	private ClubQueryMongoRepository clubQueryMongoRepository;
-	
 	
 	@GetMapping("/{clubUrlName}/players")
 	public Set<PlayerQuery> getClubPlayers(@PathVariable("clubUrlName") String clubUrlName) throws InterruptedException, ExecutionException {

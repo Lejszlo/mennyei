@@ -7,7 +7,7 @@ import lombok.Value;
 @Builder
 @Value
 @AllArgsConstructor
-public class Competition {
+public class CompetitionInfo {
 	
 	private String name;
 

@@ -1,6 +1,6 @@
 package com.mennyei.core.competition.commands;
 
-import com.mennyei.core.competition.domain.Competition;
+import com.mennyei.core.competition.domain.CompetitionInfo;
 import lombok.Builder;
 import lombok.Value;
 
@@ -8,5 +8,5 @@ import lombok.Value;
 @Builder
 public class AddCompetitionCommand extends CompetitionCommand {
 	
-	private Competition competition;
+	private CompetitionInfo competition;
 }

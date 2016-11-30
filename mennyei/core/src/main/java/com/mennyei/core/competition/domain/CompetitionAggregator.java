@@ -12,7 +12,7 @@ import java.util.*;
 
 public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAggregate<CompetitionAggregator, CompetitionCommand> {
 
-	private Competition competition;
+	private CompetitionInfo competition;
 
 	private Set<String> clubIds = new HashSet<>();
 	

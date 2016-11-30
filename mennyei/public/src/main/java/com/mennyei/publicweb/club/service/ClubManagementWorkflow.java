@@ -1,5 +1,6 @@
 package com.mennyei.publicweb.club.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,36 +26,37 @@ import io.eventuate.EventSubscriber;
 @Component
 public class ClubManagementWorkflow {
 
-    @Autowired
-    private ClubQueryMongoRepository clubMongoRepository;
+	@Autowired
+	private ClubQueryMongoRepository clubMongoRepository;
 
-    @Autowired
-    private PlayerQueryMongoRepository playerQueryMongoRepository;
+	@Autowired
+	private PlayerQueryMongoRepository playerQueryMongoRepository;
 
-    @EventHandlerMethod
-    public void create(DispatchedEvent<ClubAdded> dispatchedEvent) {
-        ClubAdded event = dispatchedEvent.getEvent();
-        String clubId = dispatchedEvent.getEntityId();
-        ClubInfo clubInfo = event.getClubInfo();
-        ClubQuery competitionListQuery = ClubQuery.builder()
-                .id(clubId)
-                .shortName(clubInfo.getShortName())
-                .fullName(clubInfo.getFullName())
-                .urlName(ClubUrlNameUtil.convertClubNameToUniqUrlFrendly(clubInfo.getFullName()))
-                .build();
-        clubMongoRepository.save(competitionListQuery);
-    }
+	@Autowired
+	private ModelMapper modelMapper;
 
-    @EventHandlerMethod
-    public void playerTransferred(DispatchedEvent<PlayerTransferred> dispatchedEvent) {
-        PlayerTransferred event = dispatchedEvent.getEvent();
-        Transfer transfer = event.getTransfer();
-        ClubQuery targetClubQuery = clubMongoRepository.findOne(transfer.getTargetTeamId());
-        PlayerQuery playerQuery = playerQueryMongoRepository.findOne(transfer.getPlayerId());
-        targetClubQuery.getPlayers().add(playerQuery);
-        //ClubQuery sourceClubQuery = clubMongoRepository.findOne(transfer.getSourceTeamId());
-        //sourceClubQuery.getPlayers().remove(playerQueryMongoRepository.findOne(transfer.getPlayerId()));
-        clubMongoRepository.save(targetClubQuery);
-        //clubMongoRepository.save(sourceClubQuery);
-    }
+	@EventHandlerMethod
+	public void create(DispatchedEvent<ClubAdded> dispatchedEvent) {
+		ClubAdded event = dispatchedEvent.getEvent();
+		String clubId = dispatchedEvent.getEntityId();
+		ClubInfo clubInfo = event.getClubInfo();
+		ClubQuery clubQuery = ClubQuery.builder().id(clubId)
+				.urlName(ClubUrlNameUtil.convertClubNameToUniqUrlFrendly(clubInfo.getFullName())).build();
+		modelMapper.map(clubInfo, clubQuery);
+		clubMongoRepository.save(clubQuery);
+	}
+
+	@EventHandlerMethod
+	public void playerTransferred(DispatchedEvent<PlayerTransferred> dispatchedEvent) {
+		PlayerTransferred event = dispatchedEvent.getEvent();
+		Transfer transfer = event.getTransfer();
+		ClubQuery targetClubQuery = clubMongoRepository.findOne(transfer.getTargetTeamId());
+		PlayerQuery playerQuery = playerQueryMongoRepository.findOne(transfer.getPlayerId());
+		targetClubQuery.getPlayers().add(playerQuery);
+		// ClubQuery sourceClubQuery =
+		// clubMongoRepository.findOne(transfer.getSourceTeamId());
+		// sourceClubQuery.getPlayers().remove(playerQueryMongoRepository.findOne(transfer.getPlayerId()));
+		clubMongoRepository.save(targetClubQuery);
+		// clubMongoRepository.save(sourceClubQuery);
+	}
 }

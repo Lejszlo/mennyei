@@ -1,6 +1,6 @@
 package com.mennyei.core.match.domain;
 
-import com.mennyei.core.club.domain.ClubInfo;
+import com.mennyei.core.club.domain.value.ClubInfo;
 import com.mennyei.core.match.domain.match.event.MatchEvent;
 import lombok.Builder;
 import lombok.Data;

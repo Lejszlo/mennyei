@@ -2,9 +2,9 @@ package com.mennyei.core.player.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
 
-@Data
+@Value
 @Builder
 @AllArgsConstructor
 public class Player {
@@ -14,5 +14,7 @@ public class Player {
 	private Integer number;
 
 	private String birthday;
+	
+	private String nationality;
 
 }

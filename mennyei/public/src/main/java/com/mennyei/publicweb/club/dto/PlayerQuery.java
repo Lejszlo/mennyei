@@ -4,14 +4,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
 
 /**
  * Created by lejsz on 2016. 11. 22..
  */
 @Document
 @Builder
-@Value
+@Data
 public class PlayerQuery {
 
     @Id
@@ -24,5 +24,7 @@ public class PlayerQuery {
     private Integer age;
 
     private String birthday;
+    
+    private String nationality;
 
 }

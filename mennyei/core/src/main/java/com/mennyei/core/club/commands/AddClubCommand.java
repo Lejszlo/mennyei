@@ -1,6 +1,7 @@
 package com.mennyei.core.club.commands;
 
-import com.mennyei.core.club.domain.ClubInfo;
+import com.mennyei.core.club.domain.value.ClubInfo;
+
 import lombok.Builder;
 import lombok.Value;
 

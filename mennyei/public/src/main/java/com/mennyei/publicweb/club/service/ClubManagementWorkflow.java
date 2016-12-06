@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.mennyei.core.club.domain.ClubInfo;
+import com.mennyei.core.club.domain.value.ClubInfo;
 import com.mennyei.core.club.events.ClubAdded;
 import com.mennyei.core.transfer.domain.Transfer;
 import com.mennyei.core.transfer.events.PlayerTransferred;

@@ -3,6 +3,7 @@ package com.mennyei.publicweb.player.dto;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,9 @@ public class PlayerManagementWorkflow {
 
     @Autowired
     private PlayerQueryMongoRepository playerQueryMongoRepository;
+    
+    @Autowired
+    private ModelMapper modelMapper;
 
     @EventHandlerMethod
     public void create(DispatchedEvent<PlayerAdded> dispatchedEvent) {
@@ -33,11 +37,9 @@ public class PlayerManagementWorkflow {
         Player player = event.getPlayer();
         PlayerQuery playerQuery = PlayerQuery.builder()
                 .id(playerId)
-                .name(player.getName())
-                .birthday(player.getBirthday())
                 .age(Long.valueOf(LocalDate.parse(player.getBirthday(), DateUtil.dateTimeFormatter).until(LocalDate.now(), ChronoUnit.YEARS)).intValue())
-                .number(player.getNumber())
                 .build();
+        modelMapper.map(player, playerQuery);
         playerQueryMongoRepository.save(playerQuery);
     }
 }

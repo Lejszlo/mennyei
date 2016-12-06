@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mennyei.core.club.commands.AddClubCommand;
 import com.mennyei.core.club.domain.ClubAggregate;
-import com.mennyei.core.club.domain.ClubInfo;
+import com.mennyei.core.club.domain.value.ClubInfo;
 import com.mennyei.core.club.infrastructure.ClubAggregateRepository;
 
 import io.eventuate.EntityWithIdAndVersion;

@@ -1,4 +1,4 @@
-package com.mennyei.core.club.domain;
+package com.mennyei.core.club.domain.value;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +8,6 @@ import lombok.Value;
 @Value
 @AllArgsConstructor
 public class ClubInfo {
-	
 	private String fullName;
 
 	private String shortName;

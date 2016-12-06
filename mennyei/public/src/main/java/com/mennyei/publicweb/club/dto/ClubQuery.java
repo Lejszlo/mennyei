@@ -1,17 +1,19 @@
 package com.mennyei.publicweb.club.dto;
 
-import lombok.Builder;
-import lombok.Value;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.HashSet;
-import java.util.Set;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Singular;
 
 @Document
 @Builder
-@Value
+@Data
 public class ClubQuery {
 
     @Id
@@ -24,6 +26,7 @@ public class ClubQuery {
     private String urlName;
 
     @DBRef
+    @Singular
     private Set<PlayerQuery> players = new HashSet<>();
 
 }

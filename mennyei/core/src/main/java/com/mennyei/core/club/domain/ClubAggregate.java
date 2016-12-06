@@ -4,6 +4,7 @@ import com.mennyei.core.club.commands.AddClubCommand;
 import com.mennyei.core.club.commands.AddPlayerToClub;
 import com.mennyei.core.club.commands.ClubCommand;
 import com.mennyei.core.club.commands.RemovePlayerFromClub;
+import com.mennyei.core.club.domain.value.ClubInfo;
 import com.mennyei.core.club.events.ClubAdded;
 import com.mennyei.core.club.events.PlayerAddedToClub;
 import com.mennyei.core.club.events.PlayerRemovedFromClub;

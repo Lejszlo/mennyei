@@ -1,17 +1,18 @@
 package com.mennyei.core.competition.domain;
 
-import com.mennyei.core.match.domain.Match;
-import lombok.Builder;
-import lombok.Data;
-
 import java.util.Set;
 
-@Data
+import com.mennyei.core.match.domain.Match;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
+
+@Value
 @Builder
+@AllArgsConstructor
 public class Turn {
 	private Integer number;
-	
-	private boolean played;
 	
 	private Set<Match> matches;
 }

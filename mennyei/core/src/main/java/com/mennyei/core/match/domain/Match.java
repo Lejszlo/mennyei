@@ -1,24 +1,26 @@
 package com.mennyei.core.match.domain;
 
-import com.mennyei.core.club.domain.value.ClubInfo;
-import com.mennyei.core.match.domain.match.event.MatchEvent;
-import lombok.Builder;
-import lombok.Data;
-
-import java.time.LocalDateTime;
 import java.util.Set;
 
-@Data
+import com.mennyei.core.match.domain.match.event.MatchEvent;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
+
+@Value
 @Builder
+@AllArgsConstructor
 public class Match {
-	private LocalDateTime matchDate;
+	private String matchDate;
+	
+	private boolean played;
 	
 	private Result result;
 	
-	private ClubInfo home;
+	private String homeClubId;
 	
-	private ClubInfo away;
+	private String awayClubId;
 	
 	private Set<MatchEvent> events;
-	
 }

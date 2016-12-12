@@ -36,7 +36,7 @@ public class CompetitionManagementWorkflow {
     public void create(DispatchedEvent<CompetitionAdded> dispatchedEvent) {
         CompetitionAdded event = dispatchedEvent.getEvent();
         String competitionId = dispatchedEvent.getEntityId();
-        CompetitionInfo competitionInfo = event.getCompetition();
+        CompetitionInfo competitionInfo = event.getCompetitionInfo();
         CompetitionQuery competitionQuery = CompetitionQuery.builder().id(competitionId).build();
         modelMapper.map(competitionInfo , competitionQuery);
         competitionMongoRepository.save(competitionQuery);

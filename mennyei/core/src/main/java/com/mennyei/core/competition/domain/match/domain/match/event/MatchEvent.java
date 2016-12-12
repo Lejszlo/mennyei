@@ -1,4 +1,4 @@
-package com.mennyei.core.match.domain.match.event;
+package com.mennyei.core.competition.domain.match.domain.match.event;
 
 import lombok.Data;
 

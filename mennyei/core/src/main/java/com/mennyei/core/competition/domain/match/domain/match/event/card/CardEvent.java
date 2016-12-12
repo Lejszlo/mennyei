@@ -1,6 +1,6 @@
-package com.mennyei.core.match.domain.match.event.card;
+package com.mennyei.core.competition.domain.match.domain.match.event.card;
 
-import com.mennyei.core.match.domain.match.event.MatchEvent;
+import com.mennyei.core.competition.domain.match.domain.match.event.MatchEvent;
 import com.mennyei.core.player.domain.Player;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

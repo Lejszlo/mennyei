@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service;
 import com.mennyei.core.club.domain.value.ClubInfo;
 import com.mennyei.core.club.service.ClubService;
 import com.mennyei.core.competition.domain.CompetitionInfo;
+import com.mennyei.core.competition.domain.match.domain.Match;
 import com.mennyei.core.competition.domain.rule.CompetitionRules;
 import com.mennyei.core.competition.domain.rule.SortingRule;
+import com.mennyei.core.competition.domain.season.Stage;
+import com.mennyei.core.competition.domain.season.Turn;
 import com.mennyei.core.competition.service.CompetitionService;
 import com.mennyei.core.player.domain.Player;
 import com.mennyei.core.player.service.PlayerService;
@@ -38,14 +41,19 @@ public class FillDatabase {
 		CompetitionInfo competition = CompetitionInfo.builder().name("Kelet Magyarország").build();
 		List<SortingRule> rules = Arrays.asList(SortingRule.GAMES_WON,SortingRule.GOAL_DIFFERENCE,SortingRule.GOAL_SCORED,SortingRule.RESULTS_BETWEEN_TEAMS);
 		CompetitionRules competitionRules = CompetitionRules.builder().numberOfMatches(30).numberOfTeams(15).promotion(1).relegation(2).yellowCardLimit(5).sortingRules(rules).build();
-		String competitionId = competitionService.addCompetition(competition, competitionRules).get().getEntityId();
-
+		
 		ClubInfo vamosoroszi = ClubInfo.builder().fullName("Vámosoroszi Községi Sport Egyesület").shortName("VKSE").build();
 		String vamosoroszId = clubService.addClub(vamosoroszi).get().getEntityId();
 		ClubInfo tarpa = ClubInfo.builder().fullName("Tarpa Sport Club").shortName("TSC").build();
 		String tarpaId = clubService.addClub(tarpa).get().getEntityId();
+		
+		Stage stage = Stage.builder(competition.getName()).build();
+		String competitionId = competitionService.addCompetition(competition, competitionRules, stage).get().getEntityId();
 
 		competitionService.registerClubToCompetition(competitionId, vamosoroszId, tarpaId).get();
+		
+		Match match = Match.builder(vamosoroszId, tarpaId, DateUtil.ofDate(2017, 3, 12)).build();
+		Turn turn = Turn.builder(0).match(match).build();
 
 		String playerId = playerService.addPlayer(Player.builder().name("Hajdu László").number(10)
 				.birthday(LocalDate.of(1990, 1, 9).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())

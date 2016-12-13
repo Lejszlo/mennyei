@@ -2,6 +2,7 @@ package com.mennyei.core.competition.domain.match.domain.match.event.substitutio
 
 import com.mennyei.core.competition.domain.match.domain.match.event.MatchEvent;
 import com.mennyei.core.player.domain.Player;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,4 +12,5 @@ public class Substitution extends MatchEvent {
 	private Player inner;
 	
 	private Player outer;
+	
 }

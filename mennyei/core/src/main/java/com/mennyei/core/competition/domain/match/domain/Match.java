@@ -1,6 +1,7 @@
 package com.mennyei.core.competition.domain.match.domain;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mennyei.core.competition.domain.match.domain.match.event.MatchEvent;
 
@@ -18,6 +19,8 @@ public class Match {
 	
 	private boolean played;
 	
+	private int minute = 90;
+	
 	private Result result;
 	
 	@NonNull
@@ -26,7 +29,7 @@ public class Match {
 	@NonNull
 	private String awayClubId;
 	
-	private Set<MatchEvent> events;
+	private List<MatchEvent> events = new ArrayList<>();
 	
 	public static MatchBuilder builder(String homeClubId, String awayClubId, String matchDate) {
 		return hiddenBuilder().homeClubId(homeClubId).awayClubId(awayClubId).matchDate(matchDate);

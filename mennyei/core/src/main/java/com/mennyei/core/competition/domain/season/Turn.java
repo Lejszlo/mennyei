@@ -1,5 +1,6 @@
 package com.mennyei.core.competition.domain.season;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mennyei.core.competition.domain.match.domain.Match;
@@ -17,7 +18,7 @@ public class Turn {
 	private int index;
 	
 	@Singular
-	private List<Match> matches;
+	private List<Match> matches = new ArrayList<>();
 	
 	public static TurnBuilder builder(int index) {
 		return hiddenBuilder().index(index);

@@ -1,9 +1,7 @@
 package com.mennyei.core.competition.domain.match.domain.match.event;
 
-import lombok.Data;
-
-@Data
-public abstract class MatchEvent {
-	private MatchEventType matchEventType;
+public class MatchEvent {
+	protected MatchEventType matchEventType;
 	
+	protected int minute;
 }

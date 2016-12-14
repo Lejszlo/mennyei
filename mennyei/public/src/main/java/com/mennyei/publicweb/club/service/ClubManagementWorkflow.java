@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.mennyei.core.club.domain.value.ClubInfo;
 import com.mennyei.core.club.events.ClubAdded;
-import com.mennyei.core.transfer.domain.Transfer;
-import com.mennyei.core.transfer.events.PlayerTransferred;
+import com.mennyei.core.club.events.PlayerAddedToClub;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.club.dto.PlayerQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
@@ -40,23 +39,17 @@ public class ClubManagementWorkflow {
 		ClubAdded event = dispatchedEvent.getEvent();
 		String clubId = dispatchedEvent.getEntityId();
 		ClubInfo clubInfo = event.getClubInfo();
-		ClubQuery clubQuery = ClubQuery.builder().id(clubId)
-				.urlName(ClubUrlNameUtil.convertClubNameToUniqUrlFrendly(clubInfo.getFullName())).build();
+		ClubQuery clubQuery = ClubQuery.builder().id(clubId).urlName(ClubUrlNameUtil.convertClubNameToUniqUrlFrendly(clubInfo.getFullName())).build();
 		modelMapper.map(clubInfo, clubQuery);
 		clubMongoRepository.save(clubQuery);
 	}
 
 	@EventHandlerMethod
-	public void playerTransferred(DispatchedEvent<PlayerTransferred> dispatchedEvent) {
-		PlayerTransferred event = dispatchedEvent.getEvent();
-		Transfer transfer = event.getTransfer();
-		ClubQuery targetClubQuery = clubMongoRepository.findOne(transfer.getTargetTeamId());
-		PlayerQuery playerQuery = playerQueryMongoRepository.findOne(transfer.getPlayerId());
+	public void playerTransferred(DispatchedEvent<PlayerAddedToClub> dispatchedEvent) {
+		PlayerAddedToClub event = dispatchedEvent.getEvent();
+		ClubQuery targetClubQuery = clubMongoRepository.findOne(event.getClubId());
+		PlayerQuery playerQuery = playerQueryMongoRepository.findOne(event.getPlayerId());
 		targetClubQuery.getPlayers().add(playerQuery);
-		// ClubQuery sourceClubQuery =
-		// clubMongoRepository.findOne(transfer.getSourceTeamId());
-		// sourceClubQuery.getPlayers().remove(playerQueryMongoRepository.findOne(transfer.getPlayerId()));
 		clubMongoRepository.save(targetClubQuery);
-		// clubMongoRepository.save(sourceClubQuery);
 	}
 }

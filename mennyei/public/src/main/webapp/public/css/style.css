@@ -3,6 +3,10 @@ a {
     cursor: pointer;
 }
 
+hr {
+	border-top: solid 1px #dfd7ca;
+}
+
 .footer {
     bottom: 0;
     width: 100%;

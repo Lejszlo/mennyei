@@ -1,5 +1,9 @@
 package com.mennyei.core.club.domain;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.mennyei.core.club.commands.AddClubCommand;
 import com.mennyei.core.club.commands.AddPlayerToClub;
 import com.mennyei.core.club.commands.ClubCommand;
@@ -8,13 +12,10 @@ import com.mennyei.core.club.domain.value.ClubInfo;
 import com.mennyei.core.club.events.ClubAdded;
 import com.mennyei.core.club.events.PlayerAddedToClub;
 import com.mennyei.core.club.events.PlayerRemovedFromClub;
+
 import io.eventuate.Event;
 import io.eventuate.EventUtil;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 
 public class ClubAggregate extends ReflectiveMutableCommandProcessingAggregate<ClubAggregate, ClubCommand> {
@@ -28,7 +29,7 @@ public class ClubAggregate extends ReflectiveMutableCommandProcessingAggregate<C
     }
 
     public List<Event> process(AddPlayerToClub addPlayerToClub) {
-        return EventUtil.events(PlayerAddedToClub.builder().playerId(addPlayerToClub.getPlayerId()).build());
+        return EventUtil.events(PlayerAddedToClub.builder(addPlayerToClub.getClubId(), addPlayerToClub.getPlayerId()).build());
     }
 
     public List<Event> process(RemovePlayerFromClub removePlayerFromClub) {

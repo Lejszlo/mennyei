@@ -26,9 +26,9 @@ public class TransferService {
     public void transferPlayer(Transfer transfer) throws ExecutionException, InterruptedException {
         TransferPlayerCommand transferPlayerCommand = TransferPlayerCommand.builder().transfer(transfer).build();
         transferAggregatorRepository.save(transferPlayerCommand).get();
-        clubRepository.update(transfer.getTargetTeamId(), AddPlayerToClub.builder().playerId(transfer.getPlayerId()).build()).get();
+        clubRepository.update(transfer.getTargetTeamId(), AddPlayerToClub.builder(transfer.getTargetTeamId(), transfer.getPlayerId()).build()).get();
         if(transfer.getSourceTeamId() != null) {
-        	clubRepository.update(transfer.getSourceTeamId(), AddPlayerToClub.builder().playerId(transfer.getPlayerId()).build()).get();
+        	clubRepository.update(transfer.getSourceTeamId(), AddPlayerToClub.builder(transfer.getTargetTeamId(), transfer.getPlayerId()).build()).get();
     	}
         	
     }

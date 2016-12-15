@@ -1,5 +1,6 @@
 package com.mennyei.publicweb.competition.service;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mennyei.core.competition.domain.CompetitionInfo;
+import com.mennyei.core.competition.domain.season.Stage;
 import com.mennyei.core.competition.events.ClubRegistered;
 import com.mennyei.core.competition.events.CompetitionAdded;
+import com.mennyei.core.competition.events.MatchAdded;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
@@ -39,6 +42,7 @@ public class CompetitionManagementWorkflow {
         CompetitionInfo competitionInfo = event.getCompetitionInfo();
         CompetitionQuery competitionQuery = CompetitionQuery.builder().id(competitionId).build();
         modelMapper.map(competitionInfo , competitionQuery);
+        competitionQuery.getStages().addAll(event.getStages());
         competitionMongoRepository.save(competitionQuery);
     }
 
@@ -51,6 +55,16 @@ public class CompetitionManagementWorkflow {
         Set<ClubQuery> clubQueries = clubIds.stream().map(s -> clubMongoRepository.findOne(s)).collect(Collectors.toSet());
         competitionClubList.getClubs().addAll(clubQueries);
         competitionMongoRepository.save(competitionClubList);
+    }
+    
+    @EventHandlerMethod
+    public void matchAdded(DispatchedEvent<MatchAdded> dispatchedEvent) {
+        MatchAdded event = dispatchedEvent.getEvent();
+        String competitionId = dispatchedEvent.getEntityId();
+        CompetitionQuery competitionQuery = competitionMongoRepository.findOne(competitionId);
+        Optional<Stage> stage = competitionQuery.getStages().stream().filter(s -> s.getName().equals(event.getStageName())).findFirst();
+        stage.get().getTurns().add(event.getTurn());
+        competitionMongoRepository.save(competitionQuery);
     }
 
 }

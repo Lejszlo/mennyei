@@ -34,4 +34,19 @@ public class Match {
 	public static MatchBuilder builder(String homeClubId, String awayClubId, String matchDate) {
 		return hiddenBuilder().homeClubId(homeClubId).awayClubId(awayClubId).matchDate(matchDate);
 	}
+	
+	public boolean containsMatch(String clubId) {
+		return clubId.equals(homeClubId) || awayClubId.equals(clubId);
+	}
+	
+	public String whoIsTheOpponentOf(String clubId) {
+		if(clubId.equals(homeClubId)) {
+			return awayClubId;
+		}
+		return homeClubId;	
+	}
+	
+	public boolean isAtHome(String clubId) {
+		return clubId.equals(homeClubId);
+	}
 }

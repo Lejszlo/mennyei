@@ -37,7 +37,7 @@ public class PlayerManagementWorkflow {
         Player player = event.getPlayer();
         PlayerQuery playerQuery = PlayerQuery.builder()
                 .id(playerId)
-                .age(Long.valueOf(LocalDate.parse(player.getBirthday(), DateUtil.dateTimeFormatter).until(LocalDate.now(), ChronoUnit.YEARS)).intValue())
+                .age(Long.valueOf(LocalDate.parse(player.getBirthday(), DateUtil.dateTimeFormatterShort).until(LocalDate.now(), ChronoUnit.YEARS)).intValue())
                 .build();
         modelMapper.map(player, playerQuery);
         playerQueryMongoRepository.save(playerQuery);

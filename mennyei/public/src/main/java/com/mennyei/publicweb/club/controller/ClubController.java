@@ -1,5 +1,6 @@
 package com.mennyei.publicweb.club.controller;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mennyei.publicweb.club.dto.PlayerQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
+import com.mennyei.publicweb.competition.dto.MatchQuery;
+import com.mennyei.publicweb.competition.service.CompetitionBusinessService;
 
 
 @RequestMapping("/clubs/")
@@ -20,9 +23,17 @@ public class ClubController {
 	@Autowired
 	private ClubQueryMongoRepository clubQueryMongoRepository;
 	
+	@Autowired
+	private CompetitionBusinessService competitionBusinessService;
+	
 	@GetMapping("/{clubUrlName}/players")
 	public Set<PlayerQuery> getClubPlayers(@PathVariable("clubUrlName") String clubUrlName) throws InterruptedException, ExecutionException {
 		return clubQueryMongoRepository.findByUrlName(clubUrlName).getPlayers();
+	}
+	
+	@GetMapping("/{clubId}/{competitionId}/{stageName}/matches")
+	public List<MatchQuery> getClubCompetitionMatches(@PathVariable("clubId") String clubId, @PathVariable("competitionId") String competitionId, @PathVariable("stageName") String stageName) {
+		return competitionBusinessService.getClubMatches(clubId, competitionId, "Kelet Magyarország");
 	}
 	
 }

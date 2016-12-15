@@ -41,8 +41,7 @@ public class CompetitionAggregator
 	}
 
 	public List<Event> process(AddMatchCommand addMatchCommand) {
-		return Arrays.asList(MatchAdded.builder(addMatchCommand.getCompetitionId(), addMatchCommand.getStageName(),
-				addMatchCommand.getTurnIndex()).matches(addMatchCommand.getMatches()).build());
+		return Arrays.asList(MatchAdded.builder(addMatchCommand.getCompetitionId(), addMatchCommand.getStageName(),addMatchCommand.getTurn()).build());
 	}
 
 	public List<Event> process(PlayMatchCommand fillMatchCommand) {
@@ -71,29 +70,19 @@ public class CompetitionAggregator
 
 	public void apply(MatchAdded matchAdded) {
 		Optional<Stage> stage = findStageByName(matchAdded.getStageName());
-		Optional<Turn> optionalTurn = findTurnByIndex(matchAdded.getTurnIndex(), stage.get());
-		Turn turn = null;
-		if(!optionalTurn.isPresent()) {
-			turn = Turn.builder(matchAdded.getTurnIndex()).build();
-			stage.get().getTurns().add(turn);
-		}
-		turn.getMatches().addAll(matchAdded.getMatches());
+		stage.get().getTurns().add(matchAdded.getTurn());
 	}
 
-	public void apply(MatchPlayed matchFilledWithEvents) {
-		Optional<Stage> stage = findStageByName(matchFilledWithEvents.getStageName());
-		Optional<Turn> turn = findTurnByIndex(matchFilledWithEvents.getTurnIndex(), stage.get());
-		Optional<Match> match = findMatchByTurn(turn.get(), matchFilledWithEvents.getHomeClubId());
-		match.get().getEvents().addAll(matchFilledWithEvents.getEvents());
+	public void apply(MatchPlayed matchPlayed) {
+		Optional<Stage> stage = findStageByName(matchPlayed.getStageName());
+		Optional<Turn> turn = stage.get().getTurnByIndex(matchPlayed.getTurnIndex());
+		Optional<Match> match = findMatchByTurn(turn.get(), matchPlayed.getHomeClubId());
+		match.get().getEvents().addAll(matchPlayed.getEvents());
 		match.get().setPlayed(true);
 	}
 
 	private Optional<Stage> findStageByName(String stageName) {
 		return stages.stream().filter(s -> s.getName().equals(stageName)).findFirst();
-	}
-
-	private Optional<Turn> findTurnByIndex(int index, Stage stage) {
-		return stage.getTurns().stream().filter(t -> t.getIndex() == index).findFirst();
 	}
 
 	private Optional<Match> findMatchByTurn(Turn turn, String homeClubId) {

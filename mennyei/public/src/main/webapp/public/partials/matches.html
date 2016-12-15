@@ -10,36 +10,20 @@
             <table class="table table-striped table-condensed table-responsive matchTable">
                 <thead>
                     <tr>
-                        <th># forduló</th>
-                        <th>Dátum</th>
-                        <th>Idopont</th>
-                        <th colspan="2">Hazai</th>
-                        <th>Eredmény</th>
-                        <th colspan="2">Vendég</th>
+                        <th class="text-center"># forduló</th>
+                        <th class="text-center"><span class="glyphicon glyphicon-calendar"></span> Dátum</th>
+                        <th class="text-center"></th>
+                        <th class="text-center">Ellenfél</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="match in matches" ng-class="match.state == 'next' ? 'info' : ''">
-                    <td style="width: 5%"><strong>{{$index + 1}}.</strong></td>
-                    <td style="width: 15%; text-align: left"><span class="glyphicon glyphicon-calendar"></span> {{match.date}}</td>
-                    <td style="width: 15%; text-align: left"><span class="glyphicon glyphicon-time" style="margin-left: 10px"></span> {{match.time}}</td>
-                    <td ><img data-src="{{match.homeLogo}}"
-                             class="img-thumbnail"
-                             alt="Klub"
-                             src="{{match.homeLogo}}"
-                             data-holder-rendered="true"
-                             style="width: 40px; height: 40px;"></td>
-                    <td ng-class="match.homeResult == 'win' ? 'bold' : ''">{{match.home}}</td>
-                    <td class="matchResult"><strong>{{match.homeScore}} : {{match.awayScore}}</strong></td>
-                    <td ng-class="match.awayResult == 'win' ? 'bold' : ''">{{match.away}}</td>
-                    <td><img data-src="{{match.awayLogo}}"
-                             class="img-thumbnail"
-                             alt="Klub"
-                             src="{{match.awayLogo}}"
-                             data-holder-rendered="true"
-                             style="width: 40px; height: 40px;"></td>
-                    <td><a ng-href="#/competation/1/matches/1" ng-class="match.state == 'played' ? 'btn btn-success btn-xs' : 'hidden'"><i class="glyphicon glyphicon-book"></i> Jegyzőkönyv</a></td>
+                <tr ng-repeat="match in matches">
+                    <td><strong>{{$index + 1}}.</strong></td>
+                    <td>{{match.matchDate}}</td>
+                    <td>{{match.atHome}}</td>
+                    <td style="text-align: left" >{{match.opponentClubId.fullName}}</td>
+                    <td><a ng-href="#/competation/1/matches/1" ng-class="match.played ? 'btn btn-success btn-xs' : 'hidden'"><i class="glyphicon glyphicon-book"></i> Jegyzőkönyv</a></td>
                 </tr>
                 </tbody>
             </table>

@@ -1,6 +1,7 @@
 package com.mennyei.core;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -95,61 +96,64 @@ public class FillDatabase {
 		competitionService.registerClubToCompetition(competitionId, clubIds.toArray(new String[clubIds.size()])).get();
 		
 		
-		for (int i=0; i<clubIds.size() / 2; ++i) {
+		for(int i=0; i< clubIds.size() - 1; ++i) {
 			List<String> firstHalfClubIds = clubIds.subList(0, clubIds.size() / 2);
 			List<String> seacondHalfClubIds = clubIds.subList(clubIds.size() / 2, clubIds.size());
 			Collections.reverse(seacondHalfClubIds);
-			
-			Turn turn = Turn.builder(i + 1).build();
+			Turn turn = Turn.builder(i+1).build();
 			for (int j=0; j<firstHalfClubIds.size(); ++j) {
-				Match match = null;
+				String homeClubId = "";
+				String awayClubId = "";
 				if(i % 2 == 0) {
-					match = Match.builder(firstHalfClubIds.get(j), seacondHalfClubIds.get(j), LocalDate.of(2017, 1, 9).format(DateUtil.dateTimeFormatter)).build();
+					homeClubId = firstHalfClubIds.get(j);
+					awayClubId = seacondHalfClubIds.get(j);
 				} else {
-					match = Match.builder(seacondHalfClubIds.get(j), firstHalfClubIds.get(j), LocalDate.of(2017, 1, 9).format(DateUtil.dateTimeFormatter)).build();
+					homeClubId = seacondHalfClubIds.get(j);
+					awayClubId = firstHalfClubIds.get(j);
 				}
+				Match match = Match.builder(homeClubId, awayClubId, LocalDateTime.of(2017, 1, 9, 16, 00).plusDays(i * 7).format(DateUtil.dateTimeFormatter)).build();
 				turn.getMatches().add(match);
 			}
 			
-			competitionService.addMatch(competitionId, competition.getName(), turn.getIndex(), turn.getMatches()).get();
+			competitionService.addMatch(competitionId, competition.getName(), turn).get();
 			
-			clubIds.set(1, clubIds.get(clubIds.size()-1));
+			clubIds.add(1, clubIds.get(clubIds.size()-1));
 			clubIds.remove(clubIds.size()-1);
 		}
 		
 		
 		String playerId = playerService.addPlayer(Player.builder().name("Hajdu László").number(10)
-				.birthday(LocalDate.of(1990, 1, 9).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())
+				.birthday(LocalDate.of(1990, 1, 9).format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 		String player2Id = playerService.addPlayer(Player.builder().name("Kiss Pista").number(11)
-				.birthday(LocalDate.of(1988, 11, 19).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())
+				.birthday(LocalDate.of(1988, 11, 19).format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 		String player3Id = playerService.addPlayer(Player.builder().name("Gera Zoltán").number(2)
-				.birthday(LocalDate.of(1995, 3, 7).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())
+				.birthday(LocalDate.of(1995, 3, 7).format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 		String player4Id = playerService.addPlayer(Player.builder().name("Szilágyi László").number(9)
-				.birthday(LocalDate.of(1990, 1, 15).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())
+				.birthday(LocalDate.of(1990, 1, 15).format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 		String player5Id = playerService.addPlayer(Player.builder().name("Kádár László").number(4)
-				.birthday(LocalDate.of(1980, 12, 20).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())
+				.birthday(LocalDate.of(1980, 12, 20).format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 		String player6Id = playerService.addPlayer(Player.builder().name("Szaniszló Ádám").number(1)
-				.birthday(LocalDate.of(1991, 5, 14).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())
+				.birthday(LocalDate.of(1991, 5, 14).format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 		String player7Id = playerService.addPlayer(Player.builder().name("Gera Zoltán").number(7)
-				.birthday(LocalDate.of(1985, 6, 4).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())
+				.birthday(LocalDate.of(1985, 6, 4).format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 		String player8Id = playerService.addPlayer(Player.builder().name("Pintér Ádám").number(5)
-				.birthday(LocalDate.of(1975, 12, 21).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())
+				.birthday(LocalDate.of(1975, 12, 21).format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 		String player9Id = playerService.addPlayer(Player.builder().name("Sebestyén Zoltán").number(3)
-				.birthday(LocalDate.of(1990, 5, 30).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())
+				.birthday(LocalDate.of(1990, 5, 30).format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 		String player10Id = playerService.addPlayer(Player.builder().name("Bihari Tamás").number(99)
-				.birthday(LocalDate.of(1986, 3, 5).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())
+				.birthday(LocalDate.of(1986, 3, 5).format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 		String player11Id = playerService.addPlayer(Player.builder().name("Szabó János").number(88)
-				.birthday(LocalDate.of(1987, 8, 1).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())
+				.birthday(LocalDate.of(1987, 8, 1).format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 
 		transferPlayers(vamosoroszId, playerId, player2Id, player3Id, player4Id, player5Id, player6Id, player7Id, player8Id,
@@ -157,8 +161,8 @@ public class FillDatabase {
 //		extracted(tarpaId, playerId, player2Id, player3Id, player4Id, player5Id, player6Id, player7Id, player8Id,
 //				player9Id, player10Id, player11Id);
 		
-		Match match = Match.builder(vamosoroszId, tarpaId, DateUtil.ofDate(2017, 3, 12)).build();
-		competitionService.addMatch(competitionId, competition.getName(), 0, Arrays.asList(match)).get();
+//		Match match = Match.builder(vamosoroszId, tarpaId, DateUtil.ofDate(2017, 3, 12)).build();
+//		competitionService.addMatch(competitionId, competition.getName(), 0, Arrays.asList(match)).get();
 
 //		List<MatchEvent> events = Arrays.asList(GoalEvent.goalOf(playerId, 25), GoalEvent.goalOf(playerId, 63),
 //				CardEvent.redCardOf(player2Id, 89), CardEvent.yellowCardOf(player11Id, 23),
@@ -170,7 +174,7 @@ public class FillDatabase {
 	private void transferPlayers(String clubId, String... playerIds) throws ExecutionException, InterruptedException {
 		Arrays.stream(playerIds).forEach(p -> {
 			try {
-				Transfer transfer = Transfer.builder().transferDate(LocalDate.now().format(DateUtil.dateTimeFormatter)).targetTeamId(clubId).playerId(p).build();
+				Transfer transfer = Transfer.builder().transferDate(LocalDateTime.now().format(DateUtil.dateTimeFormatter)).targetTeamId(clubId).playerId(p).build();
 				transferService.transferPlayer(transfer);
 			} catch (ExecutionException | InterruptedException e) {
 				e.printStackTrace();

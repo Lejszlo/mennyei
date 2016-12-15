@@ -3,6 +3,7 @@ package com.mennyei.core;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -16,6 +17,7 @@ import com.mennyei.core.competition.domain.match.domain.Match;
 import com.mennyei.core.competition.domain.rule.CompetitionRules;
 import com.mennyei.core.competition.domain.rule.SortingRule;
 import com.mennyei.core.competition.domain.season.Stage;
+import com.mennyei.core.competition.domain.season.Turn;
 import com.mennyei.core.competition.service.CompetitionService;
 import com.mennyei.core.player.domain.Player;
 import com.mennyei.core.player.service.PlayerService;
@@ -92,7 +94,29 @@ public class FillDatabase {
 
 		competitionService.registerClubToCompetition(competitionId, clubIds.toArray(new String[clubIds.size()])).get();
 		
-//		competitionService.addMatch(competitionId, competition.getName(), 0, Arrays.asList(match)).get();
+		
+		for (int i=0; i<clubIds.size() / 2; ++i) {
+			List<String> firstHalfClubIds = clubIds.subList(0, clubIds.size() / 2);
+			List<String> seacondHalfClubIds = clubIds.subList(clubIds.size() / 2, clubIds.size());
+			Collections.reverse(seacondHalfClubIds);
+			
+			Turn turn = Turn.builder(i + 1).build();
+			for (int j=0; j<firstHalfClubIds.size(); ++j) {
+				Match match = null;
+				if(i % 2 == 0) {
+					match = Match.builder(firstHalfClubIds.get(j), seacondHalfClubIds.get(j), LocalDate.of(2017, 1, 9).format(DateUtil.dateTimeFormatter)).build();
+				} else {
+					match = Match.builder(seacondHalfClubIds.get(j), firstHalfClubIds.get(j), LocalDate.of(2017, 1, 9).format(DateUtil.dateTimeFormatter)).build();
+				}
+				turn.getMatches().add(match);
+			}
+			
+			competitionService.addMatch(competitionId, competition.getName(), turn.getIndex(), turn.getMatches()).get();
+			
+			clubIds.set(1, clubIds.get(clubIds.size()-1));
+			clubIds.remove(clubIds.size()-1);
+		}
+		
 		
 		String playerId = playerService.addPlayer(Player.builder().name("Hajdu László").number(10)
 				.birthday(LocalDate.of(1990, 1, 9).format(DateUtil.dateTimeFormatter)).nationality("Magyar").build())

@@ -13,7 +13,7 @@ import lombok.Value;
 @Builder(builderMethodName = "hiddenBuilder")
 @Value
 @EqualsAndHashCode(callSuper = false)
-public class MatchFilledWithEvents implements CompetitionEvent {
+public class MatchPlayed implements CompetitionEvent {
 	@NonNull
 	private String competitionId;
 	
@@ -28,7 +28,7 @@ public class MatchFilledWithEvents implements CompetitionEvent {
 	@Singular
 	private Set<MatchEvent> events;
 	
-	public static MatchFilledWithEventsBuilder builder(String competitionId, String stageName, int turnIndex, String homeClubId) {
+	public static MatchPlayedBuilder builder(String competitionId, String stageName, int turnIndex, String homeClubId) {
 		return hiddenBuilder().competitionId(competitionId).stageName(stageName).turnIndex(turnIndex).homeClubId(homeClubId);
 	}
 }

@@ -13,7 +13,7 @@ import lombok.Value;
 @Builder(builderMethodName = "hiddenBuilder")
 @Value
 @EqualsAndHashCode(callSuper = false)
-public class FillMatchCommand extends CompetitionCommand {
+public class PlayMatchCommand extends CompetitionCommand {
 	@NonNull
 	private String competitionId;
 	
@@ -28,7 +28,7 @@ public class FillMatchCommand extends CompetitionCommand {
 	@Singular
 	private Set<MatchEvent> events;
 
-	public static FillMatchCommandBuilder builder(String competitionId, String stageName, int turnIndex, String homeClubId) {
+	public static PlayMatchCommandBuilder builder(String competitionId, String stageName, int turnIndex, String homeClubId) {
 		return hiddenBuilder().competitionId(competitionId).stageName(stageName).turnIndex(turnIndex).homeClubId(homeClubId);
 	}
 }

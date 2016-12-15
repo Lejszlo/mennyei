@@ -10,7 +10,7 @@ import com.mennyei.core.club.exception.MaxClubLimitIsReached;
 import com.mennyei.core.competition.commands.AddCompetitionCommand;
 import com.mennyei.core.competition.commands.AddMatchCommand;
 import com.mennyei.core.competition.commands.CompetitionCommand;
-import com.mennyei.core.competition.commands.FillMatchCommand;
+import com.mennyei.core.competition.commands.PlayMatchCommand;
 import com.mennyei.core.competition.commands.RegisterClubCommand;
 import com.mennyei.core.competition.domain.match.domain.Match;
 import com.mennyei.core.competition.domain.rule.CompetitionRules;
@@ -19,7 +19,7 @@ import com.mennyei.core.competition.domain.season.Turn;
 import com.mennyei.core.competition.events.ClubRegistered;
 import com.mennyei.core.competition.events.CompetitionAdded;
 import com.mennyei.core.competition.events.MatchAdded;
-import com.mennyei.core.competition.events.MatchFilledWithEvents;
+import com.mennyei.core.competition.events.MatchPlayed;
 
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
@@ -45,8 +45,8 @@ public class CompetitionAggregator
 				addMatchCommand.getTurnIndex()).matches(addMatchCommand.getMatches()).build());
 	}
 
-	public List<Event> process(FillMatchCommand fillMatchCommand) {
-		return Arrays.asList(MatchFilledWithEvents
+	public List<Event> process(PlayMatchCommand fillMatchCommand) {
+		return Arrays.asList(MatchPlayed
 				.builder(fillMatchCommand.getCompetitionId(), fillMatchCommand.getStageName(),
 						fillMatchCommand.getTurnIndex(), fillMatchCommand.getHomeClubId())
 				.events(fillMatchCommand.getEvents()).build());
@@ -80,11 +80,12 @@ public class CompetitionAggregator
 		turn.getMatches().addAll(matchAdded.getMatches());
 	}
 
-	public void apply(MatchFilledWithEvents matchFilledWithEvents) {
+	public void apply(MatchPlayed matchFilledWithEvents) {
 		Optional<Stage> stage = findStageByName(matchFilledWithEvents.getStageName());
 		Optional<Turn> turn = findTurnByIndex(matchFilledWithEvents.getTurnIndex(), stage.get());
 		Optional<Match> match = findMatchByTurn(turn.get(), matchFilledWithEvents.getHomeClubId());
-		match.get().getEvents().addAll(matchFilledWithEvents.getEvents()); 
+		match.get().getEvents().addAll(matchFilledWithEvents.getEvents());
+		match.get().setPlayed(true);
 	}
 
 	private Optional<Stage> findStageByName(String stageName) {

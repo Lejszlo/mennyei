@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.mennyei.core.competition.commands.AddCompetitionCommand;
 import com.mennyei.core.competition.commands.AddMatchCommand;
-import com.mennyei.core.competition.commands.FillMatchCommand;
+import com.mennyei.core.competition.commands.PlayMatchCommand;
 import com.mennyei.core.competition.commands.RegisterClubCommand;
 import com.mennyei.core.competition.domain.CompetitionAggregator;
 import com.mennyei.core.competition.domain.CompetitionInfo;
@@ -42,8 +42,8 @@ public class CompetitionService {
 		return competitionRepository.update(competitionId, addMatchCommand);
 	}
 	
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> fillMatchWithEvents(String competitionId, String stageName, int turnIndex, String homeClubId, List<MatchEvent> events) {
-		FillMatchCommand fillMatchCommand = FillMatchCommand.builder(competitionId, stageName, turnIndex, homeClubId).events(events).build();
+	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> playMatch(String competitionId, String stageName, int turnIndex, String homeClubId, List<MatchEvent> events) {
+		PlayMatchCommand fillMatchCommand = PlayMatchCommand.builder(competitionId, stageName, turnIndex, homeClubId).events(events).build();
 		return competitionRepository.update(competitionId, fillMatchCommand);
 	}
 	

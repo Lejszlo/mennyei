@@ -7,10 +7,10 @@ import com.mennyei.core.competition.domain.match.domain.match.event.MatchEvent;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NonNull;
-import lombok.Value;
 
-@Value
+@Data
 @Builder(builderMethodName="hiddenBuilder")
 @AllArgsConstructor
 public class Match {

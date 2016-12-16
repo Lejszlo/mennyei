@@ -8,6 +8,6 @@ public class DateUtil {
 	public static DateTimeFormatter dateTimeFormatterShort = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 	
 	public static String ofDate(int year, int mounth, int day) {
-		return LocalDate.of(year, mounth, day).format(dateTimeFormatter);
+		return LocalDate.of(year, mounth, day).format(dateTimeFormatterShort);
 	}
 }

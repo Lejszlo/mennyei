@@ -13,7 +13,7 @@ import lombok.Value;
 @Value
 @Builder(builderMethodName="hiddenBuilder")
 @AllArgsConstructor
-public class Turn {
+public class Turn implements Comparable<Turn> {
 	
 	private int index;
 	
@@ -22,5 +22,16 @@ public class Turn {
 	
 	public static TurnBuilder builder(int index) {
 		return hiddenBuilder().index(index);
+	}
+
+	@Override
+	public int compareTo(Turn turn) {
+		if(turn.getIndex() < turn.getIndex()) {
+			return -1;
+		}
+		if(turn.getIndex() > turn.getIndex()) {
+			return 1;
+		}
+		return 0;
 	}
 }

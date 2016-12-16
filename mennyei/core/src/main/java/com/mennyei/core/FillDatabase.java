@@ -116,6 +116,13 @@ public class FillDatabase {
 			}
 			
 			competitionService.addMatch(competitionId, competition.getName(), turn).get();
+			Turn reTurn = Turn.builder(turn.getIndex() + (clubIds.size() - 1)).build();
+			turn.getMatches().stream().forEach(m -> {
+				LocalDateTime plusMonths = LocalDateTime.parse(m.getMatchDate(), DateUtil.dateTimeFormatter).plusMonths(3);
+				Match match = Match.builder(m.getAwayClubId(), m.getHomeClubId(), plusMonths.format(DateUtil.dateTimeFormatter)).build();
+				reTurn.getMatches().add(match);
+			});
+			competitionService.addMatch(competitionId, competition.getName(), reTurn).get();
 			
 			clubIds.add(1, clubIds.get(clubIds.size()-1));
 			clubIds.remove(clubIds.size()-1);

@@ -28,23 +28,26 @@ public class CompetitionService {
 	@Autowired
 	private CompetitionAggregateRepository competitionRepository;
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> addCompetition(CompetitionInfo competition, CompetitionRules competitionRules, Stage stage) {
-		return competitionRepository.save(AddCompetitionCommand.builder().competition(competition).competitionRules(competitionRules).stage(stage).build());
+	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> addCompetition(CompetitionInfo competition,
+			CompetitionRules competitionRules, Stage stage) {
+		return competitionRepository
+				.save(AddCompetitionCommand.builder().competition(competition).competitionRules(competitionRules).stage(stage).build());
 	}
 
 	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> registerClubToCompetition(String competitionId, String... clubId) {
 		RegisterClubCommand registerClubCommand = RegisterClubCommand.builder().clubIds(Arrays.stream(clubId).collect(Collectors.toSet())).build();
 		return competitionRepository.update(competitionId, registerClubCommand);
 	}
-	
+
 	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> addMatch(String competitionId, String stageName, Turn turn) {
 		AddMatchCommand addMatchCommand = AddMatchCommand.builder(competitionId, stageName, turn).build();
 		return competitionRepository.update(competitionId, addMatchCommand);
 	}
-	
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> playMatch(String competitionId, String stageName, int turnIndex, String homeClubId, List<MatchEvent> events) {
-		PlayMatchCommand fillMatchCommand = PlayMatchCommand.builder(competitionId, stageName, turnIndex, homeClubId).events(events).build();
+
+	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> playMatch(String competitionId, String stageName, int turnIndex,
+			String homeClubId, List<MatchEvent> homeClubEvents, List<MatchEvent> awayClubEvents) {
+		PlayMatchCommand fillMatchCommand = PlayMatchCommand.builder(competitionId, stageName, turnIndex, homeClubId).homeClubevents(homeClubEvents).awayClubevents(awayClubEvents).build();
 		return competitionRepository.update(competitionId, fillMatchCommand);
 	}
-	
+
 }

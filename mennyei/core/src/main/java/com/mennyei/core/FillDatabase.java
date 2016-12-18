@@ -15,6 +15,9 @@ import com.mennyei.core.club.domain.value.ClubInfo;
 import com.mennyei.core.club.service.ClubService;
 import com.mennyei.core.competition.domain.CompetitionInfo;
 import com.mennyei.core.competition.domain.match.domain.Match;
+import com.mennyei.core.competition.domain.match.domain.match.event.MatchEvent;
+import com.mennyei.core.competition.domain.match.domain.match.event.card.CardEvent;
+import com.mennyei.core.competition.domain.match.domain.match.event.goal.GoalEvent;
 import com.mennyei.core.competition.domain.rule.CompetitionRules;
 import com.mennyei.core.competition.domain.rule.SortingRule;
 import com.mennyei.core.competition.domain.season.Stage;
@@ -95,10 +98,9 @@ public class FillDatabase {
 
 		competitionService.registerClubToCompetition(competitionId, clubIds.toArray(new String[clubIds.size()])).get();
 		
-		
 		for(int i=0; i< clubIds.size() - 1; ++i) {
-			List<String> firstHalfClubIds = clubIds.subList(0, clubIds.size() / 2);
-			List<String> seacondHalfClubIds = clubIds.subList(clubIds.size() / 2, clubIds.size());
+			List<String> firstHalfClubIds = new ArrayList<>(clubIds.subList(0, clubIds.size() / 2));
+			List<String> seacondHalfClubIds = new ArrayList<>(clubIds.subList(clubIds.size() / 2, clubIds.size()));
 			Collections.reverse(seacondHalfClubIds);
 			Turn turn = Turn.builder(i+1).build();
 			for (int j=0; j<firstHalfClubIds.size(); ++j) {
@@ -111,8 +113,9 @@ public class FillDatabase {
 					homeClubId = seacondHalfClubIds.get(j);
 					awayClubId = firstHalfClubIds.get(j);
 				}
-				Match match = Match.builder(homeClubId, awayClubId, LocalDateTime.of(2017, 1, 9, 16, 00).plusDays(i * 7).format(DateUtil.dateTimeFormatter)).build();
+				Match match = Match.builder(homeClubId, awayClubId, LocalDateTime.of(2017, 1, 9, 16, 00).plusWeeks(i).format(DateUtil.dateTimeFormatter)).build();
 				turn.getMatches().add(match);
+				System.out.println(match.getHomeClubId() + " - " + match.getAwayClubId());
 			}
 			
 			competitionService.addMatch(competitionId, competition.getName(), turn).get();
@@ -121,6 +124,7 @@ public class FillDatabase {
 				LocalDateTime plusMonths = LocalDateTime.parse(m.getMatchDate(), DateUtil.dateTimeFormatter).plusMonths(3);
 				Match match = Match.builder(m.getAwayClubId(), m.getHomeClubId(), plusMonths.format(DateUtil.dateTimeFormatter)).build();
 				reTurn.getMatches().add(match);
+				System.out.println(match.getHomeClubId() + " - " + match.getAwayClubId());
 			});
 			competitionService.addMatch(competitionId, competition.getName(), reTurn).get();
 			
@@ -171,10 +175,21 @@ public class FillDatabase {
 //		Match match = Match.builder(vamosoroszId, tarpaId, DateUtil.ofDate(2017, 3, 12)).build();
 //		competitionService.addMatch(competitionId, competition.getName(), 0, Arrays.asList(match)).get();
 
-//		List<MatchEvent> events = Arrays.asList(GoalEvent.goalOf(playerId, 25), GoalEvent.goalOf(playerId, 63),
-//				CardEvent.redCardOf(player2Id, 89), CardEvent.yellowCardOf(player11Id, 23),
-//				CardEvent.yellowCardOf(player8Id, 53));
-//		competitionService.playMatch(competitionId, competition.getName(), 0, vamosoroszId, events).get();
+		List<MatchEvent> events = Arrays.asList(GoalEvent.goalOf(playerId, 25), GoalEvent.goalOf(playerId, 63),
+				CardEvent.redCardOf(player2Id, 89), CardEvent.yellowCardOf(player11Id, 23),
+				CardEvent.yellowCardOf(player8Id, 53));
+		competitionService.playMatch(competitionId, competition.getName(), 1, vamosoroszId, events, Collections.emptyList()).get();
+		
+		List<MatchEvent> events2 = Arrays.asList(GoalEvent.goalOf(playerId, 12), GoalEvent.goalOf(playerId, 89), CardEvent.yellowCardOf(player11Id, 23),
+				CardEvent.yellowCardOf(player8Id, 53));
+		competitionService.playMatch(competitionId, competition.getName(), 2, vamosoroszId, Collections.emptyList(), events2).get();
+		
+		List<MatchEvent> events3 = Arrays.asList(GoalEvent.goalOf(playerId, 25), GoalEvent.goalOf(playerId, 63), CardEvent.yellowCardOf(player11Id, 23),
+				CardEvent.yellowCardOf(player8Id, 53));
+		List<MatchEvent> events3away = Arrays.asList(GoalEvent.goalOf(playerId, 25), GoalEvent.goalOf(playerId, 63),
+				CardEvent.redCardOf(player2Id, 89), CardEvent.yellowCardOf(player11Id, 23),
+				CardEvent.yellowCardOf(player8Id, 53));
+		competitionService.playMatch(competitionId, competition.getName(), 3, vamosoroszId, events3, events3away).get();
 
 	}
 

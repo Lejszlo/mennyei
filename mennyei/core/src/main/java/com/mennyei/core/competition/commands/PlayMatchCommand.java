@@ -1,6 +1,6 @@
 package com.mennyei.core.competition.commands;
 
-import java.util.Set;
+import java.util.List;
 
 import com.mennyei.core.competition.domain.match.domain.match.event.MatchEvent;
 
@@ -26,7 +26,10 @@ public class PlayMatchCommand extends CompetitionCommand {
 	private String homeClubId;
 	
 	@Singular
-	private Set<MatchEvent> events;
+	private List<MatchEvent> homeClubevents;
+	
+	@Singular
+	private List<MatchEvent> awayClubevents;
 
 	public static PlayMatchCommandBuilder builder(String competitionId, String stageName, int turnIndex, String homeClubId) {
 		return hiddenBuilder().competitionId(competitionId).stageName(stageName).turnIndex(turnIndex).homeClubId(homeClubId);

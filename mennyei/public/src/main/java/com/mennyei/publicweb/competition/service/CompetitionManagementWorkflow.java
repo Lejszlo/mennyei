@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mennyei.core.competition.domain.CompetitionInfo;
+import com.mennyei.core.competition.domain.match.domain.Match;
 import com.mennyei.core.competition.domain.season.Stage;
+import com.mennyei.core.competition.domain.season.Turn;
 import com.mennyei.core.competition.events.ClubRegistered;
 import com.mennyei.core.competition.events.CompetitionAdded;
 import com.mennyei.core.competition.events.MatchAdded;
+import com.mennyei.core.competition.events.MatchPlayed;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
@@ -64,6 +67,22 @@ public class CompetitionManagementWorkflow {
         CompetitionQuery competitionQuery = competitionMongoRepository.findOne(competitionId);
         Optional<Stage> stage = competitionQuery.getStages().stream().filter(s -> s.getName().equals(event.getStageName())).findFirst();
         stage.get().getTurns().add(event.getTurn());
+        competitionMongoRepository.save(competitionQuery);
+    }
+    
+    @EventHandlerMethod
+    public void matchPlayed(DispatchedEvent<MatchPlayed> dispatchedEvent) {
+    	MatchPlayed event = dispatchedEvent.getEvent();
+        String competitionId = dispatchedEvent.getEntityId();
+        CompetitionQuery competitionQuery = competitionMongoRepository.findOne(competitionId);
+        Optional<Stage> stage = competitionQuery.getStages().stream().filter(s -> s.getName().equals(event.getStageName())).findFirst();
+        Optional<Turn> turn = stage.get().getTurnByIndex(event.getTurnIndex());
+		Optional<Match> matchOptional = turn.get().findMatchByClub(event.getHomeClubId());
+		Match match = matchOptional.get();
+		match.getHomeClubevents().addAll(event.getHomeClubEvents());
+		match.getAwayClubevents().addAll(event.getAwayClubEvents());
+		match.calculateResult();
+		match.setPlayed(true);
         competitionMongoRepository.save(competitionQuery);
     }
 

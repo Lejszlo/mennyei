@@ -36,15 +36,15 @@ public class CompetitionBusinessService {
 
 		Optional<Stage> stage = competitionQuery.getStages().stream().filter(s -> s.getName().equals(stageName)).findFirst();
 
-		return stage.get().getTurns().stream().map(t -> createMatchQuery(t, clubId2)).collect(Collectors.toList());
+		return stage.get().getTurns().stream().map(t -> createMatchQuery(t, clubId2, competitionQuery)).collect(Collectors.toList());
 	}
 
-	private MatchQuery createMatchQuery(Turn turn, String clubId) {
-		Optional<Match> match = turn.getMatches().stream().filter(m -> m.containsMatch(clubId)).findFirst();
-		return mapMatch(match.get(), turn, clubId);
+	private MatchQuery createMatchQuery(Turn turn, String clubId, CompetitionQuery competitionQuery) {
+		Optional<Match> match = turn.getMatches().stream().filter(m -> m.containsClub(clubId)).findFirst();
+		return mapMatch(match.get(), turn, clubId, competitionQuery);
 	}
 
-	private MatchQuery mapMatch(Match match, Turn turn, String clubId) {
+	private MatchQuery mapMatch(Match match, Turn turn, String clubId, CompetitionQuery competitionQuery) {
 		MatchQuery matchQuery = MatchQuery.builder().index(turn.getIndex()).build();
 		modelMapper.map(match, matchQuery);
 		if(matchQuery.isPlayed()) {
@@ -53,6 +53,7 @@ public class CompetitionBusinessService {
 		ClubQuery clubQuery = clubQueryMongoRepository.findOne(match.whoIsTheOpponentOf(clubId));
 		matchQuery.setOpponentClubId(clubQuery);
 		matchQuery.setAtHome(match.isAtHome(clubId));
+		matchQuery.setCompetitionName(competitionQuery.getName());
 		return matchQuery;
 	}
 

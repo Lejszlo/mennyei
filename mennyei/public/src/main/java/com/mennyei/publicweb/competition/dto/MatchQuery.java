@@ -27,4 +27,6 @@ public class MatchQuery {
 	private ClubQuery opponentClubId;
 	
 	private MatchResultType resultType;
+	
+	private String competitionName;
 }

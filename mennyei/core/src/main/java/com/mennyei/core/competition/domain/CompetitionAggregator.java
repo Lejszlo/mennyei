@@ -25,8 +25,7 @@ import com.mennyei.core.competition.events.MatchPlayed;
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 
-public class CompetitionAggregator
-		extends ReflectiveMutableCommandProcessingAggregate<CompetitionAggregator, CompetitionCommand> {
+public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAggregate<CompetitionAggregator, CompetitionCommand> {
 
 	private CompetitionInfo competitionInfo;
 
@@ -42,14 +41,15 @@ public class CompetitionAggregator
 	}
 
 	public List<Event> process(AddMatchCommand addMatchCommand) {
-		return Arrays.asList(MatchAdded.builder(addMatchCommand.getCompetitionId(), addMatchCommand.getStageName(),addMatchCommand.getTurn()).build());
+		return Arrays
+				.asList(MatchAdded.builder(addMatchCommand.getCompetitionId(), addMatchCommand.getStageName(), addMatchCommand.getTurn()).build());
 	}
 
 	public List<Event> process(PlayMatchCommand fillMatchCommand) {
 		return Arrays.asList(MatchPlayed
-				.builder(fillMatchCommand.getCompetitionId(), fillMatchCommand.getStageName(),
-						fillMatchCommand.getTurnIndex(), fillMatchCommand.getHomeClubId())
-				.events(fillMatchCommand.getEvents()).build());
+				.builder(fillMatchCommand.getCompetitionId(), fillMatchCommand.getStageName(), fillMatchCommand.getTurnIndex(),
+						fillMatchCommand.getHomeClubId())
+				.homeClubEvents(fillMatchCommand.getHomeClubevents()).awayClubEvents(fillMatchCommand.getAwayClubevents()).build());
 	}
 
 	public List<Event> process(RegisterClubCommand registerClubCommand) throws MaxClubLimitIsReached {
@@ -79,16 +79,16 @@ public class CompetitionAggregator
 	public void apply(MatchPlayed matchPlayed) {
 		Optional<Stage> stage = findStageByName(matchPlayed.getStageName());
 		Optional<Turn> turn = stage.get().getTurnByIndex(matchPlayed.getTurnIndex());
-		Optional<Match> match = findMatchByTurn(turn.get(), matchPlayed.getHomeClubId());
-		match.get().getEvents().addAll(matchPlayed.getEvents());
-		match.get().setPlayed(true);
+		Optional<Match> matchOptional = turn.get().findMatchByClub(matchPlayed.getHomeClubId());
+		Match match = matchOptional.get();
+		match.getHomeClubevents().addAll(matchPlayed.getHomeClubEvents());
+		match.getAwayClubevents().addAll(matchPlayed.getAwayClubEvents());
+		match.calculateResult();
+		match.setPlayed(true);
 	}
 
 	private Optional<Stage> findStageByName(String stageName) {
 		return stages.stream().filter(s -> s.getName().equals(stageName)).findFirst();
 	}
 
-	private Optional<Match> findMatchByTurn(Turn turn, String homeClubId) {
-		return turn.getMatches().stream().filter(m -> m.getHomeClubId().equals(homeClubId)).findFirst();
-	}
 }

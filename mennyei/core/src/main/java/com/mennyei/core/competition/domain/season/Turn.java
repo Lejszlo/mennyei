@@ -2,6 +2,7 @@ package com.mennyei.core.competition.domain.season;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.mennyei.core.competition.domain.match.domain.Match;
 
@@ -26,12 +27,16 @@ public class Turn implements Comparable<Turn> {
 
 	@Override
 	public int compareTo(Turn turn) {
-		if(turn.getIndex() < turn.getIndex()) {
+		if(index < turn.getIndex()) {
 			return -1;
 		}
-		if(turn.getIndex() > turn.getIndex()) {
+		if(index > turn.getIndex()) {
 			return 1;
 		}
 		return 0;
+	}
+	
+	public Optional<Match> findMatchByClub(String clubId) {
+		return matches.stream().filter(m -> m.containsClub(clubId)).findFirst();
 	}
 }

@@ -1,32 +1,39 @@
 <div class="row">
-    <div class="panel panel-primary" style="border: 0px;">
-        <div class="panel-body">
-            <p><strong><img data-src="static/images/picto/trophy.png"
-                             class="img-rounded"
-                             alt="Klub"
-                             src="static/images/picto/trophy.png"
-                             data-holder-rendered="true"
-                             style="width: 25px; height: 25px;"> Megyei II. osztály - Kelet-Magyarország csoport - 2015/2016</strong></p>
-            <table class="table table-striped table-condensed table-responsive matchTable">
-                <thead>
-                    <tr>
-                        <th class="text-center"># forduló</th>
-                        <th class="text-center"><span class="glyphicon glyphicon-calendar"></span> Dátum</th>
-                        <th class="text-center"></th>
-                        <th class="text-center">Ellenfél</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="match in matches">
-                    <td><strong>{{$index + 1}}.</strong></td>
-                    <td>{{match.matchDate}}</td>
-                    <td>{{match.atHome}}</td>
-                    <td style="text-align: left" >{{match.opponentClubId.fullName}}</td>
-                    <td><a ng-href="#/competation/1/matches/1" ng-class="match.played ? 'btn btn-success btn-xs' : 'hidden'"><i class="glyphicon glyphicon-book"></i> Jegyzőkönyv</a></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+	<div class="panel panel-primary" style="border: 0px;">
+		<div class="panel-body">
+			<table class="table table-hover table-responsive matchTable">
+				<thead>
+					<tr>
+						<th class="text-center"><span class="glyphicon glyphicon-calendar"></span> Dátum</th>
+						<th class="text-center"></th>
+						<th class="text-center">Eredmény</th>
+						<th class="text-center"></th>
+						<th style="text-align: left">Ellenfél</th>
+						<th style="text-align: left">Verseny</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="match in matches">
+						<td>{{match.matchDate}}</td>
+						<td>
+							<span ng-if="match.atHome" class="glyphicon glyphicon-home" onmouseenter="$(this).tooltip('show')" data-toggle="tooltip" data-placement="left" data-original-title="Otthon"></span>
+							<span ng-if="!match.atHome" class="glyphicon glyphicon-briefcase" onmouseenter="$(this).tooltip('show')" data-toggle="tooltip" data-placement="left" title="" data-original-title="Idegenben"></span>
+						</td>
+						<td><strong>{{match.result.homeGoalAmount}} - {{match.result.awayGoalAmount}}</strong></td>
+						<td>
+							<span ng-if="match.resultType == 'HOME' && match.atHome" class="label label-success">Gy</span>
+							<span ng-if="match.resultType == 'AWAY' && !match.atHome" class="label label-danger">V</span>
+							<span ng-if="match.resultType == 'DRAW'" class="label label-warning">D</span>
+						</td>
+						<td style="text-align: left">{{match.opponentClubId.fullName}}</td>
+						<td>{{match.competitionName}}</td>
+						<td><a ng-href="#/competation/1/matches/1" ng-class="match.played ? 'btn btn-success btn-xs' : 'hidden'"><i
+								class="glyphicon glyphicon-book"
+							></i> Jegyzőkönyv</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

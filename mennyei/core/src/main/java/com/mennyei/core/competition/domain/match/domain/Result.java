@@ -3,24 +3,28 @@ package com.mennyei.core.competition.domain.match.domain;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
+@Builder(builderMethodName = "hiddenBuilder")
 public class Result {
-	
+
 	@Getter
-	private Integer homeGoalAmount;
-	
+	private int homeGoalAmount;
+
 	@Getter
-	private Integer awayGoalAmount;
-	
+	private int awayGoalAmount;
+
 	public MatchResultType whoIsTheWinner() {
 		int result = homeGoalAmount - awayGoalAmount;
-		if(result > 0) {
+		if (result > 0) {
 			return MatchResultType.HOME;
 		}
-		if(result < 0) {
+		if (result < 0) {
 			return MatchResultType.AWAY;
 		}
 		return MatchResultType.DRAW;
 	}
-	
+
+	public static ResultBuilder builder(int homeGoalAmount, int awayGoalAmount) {
+		return hiddenBuilder().awayGoalAmount(awayGoalAmount).homeGoalAmount(homeGoalAmount);
+	}
+
 }

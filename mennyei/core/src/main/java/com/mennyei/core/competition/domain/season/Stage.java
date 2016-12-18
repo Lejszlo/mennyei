@@ -28,4 +28,6 @@ public class Stage {
 	public Optional<Turn> getTurnByIndex(int index) {
 		return turns.stream().filter(t -> t.getIndex() == index).findFirst();
 	}
+	
+	
 }

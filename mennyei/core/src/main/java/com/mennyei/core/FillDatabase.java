@@ -115,18 +115,16 @@ public class FillDatabase {
 				}
 				Match match = Match.builder(homeClubId, awayClubId, LocalDateTime.of(2017, 1, 9, 16, 00).plusWeeks(i).format(DateUtil.dateTimeFormatter)).build();
 				turn.getMatches().add(match);
-				System.out.println(match.getHomeClubId() + " - " + match.getAwayClubId());
 			}
+			competitionService.addTurn(competitionId, competition.getName(), turn).get();
 			
-			competitionService.addMatch(competitionId, competition.getName(), turn).get();
 			Turn reTurn = Turn.builder(turn.getIndex() + (clubIds.size() - 1)).build();
 			turn.getMatches().stream().forEach(m -> {
 				LocalDateTime plusMonths = LocalDateTime.parse(m.getMatchDate(), DateUtil.dateTimeFormatter).plusMonths(3);
 				Match match = Match.builder(m.getAwayClubId(), m.getHomeClubId(), plusMonths.format(DateUtil.dateTimeFormatter)).build();
 				reTurn.getMatches().add(match);
-				System.out.println(match.getHomeClubId() + " - " + match.getAwayClubId());
 			});
-			competitionService.addMatch(competitionId, competition.getName(), reTurn).get();
+			competitionService.addTurn(competitionId, competition.getName(), reTurn).get();
 			
 			clubIds.add(1, clubIds.get(clubIds.size()-1));
 			clubIds.remove(clubIds.size()-1);

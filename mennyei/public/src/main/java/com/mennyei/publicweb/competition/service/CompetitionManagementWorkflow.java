@@ -1,5 +1,6 @@
 package com.mennyei.publicweb.competition.service;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Component;
 import com.mennyei.core.competition.domain.CompetitionInfo;
 import com.mennyei.core.competition.domain.match.domain.Match;
 import com.mennyei.core.competition.domain.season.Stage;
-import com.mennyei.core.competition.domain.season.Turn;
 import com.mennyei.core.competition.events.ClubRegistered;
 import com.mennyei.core.competition.events.CompetitionAdded;
 import com.mennyei.core.competition.events.MatchAdded;
@@ -34,6 +34,12 @@ public class CompetitionManagementWorkflow {
 
     @Autowired
     private ClubQueryMongoRepository clubMongoRepository;
+    
+    @Autowired
+    private CompetitionMatchService competitionMatchService;
+    
+    @Autowired
+    private CompetitionTableService competitionTableService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -67,6 +73,7 @@ public class CompetitionManagementWorkflow {
         CompetitionQuery competitionQuery = competitionMongoRepository.findOne(competitionId);
         Optional<Stage> stage = competitionQuery.getStages().stream().filter(s -> s.getName().equals(event.getStageName())).findFirst();
         stage.get().getTurns().add(event.getTurn());
+        Collections.sort(stage.get().getTurns());
         competitionMongoRepository.save(competitionQuery);
     }
     
@@ -75,14 +82,8 @@ public class CompetitionManagementWorkflow {
     	MatchPlayed event = dispatchedEvent.getEvent();
         String competitionId = dispatchedEvent.getEntityId();
         CompetitionQuery competitionQuery = competitionMongoRepository.findOne(competitionId);
-        Optional<Stage> stage = competitionQuery.getStages().stream().filter(s -> s.getName().equals(event.getStageName())).findFirst();
-        Optional<Turn> turn = stage.get().getTurnByIndex(event.getTurnIndex());
-		Optional<Match> matchOptional = turn.get().findMatchByClub(event.getHomeClubId());
-		Match match = matchOptional.get();
-		match.getHomeClubevents().addAll(event.getHomeClubEvents());
-		match.getAwayClubevents().addAll(event.getAwayClubEvents());
-		match.calculateResult();
-		match.setPlayed(true);
+        Match match = competitionMatchService.matchPlayed(event, competitionQuery);
+        competitionTableService.refreshTable(competitionQuery, match, event.getStageName());
         competitionMongoRepository.save(competitionQuery);
     }
 

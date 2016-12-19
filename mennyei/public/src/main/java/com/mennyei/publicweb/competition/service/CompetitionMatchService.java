@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.mennyei.core.competition.domain.match.domain.Match;
 import com.mennyei.core.competition.domain.season.Stage;
 import com.mennyei.core.competition.domain.season.Turn;
+import com.mennyei.core.competition.events.MatchPlayed;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
@@ -18,7 +19,7 @@ import com.mennyei.publicweb.competition.dto.MatchQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
 
 @Service
-public class CompetitionBusinessService {
+public class CompetitionMatchService {
 
 	@Autowired
 	private CompetitionMongoRepository competitionMongoRepository;
@@ -55,6 +56,22 @@ public class CompetitionBusinessService {
 		matchQuery.setAtHome(match.isAtHome(clubId));
 		matchQuery.setCompetitionName(competitionQuery.getName());
 		return matchQuery;
+	}
+
+	public Match matchPlayed(MatchPlayed event, CompetitionQuery competitionQuery) {
+		Match match = getMatch(competitionQuery, event.getStageName(), event.getTurnIndex(), event.getHomeClubId());
+		match.getHomeClubevents().addAll(event.getHomeClubEvents());
+		match.getAwayClubevents().addAll(event.getAwayClubEvents());
+		match.calculateResult();
+		match.setPlayed(true);
+		return match;
+	}
+	
+	private Match getMatch(CompetitionQuery competitionQuery, String stageName, int turnIndex, String homeClubId) {
+		Optional<Stage> stage = competitionQuery.getStages().stream().filter(s -> s.getName().equals(stageName)).findFirst();
+        Optional<Turn> turn = stage.get().getTurnByIndex(turnIndex);
+		Optional<Match> matchOptional = turn.get().findMatchByClub(homeClubId);
+		return matchOptional.get();
 	}
 
 }

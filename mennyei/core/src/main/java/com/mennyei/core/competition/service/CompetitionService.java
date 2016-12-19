@@ -39,7 +39,7 @@ public class CompetitionService {
 		return competitionRepository.update(competitionId, registerClubCommand);
 	}
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> addMatch(String competitionId, String stageName, Turn turn) {
+	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> addTurn(String competitionId, String stageName, Turn turn) {
 		AddMatchCommand addMatchCommand = AddMatchCommand.builder(competitionId, stageName, turn).build();
 		return competitionRepository.update(competitionId, addMatchCommand);
 	}

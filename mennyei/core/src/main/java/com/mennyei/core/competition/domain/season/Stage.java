@@ -1,6 +1,6 @@
 package com.mennyei.core.competition.domain.season;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +19,7 @@ public class Stage {
 	private String name;
 	
 	@Singular
-	private List<Turn> turns = new ArrayList<>();
+	private List<Turn> turns = new LinkedList<>();
 	
 	public static StageBuilder builder(String name) {
 		return hiddenBuilder().name(name);

@@ -1,7 +1,6 @@
 package com.mennyei.core.competition.domain;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -73,7 +72,6 @@ public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAgg
 		Optional<Stage> optionalstage = findStageByName(matchAdded.getStageName());
 		Stage stage = optionalstage.get();
 		stage.getTurns().add(matchAdded.getTurn());
-		Collections.sort(stage.getTurns());
 	}
 
 	public void apply(MatchPlayed matchPlayed) {

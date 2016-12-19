@@ -1,48 +1,54 @@
 <div class="row">
-    <div class="panel panel-primary" style="border: 0px;">
-        <div class="panel-body">
-            <p><strong><img data-src="static/images/picto/trophy.png"
-                             class="img-rounded"
-                             alt="Klub"
-                             src="static/images/picto/trophy.png"
-                             data-holder-rendered="true"
-                             style="width: 25px; height: 25px;"> Megyei II. osztály - Kelet-Magyarország csoport - 2015/2016 - 1.fordulo</strong></p>
-            <table class="table table-hover table-responsive">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Csapat</th>
-                    <th>M</th>
-                    <th>Gy</th>
-                    <th>D</th>
-                    <th>V</th>
-                    <th>LG</th>
-                    <th>KG</th>
-                    <th>GK</th>
-                    <th>P</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-class='calculatePositionHighlights($index)' ng-repeat="clubInfo in clubs | orderBy : '-point'">
-                    <td>{{$index + 1}}</td>
-                    <td>{{clubInfo.name}}</td>
-                    <td>{{clubInfo.match}}</td>
-                    <td>{{clubInfo.win}}</td>
-                    <td>{{clubInfo.draw}}</td>
-                    <td>{{clubInfo.lose}}</td>
-                    <td>{{clubInfo.goalScored}}</td>
-                    <td>{{clubInfo.goalConcerd}}</td>
-                    <td>{{clubInfo.goalScored - clubInfo.goalConcerd}}</td>
-                    <td>{{clubInfo.win * 3 + clubInfo.draw}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="panel-footer">
-            <small>M: merkozesek, Gy: Gyozelem, D: Dontetlen, V: Vereseg, LG: Lott Golok, KG: Kapott Golok, GK:
-                GolKulonbseg, P: pont
-            </small>
-        </div>
-    </div>
-</div>
+	<div class="panel panel-primary" style="border: 0px;">
+		<div class="panel-body">
+
+			<ul class="nav nav-tabs">
+				<li role="presentation" class="active"><a href="#first" data-toggle="tab" aria-expanded="true">Bajnoksag</a></li>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="" aria-expanded="false"> Kupa <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="" data-toggle="tab">1. fordulo</a></li>
+						<li><a href="" data-toggle="tab">2. fordulo</a></li>
+					</ul>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade active in" id="first">
+					<table class="table table-hover table-responsive">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Csapat</th>
+								<th>M</th>
+								<th>Gy</th>
+								<th>D</th>
+								<th>V</th>
+								<th>LG</th>
+								<th>KG</th>
+								<th>GK</th>
+								<th>P</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-class='calculatePositionHighlights($index)' ng-repeat="clubInfo in clubs | orderBy : '-point'">
+								<td>{{$index + 1}}</td>
+								<td>{{clubInfo.name}}</td>
+								<td>{{clubInfo.match}}</td>
+								<td>{{clubInfo.win}}</td>
+								<td>{{clubInfo.draw}}</td>
+								<td>{{clubInfo.lose}}</td>
+								<td>{{clubInfo.goalScored}}</td>
+								<td>{{clubInfo.goalConcerd}}</td>
+								<td>{{clubInfo.goalScored - clubInfo.goalConcerd}}</td>
+								<td>{{clubInfo.win * 3 + clubInfo.draw}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade in" id="second"></div>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<small>M: merkozesek, Gy: Gyozelem, D: Dontetlen, V: Vereseg, LG: Lott Golok, KG: Kapott Golok, GK: GolKulonbseg, P: pont </small>
+		</div>
+	</div>
 </div>

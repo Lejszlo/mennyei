@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mennyei.publicweb.club.dto.PlayerQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.competition.dto.MatchQuery;
-import com.mennyei.publicweb.competition.service.CompetitionBusinessService;
+import com.mennyei.publicweb.competition.service.CompetitionMatchService;
 
 
 @RequestMapping("/clubs/")
@@ -24,7 +24,7 @@ public class ClubController {
 	private ClubQueryMongoRepository clubQueryMongoRepository;
 	
 	@Autowired
-	private CompetitionBusinessService competitionBusinessService;
+	private CompetitionMatchService competitionBusinessService;
 	
 	@GetMapping("/{clubUrlName}/players")
 	public Set<PlayerQuery> getClubPlayers(@PathVariable("clubUrlName") String clubUrlName) throws InterruptedException, ExecutionException {

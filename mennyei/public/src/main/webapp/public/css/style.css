@@ -18,13 +18,13 @@ hr {
     cursor: pointer;
 }
 
-.nav > li.dropdown.open {
+.mainNav .nav > li.dropdown.open {
     position: static;
 }
-.nav > li.dropdown.open .dropdown-menu {
+.mainNav .nav > li.dropdown.open .dropdown-menu {
     display:table; width: 100%; text-align: center; left:0; right:0;
 }
-.dropdown-menu>li {
+.mainNav > .dropdown-menu>li {
     display: table-cell;
 }
 

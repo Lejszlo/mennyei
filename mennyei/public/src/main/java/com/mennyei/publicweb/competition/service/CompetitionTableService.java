@@ -26,5 +26,21 @@ public class CompetitionTableService {
 		
 		Optional<TableRow> homeClubTableRowOptional = tableQuery.getRows().stream().filter(r -> r.getClubId().equals(match.getHomeClubId())).findFirst();
 		Optional<TableRow> awayClubTableRowOptional = tableQuery.getRows().stream().filter(r -> r.getClubId().equals(match.getAwayClubId())).findFirst();
+		
+		updateRow(homeClubTableRowOptional, match, competitionQuery);
+		updateRow(awayClubTableRowOptional, match, competitionQuery);
+	}
+
+	private void updateRow(Optional<TableRow> tableRowOptional, Match match, CompetitionQuery competitionQuery) {
+		if(!tableRowOptional.isPresent())  {
+			return;
+		}
+		
+		TableRow tableRow = tableRowOptional.get();
+		tableRow.setResult(match.getResultFor(tableRow.getClubId()));
+		tableRow.addScoredGoals(match.getGoalAmountFor(tableRow.getClubId()));
+		tableRow.addConcerdGoals(match.getGoalAmountFor(match.whoIsTheOpponentOf(tableRow.getClubId())));
+		tableRow.calculatePoints(competitionQuery.getCompetitionRules());
+		tableRow.incraseMatches();
 	}
 }

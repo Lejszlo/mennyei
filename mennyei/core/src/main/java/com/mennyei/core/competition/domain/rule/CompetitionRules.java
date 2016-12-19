@@ -17,6 +17,8 @@ public class CompetitionRules {
 	
 	private int pointsForDraw = 1;
 	
+	private int pointsForLose = 0;
+	
 	private int numberOfMatches;
 	
 	private List<SortingRule> sortingRules;

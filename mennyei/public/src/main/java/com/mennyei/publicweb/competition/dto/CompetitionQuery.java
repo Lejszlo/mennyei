@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.mennyei.core.competition.domain.rule.CompetitionRules;
 import com.mennyei.core.competition.domain.season.Stage;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 
@@ -27,4 +28,6 @@ public class CompetitionQuery {
 	private Set<ClubQuery> clubs = new HashSet<>();
 	
 	private Set<Stage> stages = new HashSet<>();
+	
+	private CompetitionRules competitionRules;
 }

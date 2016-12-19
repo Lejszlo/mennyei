@@ -53,6 +53,24 @@ public class Match {
 		}
 		return homeClubId;
 	}
+	
+	public int getGoalAmountFor(String clubId) {
+		if(homeClubId.equals(clubId)) {
+			return result.getHomeGoalAmount();
+		}
+		return result.getAwayGoalAmount();
+	}
+	
+	public MatchResult getResultFor(String clubId) {
+		MatchResultType whoIsTheWinner = result.whoIsTheWinner();
+		if(MatchResultType.DRAW.equals(whoIsTheWinner)) {
+			return MatchResult.DRAW;
+		}
+		if(MatchResultType.HOME.equals(whoIsTheWinner) && isAtHome(clubId) || MatchResultType.AWAY.equals(whoIsTheWinner) && !isAtHome(clubId)) {
+			return MatchResult.WIN;
+		}
+		return MatchResult.LOSE;
+	}
 
 	public boolean isAtHome(String clubId) {
 		return clubId.equals(homeClubId);

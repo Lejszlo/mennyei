@@ -1,16 +1,19 @@
 package com.mennyei.publicweb.competition.controller;
 
-import com.mennyei.core.FillDatabase;
-import com.mennyei.publicweb.competition.dto.CompetitionQuery;
-import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.concurrent.ExecutionException;
+import com.mennyei.core.FillDatabase;
+import com.mennyei.publicweb.competition.dto.CompetitionQuery;
+import com.mennyei.publicweb.competition.dto.table.TableQuery;
+import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
+import com.mennyei.publicweb.competition.service.CompetitionTableService;
 
 @RequestMapping("/competition/")
 @RestController
@@ -18,6 +21,9 @@ public class CompetitionController {
 	
 	@Autowired
 	private CompetitionMongoRepository competitionMongoRepository;
+	
+	@Autowired
+	private CompetitionTableService competitionTableService;
 	
 	@Autowired
 	private FillDatabase fillDatabase;
@@ -31,4 +37,10 @@ public class CompetitionController {
 	public List<CompetitionQuery> getCompetation(@PathVariable("competitionId") String competationId)  {
 		return competitionMongoRepository.findAll();
 	}
+	
+	@GetMapping("/{competitionId}/{stageName}/table")
+	public TableQuery getClubCompetitionTable(@PathVariable("competitionId") String competitionId, @PathVariable("stageName") String stageName) {
+		return competitionTableService.getCompetationTable(competitionId, "Kelet Magyarország");
+	}
+	
 }

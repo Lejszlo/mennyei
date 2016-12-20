@@ -24,7 +24,7 @@ public class ClubController {
 	private ClubQueryMongoRepository clubQueryMongoRepository;
 	
 	@Autowired
-	private CompetitionMatchService competitionBusinessService;
+	private CompetitionMatchService competitionMatchService;
 	
 	@GetMapping("/{clubUrlName}/players")
 	public Set<PlayerQuery> getClubPlayers(@PathVariable("clubUrlName") String clubUrlName) throws InterruptedException, ExecutionException {
@@ -33,7 +33,7 @@ public class ClubController {
 	
 	@GetMapping("/{clubId}/{competitionId}/{stageName}/matches")
 	public List<MatchQuery> getClubCompetitionMatches(@PathVariable("clubId") String clubId, @PathVariable("competitionId") String competitionId, @PathVariable("stageName") String stageName) {
-		return competitionBusinessService.getClubMatches(clubId, competitionId, "Kelet Magyarország");
+		return competitionMatchService.getClubMatches(clubId, competitionId, "Kelet Magyarország");
 	}
 	
 }

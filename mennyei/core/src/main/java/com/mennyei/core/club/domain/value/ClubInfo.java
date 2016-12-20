@@ -10,5 +10,5 @@ import lombok.Value;
 public class ClubInfo {
 	private String fullName;
 
-	private String shortName;
+	private String name;
 }

@@ -1,6 +1,7 @@
 package com.mennyei.publicweb.competition.service;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,7 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.mennyei.core.competition.domain.CompetitionInfo;
 import com.mennyei.core.competition.domain.match.domain.Match;
 import com.mennyei.core.competition.domain.season.Stage;
 import com.mennyei.core.competition.events.ClubRegistered;
@@ -48,10 +48,11 @@ public class CompetitionManagementWorkflow {
     public void create(DispatchedEvent<CompetitionAdded> dispatchedEvent) {
         CompetitionAdded event = dispatchedEvent.getEvent();
         String competitionId = dispatchedEvent.getEntityId();
-        CompetitionInfo competitionInfo = event.getCompetitionInfo();
         CompetitionQuery competitionQuery = CompetitionQuery.builder().id(competitionId).build();
-        modelMapper.map(competitionInfo , competitionQuery);
+        modelMapper.map(event , competitionQuery);
+        modelMapper.map(event , competitionQuery);
         competitionQuery.getStages().addAll(event.getStages());
+        competitionTableService.createTables(event.getStages(), competitionQuery);
         competitionMongoRepository.save(competitionQuery);
     }
 
@@ -60,10 +61,11 @@ public class CompetitionManagementWorkflow {
         ClubRegistered event = dispatchedEvent.getEvent();
         String competitionId = dispatchedEvent.getEntityId();
         Set<String> clubIds = event.getClubIds();
-        CompetitionQuery competitionClubList = competitionMongoRepository.findOne(competitionId);
-        Set<ClubQuery> clubQueries = clubIds.stream().map(s -> clubMongoRepository.findOne(s)).collect(Collectors.toSet());
-        competitionClubList.getClubs().addAll(clubQueries);
-        competitionMongoRepository.save(competitionClubList);
+        CompetitionQuery competitionQuery = competitionMongoRepository.findOne(competitionId);
+        List<ClubQuery> clubQueries = clubIds.stream().map(s -> clubMongoRepository.findOne(s)).collect(Collectors.toList());
+        competitionQuery.getClubs().addAll(clubQueries);
+        competitionMongoRepository.save(competitionQuery);
+        competitionTableService.createTableRow(clubQueries, competitionQuery);
     }
     
     @EventHandlerMethod

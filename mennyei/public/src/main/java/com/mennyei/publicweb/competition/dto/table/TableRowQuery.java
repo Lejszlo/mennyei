@@ -1,29 +1,41 @@
 package com.mennyei.publicweb.competition.dto.table;
 
 import com.mennyei.core.competition.domain.match.domain.MatchResult;
-import com.mennyei.core.competition.domain.rule.CompetitionRules;
+import com.mennyei.core.competition.domain.rule.CompetitionRuleSet;
 
-public class TableRow {
-	private int place;
-	
+import lombok.Getter;
+
+public class TableRowQuery implements Comparable<TableRowQuery> {
+	@Getter
 	private String clubId;
 	
+	@Getter
+	private String clubName;
+	
+	@Getter
 	private int playedMatches;
 	
+	@Getter
 	private int win;
 	
+	@Getter
 	private int draw;
 	
+	@Getter
 	private int lose;
 
+	@Getter
 	private int scoredGoals;
 	
+	@Getter
 	private int concerdGoals;
 	
+	@Getter
 	private int point;
 	
-	public TableRow(String clubId) {
+	public TableRowQuery(String clubId, String clubName) {
 		this.clubId = clubId;
+		this.clubName = clubName;
 	}
 	
 	public int incraseMatches() {
@@ -54,22 +66,16 @@ public class TableRow {
 		}
 	}
 	
-	public int calculatePoints(CompetitionRules competitionRules) {
-		point = win * competitionRules.getPointsForWin();
-		point += draw * competitionRules.getPointsForDraw();
-		point += lose * competitionRules.getPointsForLose();
+	public int calculatePoints(CompetitionRuleSet competitionRuleSet) {
+		point = win * competitionRuleSet.getPointsForWin();
+		point += draw * competitionRuleSet.getPointsForDraw();
+		point += lose * competitionRuleSet.getPointsForLose();
 		return point;
 	}
 	
-	public void setPlace(int place) {
-		this.place = place;
+	@Override
+	public int compareTo(TableRowQuery tableRowQuery) {
+		return 0;
 	}
-	
-	public int getPlace() {
-		return place;
-	}
-	
-	public String getClubId() {
-		return clubId;
-	}
+
 }

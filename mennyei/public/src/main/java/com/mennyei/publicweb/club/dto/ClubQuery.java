@@ -16,11 +16,11 @@ import lombok.Singular;
 @Data
 public class ClubQuery {
 
-    @Id
+	@Id
     private String id;
 
-    private String shortName;
-
+    private String name;
+    
     private String fullName;
 
     private String urlName;

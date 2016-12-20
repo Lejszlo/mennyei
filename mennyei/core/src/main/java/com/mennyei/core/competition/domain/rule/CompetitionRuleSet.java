@@ -9,7 +9,7 @@ import lombok.Value;
 @Value
 @Builder
 @AllArgsConstructor
-public class CompetitionRules {
+public class CompetitionRuleSet {
 
 	private int numberOfTeams;
 	

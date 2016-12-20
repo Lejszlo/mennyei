@@ -18,7 +18,7 @@ import com.mennyei.core.competition.domain.match.domain.Match;
 import com.mennyei.core.competition.domain.match.domain.match.event.MatchEvent;
 import com.mennyei.core.competition.domain.match.domain.match.event.card.CardEvent;
 import com.mennyei.core.competition.domain.match.domain.match.event.goal.GoalEvent;
-import com.mennyei.core.competition.domain.rule.CompetitionRules;
+import com.mennyei.core.competition.domain.rule.CompetitionRuleSet;
 import com.mennyei.core.competition.domain.rule.SortingRule;
 import com.mennyei.core.competition.domain.season.Stage;
 import com.mennyei.core.competition.domain.season.Turn;
@@ -45,54 +45,54 @@ public class FillDatabase {
 	
 	public void fillTestMemoryDB() throws InterruptedException, ExecutionException {
 		CompetitionInfo competition = CompetitionInfo.builder().name("Kelet Magyarország").build();
-		List<SortingRule> rules = Arrays.asList(SortingRule.GAMES_WON, SortingRule.GOAL_DIFFERENCE,
+		List<SortingRule> sortingRules = Arrays.asList(SortingRule.GAMES_WON, SortingRule.GOAL_DIFFERENCE,
 				SortingRule.GOAL_SCORED, SortingRule.RESULTS_BETWEEN_TEAMS);
-		CompetitionRules competitionRules = CompetitionRules.builder().numberOfMatches(30).numberOfTeams(15)
-				.promotion(1).relegation(2).yellowCardLimit(5).sortingRules(rules).build();
+		CompetitionRuleSet competitionRules = CompetitionRuleSet.builder().numberOfMatches(30).numberOfTeams(15)
+				.promotion(1).relegation(2).yellowCardLimit(5).sortingRules(sortingRules).build();
 		Stage stage = Stage.builder(competition.getName()).build();
 		String competitionId = competitionService.addCompetition(competition, competitionRules, stage).get().getEntityId();
 
 		List<String> clubIds = new ArrayList<>();
-		ClubInfo vamosoroszi = ClubInfo.builder().fullName("Vámosoroszi Községi Sport Egyesület").shortName("VKSE").build();
+		ClubInfo vamosoroszi = ClubInfo.builder().fullName("Vámosoroszi Községi Sport Egyesület").name("Vámosoroszi KSE").build();
 		String vamosoroszId = clubService.addClub(vamosoroszi).get().getEntityId();
 		clubIds.add(vamosoroszId);
-		ClubInfo tarpa = ClubInfo.builder().fullName("Tarpa Sport Club").shortName("TSC").build();
+		ClubInfo tarpa = ClubInfo.builder().fullName("Tarpa Sport Club").name("Tarpa SC").build();
 		String tarpaId = clubService.addClub(tarpa).get().getEntityId();
 		clubIds.add(tarpaId);
-		ClubInfo tisztaberek = ClubInfo.builder().fullName("Tisztaberek Sport Egyesulet").shortName("TSE").build();
+		ClubInfo tisztaberek = ClubInfo.builder().fullName("Tisztaberek Sport Egyesulet").name("Tisztaberek SE").build();
 		String tisztaberekId = clubService.addClub(tisztaberek).get().getEntityId();
 		clubIds.add(tisztaberekId);
-		ClubInfo szatmarcseke = ClubInfo.builder().fullName("Szatmarcseke Községi Sport Egyesület").shortName("SZKSE").build();
+		ClubInfo szatmarcseke = ClubInfo.builder().fullName("Szatmarcseke Községi Sport Egyesület").name("Szatmarcseke KSE").build();
 		String szatmarcsekeId = clubService.addClub(szatmarcseke).get().getEntityId();
 		clubIds.add(szatmarcsekeId);
-		ClubInfo tyukod = ClubInfo.builder().fullName("Tyukod Footbal Club").shortName("TFC").build();
+		ClubInfo tyukod = ClubInfo.builder().fullName("Tyukod Footbal Club").name("Tyukod FC").build();
 		String tyukodId = clubService.addClub(tyukod).get().getEntityId();
 		clubIds.add(tyukodId);
-		ClubInfo csengersimaert = ClubInfo.builder().fullName("Csengersimaert Községi Sport Egyesület").shortName("CSKSE").build();
+		ClubInfo csengersimaert = ClubInfo.builder().fullName("Csengersimaert Községi Sport Egyesület").name("Csengersimaert KSE").build();
 		String csengersimaertId = clubService.addClub(csengersimaert).get().getEntityId();
 		clubIds.add(csengersimaertId);
-		ClubInfo nyirmeggyes = ClubInfo.builder().fullName("Nyirmeggyes Sportklub").shortName("NYS").build();
+		ClubInfo nyirmeggyes = ClubInfo.builder().fullName("Nyirmeggyes Sportklub").name("Nyirmeggyes SK").build();
 		String nyirmeggyesId = clubService.addClub(nyirmeggyes).get().getEntityId();
 		clubIds.add(nyirmeggyesId);
-		ClubInfo tiszakorod = ClubInfo.builder().fullName("Tiszakorod Sport Egyesulet").shortName("TSE").build();
+		ClubInfo tiszakorod = ClubInfo.builder().fullName("Tiszakorod Sport Egyesulet").name("Tiszakorod SE").build();
 		String tiszakorodId = clubService.addClub(tiszakorod).get().getEntityId();
 		clubIds.add(tiszakorodId);
-		ClubInfo nabrad = ClubInfo.builder().fullName("Nabrad Sport Egyesulet").shortName("NSE").build();
+		ClubInfo nabrad = ClubInfo.builder().fullName("Nabrad Sport Egyesulet").name("Nabrad SE").build();
 		String nabradId = clubService.addClub(nabrad).get().getEntityId();
 		clubIds.add(nabradId);
-		ClubInfo Beregdaroc = ClubInfo.builder().fullName("Beregdaroc Sport Egyesulet").shortName("BSE").build();
+		ClubInfo Beregdaroc = ClubInfo.builder().fullName("Beregdaroc Sport Egyesulet").name("Beregdaroc SE").build();
 		String beregdarocId = clubService.addClub(Beregdaroc).get().getEntityId();
 		clubIds.add(beregdarocId);
-		ClubInfo csenger = ClubInfo.builder().fullName("Csenger Footbal Club").shortName("CSFC").build();
+		ClubInfo csenger = ClubInfo.builder().fullName("Csenger Footbal Club").name("Csenger FC").build();
 		String csengerId = clubService.addClub(csenger).get().getEntityId();
 		clubIds.add(csengerId);
-		ClubInfo kolcse = ClubInfo.builder().fullName("Kolcse Sport Egyesulet").shortName("KSE").build();
+		ClubInfo kolcse = ClubInfo.builder().fullName("Kolcse Sport Egyesulet").name("Kolcse SE").build();
 		String kolcseId = clubService.addClub(kolcse).get().getEntityId();
 		clubIds.add(kolcseId);
-		ClubInfo nagydobosi = ClubInfo.builder().fullName("Nagydobosi Labdarugo Sport Egyesulet").shortName("NLSE").build();
+		ClubInfo nagydobosi = ClubInfo.builder().fullName("Nagydobosi Labdarugo Sport Egyesulet").name("Nagydobosi LSE").build();
 		String nagydobosiId = clubService.addClub(nagydobosi).get().getEntityId();
 		clubIds.add(nagydobosiId);
-		ClubInfo milota = ClubInfo.builder().fullName("Milota Sport Egyesulet").shortName("MSE").build();
+		ClubInfo milota = ClubInfo.builder().fullName("Milota Sport Egyesulet").name("Milota SE").build();
 		String milotaId = clubService.addClub(milota).get().getEntityId();
 		clubIds.add(milotaId);
 

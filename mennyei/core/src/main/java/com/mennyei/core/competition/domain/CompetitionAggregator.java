@@ -13,7 +13,7 @@ import com.mennyei.core.competition.commands.CompetitionCommand;
 import com.mennyei.core.competition.commands.PlayMatchCommand;
 import com.mennyei.core.competition.commands.RegisterClubCommand;
 import com.mennyei.core.competition.domain.match.domain.Match;
-import com.mennyei.core.competition.domain.rule.CompetitionRules;
+import com.mennyei.core.competition.domain.rule.CompetitionRuleSet;
 import com.mennyei.core.competition.domain.season.Stage;
 import com.mennyei.core.competition.domain.season.Turn;
 import com.mennyei.core.competition.events.ClubRegistered;
@@ -28,15 +28,15 @@ public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAgg
 
 	private CompetitionInfo competitionInfo;
 
-	private CompetitionRules competitionRules;
+	private CompetitionRuleSet competitionRules;
 
 	private Set<Stage> stages = new HashSet<>();
 
 	private Set<String> clubIds = new HashSet<>();
 
 	public List<Event> process(AddCompetitionCommand addCompetitionCommand) {
-		return Arrays.asList(CompetitionAdded.builder().competitionInfo(addCompetitionCommand.getCompetition())
-				.competitionRules(addCompetitionCommand.getCompetitionRules()).stages(addCompetitionCommand.getStages()).build());
+		return Arrays.asList(CompetitionAdded.builder().competitionInfo(addCompetitionCommand.getCompetitionInfo())
+				.competitionRuleSet(addCompetitionCommand.getCompetitionRules()).stages(addCompetitionCommand.getStages()).build());
 	}
 
 	public List<Event> process(AddMatchCommand addMatchCommand) {
@@ -64,7 +64,7 @@ public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAgg
 
 	public void apply(CompetitionAdded competationAdded) {
 		competitionInfo = competationAdded.getCompetitionInfo();
-		competitionRules = competationAdded.getCompetitionRules();
+		competitionRules = competationAdded.getCompetitionRuleSet();
 		stages.addAll(competationAdded.getStages());
 	}
 

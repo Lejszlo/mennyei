@@ -54,7 +54,7 @@ public class CompetitionMatchService {
 		ClubQuery clubQuery = clubQueryMongoRepository.findOne(match.whoIsTheOpponentOf(clubId));
 		matchQuery.setOpponentClubId(clubQuery);
 		matchQuery.setAtHome(match.isAtHome(clubId));
-		matchQuery.setCompetitionName(competitionQuery.getName());
+		matchQuery.setCompetitionName(competitionQuery.getCompetitionInfo().getName());
 		return matchQuery;
 	}
 

@@ -6,12 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.mennyei.core.competition.domain.match.domain.match.event.MatchEvent;
 import com.mennyei.core.competition.domain.match.domain.match.event.MatchEventType;
-import com.mennyei.core.competition.domain.match.domain.match.event.goal.GoalEvent;
-import com.mennyei.core.competition.domain.match.domain.match.event.goal.GoalEventType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -84,27 +81,19 @@ public class Match {
 	}
 
 	private int getHomeGoalAmount() {
-		List<MatchEvent> goalEvents = filterEvents(homeClubevents, new HashSet<>(Arrays.asList(MatchEventType.GOAL)));
-		return filterGoalEvents(goalEvents, GoalEventType.GOAL).collect(Collectors.toList()).size();
+		return filterEvents(homeClubevents, new HashSet<>(Arrays.asList(MatchEventType.GOAL))).size();
 	}
 	
 	private int getHomeOwnGoalAmount() {
-		List<MatchEvent> goalEvents = filterEvents(homeClubevents, new HashSet<>(Arrays.asList(MatchEventType.GOAL)));
-		return filterGoalEvents(goalEvents, GoalEventType.OWNGOAL).collect(Collectors.toList()).size();
-	}
-
-	private Stream<GoalEvent> filterGoalEvents(List<MatchEvent> goalEvents, GoalEventType goalEventType) {
-		return goalEvents.stream().map(me -> (GoalEvent) me).filter(ge -> goalEventType.equals(ge.getType()));
+		return filterEvents(homeClubevents, new HashSet<>(Arrays.asList(MatchEventType.OWN_GOAL))).size();
 	}
 
 	private int getAwayGoalAmount() {
-		List<MatchEvent> goalEvents = filterEvents(awayClubevents, new HashSet<>(Arrays.asList(MatchEventType.GOAL)));
-		return filterGoalEvents(goalEvents, GoalEventType.GOAL).collect(Collectors.toList()).size();
+		return filterEvents(awayClubevents, new HashSet<>(Arrays.asList(MatchEventType.GOAL))).size();
 	}
 	
 	private int getAwayOwnGoalAmount() {
-		List<MatchEvent> goalEvents = filterEvents(awayClubevents, new HashSet<>(Arrays.asList(MatchEventType.GOAL)));
-		return filterGoalEvents(goalEvents, GoalEventType.OWNGOAL).collect(Collectors.toList()).size();
+		return filterEvents(awayClubevents, new HashSet<>(Arrays.asList(MatchEventType.OWN_GOAL))).size();
 	}
 
 	private List<MatchEvent> filterEvents(List<MatchEvent> events, Set<MatchEventType> eventTypes) {

@@ -13,19 +13,17 @@ import lombok.Value;
 public class CardEvent extends MatchEvent {
 	private String suffererId;
 	
-	private CardEventType type;
-	
 	public static CardEvent yellowCardOf(String suffererId, int minute) {
-		CardEvent cardEvent = CardEvent.builder().suffererId(suffererId).type(CardEventType.YELLOW).build();
+		CardEvent cardEvent = CardEvent.builder().suffererId(suffererId).build();
 		cardEvent.minute = minute;
-		cardEvent.matchEventType = MatchEventType.CARD;
+		cardEvent.matchEventType = MatchEventType.YELLOW_CARD;
 		return cardEvent;
 	}
 	
 	public static CardEvent redCardOf(String suffererId, int minute) {
-		CardEvent cardEvent = CardEvent.builder().suffererId(suffererId).type(CardEventType.RED).build();
+		CardEvent cardEvent = CardEvent.builder().suffererId(suffererId).build();
 		cardEvent.minute = minute;
-		cardEvent.matchEventType = MatchEventType.CARD;
+		cardEvent.matchEventType = MatchEventType.RED_CARD;
 		return cardEvent;
 	}
 }

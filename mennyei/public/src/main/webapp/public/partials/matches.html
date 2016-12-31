@@ -22,8 +22,8 @@
 						</td>
 						<td><strong>{{match.result.homeGoalAmount}} - {{match.result.awayGoalAmount}}</strong></td>
 						<td>
-							<span ng-if="match.resultType == 'HOME' && match.atHome" class="label label-success">Gy</span>
-							<span ng-if="match.resultType == 'AWAY' && !match.atHome" class="label label-danger">V</span>
+							<span ng-if="(match.resultType == 'HOME' && match.atHome) || (match.resultType == 'AWAY' && !match.atHome)" class="label label-success">Gy</span>
+							<span ng-if="(match.resultType == 'AWAY' && match.atHome) || (match.resultType == 'HOME' && !match.atHome)" class="label label-danger">V</span>
 							<span ng-if="match.resultType == 'DRAW'" class="label label-warning">D</span>
 						</td>
 						<td style="text-align: left">{{match.opponentClubId.fullName}}</td>

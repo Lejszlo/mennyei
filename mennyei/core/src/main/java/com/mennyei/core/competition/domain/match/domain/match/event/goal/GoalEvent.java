@@ -13,17 +13,15 @@ import lombok.Value;
 public class GoalEvent extends MatchEvent {
 	private String scorerId;
 
-	private GoalEventType type;
-	
 	public static GoalEvent goalOf(String scorerId, int minute) {
-		GoalEvent goalEvent = GoalEvent.builder().scorerId(scorerId).type(GoalEventType.GOAL).build();
+		GoalEvent goalEvent = GoalEvent.builder().scorerId(scorerId).build();
 		goalEvent.minute = minute;
 		goalEvent.matchEventType = MatchEventType.GOAL;
 		return goalEvent;
 	}
 	
 	public static GoalEvent ownGoalOf(String scorerId, int minute) {
-		GoalEvent goalEvent = GoalEvent.builder().scorerId(scorerId).type(GoalEventType.OWNGOAL).build();
+		GoalEvent goalEvent = GoalEvent.builder().scorerId(scorerId).build();
 		goalEvent.minute = minute;
 		goalEvent.matchEventType = MatchEventType.GOAL;
 		return goalEvent;

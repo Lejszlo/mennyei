@@ -69,4 +69,5 @@ public class CompetitionTableService {
 		clubQueries.stream().forEach(cq -> tableQuery.getRows().add(new TableRowQuery(cq.getId(), cq.getName())));
 		tableMongoRepository.save(tableQuery);
 	}
+
 }

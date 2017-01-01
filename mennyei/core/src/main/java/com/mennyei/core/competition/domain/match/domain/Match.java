@@ -24,6 +24,8 @@ public class Match {
 	private String matchDate;
 
 	private boolean played;
+	
+	private int fans;
 
 	private Result result;
 
@@ -38,7 +40,7 @@ public class Match {
 
 	@Singular
 	private List<MatchEvent> awayClubevents = new ArrayList<>();
-
+	
 	public static MatchBuilder builder(String homeClubId, String awayClubId, String matchDate) {
 		return hiddenBuilder().homeClubId(homeClubId).awayClubId(awayClubId).matchDate(matchDate);
 	}
@@ -53,20 +55,27 @@ public class Match {
 		}
 		return homeClubId;
 	}
-	
+
+	public String whoIsMe(String clubId) {
+		if (clubId.equals(homeClubId)) {
+			return homeClubId;
+		}
+		return awayClubId;
+	}
+
 	public int getGoalAmountFor(String clubId) {
-		if(homeClubId.equals(clubId)) {
+		if (homeClubId.equals(clubId)) {
 			return result.getHomeGoalAmount();
 		}
 		return result.getAwayGoalAmount();
 	}
-	
+
 	public MatchResult getResultFor(String clubId) {
 		MatchResultType whoIsTheWinner = result.whoIsTheWinner();
-		if(MatchResultType.DRAW.equals(whoIsTheWinner)) {
+		if (MatchResultType.DRAW.equals(whoIsTheWinner)) {
 			return MatchResult.DRAW;
 		}
-		if(MatchResultType.HOME.equals(whoIsTheWinner) && isAtHome(clubId) || MatchResultType.AWAY.equals(whoIsTheWinner) && !isAtHome(clubId)) {
+		if (MatchResultType.HOME.equals(whoIsTheWinner) && isAtHome(clubId) || MatchResultType.AWAY.equals(whoIsTheWinner) && !isAtHome(clubId)) {
 			return MatchResult.WIN;
 		}
 		return MatchResult.LOSE;
@@ -80,10 +89,33 @@ public class Match {
 		result = Result.builder(getHomeGoalAmount() + getAwayOwnGoalAmount(), getAwayGoalAmount() + getHomeOwnGoalAmount()).build();
 	}
 
+	public int getScoredGoalAmount(String clubId) throws MatchHasNotPlayedYetException {
+		if(result == null) {
+			throw new MatchHasNotPlayedYetException();
+		}
+		
+		if(homeClubId.equals(clubId)) {
+			return result.getHomeGoalAmount();
+		}
+		return result.getAwayGoalAmount();
+	}
+
+	public int getConcernedGoalAmount(String clubId) throws MatchHasNotPlayedYetException {
+		if(result == null) {
+			throw new MatchHasNotPlayedYetException();
+		}
+		
+		if(awayClubId.equals(clubId)) {
+			return result.getAwayGoalAmount();
+		}
+		
+		return result.getHomeGoalAmount();
+	}
+	
 	private int getHomeGoalAmount() {
 		return filterEvents(homeClubevents, new HashSet<>(Arrays.asList(MatchEventType.GOAL))).size();
 	}
-	
+
 	private int getHomeOwnGoalAmount() {
 		return filterEvents(homeClubevents, new HashSet<>(Arrays.asList(MatchEventType.OWN_GOAL))).size();
 	}
@@ -91,12 +123,24 @@ public class Match {
 	private int getAwayGoalAmount() {
 		return filterEvents(awayClubevents, new HashSet<>(Arrays.asList(MatchEventType.GOAL))).size();
 	}
-	
+
 	private int getAwayOwnGoalAmount() {
 		return filterEvents(awayClubevents, new HashSet<>(Arrays.asList(MatchEventType.OWN_GOAL))).size();
 	}
+	
+	public int calculateTotalYellowCardAmount() {
+		List<MatchEvent> events = new ArrayList<>(awayClubevents);
+		events.addAll(homeClubevents);
+		return filterEvents(events, new HashSet<>(Arrays.asList(MatchEventType.YELLOW_CARD))).size();
+	}
+	
+	public int calculateTotalRedCardAmount() {
+		List<MatchEvent> events = new ArrayList<>(awayClubevents);
+		events.addAll(homeClubevents);
+		return filterEvents(events, new HashSet<>(Arrays.asList(MatchEventType.RED_CARD))).size();
+	}
 
-	private List<MatchEvent> filterEvents(List<MatchEvent> events, Set<MatchEventType> eventTypes) {
+	public List<MatchEvent> filterEvents(List<MatchEvent> events, Set<MatchEventType> eventTypes) {
 		return events.stream().filter(e -> eventTypes.contains(e.getMatchEventType())).collect(Collectors.toList());
 	}
 }

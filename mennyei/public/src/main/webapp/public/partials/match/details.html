@@ -9,12 +9,12 @@
 						</div>
 						<div class="panel-body">
 							<dl class="dl-horizontal matchDetails">
-								<dt>Bajnoksag</dt>
-								<dd>Megyei II. osztály - Kelet-Magyarország csoport</dd>
+								<dt>Bajnokság</dt>
+								<dd>{{matchQuery.competitionName}}</dd>
 								<dt>Forduló</dt>
-								<dd>4.</dd>
-								<dt>Datum</dt>
-								<dd>2016.10.12 17:00</dd>
+								<dd>{{matchQuery.index}}.</dd>
+								<dt>Dátum</dt>
+								<dd>{{matchQuery.matchDate}}</dd>
 								<dt>Jatekvezetok</dt>
 								<dd>Kiss pista, Halmi Gabor, Gipsz Jakab</dd>
 								<dt>Helyszin</dt>
@@ -30,28 +30,24 @@
 						</div>
 						<div class="panel-body">
 							<div class="col-md-3 text-center">
-								<img data-src="static/images/picto/goal.png" alt="Crest picture" src="static/images/picto/fans.png" data-holder-rendered="true"
-									style="width: 50px; height: 50px;"
-								>
+								<img data-src="static/images/picto/goal.png" alt="Crest picture" src="../../../static/images/picto/fans.png" data-holder-rendered="true"
+									style="width: 50px; height: 50px;">
 								<h2 class="text-center">150</h2>
 							</div>
 							<div class="col-md-3 text-center">
-								<img data-src="static/images/picto/red_card.png" alt="Crest picture" src="static/images/picto/red_card.png" data-holder-rendered="true"
-									style="width: 50px; height: 50px;"
-								>
+								<img data-src="static/images/picto/red_card.png" alt="Crest picture" src="../../../static/images/picto/red_card.png"
+									data-holder-rendered="true" style="width: 50px; height: 50px;">
 								<h2 class="text-center">0</h2>
 							</div>
 							<div class="col-md-3 text-center">
-								<img data-src="static/images/picto/yellow_card.png" alt="Crest picture" src="static/images/picto/yellow_card.png" data-holder-rendered="true"
-									style="width: 50px; height: 50px;"
-								>
+								<img data-src="static/images/picto/yellow_card.png" alt="Crest picture" src="../../../static/images/picto/yellow_card.png"
+									data-holder-rendered="true" style="width: 50px; height: 50px;">
 								<h2 class="text-center">3</h2>
 							</div>
 							<div class="col-md-3 text-center">
-								<img data-src="static/images/picto/goal.png" alt="Crest picture" src="static/images/picto/goal.png" data-holder-rendered="true"
-									style="width: 50px; height: 50px;"
-								>
-								<h2 class="text-center">6</h2>
+								<img data-src="static/images/picto/goal.png" alt="Crest picture" src="../../../static/images/picto/goal.png" data-holder-rendered="true"
+									style="width: 50px; height: 50px;">
+								<h2 class="text-center">{{matchQuery.result.homeGoalAmount + matchQuery.result.awayGoalAmount}}</h2>
 							</div>
 						</div>
 					</div>
@@ -89,18 +85,17 @@
 									<th><img data-src="static/images/crest/szszbm/vamosoroszi_big.jpg" class="img-responsive img-thumbnail" alt="Crest picture"
 										src="static/images/crest/szszbm/vamosoroszi_big.jpg" data-holder-rendered="true" style="width: 50px; height: 50px;"
 									></th>
-									<th colspan="2" style="width: 30%; border-bottom: 5px solid #93c54b; vertical-align: middle;" class="text-center">Vámosoroszi KSE</th>
-									<th style="font-size: xx-large" class="text-center"><span style="background-color: #f8f5f0; padding: 5px">3</span> : <span
-										style="background-color: #f8f5f0; padding: 5px"
-									>3</span></th>
-									<th colspan="2" style="width: 30%; border-bottom: 5px solid #3e3f3a; vertical-align: middle;" class="text-center">Kölcse SE</th>
+									<th colspan="2" style="width: 30%; border-bottom: 5px solid #93c54b; vertical-align: middle;" class="text-center">{{matchQuery.clubId.name}}</th>
+									<th style="font-size: xx-large" class="text-center"><span style="background-color: #f8f5f0; padding: 5px">{{matchQuery.result.homeGoalAmount}}</span>
+										: <span style="background-color: #f8f5f0; padding: 5px">{{matchQuery.result.awayGoalAmount}}</span></th>
+									<th colspan="2" style="width: 30%; border-bottom: 5px solid #3e3f3a; vertical-align: middle;" class="text-center">{{matchQuery.opponentClubId.name}}</th>
 									<th><img data-src="static/images/crest/szszbm/vamosoroszi_big.jpg" class="img-responsive img-thumbnail" alt="Crest picture"
 										src="static/images/crest/szszbm/kolcse_big.jpg" data-holder-rendered="true" style="width: 50px; height: 50px;"
 									></th>
 								</tr>
 								<tr>
 									<th>Mez</th>
-									<th class="text-right">Jatekos</th>
+									<th class="text-right">Játékos</th>
 									<th></th>
 									<th></th>
 									<th></th>

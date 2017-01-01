@@ -17,7 +17,7 @@ phonecatApp.config([ '$routeProvider', function($routeProvider) {
 		templateUrl : 'public/partials/club.html',
 		controller : 'clubDetailesCtrl',
 		activetab: 'club'
-	}).when('/competation/:competitionId/matches/:matchId', {
+	}).when('/competition/:competitionId/stage/:stage/turn/:turnId/club/:clubId', {
 		templateUrl : 'public/partials/match/details.html',
 		controller : 'matchDetailsCtrl',
 		activetab: 'matches'

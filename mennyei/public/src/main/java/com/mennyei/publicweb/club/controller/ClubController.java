@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mennyei.publicweb.club.dto.PlayerQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
-import com.mennyei.publicweb.competition.dto.MatchQuery;
+import com.mennyei.publicweb.competition.dto.match.MatchQuery;
 import com.mennyei.publicweb.competition.service.CompetitionMatchService;
 
 

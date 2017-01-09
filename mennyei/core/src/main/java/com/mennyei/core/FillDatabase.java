@@ -18,6 +18,7 @@ import com.mennyei.core.club.domain.value.ClubInfo;
 import com.mennyei.core.club.service.ClubService;
 import com.mennyei.core.competition.domain.CompetitionInfo;
 import com.mennyei.core.competition.domain.match.domain.Match;
+import com.mennyei.core.competition.domain.match.domain.lineup.LineUp;
 import com.mennyei.core.competition.domain.match.domain.match.event.MatchEvent;
 import com.mennyei.core.competition.domain.match.domain.match.event.card.CardEvent;
 import com.mennyei.core.competition.domain.match.domain.match.event.goal.GoalEvent;
@@ -46,8 +47,8 @@ public class FillDatabase {
 	@Autowired
 	private PlayerService playerService;
 	
-	private String[] firstNames = {"Hajdu", "Kiss", "Nagy", "Szilágyi", "Talpas", "Gera", "Szabó", "Bihari", "Sebestyén", "Pintér", "Kádár"};
-	private String[] secondNames = {"László", "István", "Zoltán", "Tamás", "Ádám", "János", "Gergő", "Szilárd", "Tibor", "Attila", "Béla"};
+	private String[] firstNames = {"Hajdu", "Kiss", "Nagy", "Szilágyi", "Talpas", "Gera", "Szabó", "Bihari", "Sebestyén", "Pintér", "Kádár", "Jelinek", "Szőllősi", "Gittinger", "Galina", "Bócsi"};
+	private String[] secondNames = {"László", "István", "Zoltán", "Tamás", "Ádám", "János", "Gergő", "Szilárd", "Tibor", "Attila", "Béla","Róbert", "Kálmán", "Albert", "Balázs", "Sándor"};
 	private Map<String, List<String>> clubPlayers = new HashMap<>();
 	
 	public void fillTestMemoryDB() throws InterruptedException, ExecutionException {
@@ -59,79 +60,80 @@ public class FillDatabase {
 		Stage stage = Stage.builder(competition.getName()).build();
 		String competitionId = competitionService.addCompetition(competition, competitionRules, stage).get().getEntityId();
 
-		List<String> clubIds = new ArrayList<>();
+		
 		ClubInfo vamosoroszi = ClubInfo.builder().fullName("Vámosoroszi Községi Sport Egyesület").name("Vámosoroszi KSE").build();
 		String vamosoroszId = clubService.addClub(vamosoroszi).get().getEntityId();
-		clubIds.add(vamosoroszId);
+		clubPlayers.put(vamosoroszId, new ArrayList<>());
 		transferPlayers(vamosoroszId);
 		
 		ClubInfo tarpa = ClubInfo.builder().fullName("Tarpa Sport Club").name("Tarpa SC").build();
 		String tarpaId = clubService.addClub(tarpa).get().getEntityId();
-		clubIds.add(tarpaId);
+		clubPlayers.put(tarpaId, new ArrayList<>());
 		transferPlayers(tarpaId);
 		
 		ClubInfo tisztaberek = ClubInfo.builder().fullName("Tisztaberek Sport Egyesulet").name("Tisztaberek SE").build();
 		String tisztaberekId = clubService.addClub(tisztaberek).get().getEntityId();
-		clubIds.add(tisztaberekId);
+		clubPlayers.put(tisztaberekId, new ArrayList<>());
 		transferPlayers(tisztaberekId);
 		
 		ClubInfo szatmarcseke = ClubInfo.builder().fullName("Szatmarcseke Községi Sport Egyesület").name("Szatmarcseke KSE").build();
 		String szatmarcsekeId = clubService.addClub(szatmarcseke).get().getEntityId();
-		clubIds.add(szatmarcsekeId);
+		clubPlayers.put(szatmarcsekeId, new ArrayList<>());
 		transferPlayers(szatmarcsekeId);
 		
 		ClubInfo tyukod = ClubInfo.builder().fullName("Tyukod Footbal Club").name("Tyukod FC").build();
 		String tyukodId = clubService.addClub(tyukod).get().getEntityId();
-		clubIds.add(tyukodId);
+		clubPlayers.put(tyukodId, new ArrayList<>());
 		transferPlayers(tyukodId);
 		
 		ClubInfo csengersimaert = ClubInfo.builder().fullName("Csengersimaert Községi Sport Egyesület").name("Csengersimaert KSE").build();
 		String csengersimaertId = clubService.addClub(csengersimaert).get().getEntityId();
-		clubIds.add(csengersimaertId);
+		clubPlayers.put(csengersimaertId, new ArrayList<>());
 		transferPlayers(csengersimaertId);
 		
 		ClubInfo nyirmeggyes = ClubInfo.builder().fullName("Nyirmeggyes Sportklub").name("Nyirmeggyes SK").build();
 		String nyirmeggyesId = clubService.addClub(nyirmeggyes).get().getEntityId();
-		clubIds.add(nyirmeggyesId);
+		clubPlayers.put(nyirmeggyesId, new ArrayList<>());
 		transferPlayers(nyirmeggyesId);
 		
 		ClubInfo tiszakorod = ClubInfo.builder().fullName("Tiszakorod Sport Egyesulet").name("Tiszakorod SE").build();
 		String tiszakorodId = clubService.addClub(tiszakorod).get().getEntityId();
-		clubIds.add(tiszakorodId);
+		clubPlayers.put(tiszakorodId, new ArrayList<>());
 		transferPlayers(tiszakorodId);
 		
 		ClubInfo nabrad = ClubInfo.builder().fullName("Nabrad Sport Egyesulet").name("Nabrad SE").build();
 		String nabradId = clubService.addClub(nabrad).get().getEntityId();
-		clubIds.add(nabradId);
+		clubPlayers.put(nabradId, new ArrayList<>());
 		transferPlayers(nabradId);
 		
 		ClubInfo Beregdaroc = ClubInfo.builder().fullName("Beregdaroc Sport Egyesulet").name("Beregdaroc SE").build();
 		String beregdarocId = clubService.addClub(Beregdaroc).get().getEntityId();
-		clubIds.add(beregdarocId);
+		clubPlayers.put(beregdarocId, new ArrayList<>());
 		transferPlayers(beregdarocId);
 		
 		ClubInfo csenger = ClubInfo.builder().fullName("Csenger Footbal Club").name("Csenger FC").build();
 		String csengerId = clubService.addClub(csenger).get().getEntityId();
-		clubIds.add(csengerId);
+		clubPlayers.put(csengerId, new ArrayList<>());
 		transferPlayers(csengerId);
 		
 		ClubInfo kolcse = ClubInfo.builder().fullName("Kolcse Sport Egyesulet").name("Kolcse SE").build();
 		String kolcseId = clubService.addClub(kolcse).get().getEntityId();
-		clubIds.add(kolcseId);
+		clubPlayers.put(kolcseId, new ArrayList<>());
 		transferPlayers(kolcseId);
 		
 		ClubInfo nagydobosi = ClubInfo.builder().fullName("Nagydobosi Labdarugo Sport Egyesulet").name("Nagydobosi LSE").build();
 		String nagydobosiId = clubService.addClub(nagydobosi).get().getEntityId();
-		clubIds.add(nagydobosiId);
+		clubPlayers.put(nagydobosiId, new ArrayList<>());
 		transferPlayers(nagydobosiId);
 		
 		ClubInfo milota = ClubInfo.builder().fullName("Milota Sport Egyesulet").name("Milota SE").build();
 		String milotaId = clubService.addClub(milota).get().getEntityId();
-		clubIds.add(milotaId);
+		clubPlayers.put(milotaId, new ArrayList<>());
 		transferPlayers(milotaId);
 
-		competitionService.registerClubToCompetition(competitionId, clubIds.toArray(new String[clubIds.size()])).get();
+		competitionService.registerClubToCompetition(competitionId, clubPlayers.keySet().toArray(new String[clubPlayers.keySet().size()])).get();
 		
+		List<String> clubIds = new ArrayList<>(clubPlayers.keySet());
 		for(int i=0; i< clubIds.size() - 1; ++i) {
 			List<String> firstHalfClubIds = new ArrayList<>(clubIds.subList(0, clubIds.size() / 2));
 			List<String> seacondHalfClubIds = new ArrayList<>(clubIds.subList(clubIds.size() / 2, clubIds.size()));
@@ -154,6 +156,8 @@ public class FillDatabase {
 			
 			fillTurnWithRandomEvents(competition, competitionId, turn);
 			
+			fillPreMatches(competition, competitionId, turn);
+			
 			Turn reTurn = Turn.builder(turn.getIndex() + (clubIds.size() - 1)).build();
 			turn.getMatches().stream().forEach(m -> {
 				LocalDateTime plusMonths = LocalDateTime.parse(m.getMatchDate(), DateUtil.dateTimeFormatter).plusMonths(3);
@@ -166,6 +170,36 @@ public class FillDatabase {
 			clubIds.remove(clubIds.size()-1);
 		}
 
+	}
+
+	private void fillPreMatches(CompetitionInfo competition, String competitionId, Turn turn) {
+		for (Match match : turn.getMatches()) {
+			List<String> homePlayers = clubPlayers.get(match.getHomeClubId());
+			List<String> awayPlayers = clubPlayers.get(match.getAwayClubId());
+			
+			for (String homePlayer : homePlayers) {
+				int shirtNumber = new Random().nextInt(99);
+				LineUp lineUp;
+				if(homePlayers.indexOf(homePlayer) >= 11) {
+					lineUp = LineUp.substitution(homePlayer, shirtNumber).build();
+					continue;
+				}
+				lineUp = LineUp.starter(homePlayer, shirtNumber).build();
+				match.getHomeLineUps().add(lineUp);
+			}
+			
+			for (String awayPlayer : awayPlayers) {
+				int shirtNumber = new Random().nextInt(99);
+				LineUp lineUp;
+				if(homePlayers.indexOf(awayPlayer) >= 11) {
+					lineUp = LineUp.substitution(awayPlayer, shirtNumber).build();
+					continue;
+				}
+				lineUp = LineUp.starter(awayPlayer, shirtNumber).build();
+				match.getAwayLineUps().add(lineUp);
+			}
+
+		}
 	}
 
 	private void fillTurnWithRandomEvents(CompetitionInfo competition, String competitionId, Turn turn) throws InterruptedException, ExecutionException {
@@ -221,6 +255,7 @@ public class FillDatabase {
 				String randomPlayer = randomPlayer();
 				Transfer transfer = Transfer.builder().transferDate(LocalDateTime.now().format(DateUtil.dateTimeFormatter)).targetTeamId(clubId).playerId(randomPlayer).build();
 				transferService.transferPlayer(transfer);
+				clubPlayers.get(clubId).add(randomPlayer);
 				putMap(clubId,randomPlayer);
 			} catch (ExecutionException | InterruptedException e) {
 				e.printStackTrace();
@@ -240,7 +275,6 @@ public class FillDatabase {
 	private String randomPlayer() throws InterruptedException, ExecutionException {
 		int firstNameIndex = new Random().nextInt(firstNames.length-1);
 		int secondNameIndex = new Random().nextInt(secondNames.length-1);
-		int shirtNumber = new Random().nextInt(99);
 		
 		Random random = new Random();
 		int minDay = (int) LocalDate.of(1976, 1, 1).toEpochDay();
@@ -249,7 +283,7 @@ public class FillDatabase {
 
 		LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
 		
-		return playerService.addPlayer(Player.builder().name(String.format("%s %s", firstNames[firstNameIndex], secondNames[secondNameIndex])).number(shirtNumber)
+		return playerService.addPlayer(Player.builder().name(String.format("%s %s", firstNames[firstNameIndex], secondNames[secondNameIndex]))
 				.birthday(randomBirthDate.format(DateUtil.dateTimeFormatterShort)).nationality("Magyar").build())
 				.get().getEntityId();
 	}

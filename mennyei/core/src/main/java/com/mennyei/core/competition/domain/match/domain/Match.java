@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.mennyei.core.competition.domain.match.domain.lineup.LineUp;
 import com.mennyei.core.competition.domain.match.domain.match.event.MatchEvent;
 import com.mennyei.core.competition.domain.match.domain.match.event.MatchEventType;
 
@@ -35,6 +36,12 @@ public class Match {
 	@NonNull
 	private String awayClubId;
 
+	@Singular
+	private List<LineUp> homeLineUps = new ArrayList<>();
+	
+	@Singular
+	private List<LineUp> awayLineUps = new ArrayList<>();
+	
 	@Singular
 	private List<MatchEvent> homeClubevents = new ArrayList<>();
 

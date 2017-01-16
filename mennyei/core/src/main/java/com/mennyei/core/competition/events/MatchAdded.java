@@ -1,6 +1,7 @@
 package com.mennyei.core.competition.events;
 
 import com.mennyei.core.competition.domain.season.Turn;
+import com.mennyei.core.competition.events.CompetitionEvent;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

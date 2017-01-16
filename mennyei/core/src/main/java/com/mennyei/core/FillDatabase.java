@@ -17,20 +17,24 @@ import org.springframework.stereotype.Service;
 import com.mennyei.core.club.domain.value.ClubInfo;
 import com.mennyei.core.club.service.ClubService;
 import com.mennyei.core.competition.domain.CompetitionInfo;
-import com.mennyei.core.competition.domain.match.domain.Match;
-import com.mennyei.core.competition.domain.match.domain.lineup.LineUp;
-import com.mennyei.core.competition.domain.match.domain.match.event.MatchEvent;
-import com.mennyei.core.competition.domain.match.domain.match.event.card.CardEvent;
-import com.mennyei.core.competition.domain.match.domain.match.event.goal.GoalEvent;
 import com.mennyei.core.competition.domain.rule.CompetitionRuleSet;
 import com.mennyei.core.competition.domain.rule.SortingRule;
 import com.mennyei.core.competition.domain.season.Stage;
 import com.mennyei.core.competition.domain.season.Turn;
 import com.mennyei.core.competition.service.CompetitionService;
+import com.mennyei.core.match.domain.MatchAggregator;
+import com.mennyei.core.match.domain.MatchInfo;
+import com.mennyei.core.match.domain.event.CardEvent;
+import com.mennyei.core.match.domain.event.GoalEvent;
+import com.mennyei.core.match.domain.event.MatchEvent;
+import com.mennyei.core.match.domain.event.lineup.LineUp;
+import com.mennyei.core.match.service.MatchService;
 import com.mennyei.core.player.domain.Player;
 import com.mennyei.core.player.service.PlayerService;
 import com.mennyei.core.transfer.domain.Transfer;
 import com.mennyei.core.transfer.service.TransferService;
+
+import io.eventuate.EntityWithIdAndVersion;
 
 @Service
 public class FillDatabase {
@@ -46,6 +50,9 @@ public class FillDatabase {
 
 	@Autowired
 	private PlayerService playerService;
+	
+	@Autowired
+	private MatchService matchService;
 	
 	private String[] firstNames = {"Hajdu", "Kiss", "Nagy", "Szilágyi", "Talpas", "Gera", "Szabó", "Bihari", "Sebestyén", "Pintér", "Kádár", "Jelinek", "Szőllősi", "Gittinger", "Galina", "Bócsi"};
 	private String[] secondNames = {"László", "István", "Zoltán", "Tamás", "Ádám", "János", "Gergő", "Szilárd", "Tibor", "Attila", "Béla","Róbert", "Kálmán", "Albert", "Balázs", "Sándor"};
@@ -139,6 +146,8 @@ public class FillDatabase {
 			List<String> seacondHalfClubIds = new ArrayList<>(clubIds.subList(clubIds.size() / 2, clubIds.size()));
 			Collections.reverse(seacondHalfClubIds);
 			Turn turn = Turn.builder(i+1).build();
+			List<MatchInfo> matchInfos = new ArrayList<>();
+			List<EntityWithIdAndVersion<MatchAggregator>> matchWithIds = new ArrayList<>();
 			for (int j=0; j<firstHalfClubIds.size(); ++j) {
 				String homeClubId = "";
 				String awayClubId = "";
@@ -149,20 +158,29 @@ public class FillDatabase {
 					homeClubId = seacondHalfClubIds.get(j);
 					awayClubId = firstHalfClubIds.get(j);
 				}
-				Match match = Match.builder(homeClubId, awayClubId, LocalDateTime.of(2017, 1, 9, 16, 00).plusWeeks(i).format(DateUtil.dateTimeFormatter)).build();
-				turn.getMatches().add(match);
+				MatchInfo matchInfo = MatchInfo.builder(homeClubId, awayClubId, LocalDateTime.of(2017, 1, 9, 16, 00).plusWeeks(i).format(DateUtil.dateTimeFormatter)).build();
+				EntityWithIdAndVersion<MatchAggregator> matchWithId = matchService.addMatch(matchInfo).get();
+				matchWithIds.add(matchWithId);
+				turn.getMatches().add(matchWithId.getEntityId());
 			}
 			competitionService.addTurn(competitionId, competition.getName(), turn).get();
 			
-			fillTurnWithRandomEvents(competition, competitionId, turn);
+			fillTurnWithRandomEvents(matchWithIds);
 			
-			fillPreMatches(competition, competitionId, turn);
+			fillPreMatches(matchWithIds);
 			
 			Turn reTurn = Turn.builder(turn.getIndex() + (clubIds.size() - 1)).build();
-			turn.getMatches().stream().forEach(m -> {
-				LocalDateTime plusMonths = LocalDateTime.parse(m.getMatchDate(), DateUtil.dateTimeFormatter).plusMonths(3);
-				Match match = Match.builder(m.getAwayClubId(), m.getHomeClubId(), plusMonths.format(DateUtil.dateTimeFormatter)).build();
-				reTurn.getMatches().add(match);
+			new ArrayList<>(matchInfos).stream().forEach(match -> {
+				LocalDateTime plusMonths = LocalDateTime.parse(match.getMatchDate(), DateUtil.dateTimeFormatter).plusMonths(3);
+				MatchInfo matchInfo = MatchInfo.builder(match.getAwayClubId(), match.getHomeClubId(), plusMonths.format(DateUtil.dateTimeFormatter)).build();
+				try {
+					EntityWithIdAndVersion<MatchAggregator> matchWithId = matchService.addMatch(matchInfo).get();
+					matchWithIds.add(matchWithId);
+					matchInfos.add(matchInfo);
+					reTurn.getMatches().add(matchWithId.getEntityId());
+				} catch (InterruptedException | ExecutionException e) {
+					e.printStackTrace();
+				}
 			});
 			competitionService.addTurn(competitionId, competition.getName(), reTurn).get();
 			
@@ -172,47 +190,49 @@ public class FillDatabase {
 
 	}
 
-	private void fillPreMatches(CompetitionInfo competition, String competitionId, Turn turn) {
-		for (Match match : turn.getMatches()) {
-			List<String> homePlayers = clubPlayers.get(match.getHomeClubId());
-			List<String> awayPlayers = clubPlayers.get(match.getAwayClubId());
+	private void fillPreMatches(List<EntityWithIdAndVersion<MatchAggregator>> matchWithIds) throws InterruptedException, ExecutionException {
+		List<LineUp> homeLineUps = new ArrayList<>();
+		List<LineUp> awayLineUps = new ArrayList<>();
+		for (EntityWithIdAndVersion<MatchAggregator> matchWithId : matchWithIds) {
+			MatchInfo matchInfo = matchWithId.getAggregate().getMatchInfo();
+			
+			List<String> homePlayers = clubPlayers.get(matchInfo.getHomeClubId());
+			List<String> awayPlayers = clubPlayers.get(matchInfo.getAwayClubId());
 			
 			for (String homePlayer : homePlayers) {
 				int shirtNumber = new Random().nextInt(99);
-				LineUp lineUp;
 				if(homePlayers.indexOf(homePlayer) >= 11) {
-					lineUp = LineUp.substitution(homePlayer, shirtNumber).build();
+					homeLineUps.add(LineUp.substitution(homePlayer, shirtNumber).build());
 					continue;
 				}
-				lineUp = LineUp.starter(homePlayer, shirtNumber).build();
-				match.getHomeLineUps().add(lineUp);
+				homeLineUps.add(LineUp.starter(homePlayer, shirtNumber).build());
 			}
 			
 			for (String awayPlayer : awayPlayers) {
 				int shirtNumber = new Random().nextInt(99);
-				LineUp lineUp;
 				if(homePlayers.indexOf(awayPlayer) >= 11) {
-					lineUp = LineUp.substitution(awayPlayer, shirtNumber).build();
+					awayLineUps.add(LineUp.substitution(awayPlayer, shirtNumber).build());
 					continue;
 				}
-				lineUp = LineUp.starter(awayPlayer, shirtNumber).build();
-				match.getAwayLineUps().add(lineUp);
+				awayLineUps.add(LineUp.starter(awayPlayer, shirtNumber).build());
 			}
-
+			
+			matchService.preMatch(matchWithId.getEntityId(), homeLineUps, awayLineUps).get();
 		}
 	}
 
-	private void fillTurnWithRandomEvents(CompetitionInfo competition, String competitionId, Turn turn) throws InterruptedException, ExecutionException {
-		for (Match match : turn.getMatches()) {
-			List<MatchEvent> homeEvents = randomGoalEvents(match.getHomeClubId());
-			homeEvents.addAll(randomYellowCardEvents(match.getHomeClubId()));
-			homeEvents.addAll(randomRedCardEvents(match.getHomeClubId()));
+	private void fillTurnWithRandomEvents(List<EntityWithIdAndVersion<MatchAggregator>> matchWithIds) throws InterruptedException, ExecutionException {
+		for (EntityWithIdAndVersion<MatchAggregator> matchWithId : matchWithIds) {
+			MatchInfo matchInfo = matchWithId.getAggregate().getMatchInfo();
+			List<MatchEvent> homeEvents = randomGoalEvents(matchInfo.getHomeClubId());
+			homeEvents.addAll(randomYellowCardEvents(matchInfo.getHomeClubId()));
+			homeEvents.addAll(randomRedCardEvents(matchInfo.getHomeClubId()));
 			
-			List<MatchEvent> awayEvents = randomGoalEvents(match.getAwayClubId());
-			awayEvents.addAll(randomYellowCardEvents(match.getAwayClubId()));
-			awayEvents.addAll(randomRedCardEvents(match.getAwayClubId()));
+			List<MatchEvent> awayEvents = randomGoalEvents(matchInfo.getAwayClubId());
+			awayEvents.addAll(randomYellowCardEvents(matchInfo.getAwayClubId()));
+			awayEvents.addAll(randomRedCardEvents(matchInfo.getAwayClubId()));
 			
-			competitionService.playMatch(competitionId, competition.getName(), turn.getIndex(), match.getHomeClubId(), homeEvents, awayEvents).get();
+			matchService.playMatch(matchWithId.getEntityId(), homeEvents, awayEvents).get();
 		}
 	}
 	

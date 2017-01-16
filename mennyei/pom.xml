@@ -60,5 +60,10 @@
 			<artifactId>eventuate-client-java-jdbc</artifactId>
 			<version>${eventuateClientVersion}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>0.7.5</version>
+		</dependency>
 	</dependencies>
 </project>

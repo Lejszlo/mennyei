@@ -1,6 +1,7 @@
 package com.mennyei.core.transfer.events;
 
 import com.mennyei.core.transfer.domain.Transfer;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;

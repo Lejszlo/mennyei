@@ -1,7 +1,7 @@
 package com.mennyei.publicweb.competition.dto.table;
 
-import com.mennyei.core.competition.domain.match.domain.MatchResult;
 import com.mennyei.core.competition.domain.rule.CompetitionRuleSet;
+import com.mennyei.core.match.domain.MatchResult;
 
 import lombok.Getter;
 

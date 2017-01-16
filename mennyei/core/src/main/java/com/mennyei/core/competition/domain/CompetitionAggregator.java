@@ -8,18 +8,12 @@ import java.util.Set;
 
 import com.mennyei.core.club.exception.MaxClubLimitIsReached;
 import com.mennyei.core.competition.commands.AddCompetitionCommand;
-import com.mennyei.core.competition.commands.AddMatchCommand;
 import com.mennyei.core.competition.commands.CompetitionCommand;
-import com.mennyei.core.competition.commands.PlayMatchCommand;
 import com.mennyei.core.competition.commands.RegisterClubCommand;
-import com.mennyei.core.competition.domain.match.domain.Match;
 import com.mennyei.core.competition.domain.rule.CompetitionRuleSet;
 import com.mennyei.core.competition.domain.season.Stage;
-import com.mennyei.core.competition.domain.season.Turn;
 import com.mennyei.core.competition.events.ClubRegistered;
 import com.mennyei.core.competition.events.CompetitionAdded;
-import com.mennyei.core.competition.events.MatchAdded;
-import com.mennyei.core.competition.events.MatchPlayed;
 
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
@@ -39,18 +33,6 @@ public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAgg
 				.competitionRuleSet(addCompetitionCommand.getCompetitionRules()).stages(addCompetitionCommand.getStages()).build());
 	}
 
-	public List<Event> process(AddMatchCommand addMatchCommand) {
-		return Arrays
-				.asList(MatchAdded.builder(addMatchCommand.getCompetitionId(), addMatchCommand.getStageName(), addMatchCommand.getTurn()).build());
-	}
-
-	public List<Event> process(PlayMatchCommand fillMatchCommand) {
-		return Arrays.asList(MatchPlayed
-				.builder(fillMatchCommand.getCompetitionId(), fillMatchCommand.getStageName(), fillMatchCommand.getTurnIndex(),
-						fillMatchCommand.getHomeClubId())
-				.homeClubEvents(fillMatchCommand.getHomeClubevents()).awayClubEvents(fillMatchCommand.getAwayClubevents()).build());
-	}
-
 	public List<Event> process(RegisterClubCommand registerClubCommand) throws MaxClubLimitIsReached {
 		if (competitionRules.getNumberOfTeams() == clubIds.size()) {
 			throw new MaxClubLimitIsReached();
@@ -66,23 +48,6 @@ public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAgg
 		competitionInfo = competationAdded.getCompetitionInfo();
 		competitionRules = competationAdded.getCompetitionRuleSet();
 		stages.addAll(competationAdded.getStages());
-	}
-
-	public void apply(MatchAdded matchAdded) {
-		Optional<Stage> optionalstage = findStageByName(matchAdded.getStageName());
-		Stage stage = optionalstage.get();
-		stage.getTurns().add(matchAdded.getTurn());
-	}
-
-	public void apply(MatchPlayed matchPlayed) {
-		Optional<Stage> stage = findStageByName(matchPlayed.getStageName());
-		Optional<Turn> turn = stage.get().getTurnByIndex(matchPlayed.getTurnIndex());
-		Optional<Match> matchOptional = turn.get().findMatchByClub(matchPlayed.getHomeClubId());
-		Match match = matchOptional.get();
-		match.getHomeClubevents().addAll(matchPlayed.getHomeClubEvents());
-		match.getAwayClubevents().addAll(matchPlayed.getAwayClubEvents());
-		match.calculateResult();
-		match.setPlayed(true);
 	}
 
 	private Optional<Stage> findStageByName(String stageName) {

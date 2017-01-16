@@ -3,7 +3,7 @@ package com.mennyei.publicweb.club.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mennyei.core.competition.service.MatchPlayerStatisticService;
+import com.mennyei.core.match.service.MatchPlayerStatisticService;
 
 @Service
 public class PlayerMatchStatisticService {

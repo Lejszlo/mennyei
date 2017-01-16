@@ -1,13 +1,14 @@
 package com.mennyei.core.player.domain;
 
-import com.mennyei.core.player.command.AddPlayerCommand;
-import com.mennyei.core.player.command.PlayerCommand;
-import com.mennyei.core.common.commands.PlayerAdded;
-import io.eventuate.Event;
-import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
-
 import java.util.Arrays;
 import java.util.List;
+
+import com.mennyei.core.common.commands.PlayerAdded;
+import com.mennyei.core.player.command.AddPlayerCommand;
+import com.mennyei.core.player.command.PlayerCommand;
+
+import io.eventuate.Event;
+import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 
 /**
  * Created by lejsz on 2016. 11. 22..

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mennyei.core.FillDatabase;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
-import com.mennyei.publicweb.competition.dto.match.MatchDetailesQuery;
 import com.mennyei.publicweb.competition.dto.table.TableQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
 import com.mennyei.publicweb.competition.service.CompetitionMatchService;
 import com.mennyei.publicweb.competition.service.CompetitionTableService;
+import com.mennyei.publicweb.match.dto.MatchDetailesQuery;
 
 @RequestMapping("/competition/")
 @RestController
@@ -48,10 +48,9 @@ public class CompetitionController {
 		return competitionTableService.getCompetationTable(competitionId, "Kelet Magyarország");
 	}
 
-	@GetMapping("/{competitionId}/{stageName}/{turn}/{homeClubId}")
-	public MatchDetailesQuery getCompetitionMatchDetails(@PathVariable("competitionId") String competitionId, @PathVariable("stageName") String stageName,
-			@PathVariable("turn") int turn, @PathVariable("homeClubId") String homeClubId) {
-		return competitionMatchService.getCompetationMatchDetailes(competitionId, "Kelet Magyarország", turn, homeClubId);
+	@GetMapping("/{matchId}")
+	public MatchDetailesQuery getCompetitionMatchDetails(@PathVariable("matchId") String matchId) {
+		return competitionMatchService.getCompetationMatchDetailes(matchId);
 	}
 
 }

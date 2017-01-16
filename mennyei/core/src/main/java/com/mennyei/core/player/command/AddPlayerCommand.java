@@ -1,6 +1,7 @@
 package com.mennyei.core.player.command;
 
 import com.mennyei.core.player.domain.Player;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;

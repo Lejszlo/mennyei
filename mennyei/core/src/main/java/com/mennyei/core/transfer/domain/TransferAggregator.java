@@ -1,13 +1,14 @@
 package com.mennyei.core.transfer.domain;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.mennyei.core.transfer.command.TransferCommand;
 import com.mennyei.core.transfer.command.TransferPlayerCommand;
 import com.mennyei.core.transfer.events.PlayerTransferred;
+
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by lejsz on 2016. 11. 22..

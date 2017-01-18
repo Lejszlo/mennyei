@@ -8,12 +8,14 @@ import java.util.Set;
 
 import com.mennyei.core.club.exception.MaxClubLimitIsReached;
 import com.mennyei.core.competition.commands.AddCompetitionCommand;
+import com.mennyei.core.competition.commands.AddTurnCommand;
 import com.mennyei.core.competition.commands.CompetitionCommand;
 import com.mennyei.core.competition.commands.RegisterClubCommand;
 import com.mennyei.core.competition.domain.rule.CompetitionRuleSet;
 import com.mennyei.core.competition.domain.season.Stage;
 import com.mennyei.core.competition.events.ClubRegistered;
 import com.mennyei.core.competition.events.CompetitionAdded;
+import com.mennyei.core.competition.events.TurnAdded;
 
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
@@ -39,9 +41,20 @@ public class CompetitionAggregator extends ReflectiveMutableCommandProcessingAgg
 		}
 		return Arrays.asList(ClubRegistered.builder().clubIds(registerClubCommand.getClubIds()).build());
 	}
+	
+	public List<Event> process(AddTurnCommand addTurnCommand) {
+		Optional<Stage> stage = findStageByName(addTurnCommand.getStageName());
+		return Arrays.asList(TurnAdded.builder().stageName(addTurnCommand.getStageName()).turn(addTurnCommand.getTurn()).build());
+	}
+
 
 	public void apply(ClubRegistered clubRegistered) {
 		clubIds.addAll(clubRegistered.getClubIds());
+	}
+	
+	public void apply(TurnAdded turnAdded) {
+		Optional<Stage> stageOptional = findStageByName(turnAdded.getStageName());
+		stageOptional.ifPresent(stage -> stage.getTurns().add(turnAdded.getTurn()));
 	}
 
 	public void apply(CompetitionAdded competationAdded) {

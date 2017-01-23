@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Builder(builderMethodName = "hiddenBuilder")
-public class Result {
+public class ResultGoals {
 
 	@Getter
 	private int homeGoalAmount;
@@ -23,7 +23,7 @@ public class Result {
 		return MatchResultType.DRAW;
 	}
 
-	public static ResultBuilder builder(int homeGoalAmount, int awayGoalAmount) {
+	public static ResultGoalsBuilder builder(int homeGoalAmount, int awayGoalAmount) {
 		return hiddenBuilder().awayGoalAmount(awayGoalAmount).homeGoalAmount(homeGoalAmount);
 	}
 

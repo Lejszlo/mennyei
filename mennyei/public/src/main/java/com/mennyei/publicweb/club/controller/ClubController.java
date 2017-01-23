@@ -33,7 +33,7 @@ public class ClubController {
 	
 	@GetMapping("/{clubId}/{competitionId}/{stageName}/matches")
 	public List<MatchQuery> getClubCompetitionMatches(@PathVariable("clubId") String clubId, @PathVariable("competitionId") String competitionId, @PathVariable("stageName") String stageName) {
-		return matchMongoRepository.findByClubIdAndCompetitionAndStageName(clubId, competitionId, "Kelet Magyarország");
+		return matchMongoRepository.findByHomeClubIdAndCompetitionAndStageName(clubId, competitionId, "Kelet Magyarország");
 	}
 	
 }

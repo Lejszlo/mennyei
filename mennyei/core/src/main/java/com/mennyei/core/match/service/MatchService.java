@@ -6,9 +6,9 @@ import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mennyei.core.competition.domain.CompetitionAggregator;
 import com.mennyei.core.match.command.AddMatchCommand;
 import com.mennyei.core.match.command.PlayMatchCommand;
+import com.mennyei.core.match.command.SetMatchCommand;
 import com.mennyei.core.match.domain.MatchAggregator;
 import com.mennyei.core.match.domain.MatchInfo;
 import com.mennyei.core.match.domain.event.MatchEvent;
@@ -28,6 +28,11 @@ public class MatchService {
 		return matchAggregateRepository.save(addMatchCommand);
 	}
 
+	public CompletableFuture<EntityWithIdAndVersion<MatchAggregator>> preMatch(String matchId, List<LineUp> homeLineUps,
+			List<LineUp> awayLineUps) {
+		SetMatchCommand setMatchCommand = SetMatchCommand.builder().awayLineUps(awayLineUps).homeLineUps(homeLineUps).build();
+		return matchAggregateRepository.update(matchId, setMatchCommand);
+	}
 
 	public CompletableFuture<EntityWithIdAndVersion<MatchAggregator>> playMatch(String matchId, List<MatchEvent> homeClubEvents, List<MatchEvent> awayClubEvents) {
 		PlayMatchCommand playMatchCommand = PlayMatchCommand.builder().homeClubevents(homeClubEvents).awayClubevents(awayClubEvents).build();
@@ -35,8 +40,4 @@ public class MatchService {
 	}
 
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> preMatch(String entityId, List<LineUp> homeLineUps,
-			List<LineUp> awayLineUps) {
-		return null;
-	}
 }

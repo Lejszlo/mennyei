@@ -158,12 +158,15 @@ public class FillDatabase {
 					homeClubId = seacondHalfClubIds.get(j);
 					awayClubId = firstHalfClubIds.get(j);
 				}
-				MatchInfo matchInfo = MatchInfo.builder(homeClubId, awayClubId, LocalDateTime.of(2017, 1, 9, 16, 00).plusWeeks(i).format(DateUtil.dateTimeFormatter)).build();
+				MatchInfo matchInfo = MatchInfo.builder(homeClubId, awayClubId, LocalDateTime.of(2017, 1, 9, 16, 00).plusWeeks(i).format(DateUtil.dateTimeFormatter))
+						.competitionId(competitionId)
+						.stageName(competition.getName())
+						.index(turn.getIndex())
+						.build();
 				EntityWithIdAndVersion<MatchAggregator> matchWithId = matchService.addMatch(matchInfo).get();
 				matchWithIds.add(matchWithId);
 				turn.getMatches().add(matchWithId.getEntityId());
 			}
-			competitionService.addTurn(competitionId, competition.getName(), turn).get();
 			
 			fillTurnWithRandomEvents(matchWithIds);
 			
@@ -172,7 +175,11 @@ public class FillDatabase {
 			Turn reTurn = Turn.builder(turn.getIndex() + (clubIds.size() - 1)).build();
 			new ArrayList<>(matchInfos).stream().forEach(match -> {
 				LocalDateTime plusMonths = LocalDateTime.parse(match.getMatchDate(), DateUtil.dateTimeFormatter).plusMonths(3);
-				MatchInfo matchInfo = MatchInfo.builder(match.getAwayClubId(), match.getHomeClubId(), plusMonths.format(DateUtil.dateTimeFormatter)).build();
+				MatchInfo matchInfo = MatchInfo.builder(match.getAwayClubId(), match.getHomeClubId(), plusMonths.format(DateUtil.dateTimeFormatter))		
+						.competitionId(competitionId)
+						.stageName(competition.getName())
+						.index(turn.getIndex())
+						.build();
 				try {
 					EntityWithIdAndVersion<MatchAggregator> matchWithId = matchService.addMatch(matchInfo).get();
 					matchWithIds.add(matchWithId);
@@ -182,7 +189,6 @@ public class FillDatabase {
 					e.printStackTrace();
 				}
 			});
-			competitionService.addTurn(competitionId, competition.getName(), reTurn).get();
 			
 			clubIds.add(1, clubIds.get(clubIds.size()-1));
 			clubIds.remove(clubIds.size()-1);

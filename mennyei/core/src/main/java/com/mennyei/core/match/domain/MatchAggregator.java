@@ -64,7 +64,7 @@ public class MatchAggregator extends ReflectiveMutableCommandProcessingAggregate
 	}
 
 	public void calculateResult() {
-		matchInfo.setResult(Result.builder(getHomeGoalAmount() + getAwayOwnGoalAmount(), getAwayGoalAmount() + getHomeOwnGoalAmount()).build());
+		matchInfo.setResultGoals(ResultGoals.builder(getHomeGoalAmount() + getAwayOwnGoalAmount(), getAwayGoalAmount() + getHomeOwnGoalAmount()).build());
 	}
 
 	private int getHomeGoalAmount() {

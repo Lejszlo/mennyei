@@ -8,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mennyei.core.competition.commands.AddCompetitionCommand;
-import com.mennyei.core.competition.commands.AddTurnCommand;
 import com.mennyei.core.competition.commands.RegisterClubCommand;
 import com.mennyei.core.competition.domain.CompetitionAggregator;
 import com.mennyei.core.competition.domain.CompetitionInfo;
 import com.mennyei.core.competition.domain.rule.CompetitionRuleSet;
 import com.mennyei.core.competition.domain.season.Stage;
-import com.mennyei.core.competition.domain.season.Turn;
 import com.mennyei.core.competition.infrastructure.CompetitionAggregateRepository;
 
 import io.eventuate.EntityWithIdAndVersion;
@@ -36,10 +34,5 @@ public class CompetitionService {
 		return competitionRepository.update(competitionId, registerClubCommand);
 	}
 	
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregator>> addTurn(String competitionId, String stageName, Turn turn) {
-		AddTurnCommand addTurnCommand = AddTurnCommand.builder().stageName(stageName).turn(turn).build();
-		return competitionRepository.update(competitionId, addTurnCommand);
-	}
-
 
 }

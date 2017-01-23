@@ -9,6 +9,6 @@ import com.mennyei.publicweb.match.dto.MatchQuery;
 
 @Repository
 public interface MatchMongoRepository extends MongoRepository<MatchQuery, String> {
-	List<MatchQuery> findByClubIdAndCompetitionAndStageName(String clubId, String competitionId, String stageName);
+	List<MatchQuery> findByHomeClubIdAndCompetitionAndStageName(String clubId, String competitionId, String stageName);
 
 }

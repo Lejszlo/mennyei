@@ -3,8 +3,7 @@ package com.mennyei.publicweb.match.dto;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.mennyei.core.match.domain.MatchResult;
-import com.mennyei.core.match.domain.Result;
+import com.mennyei.core.match.domain.ResultGoals;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
 
@@ -26,23 +25,19 @@ public class MatchQuery {
 	
 	private boolean played;
 	
-	private boolean isAtHome;
-	
-	private int scoredGoalAmount;
+	private int homeGoalAmount;
 
-	private int concernGoalAmount;
+	private int awayGoalAmount;
 	
-	private Result result;
-	
-	private MatchResult matchResult;
+	private ResultGoals resultGoals;
 	
 	private String stageName;
 	
 	@DBRef
-	private ClubQuery clubId;
+	private ClubQuery homeClubId;
 	
 	@DBRef
-	private ClubQuery opponentClubId;
+	private ClubQuery awayClubId;
 	
 	@DBRef
 	private CompetitionQuery competition;

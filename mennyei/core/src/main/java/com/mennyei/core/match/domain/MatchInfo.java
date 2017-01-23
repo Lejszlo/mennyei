@@ -16,13 +16,20 @@ public class MatchInfo {
 	
 	private int fans;
 
-	private Result result;
+	private ResultGoals resultGoals;
 
 	@NonNull
 	private String homeClubId;
 
 	@NonNull
 	private String awayClubId;
+	
+	@NonNull
+	private String competitionId;
+	
+	private String stageName;
+	
+	private int index;
 
 	public static MatchInfoBuilder builder(String homeClubId, String awayClubId, String matchDate) {
 		return hiddenBuilder().homeClubId(homeClubId).awayClubId(awayClubId).matchDate(matchDate);
@@ -48,13 +55,13 @@ public class MatchInfo {
 
 	public int getGoalAmountFor(String clubId) {
 		if (homeClubId.equals(clubId)) {
-			return result.getHomeGoalAmount();
+			return resultGoals.getHomeGoalAmount();
 		}
-		return result.getAwayGoalAmount();
+		return resultGoals.getAwayGoalAmount();
 	}
 
 	public MatchResult getResultFor(String clubId) {
-		MatchResultType whoIsTheWinner = result.whoIsTheWinner();
+		MatchResultType whoIsTheWinner = resultGoals.whoIsTheWinner();
 		if (MatchResultType.DRAW.equals(whoIsTheWinner)) {
 			return MatchResult.DRAW;
 		}
@@ -69,26 +76,26 @@ public class MatchInfo {
 	}
 
 	public int getScoredGoalAmount(String clubId) throws MatchHasNotPlayedYetException {
-		if(result == null) {
+		if(resultGoals == null) {
 			throw new MatchHasNotPlayedYetException();
 		}
 		
 		if(homeClubId.equals(clubId)) {
-			return result.getHomeGoalAmount();
+			return resultGoals.getHomeGoalAmount();
 		}
-		return result.getAwayGoalAmount();
+		return resultGoals.getAwayGoalAmount();
 	}
 
 	public int getConcernedGoalAmount(String clubId) throws MatchHasNotPlayedYetException {
-		if(result == null) {
+		if(resultGoals == null) {
 			throw new MatchHasNotPlayedYetException();
 		}
 		
 		if(awayClubId.equals(clubId)) {
-			return result.getAwayGoalAmount();
+			return resultGoals.getAwayGoalAmount();
 		}
 		
-		return result.getHomeGoalAmount();
+		return resultGoals.getHomeGoalAmount();
 	}
 	
 }

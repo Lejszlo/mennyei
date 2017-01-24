@@ -63,13 +63,12 @@ public class MatchManagementWorkflow {
     	MatchPlayed matchPlayed = dispatchedEvent.getEvent();
         String matchId = dispatchedEvent.getEntityId();
         MatchQuery matchQuery = matchMongoRepository.findOne(matchId);
-        MatchInfo matchInfo = matchPlayed.getMatchInfo();
-        if(matchInfo.isPlayed()) {
+        if(matchPlayed.isPlayed()) {
         	matchQuery.setPlayed(true);
-        	matchQuery.setFans(matchInfo.getFans());
-        	matchQuery.setMatchResultType(matchInfo.getResultGoals().whoIsTheWinner());
-        	matchQuery.setHomeGoalAmount(matchInfo.getResultGoals().getHomeGoalAmount());
-        	matchQuery.setAwayGoalAmount(matchInfo.getResultGoals().getAwayGoalAmount());
+        	matchQuery.setFans(matchPlayed.getFans());
+        	matchQuery.setMatchResultType(matchPlayed.getMatchResultDetailes().whoIsTheWinner());
+        	matchQuery.setHomeGoalAmount(matchPlayed.getMatchResultDetailes().getHomeGoalAmount());
+        	matchQuery.setAwayGoalAmount(matchPlayed.getMatchResultDetailes().getAwayGoalAmount());
         }
         matchQuery = matchMongoRepository.save(matchQuery);
         competitionTableService.refreshTable(matchQuery);

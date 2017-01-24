@@ -13,6 +13,7 @@ import lombok.Value;
 @Value
 @EqualsAndHashCode(callSuper = false)
 public class PlayMatchCommand extends MatchCommand {
+	
 	@Singular
 	private List<MatchEvent> homeClubevents;
 	

@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mennyei.core.match.domain.MatchInfo;
-import com.mennyei.core.match.domain.ResultGoals;
 import com.mennyei.core.match.event.MatchAdded;
 import com.mennyei.core.match.event.MatchPlayed;
+import com.mennyei.core.match.event.MatchSet;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
 import com.mennyei.publicweb.competition.service.CompetitionTableService;
@@ -40,11 +40,21 @@ public class MatchManagementWorkflow {
         MatchQuery matchQuery = MatchQuery.builder(matchId).build();
         MatchInfo matchInfo = matchAdded.getMatchInfo();
         matchQuery.setMatchDate(matchInfo.getMatchDate());
-        matchQuery.setAwayClubId(clubQueryMongoRepository.findOne(matchInfo.getAwayClubId()));
-        matchQuery.setHomeClubId(clubQueryMongoRepository.findOne(matchInfo.getHomeClubId()));
+        matchQuery.setAwayClub(clubQueryMongoRepository.findOne(matchInfo.getAwayClubId()));
+        matchQuery.setHomeClub(clubQueryMongoRepository.findOne(matchInfo.getHomeClubId()));
         matchQuery.setStageName(matchInfo.getStageName());
         matchQuery.setCompetition(competitionMongoRepository.findOne(matchInfo.getCompetitionId()));
         matchQuery.setIndex(matchInfo.getIndex());
+        matchMongoRepository.save(matchQuery);
+    }
+    
+    @EventHandlerMethod
+    public void matchSet(DispatchedEvent<MatchSet> dispatchedEvent) {
+    	MatchSet matchPlayed = dispatchedEvent.getEvent();
+        String matchId = dispatchedEvent.getEntityId();
+        MatchQuery matchQuery = matchMongoRepository.findOne(matchId);
+        matchQuery.setAwayLineUps(matchPlayed.getAwayLineUps());
+        matchQuery.setHomeLineUps(matchPlayed.getHomeLineUps());
         matchMongoRepository.save(matchQuery);
     }
     
@@ -54,16 +64,15 @@ public class MatchManagementWorkflow {
         String matchId = dispatchedEvent.getEntityId();
         MatchQuery matchQuery = matchMongoRepository.findOne(matchId);
         MatchInfo matchInfo = matchPlayed.getMatchInfo();
-        ResultGoals result = matchInfo.getResultGoals();
-        if(result != null) {
+        if(matchInfo.isPlayed()) {
         	matchQuery.setPlayed(true);
         	matchQuery.setFans(matchInfo.getFans());
-        	matchQuery.setResultGoals(matchInfo.getResultGoals());
-        	matchQuery.setHomeGoalAmount(matchInfo.getGoalAmountFor(matchInfo.getHomeClubId()));
-        	matchQuery.setAwayGoalAmount(matchInfo.getGoalAmountFor(matchInfo.getAwayClubId()));
+        	matchQuery.setMatchResultType(matchInfo.getResultGoals().whoIsTheWinner());
+        	matchQuery.setHomeGoalAmount(matchInfo.getResultGoals().getHomeGoalAmount());
+        	matchQuery.setAwayGoalAmount(matchInfo.getResultGoals().getAwayGoalAmount());
         }
-        competitionTableService.refreshTable(matchQuery, matchPlayed);
-        competitionMongoRepository.save(matchQuery.getCompetition());
+        matchQuery = matchMongoRepository.save(matchQuery);
+        competitionTableService.refreshTable(matchQuery);
     }
 	
 }

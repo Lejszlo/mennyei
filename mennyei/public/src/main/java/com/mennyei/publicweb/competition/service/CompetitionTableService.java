@@ -1,14 +1,13 @@
 package com.mennyei.publicweb.competition.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mennyei.core.competition.domain.season.Stage;
-import com.mennyei.core.match.domain.MatchInfo;
-import com.mennyei.core.match.event.MatchPlayed;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
 import com.mennyei.publicweb.competition.dto.table.TableQuery;
@@ -26,28 +25,27 @@ public class CompetitionTableService {
 	@Autowired
 	private CompetitionMongoRepository competitionMongoRepository;
 
-	public void refreshTable(MatchQuery matchQuery, MatchPlayed matchPlayed) {
+	public void refreshTable(MatchQuery matchQuery) {
 		TableQuery tableQuery = tableMongoRepository.findByCompetitionIdAndStageName(matchQuery.getCompetition().getId(), matchQuery.getStageName());
-		MatchInfo matchInfo = matchPlayed.getMatchInfo();
-		Optional<TableRowQuery> homeClubTableRowOptional = tableQuery.getRows().stream().filter(r -> r.getClubId().equals(matchInfo.getHomeClubId())).findFirst();
-		Optional<TableRowQuery> awayClubTableRowOptional = tableQuery.getRows().stream().filter(r -> r.getClubId().equals(matchInfo.getAwayClubId())).findFirst();
+		Optional<TableRowQuery> homeClubTableRowOptional = tableQuery.getRows().stream().filter(r -> r.getClub().equals(matchQuery.getHomeClub())).findFirst();
+		Optional<TableRowQuery> awayClubTableRowOptional = tableQuery.getRows().stream().filter(r -> r.getClub().equals(matchQuery.getAwayClub())).findFirst();
 		
-		updateRow(homeClubTableRowOptional, matchInfo, matchQuery.getCompetition());
-		updateRow(awayClubTableRowOptional, matchInfo, matchQuery.getCompetition());
+		updateRow(homeClubTableRowOptional, matchQuery);
+		updateRow(awayClubTableRowOptional, matchQuery);
 		
 		tableMongoRepository.save(tableQuery);
 	}
 
-	private void updateRow(Optional<TableRowQuery> tableRowOptional, MatchInfo matchInfo, CompetitionQuery competitionQuery) {
+	private void updateRow(Optional<TableRowQuery> tableRowOptional, MatchQuery matchQuery) {
 		if(!tableRowOptional.isPresent())  {
 			return;
 		}
 		
 		TableRowQuery tableRow = tableRowOptional.get();
-		tableRow.setResult(matchInfo.getResultFor(tableRow.getClubId()));
-		tableRow.addScoredGoals(matchInfo.getGoalAmountFor(tableRow.getClubId()));
-		tableRow.addConcerdGoals(matchInfo.getGoalAmountFor(matchInfo.whoIsTheOpponentOf(tableRow.getClubId())));
-		tableRow.calculatePoints(competitionQuery.getCompetitionRuleSet());
+		tableRow.setResult(matchQuery.getResultFor(tableRow.getClub()));
+		tableRow.addScoredGoals(matchQuery.getGoalAmountFor(tableRow.getClub()));
+		tableRow.addConcerdGoals(matchQuery.getGoalAmountFor(matchQuery.whoIsTheOpponentOf(tableRow.getClub())));
+		tableRow.calculatePoints(matchQuery.getCompetition().getCompetitionRuleSet());
 		tableRow.incraseMatches();
 	}
 
@@ -67,7 +65,12 @@ public class CompetitionTableService {
 
 	public void createTableRow(List<ClubQuery> clubQueries, CompetitionQuery competitionQuery) {
 		TableQuery tableQuery = tableMongoRepository.findByCompetitionIdAndStageName(competitionQuery.getId(), competitionQuery.getStages().get(0).getName());
-		clubQueries.stream().forEach(cq -> tableQuery.getRows().add(new TableRowQuery(cq.getId(), cq.getName())));
+		
+		if(tableQuery == null) {
+			return;
+		}
+		
+		clubQueries.stream().filter(Objects::nonNull).forEach(cq -> tableQuery.getRows().add(new TableRowQuery(cq)));
 		tableMongoRepository.save(tableQuery);
 	}
 

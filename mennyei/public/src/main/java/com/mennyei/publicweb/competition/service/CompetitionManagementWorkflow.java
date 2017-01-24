@@ -1,6 +1,7 @@
 package com.mennyei.publicweb.competition.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -52,7 +53,7 @@ public class CompetitionManagementWorkflow {
         String competitionId = dispatchedEvent.getEntityId();
         Set<String> clubIds = event.getClubIds();
         CompetitionQuery competitionQuery = competitionMongoRepository.findOne(competitionId);
-        List<ClubQuery> clubQueries = clubIds.stream().map(s -> clubMongoRepository.findOne(s)).collect(Collectors.toList());
+        List<ClubQuery> clubQueries = clubIds.stream().filter(Objects::nonNull).map(s -> clubMongoRepository.findOne(s)).collect(Collectors.toList());
         competitionQuery.getClubs().addAll(clubQueries);
         competitionMongoRepository.save(competitionQuery);
         competitionTableService.createTableRow(clubQueries, competitionQuery);

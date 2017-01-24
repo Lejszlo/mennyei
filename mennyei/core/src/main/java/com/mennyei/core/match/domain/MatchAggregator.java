@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import com.mennyei.core.match.command.AddMatchCommand;
 import com.mennyei.core.match.command.MatchCommand;
 import com.mennyei.core.match.command.PlayMatchCommand;
+import com.mennyei.core.match.command.SetMatchCommand;
 import com.mennyei.core.match.domain.event.MatchEvent;
 import com.mennyei.core.match.domain.event.MatchEventType;
 import com.mennyei.core.match.domain.event.lineup.LineUp;
@@ -40,10 +41,19 @@ public class MatchAggregator extends ReflectiveMutableCommandProcessingAggregate
 	}
 
 	public List<Event> process(PlayMatchCommand fillMatchCommand) {
+		matchInfo.setResultGoals(ResultGoals.builder(getHomeGoalAmount() + getAwayOwnGoalAmount(), getAwayGoalAmount() + getHomeOwnGoalAmount()).build());
+		matchInfo.setPlayed(true);
 		return Arrays.asList(MatchPlayed.builder()
 				.homeClubEvents(fillMatchCommand.getHomeClubevents())
 				.awayClubEvents(fillMatchCommand.getAwayClubevents())
 				.matchInfo(matchInfo)
+				.build());
+	}
+	
+	public List<Event> process(SetMatchCommand setMatchCommand) {
+		return Arrays.asList(MatchSet.builder()
+				.awayLineUps(setMatchCommand.getAwayLineUps())
+				.homeLineUps(setMatchCommand.getHomeLineUps())
 				.build());
 	}
 
@@ -59,12 +69,6 @@ public class MatchAggregator extends ReflectiveMutableCommandProcessingAggregate
 	public void apply(MatchPlayed matchPlayed) {
 		homeClubevents.addAll(matchPlayed.getHomeClubEvents());
 		awayClubevents.addAll(matchPlayed.getAwayClubEvents());
-		calculateResult();
-		matchInfo.setPlayed(true);
-	}
-
-	public void calculateResult() {
-		matchInfo.setResultGoals(ResultGoals.builder(getHomeGoalAmount() + getAwayOwnGoalAmount(), getAwayGoalAmount() + getHomeOwnGoalAmount()).build());
 	}
 
 	private int getHomeGoalAmount() {

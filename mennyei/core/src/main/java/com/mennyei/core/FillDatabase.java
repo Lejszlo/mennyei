@@ -197,9 +197,9 @@ public class FillDatabase {
 	}
 
 	private void fillPreMatches(List<EntityWithIdAndVersion<MatchAggregator>> matchWithIds) throws InterruptedException, ExecutionException {
-		List<LineUp> homeLineUps = new ArrayList<>();
-		List<LineUp> awayLineUps = new ArrayList<>();
 		for (EntityWithIdAndVersion<MatchAggregator> matchWithId : matchWithIds) {
+			List<LineUp> homeLineUps = new ArrayList<>();
+			List<LineUp> awayLineUps = new ArrayList<>();
 			MatchInfo matchInfo = matchWithId.getAggregate().getMatchInfo();
 			
 			List<String> homePlayers = clubPlayers.get(matchInfo.getHomeClubId());
@@ -281,7 +281,6 @@ public class FillDatabase {
 				String randomPlayer = randomPlayer();
 				Transfer transfer = Transfer.builder().transferDate(LocalDateTime.now().format(DateUtil.dateTimeFormatter)).targetTeamId(clubId).playerId(randomPlayer).build();
 				transferService.transferPlayer(transfer);
-				clubPlayers.get(clubId).add(randomPlayer);
 				putMap(clubId,randomPlayer);
 			} catch (ExecutionException | InterruptedException e) {
 				e.printStackTrace();

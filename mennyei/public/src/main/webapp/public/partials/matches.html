@@ -26,8 +26,8 @@
 							<span ng-if="match.matchResult == 'LOSE'" class="label label-danger" onmouseenter="$(this).tooltip('show')" data-toggle="tooltip" data-placement="left" data-original-title="Vereség">V</span>
 							<span ng-if="match.matchResult == 'DRAW'" class="label label-warning" onmouseenter="$(this).tooltip('show')" data-toggle="tooltip" data-placement="left" data-original-title="Döntetlen">D</span>
 						</td>
-						<td style="text-align: left">{{match.opponentClubId.fullName}}</td>
-						<td>{{match.competitionName}}</td>
+						<td style="text-align: left">{{match.homeClubId.fullName}}</td>
+						<td>{{match.competition.competitionInfo.name}}</td>
 						<td><a ng-href="#/competition/competitionName/stage/stageName/turn/{{match.index}}/club/{{match.clubId.id}}" ng-class="match.played ? 'btn btn-success btn-xs' : 'hidden'"><i
 								class="glyphicon glyphicon-book"
 							></i> Jegyzőkönyv</a></td>

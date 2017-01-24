@@ -1,7 +1,8 @@
 package com.mennyei.publicweb.club.infrastructure;
 
-import com.mennyei.publicweb.club.dto.ClubQuery;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.mennyei.publicweb.club.dto.ClubQuery;
 
 /**
  * Created by lejsz on 2016. 11. 21..

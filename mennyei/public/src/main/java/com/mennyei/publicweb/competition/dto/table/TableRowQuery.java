@@ -1,16 +1,18 @@
 package com.mennyei.publicweb.competition.dto.table;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.mennyei.core.competition.domain.rule.CompetitionRuleSet;
 import com.mennyei.core.match.domain.MatchResult;
+import com.mennyei.publicweb.club.dto.ClubQuery;
 
 import lombok.Getter;
 
+@Document
 public class TableRowQuery implements Comparable<TableRowQuery> {
-	@Getter
-	private String clubId;
 	
 	@Getter
-	private String clubName;
+	private ClubQuery club;
 	
 	@Getter
 	private int playedMatches;
@@ -33,9 +35,8 @@ public class TableRowQuery implements Comparable<TableRowQuery> {
 	@Getter
 	private int point;
 	
-	public TableRowQuery(String clubId, String clubName) {
-		this.clubId = clubId;
-		this.clubName = clubName;
+	public TableRowQuery(ClubQuery club) {
+		this.club = club;
 	}
 	
 	public int incraseMatches() {

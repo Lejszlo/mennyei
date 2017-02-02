@@ -1,7 +1,6 @@
 package com.mennyei.publicweb.club.dto;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Builder;
@@ -28,7 +27,4 @@ public class PlayerQuery {
     
     private String nationality;
     
-    @DBRef
-    private ClubQuery club;
-
 }

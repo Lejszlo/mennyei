@@ -49,7 +49,7 @@ public class ClubManagementWorkflow {
 		PlayerAddedToClub event = dispatchedEvent.getEvent();
 		ClubQuery targetClubQuery = clubMongoRepository.findOne(event.getClubId());
 		PlayerQuery playerQuery = playerQueryMongoRepository.findOne(event.getPlayerId());
-		playerQuery.setClub(targetClubQuery);
+		targetClubQuery.getPlayers().add(playerQuery);
 		clubMongoRepository.save(targetClubQuery);
 	}
 }

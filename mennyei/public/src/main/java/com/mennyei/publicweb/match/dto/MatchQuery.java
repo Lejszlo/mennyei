@@ -59,8 +59,8 @@ public class MatchQuery {
 	@Singular
 	private List<LineUp> awayLineUps = new ArrayList<>();
 	
-	public static MatchQueryBuilder builder(String matchId) {
-		return hiddenBuilder().id(matchId);
+	public static MatchQueryBuilder builder(String matchId, ClubQuery homeClub, ClubQuery awayClub, CompetitionQuery competition) {
+		return hiddenBuilder().id(matchId).homeClub(homeClub).awayClub(awayClub).competition(competition);
 	}
 	
 	public ClubQuery whoIsTheOpponentOf(ClubQuery club) {

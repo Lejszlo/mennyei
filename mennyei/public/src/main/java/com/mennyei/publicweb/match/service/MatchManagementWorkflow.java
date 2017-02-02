@@ -7,7 +7,9 @@ import com.mennyei.core.match.domain.MatchInfo;
 import com.mennyei.core.match.event.MatchAdded;
 import com.mennyei.core.match.event.MatchPlayed;
 import com.mennyei.core.match.event.MatchSet;
+import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
+import com.mennyei.publicweb.competition.dto.CompetitionQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
 import com.mennyei.publicweb.competition.service.CompetitionTableService;
 import com.mennyei.publicweb.match.dto.MatchQuery;
@@ -37,13 +39,13 @@ public class MatchManagementWorkflow {
     public void matchAdded(DispatchedEvent<MatchAdded> dispatchedEvent) {
         MatchAdded matchAdded = dispatchedEvent.getEvent();
         String matchId = dispatchedEvent.getEntityId();
-        MatchQuery matchQuery = MatchQuery.builder(matchId).build();
         MatchInfo matchInfo = matchAdded.getMatchInfo();
+        ClubQuery homeClubQuery = clubQueryMongoRepository.findOne(matchInfo.getAwayClubId());
+        ClubQuery awayClubQuery = clubQueryMongoRepository.findOne(matchInfo.getHomeClubId());
+        CompetitionQuery competitionQuery = competitionMongoRepository.findOne(matchInfo.getCompetitionId());
+        MatchQuery matchQuery = MatchQuery.builder(matchId, homeClubQuery, awayClubQuery, competitionQuery).build();
         matchQuery.setMatchDate(matchInfo.getMatchDate());
-        matchQuery.setAwayClub(clubQueryMongoRepository.findOne(matchInfo.getAwayClubId()));
-        matchQuery.setHomeClub(clubQueryMongoRepository.findOne(matchInfo.getHomeClubId()));
         matchQuery.setStageName(matchInfo.getStageName());
-        matchQuery.setCompetition(competitionMongoRepository.findOne(matchInfo.getCompetitionId()));
         matchQuery.setIndex(matchInfo.getIndex());
         matchMongoRepository.save(matchQuery);
     }

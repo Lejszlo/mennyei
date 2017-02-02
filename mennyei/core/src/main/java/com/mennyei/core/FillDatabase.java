@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,74 +71,76 @@ public class FillDatabase {
 		ClubInfo vamosoroszi = ClubInfo.builder().fullName("Vámosoroszi Községi Sport Egyesület").name("Vámosoroszi KSE").build();
 		String vamosoroszId = clubService.addClub(vamosoroszi).get().getEntityId();
 		clubPlayers.put(vamosoroszId, new ArrayList<>());
-		transferPlayers(vamosoroszId);
 		
 		ClubInfo tarpa = ClubInfo.builder().fullName("Tarpa Sport Club").name("Tarpa SC").build();
 		String tarpaId = clubService.addClub(tarpa).get().getEntityId();
 		clubPlayers.put(tarpaId, new ArrayList<>());
-		transferPlayers(tarpaId);
 		
 		ClubInfo tisztaberek = ClubInfo.builder().fullName("Tisztaberek Sport Egyesulet").name("Tisztaberek SE").build();
 		String tisztaberekId = clubService.addClub(tisztaberek).get().getEntityId();
 		clubPlayers.put(tisztaberekId, new ArrayList<>());
-		transferPlayers(tisztaberekId);
 		
 		ClubInfo szatmarcseke = ClubInfo.builder().fullName("Szatmarcseke Községi Sport Egyesület").name("Szatmarcseke KSE").build();
 		String szatmarcsekeId = clubService.addClub(szatmarcseke).get().getEntityId();
 		clubPlayers.put(szatmarcsekeId, new ArrayList<>());
-		transferPlayers(szatmarcsekeId);
 		
 		ClubInfo tyukod = ClubInfo.builder().fullName("Tyukod Footbal Club").name("Tyukod FC").build();
 		String tyukodId = clubService.addClub(tyukod).get().getEntityId();
 		clubPlayers.put(tyukodId, new ArrayList<>());
-		transferPlayers(tyukodId);
 		
 		ClubInfo csengersimaert = ClubInfo.builder().fullName("Csengersimaert Községi Sport Egyesület").name("Csengersimaert KSE").build();
 		String csengersimaertId = clubService.addClub(csengersimaert).get().getEntityId();
 		clubPlayers.put(csengersimaertId, new ArrayList<>());
-		transferPlayers(csengersimaertId);
 		
 		ClubInfo nyirmeggyes = ClubInfo.builder().fullName("Nyirmeggyes Sportklub").name("Nyirmeggyes SK").build();
 		String nyirmeggyesId = clubService.addClub(nyirmeggyes).get().getEntityId();
 		clubPlayers.put(nyirmeggyesId, new ArrayList<>());
-		transferPlayers(nyirmeggyesId);
 		
 		ClubInfo tiszakorod = ClubInfo.builder().fullName("Tiszakorod Sport Egyesulet").name("Tiszakorod SE").build();
 		String tiszakorodId = clubService.addClub(tiszakorod).get().getEntityId();
 		clubPlayers.put(tiszakorodId, new ArrayList<>());
-		transferPlayers(tiszakorodId);
 		
 		ClubInfo nabrad = ClubInfo.builder().fullName("Nabrad Sport Egyesulet").name("Nabrad SE").build();
 		String nabradId = clubService.addClub(nabrad).get().getEntityId();
 		clubPlayers.put(nabradId, new ArrayList<>());
-		transferPlayers(nabradId);
 		
 		ClubInfo Beregdaroc = ClubInfo.builder().fullName("Beregdaroc Sport Egyesulet").name("Beregdaroc SE").build();
 		String beregdarocId = clubService.addClub(Beregdaroc).get().getEntityId();
 		clubPlayers.put(beregdarocId, new ArrayList<>());
-		transferPlayers(beregdarocId);
 		
 		ClubInfo csenger = ClubInfo.builder().fullName("Csenger Footbal Club").name("Csenger FC").build();
 		String csengerId = clubService.addClub(csenger).get().getEntityId();
 		clubPlayers.put(csengerId, new ArrayList<>());
-		transferPlayers(csengerId);
 		
 		ClubInfo kolcse = ClubInfo.builder().fullName("Kolcse Sport Egyesulet").name("Kolcse SE").build();
 		String kolcseId = clubService.addClub(kolcse).get().getEntityId();
 		clubPlayers.put(kolcseId, new ArrayList<>());
-		transferPlayers(kolcseId);
 		
 		ClubInfo nagydobosi = ClubInfo.builder().fullName("Nagydobosi Labdarugo Sport Egyesulet").name("Nagydobosi LSE").build();
 		String nagydobosiId = clubService.addClub(nagydobosi).get().getEntityId();
 		clubPlayers.put(nagydobosiId, new ArrayList<>());
-		transferPlayers(nagydobosiId);
 		
 		ClubInfo milota = ClubInfo.builder().fullName("Milota Sport Egyesulet").name("Milota SE").build();
 		String milotaId = clubService.addClub(milota).get().getEntityId();
 		clubPlayers.put(milotaId, new ArrayList<>());
+		
+		competitionService.registerClubToCompetition(competitionId, clubPlayers.keySet().toArray(new String[clubPlayers.keySet().size()])).get();
+		
+		transferPlayers(vamosoroszId);
+		transferPlayers(tarpaId);
+		transferPlayers(tisztaberekId);
+		transferPlayers(szatmarcsekeId);
+		transferPlayers(tyukodId);
+		transferPlayers(csengersimaertId);
+		transferPlayers(nyirmeggyesId);
+		transferPlayers(tiszakorodId);
+		transferPlayers(nabradId);
+		transferPlayers(beregdarocId);
+		transferPlayers(csengerId);
+		transferPlayers(kolcseId);
+		transferPlayers(nagydobosiId);
 		transferPlayers(milotaId);
 
-		competitionService.registerClubToCompetition(competitionId, clubPlayers.keySet().toArray(new String[clubPlayers.keySet().size()])).get();
 		
 		List<String> clubIds = new ArrayList<>(clubPlayers.keySet());
 		for(int i=0; i< clubIds.size() - 1; ++i) {
@@ -159,9 +160,6 @@ public class FillDatabase {
 					homeClubId = seacondHalfClubIds.get(j);
 					awayClubId = firstHalfClubIds.get(j);
 				}
-				if(StringUtils.isBlank(homeClubId) || StringUtils.isBlank(awayClubId)) {
-					System.out.println();
-				}
 				MatchInfo matchInfo = MatchInfo.builder(homeClubId, awayClubId, LocalDateTime.of(2017, 1, 9, 16, 00).plusWeeks(i).format(DateUtil.dateTimeFormatter))
 						.competitionId(competitionId)
 						.stageName(competition.getName())
@@ -179,9 +177,6 @@ public class FillDatabase {
 			Turn reTurn = Turn.builder(turn.getIndex() + (clubIds.size() - 1)).build();
 			new ArrayList<>(matchInfos).stream().forEach(match -> {
 				LocalDateTime plusMonths = LocalDateTime.parse(match.getMatchDate(), DateUtil.dateTimeFormatter).plusMonths(3);
-				if(StringUtils.isBlank(match.getAwayClubId()) || StringUtils.isBlank(match.getHomeClubId())) {
-					System.out.println();
-				}
 				MatchInfo matchInfo = MatchInfo.builder(match.getAwayClubId(), match.getHomeClubId(), plusMonths.format(DateUtil.dateTimeFormatter))		
 						.competitionId(competitionId)
 						.stageName(competition.getName())

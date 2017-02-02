@@ -22,7 +22,7 @@ public class TransferService {
 
     @Autowired
     private ClubAggregateRepository clubRepository;
-
+    
     public void transferPlayer(Transfer transfer) throws ExecutionException, InterruptedException {
         TransferPlayerCommand transferPlayerCommand = TransferPlayerCommand.builder().transfer(transfer).build();
         transferAggregatorRepository.save(transferPlayerCommand).get();
@@ -30,7 +30,6 @@ public class TransferService {
         if(transfer.getSourceTeamId() != null) {
         	clubRepository.update(transfer.getSourceTeamId(), AddPlayerToClub.builder(transfer.getTargetTeamId(), transfer.getPlayerId()).build()).get();
     	}
-        	
     }
 
 }

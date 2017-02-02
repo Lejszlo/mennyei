@@ -1,7 +1,7 @@
-var phonecatApp = angular.module('phonecatApp', [ 'ngRoute', 'teamModule', 'competitionModule', 'navigationModule', 'matchModule', 'clubModule' ]);
+var phonecatApp = angular.module('phonecatApp', [ 'ngRoute', 'teamModule', 'competitionModule', 'navigationModule', 'matchModule', 'clubModule', 'restangular' ]);
 
 phonecatApp.config([ '$routeProvider', function($routeProvider) {
-	$routeProvider.when('/clubs/:clubsId/players', {
+	$routeProvider.when('/clubs/players', {
 		templateUrl : 'public/partials/players.html',
 		controller : 'playersCtrl',
 		activetab: 'players'

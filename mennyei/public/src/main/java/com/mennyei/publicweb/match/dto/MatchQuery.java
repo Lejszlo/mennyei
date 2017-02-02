@@ -15,6 +15,7 @@ import com.mennyei.publicweb.competition.dto.CompetitionQuery;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import lombok.Singular;
 
 @Builder(builderMethodName="hiddenBuilder")
@@ -41,12 +42,15 @@ public class MatchQuery {
 	private MatchResultType matchResultType;
 	
 	@DBRef
+	@NonNull
 	private ClubQuery homeClub;
 	
 	@DBRef
+	@NonNull
 	private ClubQuery awayClub;
 	
 	@DBRef
+	@NonNull
 	private CompetitionQuery competition;
 	
 	@Singular

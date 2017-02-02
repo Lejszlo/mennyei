@@ -112,7 +112,7 @@
 							<li role="presentation" ng-class="{active: $route.current.activetab == 'club'}"><a ng-href="#/clubs/1"><img
 									data-src="static/images/picto/club.png" class="img-rounded" alt="Klub" src="static/images/picto/club.png" data-holder-rendered="true"
 									style="width: 50px; height: 50px;"> Klub</a></li>
-							<li role="presentation" ng-class="{active: $route.current.activetab == 'players'}"><a ng-href="#/clubs/1/players"><img
+							<li role="presentation" ng-class="{active: $route.current.activetab == 'players'}"><a ng-href="#/clubs/players"><img
 									data-src="static/images/picto/players.png" class="img-rounded" alt="JĂˇtĂ©osok" src="static/images/picto/players.png"
 									data-holder-rendered="true" style="width: 50px; height: 50px;"> Játékosok</a></li>
 							<li role="presentation" ng-class="{active: $route.current.activetab == 'matches'}"><a ng-href="#/competation/1/turn/3"><img
@@ -143,9 +143,11 @@
 		</div>
 	</footer>
 </body>
-<script type="text/javascript" src="static/bower_components/angular/angular.min.js"></script>
+<script type="text/javascript" src="static/bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="static/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 <script type="text/javascript" src="static/bower_components/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="static/bower_components/lodash/dist/lodash.js"></script>
+<script type="text/javascript" src="static/bower_components/restangular/src/restangular.js"></script>
 <script type="text/javascript" src="static/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="public/js/modules/teamModule.js"></script>

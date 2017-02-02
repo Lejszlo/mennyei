@@ -1,9 +1,12 @@
 package com.mennyei.publicweb.competition.controller;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mennyei.core.FillDatabase;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
 import com.mennyei.publicweb.competition.dto.table.TableQuery;
-import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
+import com.mennyei.publicweb.competition.infrastructure.CompetitionNotFoundException;
 import com.mennyei.publicweb.competition.service.CompetitionMatchService;
+import com.mennyei.publicweb.competition.service.CompetitionQueryService;
 import com.mennyei.publicweb.competition.service.CompetitionTableService;
 import com.mennyei.publicweb.match.dto.MatchDetailesQuery;
 
@@ -22,13 +26,13 @@ import com.mennyei.publicweb.match.dto.MatchDetailesQuery;
 public class CompetitionController {
 
 	@Autowired
-	private CompetitionMongoRepository competitionMongoRepository;
-
-	@Autowired
 	private CompetitionTableService competitionTableService;
 
 	@Autowired
 	private CompetitionMatchService competitionMatchService;
+	
+	@Autowired
+	private CompetitionQueryService competitionQueryService;
 
 	@Autowired
 	private FillDatabase fillDatabase;
@@ -39,8 +43,9 @@ public class CompetitionController {
 	}
 
 	@GetMapping("/{competitionId}")
-	public List<CompetitionQuery> getCompetation(@PathVariable("competitionId") String competationId) {
-		return competitionMongoRepository.findAll();
+	public HttpEntity<CompetitionQuery> getCompetation(@PathVariable("competitionId") String competitionId) {
+		Optional<CompetitionQuery> findCompetition = competitionQueryService.findCompetition(competitionId);
+		return new ResponseEntity<>(findCompetition.orElseThrow(() -> new CompetitionNotFoundException(competitionId)), HttpStatus.OK);
 	}
 
 	@GetMapping("/{competitionId}/{stageName}/table")

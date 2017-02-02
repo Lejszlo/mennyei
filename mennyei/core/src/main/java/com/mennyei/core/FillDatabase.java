@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -158,6 +159,9 @@ public class FillDatabase {
 					homeClubId = seacondHalfClubIds.get(j);
 					awayClubId = firstHalfClubIds.get(j);
 				}
+				if(StringUtils.isBlank(homeClubId) || StringUtils.isBlank(awayClubId)) {
+					System.out.println();
+				}
 				MatchInfo matchInfo = MatchInfo.builder(homeClubId, awayClubId, LocalDateTime.of(2017, 1, 9, 16, 00).plusWeeks(i).format(DateUtil.dateTimeFormatter))
 						.competitionId(competitionId)
 						.stageName(competition.getName())
@@ -175,6 +179,9 @@ public class FillDatabase {
 			Turn reTurn = Turn.builder(turn.getIndex() + (clubIds.size() - 1)).build();
 			new ArrayList<>(matchInfos).stream().forEach(match -> {
 				LocalDateTime plusMonths = LocalDateTime.parse(match.getMatchDate(), DateUtil.dateTimeFormatter).plusMonths(3);
+				if(StringUtils.isBlank(match.getAwayClubId()) || StringUtils.isBlank(match.getHomeClubId())) {
+					System.out.println();
+				}
 				MatchInfo matchInfo = MatchInfo.builder(match.getAwayClubId(), match.getHomeClubId(), plusMonths.format(DateUtil.dateTimeFormatter))		
 						.competitionId(competitionId)
 						.stageName(competition.getName())

@@ -1,4 +1,4 @@
-var phonecatApp = angular.module('phonecatApp', [ 'ngRoute', 'teamModule', 'competitionModule', 'navigationModule', 'matchModule', 'clubModule', 'restangular' ]);
+var phonecatApp = angular.module('phonecatApp', [ 'ngRoute', 'teamModule', 'competitionModule', 'navigationModule', 'matchModule', 'clubModule', 'hateoas' ]);
 
 phonecatApp.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/clubs/players', {
@@ -23,3 +23,4 @@ phonecatApp.config([ '$routeProvider', function($routeProvider) {
 		activetab: 'matches'
 	});
 } ]);
+

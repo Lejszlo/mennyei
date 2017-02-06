@@ -11,7 +11,8 @@ import com.mennyei.publicweb.match.dto.MatchQuery;
 
 @Repository
 public interface MatchMongoRepository extends MongoRepository<MatchQuery, String> {
-	@Query("{ $or: [ {'homeClub' : ?0}, {'awayClub' : ?0} ], $and: [{ 'competition.id' : ?1}] }")
-	List<MatchQuery> findClubAndCompetition(@Param("clubId") String clubId,@Param("competitionId") String competitionId);
+	
+	@Query("{ $or: [ {'homeClub' : ?0}, {'awayClub' : ?0} ]}")
+	List<MatchQuery> findByClub(@Param("clubId") String clubId);
 
 }

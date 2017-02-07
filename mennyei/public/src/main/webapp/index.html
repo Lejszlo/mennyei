@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="phonecatApp">
 <head>
+<meta charset="utf-8">
 <title>Mennyei Megyei Adatbank</title>
 <link rel="stylesheet" href="static/bower_components/bootswatch/sandstone/bootstrap.min.css">
 <link rel="stylesheet" href="public/css/style.css">
 <link rel="stylesheet" href="public/css/timeline.css">
+<base href="/">
 </head>
 <body cz-shortcut-listen="true">
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -109,16 +111,16 @@
 				<div class="container">
 					<nav ng-controller="tabsCtrl">
 						<ul class="nav nav-pills nav-justified">
-							<li role="presentation" ng-class="{active: $route.current.activetab == 'club'}"><a ng-href="#/clubs/1"><img
+							<li role="presentation" ng-class="{active: $route.current.activetab == 'club'}"><a ng-href="clubs/1"><img
 									data-src="static/images/picto/club.png" class="img-rounded" alt="Klub" src="static/images/picto/club.png" data-holder-rendered="true"
 									style="width: 50px; height: 50px;"> Klub</a></li>
-							<li role="presentation" ng-class="{active: $route.current.activetab == 'players'}"><a ng-href="#/clubs/players"><img
+							<li role="presentation" ng-class="{active: $route.current.activetab == 'players'}"><a ng-href="clubs/players"><img
 									data-src="static/images/picto/players.png" class="img-rounded" alt="JĂˇtĂ©osok" src="static/images/picto/players.png"
 									data-holder-rendered="true" style="width: 50px; height: 50px;"> Játékosok</a></li>
-							<li role="presentation" ng-class="{active: $route.current.activetab == 'matches'}"><a ng-href="#/competation/1/turn/3"><img
+							<li role="presentation" ng-class="{active: $route.current.activetab == 'matches'}"><a ng-href="competation/1/turn/3"><img
 									data-src="static/images/picto/match.png" class="img-rounded" alt="MĂ©rkĹ‘zĂ©sek" src="static/images/picto/match.png"
 									data-holder-rendered="true" style="width: 50px; height: 50px;"> Mékőzések</a></li>
-							<li role="presentation" ng-class="{active: $route.current.activetab == 'table'}"><a ng-href="#/competation/1/table"><img
+							<li role="presentation" ng-class="{active: $route.current.activetab == 'table'}"><a ng-href="competation/1/table"><img
 									data-src="static/images/picto/tabella.png" class="img-rounded" alt="Tabella" src="static/images/picto/tabella.png"
 									data-holder-rendered="true" style="width: 50px; height: 50px;"> Tabella</a></li>
 							<li role="presentation" ng-class="{active: $route.current.activetab == ''}"><a><img data-src="static/images/picto/statistics.png"
@@ -146,7 +148,8 @@
 <script type="text/javascript" src="static/bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="static/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 <script type="text/javascript" src="static/bower_components/angular-route/angular-route.min.js"></script>
-<script type="text/javascript" src="static/bower_components/lodash/dist/lodash.js"></script>
+<script type="text/javascript" src="static/bower_components/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="static/bower_components/angular-spring-data-rest/dist/angular-spring-data-rest.min.js"></script>
 <script type="text/javascript" src="static/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="public/js/modules/teamModule.js"></script>

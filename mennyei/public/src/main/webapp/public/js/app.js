@@ -1,6 +1,10 @@
 var phonecatApp = angular.module('phonecatApp', [ 'ngRoute', 'teamModule', 'competitionModule', 'navigationModule', 'matchModule', 'clubModule', 'hateoas' ]);
 
 phonecatApp.config([ '$routeProvider', function($routeProvider) {
+	
+	// use the HTML5 History API
+	$locationProvider.html5Mode(true);
+	
 	$routeProvider.when('/clubs/players', {
 		templateUrl : 'public/partials/players.html',
 		controller : 'playersCtrl',

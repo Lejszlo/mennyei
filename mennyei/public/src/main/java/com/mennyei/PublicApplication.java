@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.hateoas.config.EnableEntityLinks;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 
 import com.mennyei.configurations.BeanConfigurations;
@@ -13,6 +14,7 @@ import io.eventuate.javaclient.spring.jdbc.EventuateJdbcEventStoreConfiguration;
 
 @SpringBootApplication
 @EnableEventHandlers
+@EnableEntityLinks
 @EnableMongoRepositories
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @Import({EventuateJdbcEventStoreConfiguration.class, BeanConfigurations.class, RestConfiguration.class})

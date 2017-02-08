@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 
 import com.mennyei.publicweb.match.dto.MatchDetailesQuery;
 import com.mennyei.publicweb.match.dto.MatchQuery;
-import com.mennyei.publicweb.match.infrastructure.MatchMongoRepository;
+import com.mennyei.publicweb.match.infrastructure.MatchQueryMongoRepository;
 
 @Service
 public class CompetitionMatchService {
 
 	@Autowired
-	private MatchMongoRepository matchMongoRepository;
+	private MatchQueryMongoRepository matchMongoRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;

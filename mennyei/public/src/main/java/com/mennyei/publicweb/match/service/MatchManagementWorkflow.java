@@ -13,7 +13,7 @@ import com.mennyei.publicweb.competition.dto.CompetitionQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
 import com.mennyei.publicweb.competition.service.CompetitionTableService;
 import com.mennyei.publicweb.match.dto.MatchQuery;
-import com.mennyei.publicweb.match.infrastructure.MatchMongoRepository;
+import com.mennyei.publicweb.match.infrastructure.MatchQueryMongoRepository;
 
 import io.eventuate.DispatchedEvent;
 import io.eventuate.EventHandlerMethod;
@@ -24,7 +24,7 @@ import io.eventuate.EventSubscriber;
 public class MatchManagementWorkflow {
 
 	@Autowired
-	private MatchMongoRepository matchMongoRepository;
+	private MatchQueryMongoRepository matchMongoRepository;
 	
 	@Autowired
 	private ClubQueryMongoRepository clubQueryMongoRepository;

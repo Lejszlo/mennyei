@@ -56,15 +56,15 @@ public class MatchResultDetailes {
 		return events.stream().filter(e -> eventTypes.contains(e.getMatchEventType())).collect(Collectors.toList());
 	}
 
-	public MatchResultType whoIsTheWinner() {
+	public WinnerType whoIsTheWinner() {
 		int result = homeGoalAmount - awayGoalAmount;
 		if (result > 0) {
-			return MatchResultType.HOME;
+			return WinnerType.HOME;
 		}
 		if (result < 0) {
-			return MatchResultType.AWAY;
+			return WinnerType.AWAY;
 		}
-		return MatchResultType.DRAW;
+		return WinnerType.DRAW;
 	}
 
 	public static MatchResultDetailesBuilder builder(List<MatchEvent> homeClubEvents, List<MatchEvent> awayClubEvents) {

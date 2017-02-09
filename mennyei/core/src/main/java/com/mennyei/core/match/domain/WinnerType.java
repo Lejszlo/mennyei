@@ -1,5 +1,5 @@
 package com.mennyei.core.match.domain;
 
-public enum MatchResultType {
+public enum WinnerType {
 	HOME, AWAY, DRAW;
 }

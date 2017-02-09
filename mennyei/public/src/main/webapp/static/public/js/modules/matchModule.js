@@ -5,14 +5,13 @@ matchModule.controller('nextMatchesCtrl', function ($scope, $http, SpringDataRes
 	var club = $http.get('/club/vamosoroszikse');
 	
 	SpringDataRestAdapter.process(club, 'matches').then(function (processedResponse) {
+		
 		$scope.matches = processedResponse.matches._embeddedItems;
 	});
 	
 });
 
 matchModule.controller('matchDetailsCtrl', function ($scope, $http, $routeParams, selectedClub) {
-	
-
 	
 })
 

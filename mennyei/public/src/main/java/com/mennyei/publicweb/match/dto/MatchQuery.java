@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 import com.mennyei.core.match.domain.MatchHasNotPlayedYetException;
 import com.mennyei.core.match.domain.MatchResult;
-import com.mennyei.core.match.domain.MatchResultType;
+import com.mennyei.core.match.domain.WinnerType;
 import com.mennyei.core.match.domain.event.lineup.LineUp;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
@@ -40,7 +40,7 @@ public class MatchQuery {
 	
 	private String stageName;
 	
-	private MatchResultType matchResultType;
+	private WinnerType winnerType;
 	
 	@DBRef
 	@NonNull
@@ -66,58 +66,62 @@ public class MatchQuery {
 		return hiddenBuilder().id(matchId).homeClub(homeClub).awayClub(awayClub).competition(competition);
 	}
 	
-	public ClubQuery whoIsTheOpponentOf(ClubQuery club) {
-		if (club.equals(homeClub)) {
+	public ClubQuery whoIsTheOpponentOf(String clubId) {
+		if (clubId.equals(homeClub.getId())) {
 			return awayClub;
 		}
 		return homeClub;
 	}
 
-	public ClubQuery whoIsMe(ClubQuery club) {
-		if (club.equals(homeClub)) {
+	public ClubQuery whoIsMe(String clubId) {
+		if (clubId.equals(homeClub.getId())) {
 			return homeClub;
 		}
 		return awayClub;
 	}
 
-	public int getGoalAmountFor(ClubQuery club) {
-		if (homeClub.equals(club)) {
+	public int getGoalAmountFor(String clubId) {
+		if (homeClub.getId().equals(clubId)) {
 			return homeGoalAmount;
 		}
 		return awayGoalAmount;
 	}
 
-	public MatchResult getResultFor(ClubQuery club) {
-		if (MatchResultType.DRAW.equals(matchResultType)) {
+	public MatchResult getResultFor(String clubId) {
+		if(!isPlayed()) {
+			throw new MatchHasNotPlayedYetException();
+		}
+		
+		if (WinnerType.DRAW.equals(winnerType)) {
 			return MatchResult.DRAW;
 		}
-		if (MatchResultType.HOME.equals(matchResultType) && isAtHome(club) || MatchResultType.AWAY.equals(matchResultType) && !isAtHome(club)) {
+		if (WinnerType.HOME.equals(winnerType) && isAtHome(clubId) || WinnerType.AWAY.equals(winnerType) && !isAtHome(clubId)) {
 			return MatchResult.WIN;
 		}
 		return MatchResult.LOSE;
 	}
 
-	public boolean isAtHome(ClubQuery club) {
-		return club.equals(homeClub);
+	public boolean isAtHome(String clubId) {
+		return clubId.equals(homeClub.getId());
 	}
 
-	public int getScoredGoalAmount(ClubQuery club) throws MatchHasNotPlayedYetException {
+	public int getScoredGoalAmount(String clubId) {
 		if(!isPlayed()) {
 			throw new MatchHasNotPlayedYetException();
 		}
 		
-		if(homeClub.equals(club)) {
+		if(homeClub.getId().equals(clubId)) {
 			return homeGoalAmount;
 		}
 		return awayGoalAmount;
 	}
 
-	public int getConcernedGoalAmount(ClubQuery club) throws MatchHasNotPlayedYetException {
+	public int getConcernedGoalAmount(String clubId) {
 		if(!isPlayed()) {
 			throw new MatchHasNotPlayedYetException();
 		}
 		
-		if(awayClub.equals(club)) {
+		if(awayClub.getId().equals(clubId)) {
 			return awayGoalAmount;
 		}
 		

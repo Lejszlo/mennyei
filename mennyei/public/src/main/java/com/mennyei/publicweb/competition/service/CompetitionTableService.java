@@ -42,9 +42,9 @@ public class CompetitionTableService {
 		}
 		
 		TableRowQuery tableRow = tableRowOptional.get();
-		tableRow.setResult(matchQuery.getResultFor(tableRow.getClub()));
-		tableRow.addScoredGoals(matchQuery.getGoalAmountFor(tableRow.getClub()));
-		tableRow.addConcerdGoals(matchQuery.getGoalAmountFor(matchQuery.whoIsTheOpponentOf(tableRow.getClub())));
+		tableRow.setResult(matchQuery.getResultFor(tableRow.getClub().getId()));
+		tableRow.addScoredGoals(matchQuery.getGoalAmountFor(tableRow.getClub().getId()));
+		tableRow.addConcerdGoals(matchQuery.getGoalAmountFor(matchQuery.whoIsTheOpponentOf(tableRow.getClub().getId()).getId()));
 		tableRow.calculatePoints(matchQuery.getCompetition().getCompetitionRuleSet());
 		tableRow.incraseMatches();
 	}

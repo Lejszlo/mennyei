@@ -9,6 +9,8 @@ import lombok.Data;
 @Data
 public class MatchResource extends ResourceSupport {
 
+	private MatchQuery matchQuery;
+	
 	private MatchResult matchResult;
 	
 	private boolean atHome;

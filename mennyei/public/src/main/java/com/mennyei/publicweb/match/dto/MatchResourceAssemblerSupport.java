@@ -16,8 +16,12 @@ public class MatchResourceAssemblerSupport extends ResourceAssemblerSupport<Matc
 	@Override
 	public MatchResource toResource(MatchQuery matchQuery) {
 		MatchResource resource = createResourceWithId(matchQuery.getId(), matchQuery);
-		resource.setMatchResult(matchQuery.getResultFor(clubId));
 		resource.setAtHome(matchQuery.isAtHome(clubId));
+		resource.setMatchQuery(matchQuery);
+		
+		if(matchQuery.isPlayed()) {
+			resource.setMatchResult(matchQuery.getResultFor(clubId));
+		}
 		return resource;
 	}
 

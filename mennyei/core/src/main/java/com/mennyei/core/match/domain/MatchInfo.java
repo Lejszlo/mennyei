@@ -16,7 +16,7 @@ public class MatchInfo {
 	
 	private int fans;
 
-	private MatchResultDetailes resultGoals;
+	private MatchResultDetailes matchResultDetailes;
 
 	@NonNull
 	private String homeClubId;

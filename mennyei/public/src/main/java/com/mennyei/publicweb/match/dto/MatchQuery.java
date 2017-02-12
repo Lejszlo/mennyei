@@ -9,6 +9,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 import com.mennyei.core.match.domain.MatchHasNotPlayedYetException;
 import com.mennyei.core.match.domain.MatchResult;
+import com.mennyei.core.match.domain.MatchResultDetailes;
 import com.mennyei.core.match.domain.WinnerType;
 import com.mennyei.core.match.domain.event.lineup.LineUp;
 import com.mennyei.publicweb.club.dto.ClubQuery;
@@ -35,7 +36,7 @@ public class MatchQuery {
 	private boolean played;
 	
 	private int homeGoalAmount;
-
+	
 	private int awayGoalAmount;
 	
 	private String stageName;
@@ -61,6 +62,8 @@ public class MatchQuery {
 	@Singular
 	@RestResource(exported=false)
 	private List<LineUp> awayLineUps = new ArrayList<>();
+	
+	private MatchResultDetailes matchResultDetailes;
 	
 	public static MatchQueryBuilder builder(String matchId, ClubQuery homeClub, ClubQuery awayClub, CompetitionQuery competition) {
 		return hiddenBuilder().id(matchId).homeClub(homeClub).awayClub(awayClub).competition(competition);

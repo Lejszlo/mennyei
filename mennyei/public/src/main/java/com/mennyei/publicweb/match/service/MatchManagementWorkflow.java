@@ -46,6 +46,7 @@ public class MatchManagementWorkflow {
         MatchQuery matchQuery = MatchQuery.builder(matchId, homeClubQuery, awayClubQuery, competitionQuery).build();
         matchQuery.setMatchDate(matchInfo.getMatchDate());
         matchQuery.setStageName(matchInfo.getStageName());
+        matchQuery.setMatchResultDetailes(matchAdded.getMatchInfo().getMatchResultDetailes());
         matchQuery.setIndex(matchInfo.getIndex());
         matchMongoRepository.save(matchQuery);
     }

@@ -5,15 +5,15 @@ app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $lo
 	// use the HTML5 History API
 	$locationProvider.html5Mode(true);
 	
-	$routeProvider.when('/clubs/players', {
+	$routeProvider.when('/players', {
 		templateUrl : 'static/public/partials/players.html',
 		controller : 'playersCtrl',
 		activetab: 'players'
-	}).when('/competation/:competitionId/table', {
+	}).when('/tables', {
 		templateUrl : 'static/public/partials/table.html',
 		controller : 'tableCtrl',
 		activetab: 'table'
-	}).when('/competation/:competitionId/turn/:turnNumber', {
+	}).when('/matches', {
 		templateUrl : 'static/public/partials/matches.html',
 		controller : 'nextMatchesCtrl',
 		activetab: 'matches'
@@ -21,7 +21,7 @@ app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $lo
 		templateUrl : 'static/public/partials/club.html',
 		controller : 'clubDetailesCtrl',
 		activetab: 'club'
-	}).when('/competition/:competitionId/stage/:stage/turn/:turnId/club/:clubId', {
+	}).when('/matches/:matchId', {
 		templateUrl : 'static/public/partials/match/details.html',
 		controller : 'matchDetailsCtrl',
 		activetab: 'matches'

@@ -9,10 +9,20 @@ import lombok.Data;
 @Data
 public class MatchResource extends ResourceSupport {
 
-	private MatchQuery matchQuery;
-	
 	private MatchResult matchResult;
 	
 	private boolean atHome;
+	
+	private int homeGoalAmount;
+
+	private int awayGoalAmount;
+	
+	private String matchDate;
+	
+	private String opponentClubName;
+	
+	private String opponentClubId;
+	
+	private String competitionName;
 	
 }

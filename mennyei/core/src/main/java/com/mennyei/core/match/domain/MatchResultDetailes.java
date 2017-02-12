@@ -1,9 +1,9 @@
 package com.mennyei.core.match.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.mennyei.core.match.domain.event.MatchEvent;
@@ -36,24 +36,40 @@ public class MatchResultDetailes {
 		return this;
 	}
 	
-	private int getHomeGoalAmountFromEvent() {
-		return filterEvents(homeClubEvents, new HashSet<>(Arrays.asList(MatchEventType.GOAL))).size();
+	public int getHomeGoalAmountFromEvent() {
+		return filterEvents(homeClubEvents, Arrays.asList(MatchEventType.GOAL)).size();
 	}
 
-	private int getHomeOwnGoalAmountFromEvent() {
-		return filterEvents(homeClubEvents, new HashSet<>(Arrays.asList(MatchEventType.OWN_GOAL))).size();
+	public int getHomeOwnGoalAmountFromEvent() {
+		return filterEvents(homeClubEvents, Arrays.asList(MatchEventType.OWN_GOAL)).size();
 	}
 
-	private int getAwayGoalAmountFromEvent() {
-		return filterEvents(awayClubEvents, new HashSet<>(Arrays.asList(MatchEventType.GOAL))).size();
+	public int getAwayGoalAmountFromEvent() {
+		return filterEvents(awayClubEvents, Arrays.asList(MatchEventType.GOAL)).size();
 	}
 
-	private int getAwayOwnGoalAmountFromEvent() {
-		return filterEvents(awayClubEvents, new HashSet<>(Arrays.asList(MatchEventType.OWN_GOAL))).size();
+	public int getAwayOwnGoalAmountFromEvent() {
+		return filterEvents(awayClubEvents, Arrays.asList(MatchEventType.OWN_GOAL)).size();
 	}
-
-	public List<MatchEvent> filterEvents(List<MatchEvent> events, Set<MatchEventType> eventTypes) {
-		return events.stream().filter(e -> eventTypes.contains(e.getMatchEventType())).collect(Collectors.toList());
+	
+	public List<MatchEvent> getHomeEvents(List<MatchEventType> eventTypes) {
+		return filterEvents(homeClubEvents, eventTypes);
+	}
+	
+	public List<MatchEvent> getAwayEvents(List<MatchEventType> eventTypes) {
+		return filterEvents(awayClubEvents, eventTypes);
+	}
+	
+	public List<MatchEvent> getEvents(List<MatchEventType> eventTypes) {
+		List<MatchEvent> events = new ArrayList<>();
+		events.addAll(getHomeEvents(eventTypes));
+		events.addAll(getAwayEvents(eventTypes));
+		return Collections.unmodifiableList(events);
+	}
+	
+	
+	private List<MatchEvent> filterEvents(List<MatchEvent> events, List<MatchEventType> eventTypes) {
+		return Collections.unmodifiableList(events.stream().filter(e -> eventTypes.contains(e.getMatchEventType())).collect(Collectors.toList()));
 	}
 
 	public WinnerType whoIsTheWinner() {

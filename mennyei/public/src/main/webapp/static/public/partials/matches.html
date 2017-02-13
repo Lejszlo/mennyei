@@ -38,7 +38,7 @@
 						<td style="text-align: left">{{match.opponentClubName}}</td>
 						<td>{{match.competitionName}}</td>
 						<td>
-							<a ng-href="{{detailesLink}}"
+							<a ng-click="selectMatch(match)"
 								ng-class="match.matchResult ? 'btn btn-success btn-xs' : 'hidden'"><i class="glyphicon glyphicon-book"></i> Jegyzőkönyv
 							</a>
 						</td>

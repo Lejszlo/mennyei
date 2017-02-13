@@ -24,6 +24,7 @@ public class MatchController {
 	@Autowired
 	private MatchQueryMongoRepository matchMongoRepository;
 	
+	@Autowired
 	private MatchDetailesService matchDetailesService;
 	
 	@RequestMapping(value = "/{clubId}", method = RequestMethod.GET)

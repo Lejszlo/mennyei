@@ -69,6 +69,9 @@ public class MatchResultDetailes {
 	
 	
 	private List<MatchEvent> filterEvents(List<MatchEvent> events, List<MatchEventType> eventTypes) {
+		if(events == null) {
+			return Collections.emptyList();
+		}
 		return Collections.unmodifiableList(events.stream().filter(e -> eventTypes.contains(e.getMatchEventType())).collect(Collectors.toList()));
 	}
 

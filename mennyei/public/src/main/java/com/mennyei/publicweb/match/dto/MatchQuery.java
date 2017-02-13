@@ -35,13 +35,7 @@ public class MatchQuery {
 	
 	private boolean played;
 	
-	private int homeGoalAmount;
-	
-	private int awayGoalAmount;
-	
 	private String stageName;
-	
-	private WinnerType winnerType;
 	
 	@DBRef
 	@NonNull
@@ -85,9 +79,9 @@ public class MatchQuery {
 
 	public int getGoalAmountFor(String clubId) {
 		if (homeClub.getId().equals(clubId)) {
-			return homeGoalAmount;
+			return matchResultDetailes.getHomeGoalAmount();
 		}
-		return awayGoalAmount;
+		return matchResultDetailes.getAwayGoalAmount();
 	}
 
 	public MatchResult getResultFor(String clubId) {
@@ -95,10 +89,12 @@ public class MatchQuery {
 			throw new MatchHasNotPlayedYetException();
 		}
 		
-		if (WinnerType.DRAW.equals(winnerType)) {
+		WinnerType whoIsTheWinner = matchResultDetailes.whoIsTheWinner();
+		
+		if (WinnerType.DRAW.equals(whoIsTheWinner)) {
 			return MatchResult.DRAW;
 		}
-		if (WinnerType.HOME.equals(winnerType) && isAtHome(clubId) || WinnerType.AWAY.equals(winnerType) && !isAtHome(clubId)) {
+		if (WinnerType.HOME.equals(whoIsTheWinner) && isAtHome(clubId) || WinnerType.AWAY.equals(whoIsTheWinner) && !isAtHome(clubId)) {
 			return MatchResult.WIN;
 		}
 		return MatchResult.LOSE;
@@ -114,9 +110,9 @@ public class MatchQuery {
 		}
 		
 		if(homeClub.getId().equals(clubId)) {
-			return homeGoalAmount;
+			return matchResultDetailes.getHomeGoalAmount();
 		}
-		return awayGoalAmount;
+		return matchResultDetailes.getAwayGoalAmount();
 	}
 
 	public int getConcernedGoalAmount(String clubId) {
@@ -125,10 +121,10 @@ public class MatchQuery {
 		}
 		
 		if(awayClub.getId().equals(clubId)) {
-			return awayGoalAmount;
+			return matchResultDetailes.getAwayGoalAmount();
 		}
 		
-		return homeGoalAmount;
+		return matchResultDetailes.getHomeGoalAmount();
 	}
 	
 }

@@ -19,8 +19,8 @@ public class MatchResourceAssemblerSupport extends ResourceAssemblerSupport<Matc
 	public MatchResource toResource(MatchQuery matchQuery) {
 		MatchResource resource = createResourceWithId(matchQuery.getId(), matchQuery);
 		resource.setAtHome(matchQuery.isAtHome(clubId));
-		resource.setAwayGoalAmount(matchQuery.getAwayGoalAmount());
-		resource.setHomeGoalAmount(matchQuery.getHomeGoalAmount());
+		resource.setAwayGoalAmount(matchQuery.getMatchResultDetailes().getAwayGoalAmount());
+		resource.setHomeGoalAmount(matchQuery.getMatchResultDetailes().getHomeGoalAmount());
 		resource.setMatchDate(matchQuery.getMatchDate());
 		ClubQuery opponent = matchQuery.whoIsTheOpponentOf(clubId);
 		resource.setOpponentClubName(opponent.getName());

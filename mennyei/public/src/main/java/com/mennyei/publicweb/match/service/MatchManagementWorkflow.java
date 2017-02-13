@@ -69,9 +69,7 @@ public class MatchManagementWorkflow {
         if(matchPlayed.isPlayed()) {
         	matchQuery.setPlayed(true);
         	matchQuery.setFans(matchPlayed.getFans());
-        	matchQuery.setWinnerType(matchPlayed.getMatchResultDetailes().whoIsTheWinner());
-        	matchQuery.setHomeGoalAmount(matchPlayed.getMatchResultDetailes().getHomeGoalAmount());
-        	matchQuery.setAwayGoalAmount(matchPlayed.getMatchResultDetailes().getAwayGoalAmount());
+        	matchQuery.setMatchResultDetailes(matchPlayed.getMatchResultDetailes());
         }
         matchQuery = matchMongoRepository.save(matchQuery);
         competitionTableService.refreshTable(matchQuery);

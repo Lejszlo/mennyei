@@ -6,3 +6,7 @@ clubModule.controller('clubDetailesCtrl', function($scope) {
         shortName: "VKSE"
     }
 });
+
+clubModule.service('selectedClub', function ($http) {
+	return $http.get('/club/vamosoroszikse');
+});

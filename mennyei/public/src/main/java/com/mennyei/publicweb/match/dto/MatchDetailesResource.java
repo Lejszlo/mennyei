@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import com.mennyei.core.match.domain.event.lineup.LineUp;
-
 import lombok.Data;
 import lombok.Singular;
 
@@ -17,9 +15,15 @@ public class MatchDetailesResource extends ResourceSupport {
 	private int totalRedCardAmount;
 	
 	@Singular
-	private List<LineUp> homeLineUps;
+	private List<LineUpResource> homeStarters;
 	
 	@Singular
-	private List<LineUp> awayLineUps;
+	private List<LineUpResource> awayStarters;
+	
+	@Singular
+	private List<LineUpResource> homeSubstitution;
+	
+	@Singular
+	private List<LineUpResource> awaySubstitution;
 	
 }

@@ -13,10 +13,32 @@ matchModule.controller('nextMatchesCtrl', function ($scope, $http, $location, Sp
 	
 });
 
-matchModule.controller('matchDetailsCtrl', function ($scope, $http, $routeParams, SpringDataRestAdapter, selectedMatch) {
+matchModule.controller('matchDetailsCtrl', function ($scope, $http, $routeParams, SpringDataRestAdapter, selectedClub, selectedMatch) {
 	SpringDataRestAdapter.process(selectedMatch.getSelectedMatch(), 'detailes').then(function (processedResponse) {
 		$scope.match = processedResponse;
+		$scope.homeStarters = processedResponse.detailes.homeStarters;
+		$scope.homeSubstitutions = processedResponse.detailes.homeSubstitution;
+		$scope.awayStarters = processedResponse.detailes.awayStarters;
+		$scope.awaySubstitutions = processedResponse.detailes.awaySubstitution;
 	});
+	
+	SpringDataRestAdapter.process(selectedClub).then(function (processedResponse) {
+		$scope.club = processedResponse;
+	});
+	
+	$scope.getTeamNames = function() {
+		var match = selectedMatch.getSelectedMatch();
+		var result = {};
+		if(match.atHome) {
+			result.homeClubName = $scope.club.name;
+			result.awayClubName = match.opponentClubName;
+			return result; 
+		}
+		result.awayClubName = $scope.club.name;
+		result.homeClubName = match.opponentClubName;
+		return result; 
+	}
+	
 })
 
 matchModule.service('selectedMatch', function ($http) {

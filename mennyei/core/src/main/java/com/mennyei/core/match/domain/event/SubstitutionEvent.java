@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Substitution extends MatchEvent {
+public class SubstitutionEvent extends MatchEvent {
 	private Player inner;
 	
 	private Player outer;

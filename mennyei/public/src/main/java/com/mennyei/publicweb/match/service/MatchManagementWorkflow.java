@@ -1,17 +1,22 @@
 package com.mennyei.publicweb.match.service;
 
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mennyei.core.match.domain.MatchInfo;
+import com.mennyei.core.match.domain.event.lineup.LineUp;
 import com.mennyei.core.match.event.MatchAdded;
 import com.mennyei.core.match.event.MatchPlayed;
 import com.mennyei.core.match.event.MatchSet;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
+import com.mennyei.publicweb.club.infrastructure.PlayerQueryMongoRepository;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
 import com.mennyei.publicweb.competition.service.CompetitionTableService;
+import com.mennyei.publicweb.match.dto.LineUpQuery;
 import com.mennyei.publicweb.match.dto.MatchQuery;
 import com.mennyei.publicweb.match.infrastructure.MatchQueryMongoRepository;
 
@@ -35,6 +40,9 @@ public class MatchManagementWorkflow {
 	@Autowired
 	private CompetitionMongoRepository competitionMongoRepository;
 	
+	@Autowired
+	private PlayerQueryMongoRepository playerQueryMongoRepository;
+	
     @EventHandlerMethod
     public void matchAdded(DispatchedEvent<MatchAdded> dispatchedEvent) {
         MatchAdded matchAdded = dispatchedEvent.getEvent();
@@ -56,10 +64,18 @@ public class MatchManagementWorkflow {
     	MatchSet matchPlayed = dispatchedEvent.getEvent();
         String matchId = dispatchedEvent.getEntityId();
         MatchQuery matchQuery = matchMongoRepository.findOne(matchId);
-        matchQuery.setAwayLineUps(matchPlayed.getAwayLineUps());
-        matchQuery.setHomeLineUps(matchPlayed.getHomeLineUps());
+        matchQuery.setAwayLineUps(matchPlayed.getAwayLineUps().stream().map(this::createLineUpQuery).collect(Collectors.toList()));
+        matchQuery.setHomeLineUps(matchPlayed.getHomeLineUps().stream().map(this::createLineUpQuery).collect(Collectors.toList()));
         matchMongoRepository.save(matchQuery);
     }
+
+	private LineUpQuery createLineUpQuery(LineUp lineUp) {
+		LineUpQuery lineUpQuery = new LineUpQuery(); 
+		lineUpQuery.setLineUpType(lineUp.getLineUpType());
+		lineUpQuery.setShirtNumber(lineUp.getShirtNumber());
+		lineUpQuery.setPlayerQuery(playerQueryMongoRepository.findOne(lineUp.getPlayerId()));
+		return lineUpQuery;
+	}
     
     @EventHandlerMethod
     public void matchPlayed(DispatchedEvent<MatchPlayed> dispatchedEvent) {

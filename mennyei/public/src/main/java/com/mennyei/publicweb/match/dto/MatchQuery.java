@@ -5,13 +5,11 @@ import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import com.mennyei.core.match.domain.MatchHasNotPlayedYetException;
 import com.mennyei.core.match.domain.MatchResult;
 import com.mennyei.core.match.domain.MatchResultDetailes;
 import com.mennyei.core.match.domain.WinnerType;
-import com.mennyei.core.match.domain.event.lineup.LineUp;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
 
@@ -50,12 +48,10 @@ public class MatchQuery {
 	private CompetitionQuery competition;
 	
 	@Singular
-	@RestResource(exported=false)
-	private List<LineUp> homeLineUps = new ArrayList<>();
+	private List<LineUpQuery> homeLineUps = new ArrayList<>();
 	
 	@Singular
-	@RestResource(exported=false)
-	private List<LineUp> awayLineUps = new ArrayList<>();
+	private List<LineUpQuery> awayLineUps = new ArrayList<>();
 	
 	private MatchResultDetailes matchResultDetailes;
 	

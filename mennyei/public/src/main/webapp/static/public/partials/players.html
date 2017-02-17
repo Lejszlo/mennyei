@@ -1,37 +1,44 @@
-<div class="row">
-	<div class="panel panel-primary" style="border: 0px;">
-		<div class="panel-body">
-			<div class="col-md-8">
-				<table class="table table-hover table-responsive">
-					<thead>
-						<tr>
-							<th>Név</th>
-							<th class="text-center">Életkor</th>
-							<th class="text-center">Születesnap</th>
-							<th class="text-center">Nemzetiség</th>
-							<th class="text-center">Mez szám</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="player in players" ng-click="selectPlayer(player)" ng-class="{ 'active' : player == selectedPlayer}">
-							<td><strong>{{player.name}}</strong></td>
-							<td class="text-center">{{player.age}}</td>
-							<td class="text-center">{{player.birthday}}</td>
-							<td class="text-center">{{player.nationality}}</td>
-							<td class="text-center">{{player.number}}</td>
-						</tr>
-					</tbody>
-				</table>
+<div class="container col-md-8">
+	<div class="container col-md-12 clubMainContainer">
+		<div class="panel panel-primary" style="border: 0px;">
+			<div class="panel-body">
+				<div class="col-md-8">
+					<table class="table table-hover table-responsive">
+						<thead>
+							<tr>
+								<th>Név</th>
+								<th class="text-center">Életkor</th>
+								<th class="text-center">Születesnap</th>
+								<th class="text-center">Nemzetiség</th>
+								<th class="text-center">Mez szám</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="player in players" ng-click="selectPlayer(player)" ng-class="{ 'active' : player == selectedPlayer}">
+								<td>
+									<strong>{{player.name}}</strong>
+								</td>
+								<td class="text-center">{{player.age}}</td>
+								<td class="text-center">{{player.birthday}}</td>
+								<td class="text-center">{{player.nationality}}</td>
+								<td class="text-center">{{player.number}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
-			<div class="col-md-4">
+		</div>
+	</div>
+</div>
+<div class="container col-md-8">
+	<div class="container col-md-12 clubMainContainer">
+		<div class="panel panel-primary" style="border: 0px;">
+			<div class="panel-body">
 				<div class="row">
-					<div class="col-md-4 text-center" style="background: url(static/images/jersey.png) no-repeat center center; background-size: 100% 100%; width: 150px; height: 150px;">
-						<div style="font-size: 12px; font-weight:bold; margin-top: 35px">
-							{{selectedPlayer.name}}
-						</div>
-						<div style="font-size: 30px">
-							{{selectedPlayer.number}}
-						</div>
+					<div class="col-md-4 text-center"
+						style="background: url(static/images/jersey.png) no-repeat center center; background-size: 100% 100%; width: 150px; height: 150px;">
+						<div style="font-size: 12px; font-weight: bold; margin-top: 35px">{{selectedPlayer.name}}</div>
+						<div style="font-size: 30px">{{selectedPlayer.number}}</div>
 					</div>
 				</div>
 				<hr />

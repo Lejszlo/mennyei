@@ -94,7 +94,7 @@ td.matchResult {
     background-color: #FFFFFF;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-    min-height: 700px
+    min-height: 700px;
 }
 
 .bold {

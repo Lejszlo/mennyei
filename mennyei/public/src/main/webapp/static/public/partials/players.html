@@ -2,35 +2,31 @@
 	<div class="container col-md-12 clubMainContainer">
 		<div class="panel panel-primary" style="border: 0px;">
 			<div class="panel-body">
-				<div class="col-md-8">
-					<table class="table table-hover table-responsive">
-						<thead>
-							<tr>
-								<th>Név</th>
-								<th class="text-center">Életkor</th>
-								<th class="text-center">Születesnap</th>
-								<th class="text-center">Nemzetiség</th>
-								<th class="text-center">Mez szám</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="player in players" ng-click="selectPlayer(player)" ng-class="{ 'active' : player == selectedPlayer}">
-								<td>
-									<strong>{{player.name}}</strong>
-								</td>
-								<td class="text-center">{{player.age}}</td>
-								<td class="text-center">{{player.birthday}}</td>
-								<td class="text-center">{{player.nationality}}</td>
-								<td class="text-center">{{player.number}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<table class="table table-hover table-responsive">
+					<thead>
+						<tr>
+							<th>Név</th>
+							<th class="text-center">Életkor</th>
+							<th class="text-center">Születesnap</th>
+							<th class="text-center">Nemzetiség</th>
+							<th class="text-center">Mez szám</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="player in players" ng-click="selectPlayer(player)" ng-class="{ 'active' : player == selectedPlayer}">
+							<td><strong>{{player.name}}</strong></td>
+							<td class="text-center">{{player.age}}</td>
+							<td class="text-center">{{player.birthday}}</td>
+							<td class="text-center">{{player.nationality}}</td>
+							<td class="text-center">{{player.number}}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="container col-md-8">
+<div class="container col-md-4">
 	<div class="container col-md-12 clubMainContainer">
 		<div class="panel panel-primary" style="border: 0px;">
 			<div class="panel-body">

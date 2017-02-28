@@ -94,7 +94,6 @@ td.matchResult {
     background-color: #FFFFFF;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-    min-height: 700px;
 }
 
 .bold {
@@ -134,9 +133,19 @@ td.matchResult {
 }
 
 .matchDetails > dt {
-	width: 100px;
+	width: 20px;
 }
 
 .matchDetails > dd {
-	margin-left: 120px; 
+	margin-left: 25px; 
 }
+
+.panel-title {
+	color: #3e3f3a !important;
+}
+
+img.playerEvents {
+	width: 15px;
+	height: 15px;
+}
+

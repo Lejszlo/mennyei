@@ -1,6 +1,7 @@
 package com.mennyei.core.match.domain.event;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
@@ -8,6 +9,7 @@ import lombok.Value;
 @Value
 @Builder
 @EqualsAndHashCode(callSuper=false)
+@AllArgsConstructor
 public class GoalEvent extends MatchEvent {
 	private String scorerId;
 

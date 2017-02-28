@@ -26,6 +26,19 @@ matchModule.controller('matchDetailsCtrl', function ($scope, $http, $routeParams
 		$scope.club = processedResponse;
 	});
 	
+	const pictorUrl ="../../../../static/images/picto/";
+	$scope.getEventImage = function(event) {
+		if(event.matchEventType === "GOAL") {
+			return pictorUrl + "goal.png"
+		}
+		if(event.matchEventType === "RED_CARD") {
+			return pictorUrl + "red_card.png"
+		}
+		if(event.matchEventType === "YELLOW_CARD") {
+			return pictorUrl + "yellow_card.png"
+		}
+	}
+	
 	$scope.getTeamNames = function() {
 		var match = selectedMatch.getSelectedMatch();
 		var result = {};

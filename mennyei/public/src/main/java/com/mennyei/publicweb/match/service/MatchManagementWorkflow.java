@@ -13,6 +13,7 @@ import com.mennyei.core.match.event.MatchSet;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.club.infrastructure.PlayerQueryMongoRepository;
+import com.mennyei.publicweb.club.service.PlayerMatchStatisticService;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
 import com.mennyei.publicweb.competition.service.CompetitionTableService;
@@ -42,6 +43,9 @@ public class MatchManagementWorkflow {
 	
 	@Autowired
 	private PlayerQueryMongoRepository playerQueryMongoRepository;
+	
+	@Autowired
+	private PlayerMatchStatisticService playerMatchStatisticService;
 	
     @EventHandlerMethod
     public void matchAdded(DispatchedEvent<MatchAdded> dispatchedEvent) {
@@ -89,6 +93,7 @@ public class MatchManagementWorkflow {
         }
         matchQuery = matchMongoRepository.save(matchQuery);
         competitionTableService.refreshTable(matchQuery);
+        playerMatchStatisticService.updatePlayerStatistics(matchQuery);
     }
 	
 }

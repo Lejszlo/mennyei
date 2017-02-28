@@ -1,48 +1,111 @@
-<div class="container col-md-8">
+<div class="container col-md-9">
 	<div class="container col-md-12 clubMainContainer">
 		<div class="panel">
 			<div class="panel-body">
 				<table class="table" id="matchDetialPlayersTable">
 					<thead style="border-bottom: none">
 						<tr>
-							<th colspan="2" style="width: 40%; border-bottom: 5px solid #93c54b; vertical-align: middle;" class="text-center">{{getTeamNames().homeClubName}}</th>
-							<th style="font-size: xx-large" class="text-center"><span style="background-color: #f8f5f0; padding: 5px">{{match.homeGoalAmount}}</span>
-								: <span style="background-color: #f8f5f0; padding: 5px">{{match.awayGoalAmount}}</span></th>
-							<th colspan="2" style="width: 40%; border-bottom: 5px solid #3e3f3a; vertical-align: middle;" class="text-center">{{getTeamNames().awayClubName}}</th>
-						</tr>
-						<tr>
-							<th>Mez szám</th>
-							<th class="text-right">Játékos</th>
-							<th></th>
-							<th>Játékos</th>
-							<th class="text-right">Mez szám</th>
+							<th colspan="2" style="border-bottom: 5px solid #93c54b; width: 49%; font-size: large" class="text-center">
+								<div class="col-md-10 text-center">
+									<span>{{getTeamNames().homeClubName}}</span>
+								</div>
+								<div class="col-md-1 text-right">
+									<span style="background-color: #f8f5f0; padding: 5px; font-size: xx-large">{{match.homeGoalAmount}}</span>
+								</div>
+							</th>
+							<th style="width: 2%;">
+								<span>:</span>
+							</th>
+							<th colspan="2" style="border-bottom: 5px solid #3e3f3a; width: 49%; font-size: large">
+								<div class="col-md-1 text-left">
+									<span style="background-color: #f8f5f0; padding: 5px; font-size: xx-large">{{match.awayGoalAmount}}</span>
+								</div>
+								<div class="col-md-10 text-center">
+									<span>{{getTeamNames().awayClubName}}</span>
+								</div>
+							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="player in homeStarters">
-							<td># {{player.shirtNumber}}</td>
-							<td class="text-right">{{player.playerName}}</td>
+							<td>{{player.playerName}}</td>
+							<td>
+								<span ng-repeat="goal in player.goalEvents">
+									<img ng-src="{{getEventImage(goal)}}" class="playerEvents"></img>
+									{{goal.minute}}'
+								</span>
+								<span ng-repeat="card in player.cardEvents">
+									<img ng-src="{{getEventImage(card)}}" class="playerEvents"></img>
+									{{card.minute}}'
+								</span>
+								<span ng-repeat="substitution in player.substitutionEvents">
+									<img ng-src="{{getEventImage(substitution)}}" class="playerEvents"></img>
+									{{substitution.minute}}'
+								</span>
+							</td>
 							<td></td>
 							<td>{{awayStarters[$index].playerName}}</td>
-							<td class="text-right"># {{awayStarters[$index].shirtNumber}}</td>
+							<td class="text-right">
+								<span ng-repeat="goal in awayStarters[$index].goalEvents">
+									<img ng-src="{{getEventImage(goal)}}" class="playerEvents"></img>
+									{{goal.minute}}'
+								</span>
+								<span ng-repeat="card in awayStarters[$index].cardEvents">
+									<img ng-src="{{getEventImage(card)}}" class="playerEvents"></img>
+									{{card.minute}}'
+								</span>
+								<span ng-repeat="substitution in awayStarters[$index].substitutionEvents">
+									<img ng-src="{{getEventImage(substitution)}}" class="playerEvents"></img>
+									{{substitution.minute}}'
+								</span>
+							</td>
 						</tr>
 					</tbody>
 				</table>
 				<table class="table" id="matchDetialPlayersTable">
 					<thead>
 						<tr>
-							<th colspan="2" style="width: 40%"></th>
-							<th class="text-center">Cserepad</th>
-							<th colspan="2" style="width: 40%"></th>
+							<th colspan="5" class="text-center">Cserepad</th>
+						</tr>
+						<tr>
+							<th colspan="2" style="width: 49%"></th>
+							<th style="width: 2%"></th>
+							<th colspan="2" style="width: 49%"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="player in homeSubstitutions">
-							<td># {{player.shirtNumber}}</td>
-							<td class="text-right">{{player.playerName}}</td>
+							<td>{{player.playerName}}</td>
+							<td>
+								<span ng-repeat="goal in player.goalEvents">
+									<img ng-src="{{getEventImage(goal)}}" class="playerEvents"></img>
+									{{goal.minute}}'
+								</span>
+								<span ng-repeat="card in player.cardEvents">
+									<img ng-src="{{getEventImage(card)}}" class="playerEvents"></img>
+									{{card.minute}}'
+								</span>
+								<span ng-repeat="substitution in player.substitutionEvents">
+									<img ng-src="{{getEventImage(substitution)}}" class="playerEvents"></img>
+									{{substitution.minute}}'
+								</span>
+							</td>
 							<td></td>
 							<td>{{awaySubstitutions[$index].playerName}}</td>
-							<td class="text-right"># {{awaySubstitutions[$index].shirtNumber}}</td>
+							<td class="text-right">
+								<span ng-repeat="goal in awaySubstitutions[$index].goalEvents">
+									<img ng-src="{{getEventImage(goal)}}" class="playerEvents"></img>
+									{{goal.minute}}'
+								</span>
+								<span ng-repeat="card in awaySubstitutions[$index].cardEvents">
+									<img ng-src="{{getEventImage(card)}}" class="playerEvents"></img>
+									{{card.minute}}'
+								</span>
+								<span ng-repeat="substitution in awaySubstitutions[$index].substitutionEvents">
+									<img ng-src="{{getEventImage(substitution)}}" class="playerEvents"></img>
+									{{substitution.minute}}'
+								</span>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -50,65 +113,38 @@
 		</div>
 	</div>
 </div>
-<div class="container col-md-4">
-	<div class="container col-md-12 clubMainContainer">
-		<div class="panel">
-			<div class="panel-body">
-				<div class="row">
-					<div class="panel panel-default" style="border: none">
-						<div class="panel-heading">
-							<h3 class="panel-title">Meccs adatok</h3>
-						</div>
-						<div class="panel-body">
-							<dl class="dl-horizontal matchDetails">
-								<dt>Bajnokság</dt>
-								<dd>{{match.competitionName}}</dd>
-								<dt>Forduló</dt>
-								<dd>{{match.index}}.</dd>
-								<dt>Dátum</dt>
-								<dd>{{match.matchDate}}</dd>
-								<dt>Jatekvezetok</dt>
-								<dd>Kiss pista, Halmi Gabor, Gipsz Jakab</dd>
-								<dt>Helyszin</dt>
-								<dd>4969, Vámosoroszi Andy Endre út 1/17</dd>
-							</dl>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="panel panel-default" style="border: none">
-						<div class="panel-heading">
-							<h3 class="panel-title">Statisztika</h3>
-						</div>
-						<div class="panel-body">
-							<div class="col-md-3 text-center">
-								<img data-src="static/images/picto/goal.png" alt="Crest picture" src="../../../../static/images/picto/fans.png" data-holder-rendered="true"
-									style="width: 50px; height: 50px;"
-								>
-								<h2 class="text-center">150</h2>
-							</div>
-							<div class="col-md-3 text-center">
-								<img data-src="static/images/picto/red_card.png" alt="Crest picture" src="../../../../static/images/picto/red_card.png"
-									data-holder-rendered="true" style="width: 50px; height: 50px;"
-								>
-								<h2 class="text-center text-danger">{{match.detailes.totalRedCardAmount}}</h2>
-							</div>
-							<div class="col-md-3 text-center">
-								<img data-src="static/images/picto/yellow_card.png" alt="Crest picture" src="../../../../static/images/picto/yellow_card.png"
-									data-holder-rendered="true" style="width: 50px; height: 50px;"
-								>
-								<h2 class="text-center text-warning">{{match.detailes.totalYellowCardAmount}}</h2>
-							</div>
-							<div class="col-md-3 text-center">
-								<img data-src="static/images/picto/goal.png" alt="Crest picture" src="../../../../static/images/picto/goal.png" data-holder-rendered="true"
-									style="width: 50px; height: 50px;"
-								>
-								<h2 class="text-center">{{match.homeGoalAmount + match.awayGoalAmount}}</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<div class="container col-md-3">
+	<div class="container col-md-12 clubMainContainer" style="padding: 10px;">
+		<dl class="dl-horizontal matchDetails">
+			<dt></dt>
+			<dd>{{match.competitionName}}</dd>
+			<dt></dt>
+			<dd>{{match.index}}.</dd>
+			<dt><i class="glyphicon glyphicon-time"></i></dt>
+			<dd>{{match.matchDate}}</dd>
+			<dt></dt>
+			<dd>Kiss pista, Halmi Gabor, Gipsz Jakab</dd>
+			<dt><i class="glyphicon glyphicon-home"></i></dt>
+			<dd>4969, Vámosoroszi Andy Endre út 1/17</dd>
+		</dl>
 	</div>
 </div>
+<!-- <div class="container col-md-3"> -->
+<!-- 	<div class="container col-md-12 clubMainContainer" style="padding: 10px;"> -->
+<!-- 		<div class="col-md-6 text-center"> -->
+<!-- 			<img data-src="static/images/picto/fans.png" alt="Fans" src="../../../../static/images/picto/fans.png" data-holder-rendered="true" -->
+<!-- 				class="img-responsive"> -->
+<!-- 			<h2 class="text-center">4132</h2> -->
+<!-- 		</div> -->
+<!-- 		<div class="col-md-4 text-center"> -->
+<!-- 			<img data-src="static/images/picto/red_card.png" alt="Red card" src="../../../../static/images/picto/red_card.png" data-holder-rendered="true" -->
+<!-- 				class="img-responsive"> -->
+<!-- 			<h2 class="text-center text-danger">{{match.detailes.totalRedCardAmount}}</h2> -->
+<!-- 		</div> -->
+<!-- 		<div class="col-md-4 text-center"> -->
+<!-- 			<img data-src="static/images/picto/yellow_card.png" alt="Yellow card" src="../../../../static/images/picto/yellow_card.png" -->
+<!-- 				data-holder-rendered="true" class="img-responsive"> -->
+<!-- 			<h2 class="text-center text-warning">{{match.detailes.totalYellowCardAmount}}</h2> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->

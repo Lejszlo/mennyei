@@ -13,11 +13,17 @@ public class PlayerMatchStatisticData {
 	
 	private int scoredGoalAmount;
 	
+	private int scoredOwnGoalAmount;
+	
 	private int playedMinute;
+	
+	private int totalMatch;
 	
 	private int substitutionIn;
 	
 	private int substitutionOut;
 	
-	private boolean starter;
+	private int starter;
+	
+	private int subtitution;
 }

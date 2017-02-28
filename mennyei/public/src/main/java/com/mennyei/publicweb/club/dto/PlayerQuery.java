@@ -1,5 +1,7 @@
 package com.mennyei.publicweb.club.dto;
 
+import java.util.Map;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -27,4 +29,5 @@ public class PlayerQuery {
     
     private String nationality;
     
+    private Map<String, PlayerMatchStatisticData> playerMatchStatisticDatas;
 }

@@ -218,7 +218,7 @@ public class FillDatabase {
 			
 			for (String awayPlayer : awayPlayers) {
 				int shirtNumber = new Random().nextInt(99);
-				if(homePlayers.indexOf(awayPlayer) >= 11) {
+				if(awayPlayers.indexOf(awayPlayer) >= 11) {
 					awayLineUps.add(LineUp.substitution(awayPlayer, shirtNumber).build());
 					continue;
 				}
@@ -232,21 +232,32 @@ public class FillDatabase {
 	private void fillTurnWithRandomEvents(List<EntityWithIdAndVersion<MatchAggregator>> matchWithIds) throws InterruptedException, ExecutionException {
 		for (EntityWithIdAndVersion<MatchAggregator> matchWithId : matchWithIds) {
 			MatchInfo matchInfo = matchWithId.getAggregate().getMatchInfo();
-			List<MatchEvent> homeEvents = randomGoalEvents(matchInfo.getHomeClubId());
-			homeEvents.addAll(randomYellowCardEvents(matchInfo.getHomeClubId()));
-			homeEvents.addAll(randomRedCardEvents(matchInfo.getHomeClubId()));
+			List<MatchEvent> homeEvents = new ArrayList<>(); 
+			List<GoalEvent> randomGoalEventsHome = randomGoalEvents(matchInfo.getHomeClubId());
+			List<CardEvent> randomYellowCardEventsHome = randomYellowCardEvents(matchInfo.getHomeClubId());
+			List<CardEvent> randomRedCardEventsHome = randomRedCardEvents(matchInfo.getHomeClubId());
 			
-			List<MatchEvent> awayEvents = randomGoalEvents(matchInfo.getAwayClubId());
-			awayEvents.addAll(randomYellowCardEvents(matchInfo.getAwayClubId()));
-			awayEvents.addAll(randomRedCardEvents(matchInfo.getAwayClubId()));
+			homeEvents.addAll(randomGoalEventsHome);
+			homeEvents.addAll(randomYellowCardEventsHome);
+			homeEvents.addAll(randomRedCardEventsHome);
+			
+			
+			List<MatchEvent> awayEvents = new ArrayList<>();
+			List<GoalEvent> randomGoalEvents = randomGoalEvents(matchInfo.getAwayClubId());
+			List<CardEvent> randomYellowCardEvents = randomYellowCardEvents(matchInfo.getAwayClubId());
+			List<CardEvent> randomRedCardEvents = randomRedCardEvents(matchInfo.getAwayClubId());
+			
+			awayEvents.addAll(randomGoalEvents);
+			awayEvents.addAll(randomYellowCardEvents);
+			awayEvents.addAll(randomRedCardEvents);
 			
 			matchService.playMatch(matchWithId.getEntityId(), homeEvents, awayEvents).get();
 		}
 	}
 	
-	private List<MatchEvent> randomGoalEvents(String clubId) {
+	private List<GoalEvent> randomGoalEvents(String clubId) {
 		int goalAmount = new Random().nextInt(4);
-		List<MatchEvent> goals = new ArrayList<>();
+		List<GoalEvent> goals = new ArrayList<>();
 		for (int i = 0; i < goalAmount; i++) {
 			int playerIndex = new Random().nextInt(16);
 			int minute = new Random().nextInt(90);
@@ -255,9 +266,9 @@ public class FillDatabase {
 		return goals;
 	}
 	
-	private List<MatchEvent> randomYellowCardEvents(String clubId) {
+	private List<CardEvent> randomYellowCardEvents(String clubId) {
 		int eventAmount = new Random().nextInt(4);
-		List<MatchEvent> cards = new ArrayList<>();
+		List<CardEvent> cards = new ArrayList<>();
 		for (int i = 0; i < eventAmount; i++) {
 			int playerIndex = new Random().nextInt(16);
 			int minute = new Random().nextInt(90);
@@ -266,9 +277,9 @@ public class FillDatabase {
 		return cards;
 	}
 	
-	private List<MatchEvent> randomRedCardEvents(String clubId) {
-		int eventAmount = new Random().nextInt(1);
-		List<MatchEvent> cards = new ArrayList<>();
+	private List<CardEvent> randomRedCardEvents(String clubId) {
+		int eventAmount = new Random().nextInt(2);
+		List<CardEvent> cards = new ArrayList<>();
 		for (int i = 0; i < eventAmount; i++) {
 			int playerIndex = new Random().nextInt(16);
 			int minute = new Random().nextInt(90);

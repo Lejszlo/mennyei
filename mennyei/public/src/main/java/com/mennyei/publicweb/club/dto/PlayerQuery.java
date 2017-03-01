@@ -1,5 +1,6 @@
 package com.mennyei.publicweb.club.dto;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.data.annotation.Id;
@@ -7,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Singular;
 
 /**
  * Created by lejsz on 2016. 11. 22..
@@ -29,5 +31,6 @@ public class PlayerQuery {
     
     private String nationality;
     
-    private Map<String, PlayerMatchStatisticData> playerMatchStatisticDatas;
+    @Singular
+    private Map<String, PlayerMatchStatisticData> playerMatchStatisticDatas = new HashMap<>();
 }

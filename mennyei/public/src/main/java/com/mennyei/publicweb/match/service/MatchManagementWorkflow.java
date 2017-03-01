@@ -11,6 +11,7 @@ import com.mennyei.core.match.event.MatchAdded;
 import com.mennyei.core.match.event.MatchPlayed;
 import com.mennyei.core.match.event.MatchSet;
 import com.mennyei.publicweb.club.dto.ClubQuery;
+import com.mennyei.publicweb.club.dto.PlayerQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.club.infrastructure.PlayerQueryMongoRepository;
 import com.mennyei.publicweb.club.service.PlayerMatchStatisticService;
@@ -77,11 +78,14 @@ public class MatchManagementWorkflow {
 		LineUpQuery lineUpQuery = new LineUpQuery(); 
 		lineUpQuery.setLineUpType(lineUp.getLineUpType());
 		lineUpQuery.setShirtNumber(lineUp.getShirtNumber());
-		lineUpQuery.setPlayerQuery(playerQueryMongoRepository.findOne(lineUp.getPlayerId()));
+		PlayerQuery playerQuery = playerQueryMongoRepository.findOne(lineUp.getPlayerId());
+		playerQuery.setNumber(lineUp.getShirtNumber());
+		playerQueryMongoRepository.save(playerQuery);
+		lineUpQuery.setPlayerQuery(playerQuery);
 		return lineUpQuery;
 	}
     
-    @EventHandlerMethod
+	@EventHandlerMethod
     public void matchPlayed(DispatchedEvent<MatchPlayed> dispatchedEvent) {
     	MatchPlayed matchPlayed = dispatchedEvent.getEvent();
         String matchId = dispatchedEvent.getEntityId();

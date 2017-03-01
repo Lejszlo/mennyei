@@ -43,7 +43,7 @@ public class MatchDetailesResourceAssemblerSupport extends ResourceAssemblerSupp
 		lineUpResource.setShirtNumber(lineUpQuery.getShirtNumber());
 		lineUpResource.setGoalEvents(matchQuery.getMatchResultDetailes().getGoalEventsForPlayer(playerId));
 		lineUpResource.setCardEvents(matchQuery.getMatchResultDetailes().getCardEventsForPlayer(playerId));
-		lineUpResource.setSubstitutionEvents(matchQuery.getMatchResultDetailes().getSubstituteEventsForPlayer(playerId));
+		lineUpResource.setSubstitutionEvents(matchQuery.getMatchResultDetailes().getSubstitutionEventForPlayer(playerId));
 		return lineUpResource;
 	}
 

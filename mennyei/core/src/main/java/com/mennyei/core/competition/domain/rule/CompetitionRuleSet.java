@@ -37,4 +37,14 @@ public class CompetitionRuleSet {
 	
 	private int redCardsBan = 1;
 	
+	private int oneHalfMinutes = 45;
+	
+	private boolean hasOverTime;
+	
+	private int numberOfHalfs = 2;
+	
+	private int oneHalfOverTimeMinutes = 15;
+	
+	private boolean hasPenalties;
+	
 }

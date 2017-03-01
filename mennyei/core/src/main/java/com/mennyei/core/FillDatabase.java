@@ -27,6 +27,7 @@ import com.mennyei.core.match.domain.MatchInfo;
 import com.mennyei.core.match.domain.event.CardEvent;
 import com.mennyei.core.match.domain.event.GoalEvent;
 import com.mennyei.core.match.domain.event.MatchEvent;
+import com.mennyei.core.match.domain.event.SubstitutionEvent;
 import com.mennyei.core.match.domain.event.lineup.LineUp;
 import com.mennyei.core.match.service.MatchService;
 import com.mennyei.core.player.domain.Player;
@@ -170,9 +171,9 @@ public class FillDatabase {
 				turn.getMatches().add(matchWithId.getEntityId());
 			}
 			
-			fillTurnWithRandomEvents(matchWithIds);
-			
 			fillPreMatches(matchWithIds);
+			
+			fillTurnWithRandomEvents(matchWithIds);
 			
 			Turn reTurn = Turn.builder(turn.getIndex() + (clubIds.size() - 1)).build();
 			new ArrayList<>(matchInfos).stream().forEach(match -> {
@@ -236,20 +237,23 @@ public class FillDatabase {
 			List<GoalEvent> randomGoalEventsHome = randomGoalEvents(matchInfo.getHomeClubId());
 			List<CardEvent> randomYellowCardEventsHome = randomYellowCardEvents(matchInfo.getHomeClubId());
 			List<CardEvent> randomRedCardEventsHome = randomRedCardEvents(matchInfo.getHomeClubId());
+			List<SubstitutionEvent> randomSubstutitionEventsHome = randomSubstutitionEvents(matchInfo.getAwayClubId());
 			
 			homeEvents.addAll(randomGoalEventsHome);
 			homeEvents.addAll(randomYellowCardEventsHome);
 			homeEvents.addAll(randomRedCardEventsHome);
-			
+			homeEvents.addAll(randomSubstutitionEventsHome);
 			
 			List<MatchEvent> awayEvents = new ArrayList<>();
 			List<GoalEvent> randomGoalEvents = randomGoalEvents(matchInfo.getAwayClubId());
 			List<CardEvent> randomYellowCardEvents = randomYellowCardEvents(matchInfo.getAwayClubId());
 			List<CardEvent> randomRedCardEvents = randomRedCardEvents(matchInfo.getAwayClubId());
+			List<SubstitutionEvent> randomSubstutitionEvents = randomSubstutitionEvents(matchInfo.getAwayClubId());
 			
 			awayEvents.addAll(randomGoalEvents);
 			awayEvents.addAll(randomYellowCardEvents);
 			awayEvents.addAll(randomRedCardEvents);
+			awayEvents.addAll(randomSubstutitionEvents);
 			
 			matchService.playMatch(matchWithId.getEntityId(), homeEvents, awayEvents).get();
 		}
@@ -286,6 +290,18 @@ public class FillDatabase {
 			cards.add(CardEvent.redCardOf(clubPlayers.get(clubId).get(playerIndex), minute));
 		}
 		return cards;
+	}
+	
+	private List<SubstitutionEvent> randomSubstutitionEvents(String clubId) {
+		int eventAmount = new Random().nextInt(3);
+		List<SubstitutionEvent> substitutionEvents = new ArrayList<>();
+		for (int i = 0; i < eventAmount; i++) {
+			int playerInIndex = new Random().nextInt(11);
+			int playerOutIndex = new Random().nextInt(5) + 11;
+			int minute = new Random().nextInt(90);
+			substitutionEvents.add(SubstitutionEvent.substutitionOf(clubPlayers.get(clubId).get(playerInIndex), clubPlayers.get(clubId).get(playerOutIndex), minute));
+		}
+		return substitutionEvents;
 	}
 	
 	private void transferPlayers(String clubId) throws ExecutionException, InterruptedException {

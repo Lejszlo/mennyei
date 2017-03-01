@@ -149,3 +149,6 @@ img.playerEvents {
 	height: 15px;
 }
 
+.playerTable > tbody > tr > td {
+	vertical-align: middle !important;
+}

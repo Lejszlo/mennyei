@@ -71,6 +71,11 @@ public class MatchResultDetailes {
 		return filterEvents(GoalEvent.class, MatchEventType.GOAL, MatchEventType.OWN_GOAL).stream()
 				.filter(event -> event.getScorerId().equals(playerId)).collect(Collectors.toList());
 	}
+	
+	public List<GoalEvent> getGoalEventsForPlayer(String playerId, MatchEventType matchEventType) {
+		return filterEvents(GoalEvent.class, matchEventType).stream()
+				.filter(event -> event.getScorerId().equals(playerId)).collect(Collectors.toList());
+	}
 
 	public List<CardEvent> getCardEventsForPlayer(String playerId) {
 		return filterEvents(CardEvent.class, MatchEventType.YELLOW_CARD, MatchEventType.RED_CARD).stream()
@@ -81,10 +86,20 @@ public class MatchResultDetailes {
 		return filterEvents(CardEvent.class, matchEventType).stream()
 				.filter(event -> event.getSuffererId().equals(playerId)).collect(Collectors.toList());
 	}
-
-	public List<SubstitutionEvent> getSubstituteEventsForPlayer(String playerId) {
+	
+	public List<SubstitutionEvent> getSubstitutionEventForPlayer(String playerId) {
 		return filterEvents(SubstitutionEvent.class, MatchEventType.SUBSTITUTION).stream()
 				.filter(event -> event.getInner().equals(playerId) || event.getOuter().equals(playerId)).collect(Collectors.toList());
+	}
+
+	public List<SubstitutionEvent> getSubstitutionInEventForPlayer(String playerId) {
+		return filterEvents(SubstitutionEvent.class, MatchEventType.SUBSTITUTION).stream()
+				.filter(event -> event.getInner().equals(playerId)).collect(Collectors.toList());
+	}
+	
+	public List<SubstitutionEvent> getSubstitutionOutEventForPlayer(String playerId) {
+		return filterEvents(SubstitutionEvent.class, MatchEventType.SUBSTITUTION).stream()
+				.filter(event -> event.getOuter().equals(playerId)).collect(Collectors.toList());
 	}
 
 	public <T extends MatchEvent> List<T> filterEvents(Class<T> eventClass, MatchEventType... eventTypes) {

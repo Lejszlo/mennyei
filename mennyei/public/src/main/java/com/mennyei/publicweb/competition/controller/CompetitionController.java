@@ -48,7 +48,7 @@ public class CompetitionController {
 		return new ResponseEntity<>(findCompetition.orElseThrow(() -> new CompetitionNotFoundException(competitionId)), HttpStatus.OK);
 	}
 
-	@GetMapping("/{competitionId}/{stageName}/table")
+	@GetMapping("/{competitionId}/table")
 	public TableQuery getCompetitionTable(@PathVariable("competitionId") String competitionId, @PathVariable("stageName") String stageName) {
 		return competitionTableService.getCompetationTable(competitionId, "Kelet Magyarország");
 	}

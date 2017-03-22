@@ -1,54 +1,72 @@
-<div class="row">
-	<div class="panel panel-primary" style="border: 0px;">
-		<div class="panel-body">
-
-			<ul class="nav nav-tabs">
-				<li role="presentation" class="active"><a href="#first" data-toggle="tab" aria-expanded="true"><strong>{{competitionName}}</strong></a></li>
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="" aria-expanded="false"><strong>Magyar Kupa</strong><span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="" data-toggle="tab">1. fordulo</a></li>
-						<li><a href="" data-toggle="tab">2. fordulo</a></li>
-					</ul>
-				</li>
-			</ul>
-			<div class="tab-content">
-				<div class="tab-pane fade active in" id="first">
-					<table class="table table-hover table-responsive">
-						<thead>
-							<tr>
-								<th class="text-center" style="width: 50px">#</th>
-								<th>Csapat</th>
-								<th>M</th>
-								<th>Gy</th>
-								<th>D</th>
-								<th>V</th>
-								<th>LG</th>
-								<th>KG</th>
-								<th>GK</th>
-								<th>P</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-class='calculatePositionHighlights($index)' ng-repeat="club in clubs | orderBy : '-point'">
-								<td class="text-center"><strong>{{$index + 1}}.</strong></td>
-								<td><strong>{{club.clubName}}</strong></td>
-								<td>{{club.playedMatches}}</td>
-								<td>{{club.win}}</td>
-								<td>{{club.draw}}</td>
-								<td>{{club.lose}}</td>
-								<td>{{club.scoredGoals}}</td>
-								<td>{{club.concerdGoals}}</td>
-								<td>{{club.scoredGoals - club.concerdGoals}}</td>
-								<td><strong>{{club.point}}</strong></td>
-							</tr>
-						</tbody>
-					</table>
+<div class="container col-md-12">
+	<div class="container col-md-12 clubMainContainer">
+		<div class="panel panel-primary" style="border: 0px;">
+			<div class="panel-body">
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active">
+						<a href="#first" data-toggle="tab" aria-expanded="true">
+							<strong>{{competitionName}}</strong>
+						</a>
+					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="" aria-expanded="false">
+							<strong>Magyar Kupa</strong>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="" data-toggle="tab">1. fordulo</a>
+							</li>
+							<li>
+								<a href="" data-toggle="tab">2. fordulo</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane fade active in" id="first">
+						<table class="table table-hover table-responsive">
+							<thead>
+								<tr>
+									<th class="text-center" style="width: 50px">#</th>
+									<th>Csapat</th>
+									<th>M</th>
+									<th>Gy</th>
+									<th>D</th>
+									<th>V</th>
+									<th>LG</th>
+									<th>KG</th>
+									<th>GK</th>
+									<th>P</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-class='calculatePositionHighlights($index)' ng-repeat="club in clubs | orderBy : '-point'">
+									<td class="text-center">
+										<strong>{{$index + 1}}.</strong>
+									</td>
+									<td>
+										<strong>{{club.clubName}}</strong>
+									</td>
+									<td>{{club.playedMatches}}</td>
+									<td>{{club.win}}</td>
+									<td>{{club.draw}}</td>
+									<td>{{club.lose}}</td>
+									<td>{{club.scoredGoals}}</td>
+									<td>{{club.concerdGoals}}</td>
+									<td>{{club.scoredGoals - club.concerdGoals}}</td>
+									<td>
+										<strong>{{club.point}}</strong>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="tab-pane fade in" id="second"></div>
 				</div>
-				<div class="tab-pane fade in" id="second"></div>
 			</div>
-		</div>
-		<div class="panel-footer">
-			M: merkozesek, Gy: Gyozelem, D: Dontetlen, V: Vereseg, LG: Lott Golok, KG: Kapott Golok, GK: GolKulonbseg, P: pont
+			<div class="panel-footer">M: merkozesek, Gy: Gyozelem, D: Dontetlen, V: Vereseg, LG: Lott Golok, KG: Kapott Golok, GK: GolKulonbseg, P: pont
+			</div>
 		</div>
 	</div>
 </div>

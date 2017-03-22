@@ -19,9 +19,7 @@
 					<tbody>
 						<tr ng-repeat="player in players" ng-click="selectPlayer(player)">
 							<td class="text-center">
-								<div style="background: url(static/images/jersey.png) no-repeat center center; background-size: 100% 100%; width: 45px; height: 45px;">
-									<div style="padding-top: 10px"><strong>{{player.number}}</strong></div>
-								</div>
+								<div style="padding-top: 10px"><strong>#{{player.number}}</strong></div>
 							</td>
 							<td>
 								<strong>{{player.name}}</strong>
@@ -40,30 +38,3 @@
 		</div>
 	</div>
 </div>
-<!-- <div class="container col-md-3"> -->
-<!-- 	<div class="container col-md-12 clubMainContainer"> -->
-<!-- 		<div style="background: url(static/images/jersey.png) no-repeat center center; background-size: 100% 100%; width: 150px; height: 150px;"> -->
-<!-- 						<div style="font-size: 12px; font-weight: bold; margin-top: 35px">{{selectedPlayer.name}}</div> -->
-<!-- 			 			<div style="font-size: 30px">{{selectedPlayer.number}}</div> -->
-<!-- 		</div> -->
-<!-- 		<hr /> -->
-<!-- 		<div> -->
-<!-- 			<strong>Jatszott percek</strong> -->
-<!-- 			<div class="progress"> -->
-<!-- 				<div class="progress-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="width: 88%;">1552 perc</div> -->
-<!-- 			</div> -->
-<!-- 			<strong>Golok / Meccs</strong> -->
-<!-- 			<div class="progress"> -->
-<!-- 				<div class="progress-bar" style="width: 70%">19 / 25</div> -->
-<!-- 			</div> -->
-<!-- 			<strong>Kezdo / Csere</strong> -->
-<!-- 			<div class="progress"> -->
-<!-- 				<div class="progress-bar" style="width: 90%">21 / 25</div> -->
-<!-- 			</div> -->
-<!-- 			<strong>Sarga / Piros</strong> -->
-<!-- 			<div class="progress"> -->
-<!-- 				<div class="progress-bar" style="width: 70%">4 / 1</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </div> -->

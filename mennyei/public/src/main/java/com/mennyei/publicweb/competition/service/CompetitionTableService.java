@@ -50,9 +50,7 @@ public class CompetitionTableService {
 	}
 
 	public TableQuery getCompetationTable(String competitionId, String stageName) {
-		// competitionMongoRepository.findOne(competitionId);
-		CompetitionQuery competitionQuery = competitionMongoRepository.findAll().get(0);
-		Optional<Stage> stage = competitionQuery.getStages().stream().filter(s -> s.getName().equals(stageName)).findFirst();
+		CompetitionQuery competitionQuery = competitionMongoRepository.findOne(competitionId);
 		return tableMongoRepository.findByCompetitionIdAndStageName(competitionQuery.getId(), stageName);
 	}
 

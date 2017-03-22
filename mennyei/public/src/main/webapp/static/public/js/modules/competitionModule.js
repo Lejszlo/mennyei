@@ -1,6 +1,6 @@
 var competitionModule = angular.module('competitionModule', []);
 
-competitionModule.controller('tableCtrl', function($scope, $http) {
+competitionModule.controller('tableCtrl', function($scope, $http, selectedClub) {
 	$scope.calculatePositionHighlights = function(index) {
 		if(index < $scope.promotion) {
 			return "success";
@@ -10,10 +10,8 @@ competitionModule.controller('tableCtrl', function($scope, $http) {
 		}
 	}
 	
-	$http.get("/competition/alma/alma/table").success(function(data) {
-		$scope.clubs = data.rows;
-		$scope.competitionName = data.competitionName;
-		$scope.relegation = data.relegation;
-		$scope.promotion = data.promotion;
+	SpringDataRestAdapter.process(selectedClub, 'matches').then(function (processedResponse) {
+		$scope.club = processedResponse;
+		$scope.matches = processedResponse.matches._embeddedItems;
 	});
 });

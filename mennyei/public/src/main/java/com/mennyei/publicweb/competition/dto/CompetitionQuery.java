@@ -1,6 +1,5 @@
 package com.mennyei.publicweb.competition.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -10,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mennyei.core.competition.domain.CompetitionInfo;
 import com.mennyei.core.competition.domain.rule.CompetitionRuleSet;
-import com.mennyei.core.competition.domain.season.Stage;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 
 import lombok.Builder;
@@ -29,7 +27,8 @@ public class CompetitionQuery {
 	@Singular
 	private Set<ClubQuery> clubs;
 	
-	private List<Stage> stages = new ArrayList<>();
+	@Singular
+	private List<StageQuery> stages;
 	
 	private CompetitionRuleSet competitionRuleSet;
 	

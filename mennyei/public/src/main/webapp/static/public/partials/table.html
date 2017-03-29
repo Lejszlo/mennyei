@@ -3,24 +3,10 @@
 		<div class="panel panel-primary" style="border: 0px;">
 			<div class="panel-body">
 				<ul class="nav nav-tabs">
-					<li role="presentation" class="active">
+					<li role="presentation" class="active" ng-repeat="competition in competitions">
 						<a href="#first" data-toggle="tab" aria-expanded="true">
-							<strong>{{competitionName}}</strong>
+							<strong>{{competition.competitionInfo.name}}</strong>
 						</a>
-					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="" aria-expanded="false">
-							<strong>Magyar Kupa</strong>
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li>
-								<a href="" data-toggle="tab">1. fordulo</a>
-							</li>
-							<li>
-								<a href="" data-toggle="tab">2. fordulo</a>
-							</li>
-						</ul>
 					</li>
 				</ul>
 				<div class="tab-content">
@@ -41,22 +27,22 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-class='calculatePositionHighlights($index)' ng-repeat="club in clubs | orderBy : '-point'">
+								<tr ng-class='calculatePositionHighlights($index)' ng-repeat="tableRow in tables | orderBy : '-point'">
 									<td class="text-center">
 										<strong>{{$index + 1}}.</strong>
 									</td>
 									<td>
-										<strong>{{club.clubName}}</strong>
+										<strong>{{tableRow.club.name}}</strong>
 									</td>
-									<td>{{club.playedMatches}}</td>
-									<td>{{club.win}}</td>
-									<td>{{club.draw}}</td>
-									<td>{{club.lose}}</td>
-									<td>{{club.scoredGoals}}</td>
-									<td>{{club.concerdGoals}}</td>
-									<td>{{club.scoredGoals - club.concerdGoals}}</td>
+									<td>{{tableRow.playedMatches}}</td>
+									<td>{{tableRow.win}}</td>
+									<td>{{tableRow.draw}}</td>
+									<td>{{tableRow.lose}}</td>
+									<td>{{tableRow.scoredGoals}}</td>
+									<td>{{tableRow.concerdGoals}}</td>
+									<td>{{tableRow.scoredGoals - tableRow.concerdGoals}}</td>
 									<td>
-										<strong>{{club.point}}</strong>
+										<strong>{{tableRow.point}}</strong>
 									</td>
 								</tr>
 							</tbody>

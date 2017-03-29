@@ -1,6 +1,5 @@
 package com.mennyei.publicweb.competition.service;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +12,6 @@ public class CompetitionMatchService {
 
 	@Autowired
 	private MatchQueryMongoRepository matchMongoRepository;
-
-	@Autowired
-	private ModelMapper modelMapper;
 
 	public MatchDetailesQuery getCompetationMatchDetailes(String matchId) {
 		MatchQuery matchQuery = matchMongoRepository.findOne(matchId);

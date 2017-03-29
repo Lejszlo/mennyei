@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.club.dto.PlayerQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
+import com.mennyei.publicweb.competition.controller.CompetitionController;
 import com.mennyei.publicweb.match.controller.MatchController;
 
 
@@ -31,6 +32,7 @@ public class ClubController {
 		Resource<ClubQuery> resource = new Resource<>(clubQuery);
 		resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(MatchController.class).byClub(clubQuery.getId())).withRel("matches"));
 		resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(ClubController.class).clubPlayers(clubQuery.getId())).withRel("players"));
+		resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(CompetitionController.class).getCompetitionsByClub(clubQuery.getId())).withRel("competitions"));
 		resource.add(ControllerLinkBuilder.linkTo(ClubController.class).withSelfRel());
 		return ResponseEntity.ok(resource);
 	}
@@ -41,5 +43,4 @@ public class ClubController {
 		Resources<PlayerQuery> resources = new Resources<>(clubQuery.getPlayers());
 		return ResponseEntity.ok(resources);
 	}
-	
 }

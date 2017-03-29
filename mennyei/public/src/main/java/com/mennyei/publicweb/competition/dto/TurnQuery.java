@@ -6,12 +6,14 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import com.mennyei.publicweb.match.dto.MatchQuery;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
 
-@Builder(builderMethodName="hiddenBuilder")
 @Data
+@Builder(builderMethodName="hiddenBuilder")
+@AllArgsConstructor
 public class TurnQuery implements Comparable<TurnQuery> {
 
 	private int index;

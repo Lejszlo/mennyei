@@ -16,7 +16,7 @@ import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.club.infrastructure.PlayerQueryMongoRepository;
 import com.mennyei.publicweb.club.service.PlayerMatchStatisticService;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
-import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
+import com.mennyei.publicweb.competition.infrastructure.CompetitionQueryMongoRepository;
 import com.mennyei.publicweb.competition.service.CompetitionTableService;
 import com.mennyei.publicweb.match.dto.LineUpQuery;
 import com.mennyei.publicweb.match.dto.MatchQuery;
@@ -40,7 +40,7 @@ public class MatchManagementWorkflow {
 	private CompetitionTableService competitionTableService;
 	
 	@Autowired
-	private CompetitionMongoRepository competitionMongoRepository;
+	private CompetitionQueryMongoRepository competitionMongoRepository;
 	
 	@Autowired
 	private PlayerQueryMongoRepository playerQueryMongoRepository;

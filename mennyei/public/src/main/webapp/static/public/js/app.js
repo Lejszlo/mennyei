@@ -15,7 +15,7 @@ app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $lo
 		activetab: 'table'
 	}).when('/matches', {
 		templateUrl : 'static/public/partials/matches.html',
-		controller : 'nextMatchesCtrl',
+		controller : 'matchesCtrl',
 		activetab: 'matches'
 	}).when('/clubs/:clubsId', {
 		templateUrl : 'static/public/partials/club.html',

@@ -1,6 +1,6 @@
 var matchModule = angular.module('matchModule', []);
 
-matchModule.controller('nextMatchesCtrl', function ($scope, $http, $location, SpringDataRestAdapter, selectedClub, selectedMatch) {
+matchModule.controller('matchesCtrl', function ($scope, $http, $location, SpringDataRestAdapter, selectedClub, selectedMatch) {
 	SpringDataRestAdapter.process(selectedClub, 'matches').then(function (processedResponse) {
 		$scope.club = processedResponse;
 		$scope.matches = processedResponse.matches._embeddedItems;

@@ -1,9 +1,13 @@
 package com.mennyei.publicweb.competition.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+import com.mennyei.publicweb.competition.dto.table.TableQuery;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
@@ -11,13 +15,17 @@ import lombok.Singular;
 
 @Data
 @Builder(builderMethodName="hiddenBuilder")
+@AllArgsConstructor
 public class StageQuery {
 	
 	@NonNull
 	private String name;
 	
 	@Singular
-	private List<TurnQuery> turns = new ArrayList<>();
+	private List<TurnQuery> turns;
+	
+	@DBRef
+	private TableQuery tableQuery;
 	
 	public static StageQueryBuilder builder(String name) {
 		return hiddenBuilder().name(name);

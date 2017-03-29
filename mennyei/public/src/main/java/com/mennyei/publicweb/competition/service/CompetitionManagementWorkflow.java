@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,7 @@ import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.competition.dto.CompetitionQuery;
 import com.mennyei.publicweb.competition.dto.StageQuery;
 import com.mennyei.publicweb.competition.dto.TurnQuery;
-import com.mennyei.publicweb.competition.infrastructure.CompetitionMongoRepository;
+import com.mennyei.publicweb.competition.infrastructure.CompetitionQueryMongoRepository;
 import com.mennyei.publicweb.match.dto.MatchQuery;
 import com.mennyei.publicweb.match.infrastructure.MatchQueryMongoRepository;
 
@@ -32,7 +31,7 @@ import io.eventuate.EventSubscriber;
 public class CompetitionManagementWorkflow {
 
     @Autowired
-    private CompetitionMongoRepository competitionMongoRepository;
+    private CompetitionQueryMongoRepository competitionMongoRepository;
 
     @Autowired
     private ClubQueryMongoRepository clubMongoRepository;
@@ -43,17 +42,17 @@ public class CompetitionManagementWorkflow {
     @Autowired
     private MatchQueryMongoRepository matchQueryMongoRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
-    
     @EventHandlerMethod
     public void create(DispatchedEvent<CompetitionAdded> dispatchedEvent) {
         CompetitionAdded competitionAddedEvent = dispatchedEvent.getEvent();
         String competitionId = dispatchedEvent.getEntityId();
-        CompetitionQuery competitionQuery = CompetitionQuery.builder().id(competitionId).build();
-        modelMapper.map(competitionAddedEvent , competitionQuery);
-        competitionQuery.getStages().addAll(createStageQueries(competitionAddedEvent.getStages()));
-        competitionTableService.createTables(competitionAddedEvent.getStages(), competitionQuery);
+        CompetitionQuery competitionQuery = CompetitionQuery.builder()
+        		.id(competitionId)
+        		.competitionInfo(competitionAddedEvent.getCompetitionInfo())
+        		.competitionRuleSet(competitionAddedEvent.getCompetitionRuleSet())
+        		.stages(createStageQueries(competitionAddedEvent.getStages()))
+        		.build();
+        competitionTableService.createTables(competitionQuery);
         competitionMongoRepository.save(competitionQuery);
     }
 

@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mennyei.publicweb.club.dto.ClubQuery;
-import com.mennyei.publicweb.competition.dto.CompetitionQuery;
-import com.mennyei.publicweb.competition.dto.StageQuery;
+import com.mennyei.publicweb.competition.dto.competition.CompetitionQuery;
+import com.mennyei.publicweb.competition.dto.stage.StageQuery;
 import com.mennyei.publicweb.competition.dto.table.TableQuery;
 import com.mennyei.publicweb.competition.dto.table.TableRowQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionQueryMongoRepository;
 import com.mennyei.publicweb.competition.infrastructure.TableMongoRepository;
-import com.mennyei.publicweb.match.dto.MatchQuery;
+import com.mennyei.publicweb.match.dto.match.MatchQuery;
 
 @Service
 public class CompetitionTableService {

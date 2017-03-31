@@ -1,8 +1,10 @@
-package com.mennyei.publicweb.match.dto;
+package com.mennyei.publicweb.match.dto.detailes;
 
 import java.util.List;
 
 import org.springframework.hateoas.ResourceSupport;
+
+import com.mennyei.publicweb.match.dto.lineup.LineUpResource;
 
 import lombok.Data;
 import lombok.Singular;

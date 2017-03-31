@@ -1,4 +1,4 @@
-package com.mennyei.publicweb.competition.dto;
+package com.mennyei.publicweb.competition.dto.stage;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import com.mennyei.publicweb.competition.dto.table.TableQuery;
+import com.mennyei.publicweb.competition.dto.turn.TurnQuery;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -15,11 +15,11 @@ import com.mennyei.publicweb.club.dto.PlayerQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
 import com.mennyei.publicweb.club.infrastructure.PlayerQueryMongoRepository;
 import com.mennyei.publicweb.club.service.PlayerMatchStatisticService;
-import com.mennyei.publicweb.competition.dto.CompetitionQuery;
+import com.mennyei.publicweb.competition.dto.competition.CompetitionQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionQueryMongoRepository;
 import com.mennyei.publicweb.competition.service.CompetitionTableService;
-import com.mennyei.publicweb.match.dto.LineUpQuery;
-import com.mennyei.publicweb.match.dto.MatchQuery;
+import com.mennyei.publicweb.match.dto.lineup.LineUpQuery;
+import com.mennyei.publicweb.match.dto.match.MatchQuery;
 import com.mennyei.publicweb.match.infrastructure.MatchQueryMongoRepository;
 
 import io.eventuate.DispatchedEvent;

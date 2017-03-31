@@ -1,4 +1,4 @@
-package com.mennyei.publicweb.match.dto;
+package com.mennyei.publicweb.match.dto.match;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,8 @@ import com.mennyei.core.match.domain.MatchResult;
 import com.mennyei.core.match.domain.MatchResultDetailes;
 import com.mennyei.core.match.domain.WinnerType;
 import com.mennyei.publicweb.club.dto.ClubQuery;
-import com.mennyei.publicweb.competition.dto.CompetitionQuery;
+import com.mennyei.publicweb.competition.dto.competition.CompetitionQuery;
+import com.mennyei.publicweb.match.dto.lineup.LineUpQuery;
 
 import lombok.Builder;
 import lombok.Data;

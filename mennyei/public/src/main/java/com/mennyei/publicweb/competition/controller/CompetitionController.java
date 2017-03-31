@@ -15,15 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mennyei.core.FillDatabase;
-import com.mennyei.publicweb.competition.dto.CompetitionQuery;
-import com.mennyei.publicweb.competition.dto.CompetitionResource;
-import com.mennyei.publicweb.competition.dto.CompetitionResourceAssemblerSupport;
+import com.mennyei.publicweb.competition.dto.competition.CompetitionQuery;
+import com.mennyei.publicweb.competition.dto.competition.CompetitionResource;
+import com.mennyei.publicweb.competition.dto.competition.CompetitionResourceAssemblerSupport;
 import com.mennyei.publicweb.competition.dto.table.TableQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionNotFoundException;
-import com.mennyei.publicweb.competition.service.CompetitionMatchService;
 import com.mennyei.publicweb.competition.service.CompetitionQueryService;
 import com.mennyei.publicweb.competition.service.CompetitionTableService;
-import com.mennyei.publicweb.match.dto.MatchDetailesQuery;
 
 @RequestMapping("/competition/")
 @RestController
@@ -32,9 +30,6 @@ public class CompetitionController {
 	@Autowired
 	private CompetitionTableService competitionTableService;
 
-	@Autowired
-	private CompetitionMatchService competitionMatchService;
-	
 	@Autowired
 	private CompetitionQueryService competitionQueryService;
 
@@ -55,11 +50,6 @@ public class CompetitionController {
 		return ResponseEntity.ok(resource);
 	}
 
-	@GetMapping("/{matchId}")
-	public MatchDetailesQuery getCompetitionMatchDetails(@PathVariable("matchId") String matchId) {
-		return competitionMatchService.getCompetationMatchDetailes(matchId);
-	}
-	
 	@RequestMapping(value = "/{clubId}/related", method = RequestMethod.GET)
 	public ResponseEntity<Resources<Resource<CompetitionResource>>> getCompetitionsByClub(@PathVariable("clubId") String clubId) {
 		 List<CompetitionQuery> competitionQueries = competitionQueryService.findCompetitionsByClub(clubId);

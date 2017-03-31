@@ -15,11 +15,11 @@ import com.mennyei.core.competition.events.ClubRegistered;
 import com.mennyei.core.competition.events.CompetitionAdded;
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
-import com.mennyei.publicweb.competition.dto.CompetitionQuery;
-import com.mennyei.publicweb.competition.dto.StageQuery;
-import com.mennyei.publicweb.competition.dto.TurnQuery;
+import com.mennyei.publicweb.competition.dto.competition.CompetitionQuery;
+import com.mennyei.publicweb.competition.dto.stage.StageQuery;
+import com.mennyei.publicweb.competition.dto.turn.TurnQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionQueryMongoRepository;
-import com.mennyei.publicweb.match.dto.MatchQuery;
+import com.mennyei.publicweb.match.dto.match.MatchQuery;
 import com.mennyei.publicweb.match.infrastructure.MatchQueryMongoRepository;
 
 import io.eventuate.DispatchedEvent;

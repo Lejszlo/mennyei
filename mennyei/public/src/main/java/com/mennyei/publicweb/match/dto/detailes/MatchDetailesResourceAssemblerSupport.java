@@ -1,4 +1,4 @@
-package com.mennyei.publicweb.match.dto;
+package com.mennyei.publicweb.match.dto.detailes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +9,9 @@ import com.mennyei.core.match.domain.event.CardEvent;
 import com.mennyei.core.match.domain.event.MatchEventType;
 import com.mennyei.core.match.domain.event.lineup.LineUpType;
 import com.mennyei.publicweb.match.controller.MatchController;
+import com.mennyei.publicweb.match.dto.lineup.LineUpQuery;
+import com.mennyei.publicweb.match.dto.lineup.LineUpResource;
+import com.mennyei.publicweb.match.dto.match.MatchQuery;
 
 public class MatchDetailesResourceAssemblerSupport extends ResourceAssemblerSupport<MatchQuery, MatchDetailesResource> {
 

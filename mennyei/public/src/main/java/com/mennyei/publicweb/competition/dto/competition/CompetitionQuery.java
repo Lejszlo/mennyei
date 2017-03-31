@@ -1,4 +1,4 @@
-package com.mennyei.publicweb.competition.dto;
+package com.mennyei.publicweb.competition.dto.competition;
 
 import java.util.List;
 import java.util.Set;
@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.mennyei.core.competition.domain.CompetitionInfo;
 import com.mennyei.core.competition.domain.rule.CompetitionRuleSet;
 import com.mennyei.publicweb.club.dto.ClubQuery;
+import com.mennyei.publicweb.competition.dto.stage.StageQuery;
 
 import lombok.Builder;
 import lombok.Data;

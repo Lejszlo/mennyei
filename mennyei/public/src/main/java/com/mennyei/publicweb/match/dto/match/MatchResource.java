@@ -1,12 +1,14 @@
-package com.mennyei.publicweb.match.dto;
+package com.mennyei.publicweb.match.dto.match;
 
 import org.springframework.hateoas.ResourceSupport;
 
 import com.mennyei.core.match.domain.MatchResult;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class MatchResource extends ResourceSupport {
 
 	private MatchResult matchResult;

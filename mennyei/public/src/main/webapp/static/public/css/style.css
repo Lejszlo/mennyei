@@ -140,6 +140,14 @@ td.matchResult {
 	margin-left: 25px; 
 }
 
+.clubDetails > dt {
+	width: 50px;
+}
+
+.clubDetails > dd {
+	margin-left: 55px; 
+}
+
 .panel-title {
 	color: #3e3f3a !important;
 }

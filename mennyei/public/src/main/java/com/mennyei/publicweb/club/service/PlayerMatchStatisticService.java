@@ -13,8 +13,8 @@ import com.mennyei.core.match.domain.event.lineup.LineUpType;
 import com.mennyei.publicweb.club.dto.PlayerMatchStatisticData;
 import com.mennyei.publicweb.club.dto.PlayerQuery;
 import com.mennyei.publicweb.club.infrastructure.PlayerQueryMongoRepository;
-import com.mennyei.publicweb.match.dto.LineUpQuery;
-import com.mennyei.publicweb.match.dto.MatchQuery;
+import com.mennyei.publicweb.match.dto.lineup.LineUpQuery;
+import com.mennyei.publicweb.match.dto.match.MatchQuery;
 
 @Service
 public class PlayerMatchStatisticService {

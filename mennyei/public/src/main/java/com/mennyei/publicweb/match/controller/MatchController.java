@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mennyei.publicweb.match.dto.MatchDetailesResource;
-import com.mennyei.publicweb.match.dto.MatchResource;
-import com.mennyei.publicweb.match.dto.MatchResourceAssemblerSupport;
+import com.mennyei.publicweb.match.dto.detailes.MatchDetailesResource;
+import com.mennyei.publicweb.match.dto.match.MatchResource;
+import com.mennyei.publicweb.match.dto.match.MatchResourceAssemblerSupport;
 import com.mennyei.publicweb.match.infrastructure.MatchQueryMongoRepository;
 import com.mennyei.publicweb.match.service.MatchDetailesService;
 
@@ -30,7 +30,7 @@ public class MatchController {
 	@RequestMapping(value = "/{clubId}", method = RequestMethod.GET)
 	public ResponseEntity<Resources<Resource<MatchResource>>> byClub(@PathVariable String clubId) {
 		MatchResourceAssemblerSupport matchResourceAssemblerSupport = new MatchResourceAssemblerSupport(clubId);
-		List<MatchResource> resources = matchResourceAssemblerSupport.toResources(matchMongoRepository.findByClub(clubId));
+		List<MatchResource> resources = matchResourceAssemblerSupport.toResources(matchMongoRepository.findByClubOrderByMatchDate(clubId));
 		return ResponseEntity.ok(Resources.wrap(resources));
 	}
 	
@@ -38,6 +38,5 @@ public class MatchController {
 	public ResponseEntity<MatchDetailesResource> byClubWithDetailes(@PathVariable String matchId) {
 		return ResponseEntity.ok(matchDetailesService.matchDetailes(matchId));
 	}
-	
 	
 }

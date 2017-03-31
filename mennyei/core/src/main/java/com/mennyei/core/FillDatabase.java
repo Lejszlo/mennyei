@@ -144,13 +144,13 @@ public class FillDatabase {
 
 		
 		List<String> clubIds = new ArrayList<>(clubPlayers.keySet());
+		List<EntityWithIdAndVersion<MatchAggregator>> matchWithIds = new ArrayList<>();
 		for(int i=0; i< clubIds.size() - 1; ++i) {
 			List<String> firstHalfClubIds = new ArrayList<>(clubIds.subList(0, clubIds.size() / 2));
 			List<String> seacondHalfClubIds = new ArrayList<>(clubIds.subList(clubIds.size() / 2, clubIds.size()));
 			Collections.reverse(seacondHalfClubIds);
 			Turn turn = Turn.builder(i+1).build();
 			List<MatchInfo> matchInfos = new ArrayList<>();
-			List<EntityWithIdAndVersion<MatchAggregator>> matchWithIds = new ArrayList<>();
 			for (int j=0; j<firstHalfClubIds.size(); ++j) {
 				String homeClubId = "";
 				String awayClubId = "";
@@ -168,12 +168,9 @@ public class FillDatabase {
 						.build();
 				EntityWithIdAndVersion<MatchAggregator> matchWithId = matchService.addMatch(matchInfo).get();
 				matchWithIds.add(matchWithId);
+				matchInfos.add(matchInfo);
 				turn.getMatches().add(matchWithId.getEntityId());
 			}
-			
-			fillPreMatches(matchWithIds);
-			
-			fillTurnWithRandomEvents(matchWithIds);
 			
 			Turn reTurn = Turn.builder(turn.getIndex() + (clubIds.size() - 1)).build();
 			new ArrayList<>(matchInfos).stream().forEach(match -> {
@@ -186,7 +183,6 @@ public class FillDatabase {
 				try {
 					EntityWithIdAndVersion<MatchAggregator> matchWithId = matchService.addMatch(matchInfo).get();
 					matchWithIds.add(matchWithId);
-					matchInfos.add(matchInfo);
 					reTurn.getMatches().add(matchWithId.getEntityId());
 				} catch (InterruptedException | ExecutionException e) {
 					e.printStackTrace();
@@ -196,6 +192,10 @@ public class FillDatabase {
 			clubIds.add(1, clubIds.get(clubIds.size()-1));
 			clubIds.remove(clubIds.size()-1);
 		}
+		
+		fillPreMatches(matchWithIds);
+		
+		fillTurnWithRandomEvents(matchWithIds);
 
 	}
 

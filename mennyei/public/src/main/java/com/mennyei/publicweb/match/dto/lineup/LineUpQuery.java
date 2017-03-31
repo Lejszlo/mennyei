@@ -1,4 +1,4 @@
-package com.mennyei.publicweb.match.dto;
+package com.mennyei.publicweb.match.dto.lineup;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 

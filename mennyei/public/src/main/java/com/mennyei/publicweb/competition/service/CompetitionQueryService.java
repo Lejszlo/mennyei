@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mennyei.publicweb.club.dto.ClubQuery;
 import com.mennyei.publicweb.club.infrastructure.ClubQueryMongoRepository;
-import com.mennyei.publicweb.competition.dto.CompetitionQuery;
+import com.mennyei.publicweb.competition.dto.competition.CompetitionQuery;
 import com.mennyei.publicweb.competition.infrastructure.CompetitionQueryMongoRepository;
 
 @Service

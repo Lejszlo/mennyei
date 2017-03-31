@@ -1,4 +1,4 @@
-package com.mennyei.publicweb.match.dto;
+package com.mennyei.publicweb.match.dto.match;
 
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
@@ -19,8 +19,6 @@ public class MatchResourceAssemblerSupport extends ResourceAssemblerSupport<Matc
 	public MatchResource toResource(MatchQuery matchQuery) {
 		MatchResource resource = createResourceWithId(matchQuery.getId(), matchQuery);
 		resource.setAtHome(matchQuery.isAtHome(clubId));
-		resource.setAwayGoalAmount(matchQuery.getMatchResultDetailes().getAwayGoalAmount());
-		resource.setHomeGoalAmount(matchQuery.getMatchResultDetailes().getHomeGoalAmount());
 		resource.setMatchDate(matchQuery.getMatchDate());
 		ClubQuery opponent = matchQuery.whoIsTheOpponentOf(clubId);
 		resource.setOpponentClubName(opponent.getName());
@@ -28,6 +26,8 @@ public class MatchResourceAssemblerSupport extends ResourceAssemblerSupport<Matc
 		resource.setCompetitionName(matchQuery.getCompetition().getCompetitionInfo().getName());
 		if(matchQuery.isPlayed()) {
 			resource.setMatchResult(matchQuery.getResultFor(clubId));
+			resource.setAwayGoalAmount(matchQuery.getMatchResultDetailes().getAwayGoalAmount());
+			resource.setHomeGoalAmount(matchQuery.getMatchResultDetailes().getHomeGoalAmount());
 		}
 		resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(MatchController.class).byClubWithDetailes(matchQuery.getId())).withRel("detailes"));
 		return resource;

@@ -1,10 +1,10 @@
-package com.mennyei.publicweb.competition.dto;
+package com.mennyei.publicweb.competition.dto.turn;
 
 import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
-import com.mennyei.publicweb.match.dto.MatchQuery;
+import com.mennyei.publicweb.match.dto.match.MatchQuery;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

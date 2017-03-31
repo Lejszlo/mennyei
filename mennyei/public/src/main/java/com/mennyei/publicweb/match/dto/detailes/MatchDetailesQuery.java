@@ -1,10 +1,11 @@
-package com.mennyei.publicweb.match.dto;
+package com.mennyei.publicweb.match.dto.detailes;
 
 import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import com.mennyei.core.match.domain.event.lineup.LineUp;
+import com.mennyei.publicweb.match.dto.match.MatchQuery;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

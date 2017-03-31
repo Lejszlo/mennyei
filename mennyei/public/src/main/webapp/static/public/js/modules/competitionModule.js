@@ -8,7 +8,7 @@ competitionModule.controller('tableCtrl', function($scope, $http, selectedClub, 
 		selectedCompetition = $scope.competitions[0];
 		
 		SpringDataRestAdapter.process(selectedCompetition, 'tables').then(function (processedResponse) {
-			$scope.tables = processedResponse.tables._embeddedItems[0].rows;
+			$scope.tableRows = processedResponse.tables._embeddedItems[0].rows;
 		});
 	});
 	
@@ -21,4 +21,11 @@ competitionModule.controller('tableCtrl', function($scope, $http, selectedClub, 
 		}
 	}
 	
+})
+
+competitionModule.directive('stageTable', function() {
+	return {
+		restrict: 'E',
+		templateUrl: '/static/public/partials/competition/directives/stage-table.html'
+	}
 });

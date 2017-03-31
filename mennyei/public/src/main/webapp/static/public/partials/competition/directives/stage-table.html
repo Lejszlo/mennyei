@@ -1,0 +1,36 @@
+<table class="table table-hover table-responsive">
+	<thead>
+		<tr>
+			<th class="text-center" style="width: 50px">#</th>
+			<th>Csapat</th>
+			<th>M</th>
+			<th>Gy</th>
+			<th>D</th>
+			<th>V</th>
+			<th>LG</th>
+			<th>KG</th>
+			<th>GK</th>
+			<th>P</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-class='calculatePositionHighlights($index)' ng-repeat="tableRow in tableRows | orderBy : '-point'">
+			<td class="text-center">
+				<strong>{{$index + 1}}.</strong>
+			</td>
+			<td>
+				<strong>{{tableRow.club.name}}</strong>
+			</td>
+			<td>{{tableRow.playedMatches}}</td>
+			<td>{{tableRow.win}}</td>
+			<td>{{tableRow.draw}}</td>
+			<td>{{tableRow.lose}}</td>
+			<td>{{tableRow.scoredGoals}}</td>
+			<td>{{tableRow.concerdGoals}}</td>
+			<td>{{tableRow.scoredGoals - tableRow.concerdGoals}}</td>
+			<td>
+				<strong>{{tableRow.point}}</strong>
+			</td>
+		</tr>
+	</tbody>
+</table>

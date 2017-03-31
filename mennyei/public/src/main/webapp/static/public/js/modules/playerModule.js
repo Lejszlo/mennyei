@@ -1,6 +1,6 @@
-var teamModule = angular.module('teamModule', []);
+var playerModule = angular.module('playerModule', []);
 
-teamModule.controller('playersCtrl', function($scope, SpringDataRestAdapter, $http) {
+playerModule.controller('playersCtrl', function($scope, SpringDataRestAdapter, $http) {
 	
 	var club = $http.get('/club/vamosoroszikse');
 	

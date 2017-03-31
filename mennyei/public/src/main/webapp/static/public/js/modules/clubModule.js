@@ -1,10 +1,11 @@
 var clubModule = angular.module('clubModule', []);
 
-clubModule.controller('clubDetailesCtrl', function($scope) {
-    $scope.club = {
-        fullName: "Vámosoroszi KSE",
-        shortName: "VKSE"
-    }
+clubModule.controller('clubCtrl', function($scope) {
+}).directive('clubInfos', function() {
+	return {
+		restrict: 'E',
+		templateUrl: '/static/public/partials/club/directives/club-infos.html'
+	}
 });
 
 clubModule.service('selectedClub', function ($http) {

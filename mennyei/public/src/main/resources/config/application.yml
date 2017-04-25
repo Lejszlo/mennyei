@@ -1,6 +1,0 @@
-logging:
-  file: mennyei.log
-  path: /var/log
-spring:
-  jackson:
-    date-format: yyyy.MM.dd HH:mm:ss

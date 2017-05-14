@@ -7,4 +7,6 @@ import 'reflect-metadata'
     styleUrls: ['./app.component.css']
 })
 
-export class AppComponent { }
+export class AppComponent {
+    title: "Futball platform"
+}

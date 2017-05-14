@@ -2,14 +2,12 @@ package com.sp.organizer.backend.competition.command;
 
 import com.sp.organizer.backend.competition.domain.season.Turn;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.Value;
+import lombok.*;
 
 @Value
 @Builder(builderMethodName="hiddenBuilder")
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class AddMatchCommand extends CompetitionCommand {
 	@NonNull
 	private String competitionId;

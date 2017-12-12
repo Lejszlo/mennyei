@@ -15,6 +15,7 @@
     <modules>
         <module>sp-core-backend</module>
         <module>sp-core-query</module>
+        <module>sp-core-integration-test</module>
     </modules>
 
 </project>

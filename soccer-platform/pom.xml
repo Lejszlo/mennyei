@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.hajdu</groupId>
 	<artifactId>soccer-platform</artifactId>
@@ -10,33 +10,43 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.1.RELEASE</version>
+		<version>1.5.8.RELEASE</version>
 	</parent>
 
 	<properties>
 		<java.version>1.8</java.version>
-		<eventuateClientVersion>0.16.0.RELEASE</eventuateClientVersion>
-		<eventuateLocalVersion>0.12.0.RELEASE</eventuateLocalVersion>
+		<eventuateClientVersion>0.19.0.RELEASE</eventuateClientVersion>
+		<eventuateLocalVersion>0.15.0.RELEASE</eventuateLocalVersion>
 	</properties>
 
 	<modules>
 		<module>sp-ui</module>
 		<module>sp-core</module>
-        <module>sp-organizer</module>
-        <module>sp-frame</module>
+		<module>sp-player</module>
+		<module>sp-organizer</module>
+        <module>sp-match</module>
+        <module>sp-gateway</module>
     </modules>
 
 	<repositories>
+		<repository>
+			<id>jcenter</id>
+			<url>http://jcenter.bintray.com</url>
+		</repository>
 		<repository>
 			<id>spring-releases</id>
 			<url>https://repo.spring.io/libs-release</url>
 		</repository>
 		<repository>
-			<id>eventuate-release</id>
-			<url>http://mavenrepo.eventuate.io/release</url>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/libs-milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
-	
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>spring-releases</id>
@@ -50,21 +60,6 @@
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.eventuate.client.java</groupId>
-			<artifactId>eventuate-client-java-spring</artifactId>
-			<version>${eventuateClientVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.eventuate.local.java</groupId>
-			<artifactId>eventuate-local-java-jdbc</artifactId>
-			<version>${eventuateLocalVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.eventuate.local.java</groupId>
-			<artifactId>eventuate-local-java-embedded-cdc-autoconfigure</artifactId>
-			<version>${eventuateLocalVersion}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -76,14 +71,65 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.modelmapper</groupId>
+				<artifactId>modelmapper</artifactId>
+				<version>0.7.5</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.eventuate.client.java</groupId>
+				<artifactId>eventuate-client-java-spring</artifactId>
+				<version>${eventuateClientVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.eventuate.local.java</groupId>
+				<artifactId>eventuate-local-java-jdbc</artifactId>
+				<version>${eventuateLocalVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.eventuate.local.java</groupId>
+				<artifactId>eventuate-local-java-embedded-cdc-autoconfigure</artifactId>
+				<version>${eventuateLocalVersion}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
+				<version>1.16.10</version>
 			</dependency>
-		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>0.7.5</version>
-		</dependency>
-	</dependencies>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>1.1.0.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-library</artifactId>
+				<version>2.11.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.2.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 </project>

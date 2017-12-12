@@ -16,6 +16,7 @@
     <modules>
         <module>sp-player-backend</module>
         <module>sp-player-query</module>
+        <module>sp-player-api</module>
     </modules>
 
 

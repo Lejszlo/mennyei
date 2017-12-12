@@ -21,6 +21,15 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-rest-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hajdu</groupId>
+            <artifactId>sp-match-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 

@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sp-player-backend</artifactId>
+
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -20,7 +21,11 @@
             <artifactId>sp-core-backend</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.hajdu</groupId>
+            <artifactId>sp-player-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
-
 
 </project>

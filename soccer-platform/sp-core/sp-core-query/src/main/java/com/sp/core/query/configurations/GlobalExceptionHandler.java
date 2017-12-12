@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created by lejsz on 2017. 04. 23..
- */
 @ControllerAdvice
 @RestController
 public class GlobalExceptionHandler {

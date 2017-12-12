@@ -13,8 +13,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>sp-organizer-backend</module>
+        <module>sp-organizer-command</module>
         <module>sp-organizer-query</module>
+        <module>sp-organizer-api</module>
     </modules>
 
 </project>

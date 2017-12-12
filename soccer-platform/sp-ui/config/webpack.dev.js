@@ -1,17 +1,23 @@
 var webpackMerge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var packageJSON = require('../package.json');
+var path = require('path');
 var commonConfig = require('./webpack.common.js');
 
-const path = require('path');
-const rootDir = path.resolve(__dirname, '..');
+
+const PATHS = {
+    build: path.join(__dirname, '..','target', 'classes', 'META-INF', 'resources', 'webjars', packageJSON.name, packageJSON.version),
+    htmlPath: path.join('webjars', packageJSON.name, packageJSON.version),
+    resource: path.join(__dirname, '..','target', 'classes', 'META-INF', 'resources')
+};
+
 
 module.exports = webpackMerge(commonConfig, {
 
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
 
     output: {
-        path: path.resolve(rootDir, 'dist'),
-        publicPath: 'http://localhost:8080/',
+        path: PATHS.build,
         filename: '[name].js',
         chunkFilename: '[id].chunk.js'
     },
@@ -22,6 +28,11 @@ module.exports = webpackMerge(commonConfig, {
 
     devServer: {
         historyApiFallback: true,
-        stats: 'minimal'
+        hot: true,
+        port: 8090,
+        inline: true,
+        proxy: {
+            "/api": "http://localhost:8081"
+        }
     }
 });

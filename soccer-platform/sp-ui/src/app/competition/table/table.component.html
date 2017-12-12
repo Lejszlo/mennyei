@@ -1,0 +1,53 @@
+<div class="container col-md-12">
+    <div class="container col-md-12 clubMainContainer">
+        <div class="sp-panel">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>{{competitionResource.competitionInfo.name}}</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table *ngFor="let table of tableResources | async" class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th style="width: 50px">#</th>
+                        <th>Csapat</th>
+                        <th>M</th>
+                        <th>Gy</th>
+                        <th>D</th>
+                        <th>V</th>
+                        <th>LG</th>
+                        <th>KG</th>
+                        <th>GK</th>
+                        <th>P</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of table.rows, let i=index">
+                            <td>
+                               <strong>{{i + 1}}.</strong>
+                            </td>
+                            <td class="clubName">
+                                {{row.club.name}}
+                            </td>
+                            <td>{{row.playedMatches}}</td>
+                            <td>{{row.win}}</td>
+                            <td>{{row.draw}}</td>
+                            <td>{{row.lose}}</td>
+                            <td>{{row.scoredGoals}}</td>
+                            <td>{{row.concerdGoals}}</td>
+                            <td>{{row.scoredGoals - row.concerdGoals}}</td>
+                            <td>
+                                <strong>{{row.point}}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <strong>M</strong>: Mérközések száma <strong>Gy</strong>: Győzelem, <strong>D</strong>: Döntetlen, <strong>V</strong>: Vereség,
+                <strong>LG</strong>: Lőtt gólok, <strong>KG</strong>: Kapott gólok, <strong>GK</strong>: Gól Különbség, <strong>P</strong>: Pontok
+            </div>
+        </div>
+    </div>
+</div>

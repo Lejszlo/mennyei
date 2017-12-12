@@ -13,7 +13,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.js', '.ts']
+        extensions: ['.js', '.ts', 'css', 'html']
     },
 
     module: {
@@ -28,11 +28,11 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-                loader: 'file?name=assets/[name].[hash].[ext]'
+                loader: 'file-loader?name=assets/[name].[hash].[ext]'
             },
             {
-                test: /\.css$/,
-                loaders: ['to-string-loader', 'css-loader', 'sass-loader']
+                test: /\.css$|\.less$/,
+                loaders: ['style-loader', 'css-loader?sourceMap', 'less-loader?sourceMap']
             }
         ]},
 

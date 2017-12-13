@@ -14,6 +14,7 @@
     <modules>
         <module>sp-organizer-command-app</module>
         <module>sp-organizer-command-aggregator</module>
+        <module>../sp-organizer-command-integrationtest</module>
     </modules>
 
     <dependencies>

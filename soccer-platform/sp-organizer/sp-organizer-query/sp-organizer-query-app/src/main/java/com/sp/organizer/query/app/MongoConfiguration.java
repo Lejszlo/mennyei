@@ -9,15 +9,7 @@ import org.springframework.data.convert.Jsr310Converters;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
 
-@EnableConfigurationProperties
 public class MongoConfiguration extends AbstractMongoConfiguration {
-
-    private final MongoProperties mongoProperties;
-
-    @Autowired
-    public MongoConfiguration(MongoProperties mongoProperties) {
-        this.mongoProperties = mongoProperties;
-    }
 
     @Override
     protected String getDatabaseName() {
@@ -26,6 +18,6 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
 
     @Override
     public Mongo mongo() {
-        return new MongoClient(mongoProperties.getFullPath());
+        return new MongoClient("192.168.0.101:27017");
     }
 }

@@ -16,10 +16,10 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.hateoas.config.EnableEntityLinks;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 
-@SpringBootApplication(scanBasePackages = {"com.sp.organizer.query.app"})
+@SpringBootApplication(scanBasePackages = "com.sp.organizer.query")
 @EnableEventHandlers
 @EnableEntityLinks
-@EnableMongoRepositories(basePackages = {"com.sp.organizer.query.app"})
+@EnableMongoRepositories(basePackages = "com.sp.organizer.query")
 @EnableConfigurationProperties
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @Import({ EventuateDriverConfiguration.class, BeanConfigurations.class, MongoConfiguration.class})

@@ -18,13 +18,9 @@ public class MatchEventHandler {
 
 	private final MatchDocumentMongoRepository matchMongoRepository;
 	
-
-    private final MatchDocumentMongoRepository matchDocumentMongoRepository;
-
     @Autowired
-    public MatchEventHandler(MatchDocumentMongoRepository matchMongoRepository, MatchDocumentMongoRepository matchDocumentMongoRepository) {
+    public MatchEventHandler(MatchDocumentMongoRepository matchMongoRepository) {
         this.matchMongoRepository = matchMongoRepository;
-        this.matchDocumentMongoRepository = matchDocumentMongoRepository;
     }
 
     @EventHandlerMethod

@@ -12,18 +12,6 @@
     <artifactId>sp-match-query-app</artifactId>
     <dependencies>
         <dependency>
-            <groupId>io.eventuate.local.java</groupId>
-            <artifactId>eventuate-local-java-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.hajdu</groupId>
             <artifactId>sp-match-query-updater</artifactId>
             <version>0.0.1-SNAPSHOT</version>
@@ -38,7 +26,45 @@
             <artifactId>sp-match-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <!--EUREKA-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka-server</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--EVENTUATE-->
+        <dependency>
+            <groupId>io.eventuate.local.java</groupId>
+            <artifactId>eventuate-local-java-jdbc</artifactId>
+        </dependency>
+
+        <!--SPRING-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Edgware.SR2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

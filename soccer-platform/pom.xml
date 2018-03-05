@@ -27,6 +27,7 @@
         <module>sp-match</module>
         <module>sp-gateway</module>
         <module>sp-frame-integrationtest</module>
+        <module>sp-eureka</module>
     </modules>
 
 	<repositories>

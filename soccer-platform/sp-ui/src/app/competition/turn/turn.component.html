@@ -7,12 +7,12 @@
         </thead>
         <tbody>
         <tr *ngFor="let match of matches">
-                <td class="text-center">{{match.matchDate}}</td>
-                <td class="text-right">{{match.homeClubName}}</td>
+                <!--<td class="text-center">{{match.matchDate}}</td>-->
+                <td class="text-right">{{match.homeClubDocumentResource.name}}</td>
                 <td class="text-right">{{match.homeGoalAmount}}</td>
                 <td class="text-center"> - </td>
                 <td>{{match.awayGoalAmount}}</td>
-                <td>{{match.awayClubName}}</td>
+                <td>{{match.awayClubDocumentResource.name}}</td>
             </tr>
         </tbody>
     </table>

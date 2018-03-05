@@ -3,7 +3,6 @@ package com.sp.match.query.updater.match.entity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.sp.match.api.value.MatchResultDetails;
 import com.sp.organizer.api.value.club.AwayClubId;

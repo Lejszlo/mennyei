@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: dev
+  application:
+    name: organizer-query
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://${DOCKER_HOST_IP}/eventuate

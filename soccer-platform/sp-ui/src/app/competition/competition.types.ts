@@ -35,8 +35,8 @@ export interface TurnResource {
 }
 
 export interface MatchResource {
-    homeClubName: string;
-    awayClubName: string;
+    homeClubDocumentResource: Club;
+    awayClubDocumentResource: Club;
     homeGoalAmount: number;
     awayGoalAmount: number;
     matchDate: string;

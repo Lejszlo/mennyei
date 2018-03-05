@@ -1,4 +1,4 @@
-package com.sp.organizer.query.viewer.club.resource;
+package com.sp.organizer.api.resource;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -7,6 +7,7 @@ import org.springframework.hateoas.ResourceSupport;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class ClubDocumentResource extends ResourceSupport {
+    private String clubId;
 
     private String name;
 

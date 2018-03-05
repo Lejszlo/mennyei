@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -23,6 +26,9 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 @EnableMongoRepositories(basePackages = "com.sp.match.query")
 @EnableConfigurationProperties
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
+@EnableDiscoveryClient
+@EnableFeignClients("com.sp.match.query")
+@EnableEurekaClient
 @Import({ EventuateDriverConfiguration.class, BeanConfigurations.class, MongoConfiguration.class})
 public class MatchQueryApp implements ApplicationListener<ContextRefreshedEvent> {
 

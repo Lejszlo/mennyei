@@ -11,7 +11,6 @@ import com.sp.match.api.value.event.MatchEventType;
 @Component
 public class MatchDetailsDocumentResourceAssemblerSupport extends ResourceAssemblerSupport<MatchDocument, MatchDetailsDocumentResource> {
 
-
 	public MatchDetailsDocumentResourceAssemblerSupport() {
 		super(MatchDocumentController.class, MatchDetailsDocumentResource.class);
 	}

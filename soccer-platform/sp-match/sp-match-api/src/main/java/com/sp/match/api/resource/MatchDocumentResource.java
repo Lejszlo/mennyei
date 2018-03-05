@@ -1,6 +1,7 @@
 package com.sp.match.api.resource;
 
 import com.sp.match.api.value.MatchResult;
+import com.sp.organizer.api.resource.ClubDocumentResource;
 import org.springframework.hateoas.ResourceSupport;
 
 import lombok.Data;
@@ -16,7 +17,7 @@ public class MatchDocumentResource extends ResourceSupport {
 	
 	private String matchDate;
 	
-	private String homeClubName;
+	private ClubDocumentResource homeClubDocumentResource;
 	
-	private String awayClubName;
+	private ClubDocumentResource awayClubDocumentResource;
 }

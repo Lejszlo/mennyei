@@ -1,19 +1,18 @@
 package com.sp.organizer.query.updater.competition.handler;
 
-import com.sp.organizer.query.updater.club.entity.ClubQuery;
+import com.sp.organizer.query.updater.club.entity.ClubDocument;
 import com.sp.organizer.query.updater.club.repository.ClubQueryMongoRepository;
-import com.sp.organizer.query.updater.competition.entity.CompetitionQuery;
-import com.sp.organizer.query.updater.competition.entity.TurnQuery;
+import com.sp.organizer.query.updater.competition.entity.CompetitionDocument;
+import com.sp.organizer.query.updater.competition.entity.TurnDocument;
 import com.sp.organizer.query.updater.competition.repository.CompetitionQueryMongoRepository;
 import com.sp.organizer.query.updater.competition.service.CompetitionTableService;
-import com.sp.organizer.query.updater.match.entity.MatchQuery;
-import event.competition.CompetitionAdded;
-import event.competition.StageAdded;
+import com.sp.organizer.api.event.competition.CompetitionAdded;
+import com.sp.organizer.api.event.competition.StageAdded;
 import io.eventuate.DispatchedEvent;
-import com.sp.organizer.query.updater.competition.entity.StageQuery;
-import com.sp.organizer.query.updater.match.repository.MatchQueryMongoRepository;
-import value.competition.season.Stage;
-import value.competition.season.Turn;
+import com.sp.organizer.query.updater.competition.entity.StageDocument;
+import com.sp.match.api.event.MatchPlayed;
+import com.sp.organizer.api.value.competition.season.Stage;
+import com.sp.organizer.api.value.competition.season.Turn;
 import io.eventuate.EventHandlerMethod;
 import io.eventuate.EventSubscriber;
 import org.assertj.core.util.Lists;
@@ -24,34 +23,29 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@EventSubscriber(id = "competitionEventHandler", progressNotifications = true)
+@EventSubscriber
 @Component
 public class CompetitionEventHandler {
 
     private final CompetitionQueryMongoRepository competitionMongoRepository;
 
     private final ClubQueryMongoRepository clubMongoRepository;
-    
+
     private final CompetitionTableService competitionTableService;
-    
-    private final MatchQueryMongoRepository matchQueryMongoRepository;
 
     @Autowired
     public CompetitionEventHandler(CompetitionQueryMongoRepository competitionMongoRepository,
-                                   ClubQueryMongoRepository clubMongoRepository,
-                                   CompetitionTableService competitionTableService,
-                                   MatchQueryMongoRepository matchQueryMongoRepository) {
+                                   ClubQueryMongoRepository clubMongoRepository, CompetitionTableService competitionTableService) {
         this.competitionMongoRepository = competitionMongoRepository;
         this.clubMongoRepository = clubMongoRepository;
         this.competitionTableService = competitionTableService;
-        this.matchQueryMongoRepository = matchQueryMongoRepository;
     }
 
     @EventHandlerMethod
-    public void create(DispatchedEvent<CompetitionAdded> dispatchedEvent) {
+    public void createCompetition(DispatchedEvent<CompetitionAdded> dispatchedEvent) {
         CompetitionAdded competitionAddedEvent = dispatchedEvent.getEvent();
         String competitionId = dispatchedEvent.getEntityId();
-        CompetitionQuery competitionQuery = CompetitionQuery.builder(competitionAddedEvent.getCompetitionInfo())
+        CompetitionDocument competitionQuery = CompetitionDocument.builder(competitionAddedEvent.getCompetitionInfo())
         		.id(competitionId)
                 .stages(Lists.newArrayList())
         		.build();
@@ -59,40 +53,47 @@ public class CompetitionEventHandler {
     }
 
     @EventHandlerMethod
-    public void stageAdded(DispatchedEvent<StageAdded> stageAdded) {
-        StageAdded stageAddedEvent = stageAdded.getEvent();
-        String competitionId = stageAdded.getEntityId();
-        CompetitionQuery competitionQuery = competitionMongoRepository.findOne(competitionId);
+    public void addStage(DispatchedEvent<StageAdded> dispatchedEvent) {
+        StageAdded stageAddedEvent = dispatchedEvent.getEvent();
+        String competitionId = dispatchedEvent.getEntityId();
+        CompetitionDocument competitionDocument = competitionMongoRepository.findOne(competitionId);
 
-        Set<ClubQuery> clubQueries = stageAddedEvent
+        Set<ClubDocument> clubQueries = stageAddedEvent
                 .getStage()
                 .getClubIds()
                 .stream()
                 .map(clubMongoRepository::findOne)
                 .collect(Collectors.toSet());
 
-        StageQuery stageQuery = convertStage(clubQueries, stageAddedEvent.getStage(), competitionId);
-        competitionQuery.getStages().add(stageQuery);
+        StageDocument stageDocument = convertStage(clubQueries, stageAddedEvent.getStage(), competitionDocument);
+        competitionDocument.getStages().add(stageDocument);
 
-        competitionTableService.createTables(stageQuery);
+        competitionTableService.createTables(stageDocument);
 
-        competitionMongoRepository.save(competitionQuery);
+        competitionMongoRepository.save(competitionDocument);
     }
 
-    private StageQuery convertStage(Set<ClubQuery> clubQueries, Stage stage, String competitionId) {
-        List<TurnQuery> turnQueries = stage.getTurns().stream().map(this::convertTurn).collect(Collectors.toList());
-        return StageQuery
+    @EventHandlerMethod
+    public void matchPlayed(DispatchedEvent<MatchPlayed> dispatchedEvent) {
+        MatchPlayed matchPlayed = dispatchedEvent.getEvent();
+        StageDocument stageDocument = competitionTableService.getStageTable(matchPlayed.getStageId());
+        competitionTableService.refreshTable(matchPlayed, stageDocument);
+    }
+
+    private StageDocument convertStage(Set<ClubDocument> clubQueries, Stage stage, CompetitionDocument competitionDocument) {
+        List<TurnDocument> turnQueries = stage.getTurns().stream().map(this::convertTurn).collect(Collectors.toList());
+        return StageDocument
                 .builder(stage.getName(), stage.getStageRuleSet(), stage.getIndex())
-                .competitionQuery(competitionId)
+                .competitionDocumentId(competitionDocument.getId())
                 .turns(turnQueries)
                 .clubs(clubQueries)
+                .interval(stage.getInterval())
                 .build();
     }
     
-    private TurnQuery convertTurn(Turn turn) {
-        List<MatchQuery> matchQueries = turn.getMatches().stream().map(s -> matchQueryMongoRepository.findOne(s)).collect(Collectors.toList());
-        return TurnQuery.builder(turn.getIndex())
-                .matches(matchQueries)
+    private TurnDocument convertTurn(Turn turn) {
+        return TurnDocument.builder(turn.getIndex())
+                .matcheIds(turn.getMatches())
                 .build();
     }
 }

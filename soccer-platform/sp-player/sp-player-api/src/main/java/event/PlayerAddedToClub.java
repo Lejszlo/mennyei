@@ -1,6 +1,6 @@
 package event;
 
-import event.club.ClubEvent;
+import com.sp.organizer.api.event.club.ClubEvent;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.Value;

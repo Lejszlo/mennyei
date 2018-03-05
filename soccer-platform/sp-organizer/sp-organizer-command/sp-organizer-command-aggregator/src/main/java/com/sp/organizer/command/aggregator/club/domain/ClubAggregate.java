@@ -4,18 +4,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import command.competition.AddPlayerToClubCommand;
-import command.competition.ClubCommand;
-import command.competition.RemovePlayerFromClub;
-import command.competition.AddClubCommand;
+import com.sp.organizer.api.competition.AddPlayerToClubCommand;
+import com.sp.organizer.api.competition.ClubCommand;
+import com.sp.organizer.api.competition.RemovePlayerFromClub;
+import com.sp.organizer.api.competition.AddClubCommand;
 
 import event.PlayerAddedToClub;
 import event.PlayerRemovedFromClub;
-import event.club.ClubAdded;
+import com.sp.organizer.api.event.club.ClubAdded;
 import io.eventuate.Event;
 import io.eventuate.EventUtil;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
-import value.club.ClubInfo;
+import com.sp.organizer.api.value.club.ClubInfo;
 
 public class ClubAggregate extends ReflectiveMutableCommandProcessingAggregate<ClubAggregate, ClubCommand> {
 

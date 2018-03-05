@@ -1,54 +1,59 @@
 package com.sp.organizer.query.updater.competition.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.sp.organizer.query.updater.competition.entity.CompetitionQuery;
+import com.sp.organizer.query.updater.competition.entity.StageDocument;
 import com.sp.organizer.query.updater.competition.entity.TableQuery;
-import com.sp.organizer.query.updater.competition.repository.CompetitionQueryMongoRepository;
-import com.sp.organizer.query.updater.match.entity.MatchQuery;
+import com.sp.organizer.query.updater.competition.entity.TableRowQuery;
+import com.sp.organizer.query.updater.competition.repository.StageDocumentMongoRepository;
+import com.sp.organizer.query.updater.competition.repository.TableQueryMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.sp.organizer.query.updater.competition.entity.StageQuery;
-import com.sp.organizer.query.updater.competition.entity.TableRowQuery;
-import com.sp.organizer.query.updater.competition.repository.TableQueryMongoRepository;
+import com.sp.match.api.event.MatchPlayed;
+import com.sp.organizer.api.value.competition.StageId;
+
+import static com.sp.organizer.api.value.club.ClubId.clubId;
 
 @Service
 public class CompetitionTableService {
 
-	@Autowired
-	private TableQueryMongoRepository tableMongoRepository;
+	private final TableQueryMongoRepository tableMongoRepository;
 
-	@Autowired
-	private CompetitionQueryMongoRepository competitionMongoRepository;
+	private final StageDocumentMongoRepository stageDocumentMongoRepository;
 
-	public void refreshTable(MatchQuery matchQuery, StageQuery stageQuery) {
-		TableQuery tableQuery = stageQuery.getTableQuery();
-		Optional<TableRowQuery> homeClubTableRowOptional = tableQuery.getRows().stream().filter(r -> r.getClub().getId().equals(matchQuery.getHomeClub().getId())).findFirst();
-		Optional<TableRowQuery> awayClubTableRowOptional = tableQuery.getRows().stream().filter(r -> r.getClub().getId().equals(matchQuery.getAwayClub().getId())).findFirst();
-		
-		updateRow(homeClubTableRowOptional, matchQuery, stageQuery);
-		updateRow(awayClubTableRowOptional, matchQuery, stageQuery);
-		
+    @Autowired
+    public CompetitionTableService(TableQueryMongoRepository tableMongoRepository,
+                                   StageDocumentMongoRepository stageDocumentMongoRepository) {
+        this.tableMongoRepository = tableMongoRepository;
+        this.stageDocumentMongoRepository = stageDocumentMongoRepository;
+    }
+
+    public void refreshTable(MatchPlayed matchPlayed, StageDocument stageDocument) {
+		TableQuery tableQuery = stageDocument.getTableQuery();
+
+		tableQuery.getRows().stream()
+				.filter(r -> clubId(r.getClub().getId()).equals(matchPlayed.getHomeClubId()))
+                .findFirst()
+                .ifPresent(tableRowQuery -> updateRow(tableRowQuery, matchPlayed, stageDocument));
+		tableQuery.getRows().stream()
+                .filter(r -> clubId(r.getClub().getId()).equals(matchPlayed.getAwayClubId()))
+                .findFirst()
+                .ifPresent(tableRowQuery -> updateRow(tableRowQuery, matchPlayed, stageDocument));
+
 		tableMongoRepository.save(tableQuery);
 	}
 
-	private void updateRow(Optional<TableRowQuery> tableRowOptional, MatchQuery matchQuery, StageQuery stageQuery) {
-		if(!tableRowOptional.isPresent())  {
-			return;
-		}
-		
-		TableRowQuery tableRow = tableRowOptional.get();
-		tableRow.setResult(matchQuery.getResultFor(tableRow.getClub().getId()));
-		tableRow.addScoredGoals(matchQuery.getGoalAmountFor(tableRow.getClub().getId()));
-		tableRow.addConcerdGoals(matchQuery.getGoalAmountFor(matchQuery.whoIsTheOpponentOf(tableRow.getClub().getId()).getId()));
-		tableRow.calculatePoints(stageQuery.getStageRuleSet());
+	private void updateRow(TableRowQuery tableRow, MatchPlayed matchPlayed, StageDocument stageDocument) {
+		tableRow.setResult(matchPlayed.getResultFor(clubId(tableRow.getClub().getId())));
+		tableRow.addScoredGoals(matchPlayed.getGoalAmountFor(clubId(tableRow.getClub().getId())));
+		tableRow.addConcerdGoals(matchPlayed.getGoalAmountFor(matchPlayed.whoIsTheOpponentOf(clubId(tableRow.getClub().getId()))));
+		tableRow.calculatePoints(stageDocument.getStageRuleSet());
 		tableRow.incraseMatches();
 	}
 
-	public void createTables(StageQuery stageQuery) {
-        List<TableRowQuery> tableRowQueries = stageQuery.getClubs()
+	public void createTables(StageDocument stageDocument) {
+        List<TableRowQuery> tableRowQueries = stageDocument.getClubs()
                 .stream()
                 .map(TableRowQuery::new)
                 .collect(Collectors.toList());
@@ -58,12 +63,11 @@ public class CompetitionTableService {
                 .build();
 
         tableMongoRepository.save(tableQuery);
-		stageQuery.setTableQuery(tableQuery);
+		stageDocument.setTableQuery(tableQuery);
 	}
 
-	public List<TableQuery> getCompetitionTable(String competitionId) {
-		CompetitionQuery competitionQuery = competitionMongoRepository.findOne(competitionId);
-		return competitionQuery.getStages().stream().map(StageQuery::getTableQuery).collect(Collectors.toList());
+	public StageDocument getStageTable(StageId stageId) {
+		return stageDocumentMongoRepository.findByCompetitionIdAndStageIndex(stageId.getCompetitionId().getValue(), stageId.getIndex());
 	}
 
 }

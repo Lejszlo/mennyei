@@ -13,8 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>io.eventuate.client.java</groupId>
-            <artifactId>eventuate-client-java</artifactId>
-            <version>0.16.0.RELEASE</version>
+            <artifactId>eventuate-client-java-spring</artifactId>
         </dependency>
         <dependency>
             <groupId>com.hajdu</groupId>

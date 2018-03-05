@@ -1,6 +1,7 @@
 package com.sp.organizer.query.app;
 
 import com.sp.core.query.configurations.BeanConfigurations;
+import com.sp.core.query.configurations.MongoConfiguration;
 import io.eventuate.javaclient.driver.EventuateDriverConfiguration;
 import io.eventuate.javaclient.spring.EnableEventHandlers;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +17,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.hateoas.config.EnableEntityLinks;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 
-@SpringBootApplication(scanBasePackages = "com.sp.organizer.query")
+@SpringBootApplication(scanBasePackages = {"com.sp.organizer.query", "com.sp.organizer.api"})
 @EnableEventHandlers
 @EnableEntityLinks
 @EnableMongoRepositories(basePackages = "com.sp.organizer.query")

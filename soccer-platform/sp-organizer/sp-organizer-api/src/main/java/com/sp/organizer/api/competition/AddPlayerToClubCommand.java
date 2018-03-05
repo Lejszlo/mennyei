@@ -1,0 +1,20 @@
+package com.sp.organizer.api.competition;
+
+import lombok.AllArgsConstructor;
+import lombok.NonNull;
+import lombok.Value;
+
+/**
+ * Created by lejsz on 2016. 11. 22..
+ */
+@Value
+@AllArgsConstructor
+public class AddPlayerToClubCommand extends ClubCommand {
+
+    @NonNull
+    private String clubId;
+
+	@NonNull
+    private String playerId;
+
+}

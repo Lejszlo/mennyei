@@ -8,12 +8,13 @@ import com.sp.player.query.player.infrastructure.LineUpQueryMongoRepository;
 import com.sp.player.query.player.infrastructure.PlayerQueryMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sp.match.api.value.MatchResultDetails;
-import sp.match.api.value.event.CardEvent;
-import sp.match.api.value.event.GoalEvent;
-import sp.match.api.value.event.MatchEventType;
-import sp.match.api.value.event.SubstitutionEvent;
-import sp.match.api.value.lineup.LineUpType;
+import com.sp.match.api.value.MatchResultDetails;
+import com.sp.match.api.value.event.CardEvent;
+import com.sp.match.api.value.event.GoalEvent;
+import com.sp.match.api.value.event.MatchEventType;
+import com.sp.match.api.value.event.SubstitutionEvent;
+import com.sp.match.api.value.lineup.LineUpType;
+import com.sp.organizer.api.value.competition.CompetitionId;
 
 import java.util.List;
 
@@ -27,11 +28,11 @@ public class PlayerMatchStatisticService {
 	@Autowired
 	private LineUpQueryMongoRepository lineUpQueryMongoRepository;
 	
-	public void updatePlayerStatistics(String matchId, MatchResultDetails matchResultDetailes, String competitionId) {
-        lineUpQueryMongoRepository.findByMatchId(matchId).stream().forEach(lineUp -> process(lineUp, matchResultDetailes, competitionId));
+	public void updatePlayerStatistics(String matchId, MatchResultDetails matchResultDetailes, CompetitionId competitionId) {
+        lineUpQueryMongoRepository.findByMatchId(matchId).forEach(lineUp -> process(lineUp, matchResultDetailes, competitionId));
 	}
 	
-	public void process(LineUpQuery lineUpQuery, MatchResultDetails matchResultDetailes, String competitionId) {
+	public void process(LineUpQuery lineUpQuery, MatchResultDetails matchResultDetailes, CompetitionId competitionId) {
 		PlayerQuery playerQuery = lineUpQuery.getPlayerQuery();
 
 		PlayerMatchStatisticData playerMatchStatisticData = getPlayerMatchStatisticData(matchResultDetailes, playerQuery, competitionId);
@@ -95,7 +96,7 @@ public class PlayerMatchStatisticService {
 		return 0;
 	}
 
-	private PlayerMatchStatisticData getPlayerMatchStatisticData(MatchResultDetails matchResultDetailes, PlayerQuery playerQuery, String competitionId) {
+	private PlayerMatchStatisticData getPlayerMatchStatisticData(MatchResultDetails matchResultDetailes, PlayerQuery playerQuery, CompetitionId competitionId) {
 		PlayerMatchStatisticData playerMatchStatisticData = playerQuery.getPlayerMatchStatisticDatas().get(competitionId);
 
 		if(playerMatchStatisticData == null) {

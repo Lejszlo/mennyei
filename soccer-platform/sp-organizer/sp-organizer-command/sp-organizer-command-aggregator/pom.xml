@@ -11,5 +11,12 @@
 
     <artifactId>sp-organizer-command-aggregator</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version></version>
+        </dependency>
+    </dependencies>
 
 </project>

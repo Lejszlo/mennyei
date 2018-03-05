@@ -41,14 +41,6 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.eventuate.local.java</groupId>
-			<artifactId>eventuate-local-java-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.eventuate.client.java</groupId>
-			<artifactId>eventuate-client-java-spring</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 		</dependency>

@@ -13,8 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>sp-match-api</module>
-        <module>sp-match-backend</module>
-        <module>sp-match-app</module>
+        <module>sp-match-query</module>
+        <module>sp-match-command</module>
     </modules>
 
 

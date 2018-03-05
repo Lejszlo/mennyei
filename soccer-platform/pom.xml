@@ -15,8 +15,8 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<eventuateClientVersion>0.19.0.RELEASE</eventuateClientVersion>
-		<eventuateLocalVersion>0.15.0.RELEASE</eventuateLocalVersion>
+		<eventuateClientVersion>0.16.0.RELEASE</eventuateClientVersion>
+		<eventuateLocalVersion>0.12.0.RELEASE</eventuateLocalVersion>
 	</properties>
 
 	<modules>
@@ -26,6 +26,7 @@
 		<module>sp-organizer</module>
         <module>sp-match</module>
         <module>sp-gateway</module>
+        <module>sp-frame-integrationtest</module>
     </modules>
 
 	<repositories>

@@ -1,53 +1,36 @@
-<div class="container col-md-12">
-    <div class="container col-md-12 clubMainContainer">
-        <div class="sp-panel">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <h3>{{competitionResource.competitionInfo.name}}</h3>
-                </div>
-            </div>
-            <div class="panel-body">
-                <table *ngFor="let table of tableResources | async" class="table table-responsive">
-                    <thead>
-                    <tr>
-                        <th style="width: 50px">#</th>
-                        <th>Csapat</th>
-                        <th>M</th>
-                        <th>Gy</th>
-                        <th>D</th>
-                        <th>V</th>
-                        <th>LG</th>
-                        <th>KG</th>
-                        <th>GK</th>
-                        <th>P</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let row of table.rows, let i=index">
-                            <td>
-                               <strong>{{i + 1}}.</strong>
-                            </td>
-                            <td class="clubName">
-                                {{row.club.name}}
-                            </td>
-                            <td>{{row.playedMatches}}</td>
-                            <td>{{row.win}}</td>
-                            <td>{{row.draw}}</td>
-                            <td>{{row.lose}}</td>
-                            <td>{{row.scoredGoals}}</td>
-                            <td>{{row.concerdGoals}}</td>
-                            <td>{{row.scoredGoals - row.concerdGoals}}</td>
-                            <td>
-                                <strong>{{row.point}}</strong>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel-footer">
-                <strong>M</strong>: Mérközések száma <strong>Gy</strong>: Győzelem, <strong>D</strong>: Döntetlen, <strong>V</strong>: Vereség,
-                <strong>LG</strong>: Lőtt gólok, <strong>KG</strong>: Kapott gólok, <strong>GK</strong>: Gól Különbség, <strong>P</strong>: Pontok
-            </div>
-        </div>
-    </div>
-</div>
+<table *ngIf="rows" class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" style="width: 50px">#</th>
+            <th scope="col">Csapat</th>
+            <th class="text-center" scope="col">Meccsek</th>
+            <th class="text-center" scope="col">Győzelem</th>
+            <th class="text-center" scope="col">Döntetlen</th>
+            <th class="text-center" scope="col">Vereség</th>
+            <th class="text-center" scope="col">Lőtt Gólok</th>
+            <th class="text-center" scope="col">Kapott Gólok</th>
+            <th class="text-center" scope="col">Gól Különbség</th>
+            <th class="text-center" scope="col">Pontok</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of rows, let i=index">
+            <th scope="row">
+               {{i + 1}}.
+            </th>
+            <th scope="row" class="clubName">
+                {{row.club.name}}
+            </th>
+            <td class="text-center">{{row.playedMatches}}</td>
+            <td class="text-center">{{row.win}}</td>
+            <td class="text-center">{{row.draw}}</td>
+            <td class="text-center">{{row.lose}}</td>
+            <td class="text-center">{{row.scoredGoals}}</td>
+            <td class="text-center">{{row.concerdGoals}}</td>
+            <td class="text-center">{{row.scoredGoals - row.concerdGoals}}</td>
+            <th class="text-center" scope="row">{{row.point}}</th>
+        </tr>
+    </tbody>
+</table>
+<!--<strong>M</strong>: Mérközések száma <strong>Gy</strong>: Győzelem, <strong>D</strong>: Döntetlen, <strong>V</strong>: Vereség,-->
+<!--<strong>LG</strong>: Lőtt gólok, <strong>KG</strong>: Kapott gólok, <strong>GK</strong>: Gól Különbség, <strong>P</strong>: Pontok-->

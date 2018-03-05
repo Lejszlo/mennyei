@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { CompetitionComponent } from "./competition/dashboard/competition.component";
+import { CompetitionComponent } from "./competition/competition.component";
 import {TableComponent} from "./competition/table/table.component";
 
 export const appRoutes: Routes = [

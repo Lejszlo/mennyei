@@ -3,7 +3,7 @@ package com.sp.organizer.command.aggregator.club.infrastructure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import command.competition.ClubCommand;
+import com.sp.organizer.api.competition.ClubCommand;
 import com.sp.organizer.command.aggregator.club.domain.ClubAggregate;
 
 import io.eventuate.AggregateRepository;

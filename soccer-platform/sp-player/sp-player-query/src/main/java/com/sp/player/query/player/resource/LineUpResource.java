@@ -2,10 +2,10 @@ package com.sp.player.query.player.resource;
 
 import lombok.Data;
 import lombok.Singular;
-import sp.match.api.value.event.CardEvent;
-import sp.match.api.value.event.GoalEvent;
-import sp.match.api.value.event.SubstitutionEvent;
-import sp.match.api.value.lineup.LineUpType;
+import com.sp.match.api.value.event.CardEvent;
+import com.sp.match.api.value.event.GoalEvent;
+import com.sp.match.api.value.event.SubstitutionEvent;
+import com.sp.match.api.value.lineup.LineUpType;
 
 import java.util.List;
 

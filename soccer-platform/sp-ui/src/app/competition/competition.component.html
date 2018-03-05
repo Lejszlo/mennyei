@@ -1,0 +1,9 @@
+<div class="justify-content-center flex-wrap d-flex my-4 py-4">
+    <sp-club-details [club]="club" *ngFor="let club of clubs"></sp-club-details>
+</div>
+<div class="justify-content-center flex-wrap d-flex bg-light border-secondary border my-4 py-4">
+    <sp-table [competitionResource]="competitionResource" [selectedStage]="selectedStage" style="width: 80%"></sp-table>
+</div>
+<div class="justify-content-center flex-wrap d-flex my-4 py-4">
+    <sp-turn [turn]="selectedTurn" style="width: 80%"></sp-turn>
+</div>

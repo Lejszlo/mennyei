@@ -1,9 +1,11 @@
 package com.sp.organizer.query.updater.club.repository;
 
+import com.sp.organizer.query.updater.club.entity.ClubDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;
-import com.sp.organizer.query.updater.club.entity.ClubQuery;
+import org.springframework.stereotype.Repository;
 
-public interface ClubQueryMongoRepository extends MongoRepository<ClubQuery, String> {
-    ClubQuery findByUrlName(@Param("urlName") String urlName);
+@Repository
+public interface ClubQueryMongoRepository extends MongoRepository<ClubDocument, String> {
+    ClubDocument findByUrlName(@Param("urlName") String urlName);
 }

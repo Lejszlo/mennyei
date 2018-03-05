@@ -1,6 +1,5 @@
 package com.sp.player.query.player.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.data.annotation.Id;
@@ -9,10 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
+import com.sp.organizer.api.value.competition.CompetitionId;
 
-/**
- * Created by lejsz on 2016. 11. 22..
- */
 @Document
 @Builder
 @Data
@@ -34,5 +31,5 @@ public class PlayerQuery {
     private String clubId;
     
     @Singular
-    private Map<String, PlayerMatchStatisticData> playerMatchStatisticDatas = new HashMap<>();
+    private Map<CompetitionId, PlayerMatchStatisticData> playerMatchStatisticDatas;
 }

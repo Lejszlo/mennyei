@@ -32,7 +32,8 @@ module.exports = webpackMerge(commonConfig, {
         port: 8090,
         inline: true,
         proxy: {
-            "/api": "http://localhost:8081"
+            "/api/competition": "http://localhost:8081",
+            "/api/matches": "http://localhost:8083"
         }
     }
 });

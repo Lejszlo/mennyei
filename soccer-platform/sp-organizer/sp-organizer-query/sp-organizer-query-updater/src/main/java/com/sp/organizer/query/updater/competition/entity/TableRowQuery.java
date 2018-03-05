@@ -1,8 +1,8 @@
 package com.sp.organizer.query.updater.competition.entity;
 
-import com.sp.organizer.query.updater.club.entity.ClubQuery;
-import sp.match.api.value.MatchResult;
-import value.competition.rule.StageRuleSet;
+import com.sp.organizer.query.updater.club.entity.ClubDocument;
+import com.sp.match.api.value.MatchResult;
+import com.sp.organizer.api.value.competition.rule.StageRuleSet;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.Getter;
 public class TableRowQuery implements Comparable<TableRowQuery> {
 	
 	@Getter
-	private ClubQuery club;
+	private ClubDocument club;
 	
 	@Getter
 	private int playedMatches;
@@ -34,7 +34,7 @@ public class TableRowQuery implements Comparable<TableRowQuery> {
 	@Getter
 	private int point;
 	
-	public TableRowQuery(ClubQuery club) {
+	public TableRowQuery(ClubDocument club) {
 		this.club = club;
 	}
 	

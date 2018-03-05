@@ -6,7 +6,7 @@ import com.sp.player.query.player.infrastructure.PlayerQueryMongoRepository;
 import io.eventuate.EventSubscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import sp.match.api.value.lineup.LineUp;
+import com.sp.match.api.value.lineup.LineUp;
 
 @EventSubscriber
 @Component

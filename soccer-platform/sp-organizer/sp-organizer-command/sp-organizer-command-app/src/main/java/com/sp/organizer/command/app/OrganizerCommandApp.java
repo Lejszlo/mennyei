@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.event.ContextRefreshedEvent;
 
-@SpringBootApplication(scanBasePackages = "com.sp.organizer.command")
+@SpringBootApplication(scanBasePackages = {"com.sp.organizer.command"})
 @EnableEventHandlers
 @Import({ EventuateDriverConfiguration.class, BeanConfigurations.class})
 public class OrganizerCommandApp implements ApplicationListener<ContextRefreshedEvent> {

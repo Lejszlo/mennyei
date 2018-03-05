@@ -1,27 +1,22 @@
 package com.sp.core.query.configurations;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 @Data
 public final class Interval implements Comparable<Interval> {
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate startDate;
+    private String startDate;
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate endDate;
+    private String endDate;
 
     public static Interval from(LocalDate startDate, LocalDate endDate) {
         Interval interval = new Interval();
-        interval.setStartDate(startDate);
-        interval.setEndDate(endDate);
+        interval.setStartDate(startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        interval.setEndDate(endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         return interval;
     }
 

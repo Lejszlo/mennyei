@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 
 import lombok.Data;
-import sp.match.api.value.lineup.LineUpType;
+import com.sp.match.api.value.lineup.LineUpType;
 
 @Data
 public class LineUpQuery {

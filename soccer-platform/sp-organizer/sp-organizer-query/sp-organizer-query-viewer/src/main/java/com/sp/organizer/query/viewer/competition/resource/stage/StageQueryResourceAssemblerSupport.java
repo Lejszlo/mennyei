@@ -1,26 +1,32 @@
 package com.sp.organizer.query.viewer.competition.resource.stage;
 
-import com.sp.organizer.query.viewer.competition.controller.CompetitionQueryController;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
-import com.sp.organizer.query.updater.competition.entity.StageQuery;
-import com.sp.organizer.query.viewer.competition.controller.StageQueryController;
+import com.sp.organizer.query.updater.competition.entity.StageDocument;
+import com.sp.organizer.query.viewer.competition.controller.StageDocumentController;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @Component
-public class StageQueryResourceAssemblerSupport extends ResourceAssemblerSupport<StageQuery, StageQueryResource> {
+public class StageQueryResourceAssemblerSupport extends ResourceAssemblerSupport<StageDocument, StageDocumentResource> {
 
     public StageQueryResourceAssemblerSupport() {
-        super(CompetitionQueryController.class, StageQueryResource.class);
+        super(StageDocumentController.class, StageDocumentResource.class);
     }
 
     @Override
-    public StageQueryResource toResource(StageQuery stageQuery) {
-        StageQueryResource stageqQueryResource = createResourceWithId(stageQuery.getIndex(), stageQuery);
-        stageqQueryResource.add(linkTo(methodOn(StageQueryController.class).getClubs(stageQuery.getCompetitionQuery(), stageQuery.getIndex())).withRel("clubs"));
-        stageqQueryResource.add(linkTo(methodOn(StageQueryController.class).getTable(stageQuery.getCompetitionQuery(), stageQuery.getIndex())).withRel("table"));
-        stageqQueryResource.setInterval(stageQuery.getInterval());
-        return stageqQueryResource;
+    public StageDocumentResource toResource(StageDocument stageDocument) {
+        StageDocumentResource stageDocumentResource = new StageDocumentResource();
+
+        stageDocumentResource.setInterval(stageDocument.getInterval());
+        stageDocumentResource.setStageRuleSet(stageDocument.getStageRuleSet());
+        stageDocumentResource.setIndex(stageDocument.getIndex());
+        stageDocumentResource.setName(stageDocument.getName());
+
+        stageDocumentResource.add(linkTo(methodOn(StageDocumentController.class).getClubs(stageDocument.getCompetitionDocumentId(), stageDocument.getIndex())).withRel("clubs"));
+        stageDocumentResource.add(linkTo(methodOn(StageDocumentController.class).getTable(stageDocument.getCompetitionDocumentId(), stageDocument.getIndex())).withRel("table"));
+        stageDocumentResource.add(linkTo(methodOn(StageDocumentController.class).getTurns(stageDocument.getCompetitionDocumentId(), stageDocument.getIndex())).withRel("turns"));
+
+        return stageDocumentResource;
     }
 }

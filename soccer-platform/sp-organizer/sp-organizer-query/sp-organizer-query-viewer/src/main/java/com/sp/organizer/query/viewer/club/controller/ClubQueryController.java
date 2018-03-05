@@ -1,6 +1,6 @@
 package com.sp.organizer.query.viewer.club.controller;
 
-import com.sp.organizer.query.viewer.club.resource.ClubQueryResource;
+import com.sp.organizer.query.viewer.club.resource.ClubDocumentResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +23,12 @@ public class ClubQueryController {
 	}
 	
 	@RequestMapping(value = "/{urlName}", method = RequestMethod.GET)
-	public ResponseEntity<Resource<ClubQueryResource>> byClub(@PathVariable String urlName) {
-//		Optional<ClubQuery> clubQueryOptional = clubQueryService.findClubByUrlName(urlName);
+	public ResponseEntity<Resource<ClubDocumentResource>> byClub(@PathVariable String urlName) {
+//		Optional<ClubDocument> clubQueryOptional = clubQueryService.findClubByUrlName(urlName);
 //
-//		ClubQuery clubQuery = clubQueryOptional.orElseThrow(ClubNotFoundException::new);
-//		Resource<ClubQuery> resource = new Resource<>(clubQuery);
-//		resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(MatchController.class).byClub(clubQuery.getId())).withRel("matches"));
+//		ClubDocument clubQuery = clubQueryOptional.orElseThrow(ClubNotFoundException::new);
+//		Resource<ClubDocument> resource = new Resource<>(clubQuery);
+//		resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(MatchController.class).getMatchByClub(clubQuery.getId())).withRel("matches"));
 //		resource.add(ControllerLinkBuilder.linkTo(ClubQueryController.class).withSelfRel());
 //		return ResponseEntity.ok(resource);
 		return null;

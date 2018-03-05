@@ -12,6 +12,10 @@
     <artifactId>sp-organizer-query-app</artifactId>
     <dependencies>
         <dependency>
+            <groupId>io.eventuate.local.java</groupId>
+            <artifactId>eventuate-local-java-jdbc</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
@@ -20,8 +24,14 @@
             <artifactId>spring-boot</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-mongodb</artifactId>
+            <groupId>com.hajdu</groupId>
+            <artifactId>sp-organizer-query-updater</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hajdu</groupId>
+            <artifactId>sp-organizer-query-viewer</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

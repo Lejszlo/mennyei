@@ -3,8 +3,11 @@ import { CommonModule } from '@angular/common'
 import { CompetitionService } from './competition.service';
 import { HttpModule }    from '@angular/http';
 import { TableComponent } from './table/table.component';
-import { CompetitionComponent } from './dashboard/competition.component';
+import { CompetitionComponent } from './competition.component';
 import { ClubDetailsComponent } from '../club/details/club.details.component';
+import {FirstLetterPipe} from "../pipes/first.letter.pipe";
+import {MatchComponent} from "./match/match.component";
+import {TurnComponent} from "./turn/turn.component";
 
 @NgModule({
     imports: [
@@ -14,7 +17,11 @@ import { ClubDetailsComponent } from '../club/details/club.details.component';
     declarations: [
         TableComponent,
         CompetitionComponent,
-        ClubDetailsComponent
+        ClubDetailsComponent,
+        MatchComponent,
+        TurnComponent,
+
+        FirstLetterPipe
     ],
     providers: [
         CompetitionService

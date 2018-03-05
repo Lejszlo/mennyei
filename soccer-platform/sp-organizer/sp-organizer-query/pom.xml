@@ -28,6 +28,10 @@
             <artifactId>sp-organizer-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>io.eventuate.client.java</groupId>
+            <artifactId>eventuate-client-java-spring</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

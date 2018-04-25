@@ -6,13 +6,15 @@ import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.ResourceSupport;
 import com.sp.organizer.api.value.competition.rule.StageRuleSet;
 
+import java.util.UUID;
+
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class StageDocumentResource extends ResourceSupport {
 
     private String name;
 
-    private int index;
+    private String stageId;
 
     private Interval interval;
 

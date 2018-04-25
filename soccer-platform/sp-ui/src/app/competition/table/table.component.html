@@ -15,7 +15,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let row of rows, let i=index">
-            <th scope="row">
+            <th ngClass="{{i + 1 < 1}}" scope="row">
                {{i + 1}}.
             </th>
             <th scope="row" class="clubName">
@@ -31,6 +31,7 @@
             <th class="text-center" scope="row">{{row.point}}</th>
         </tr>
     </tbody>
+    <tfoot>
+        Footer
+    </tfoot>
 </table>
-<!--<strong>M</strong>: Mérközések száma <strong>Gy</strong>: Győzelem, <strong>D</strong>: Döntetlen, <strong>V</strong>: Vereség,-->
-<!--<strong>LG</strong>: Lőtt gólok, <strong>KG</strong>: Kapott gólok, <strong>GK</strong>: Gól Különbség, <strong>P</strong>: Pontok-->

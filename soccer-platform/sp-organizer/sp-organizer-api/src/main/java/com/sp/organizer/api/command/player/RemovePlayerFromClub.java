@@ -1,13 +1,12 @@
-package com.sp.organizer.api.competition;
+package com.sp.organizer.api.command.player;
 
+import com.sp.organizer.api.command.club.ClubCommand;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.Value;
 
-/**
- * Created by lejsz on 2016. 11. 22..
- */
-
+@EqualsAndHashCode(callSuper = true)
 @Value
 @AllArgsConstructor
 public class RemovePlayerFromClub extends ClubCommand {

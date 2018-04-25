@@ -1,4 +1,4 @@
-package com.sp.organizer.api.competition;
+package com.sp.organizer.api.command.club;
 
 import lombok.AllArgsConstructor;
 import lombok.Value;

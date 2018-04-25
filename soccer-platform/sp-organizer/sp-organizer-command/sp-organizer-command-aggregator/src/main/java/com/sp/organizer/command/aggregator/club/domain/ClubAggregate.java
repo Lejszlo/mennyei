@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.sp.organizer.api.competition.AddPlayerToClubCommand;
-import com.sp.organizer.api.competition.ClubCommand;
-import com.sp.organizer.api.competition.RemovePlayerFromClub;
-import com.sp.organizer.api.competition.AddClubCommand;
+import com.sp.organizer.api.command.club.AddClubCommand;
+import com.sp.organizer.api.command.player.AddPlayerToClubCommand;
+import com.sp.organizer.api.command.club.ClubCommand;
+import com.sp.organizer.api.command.player.RemovePlayerFromClub;
 
 import event.PlayerAddedToClub;
 import event.PlayerRemovedFromClub;

@@ -1,7 +1,7 @@
 package com.sp.organizer.command.aggregator.competition.controller;
 
 import com.sp.core.backend.web.resource.IdResource;
-import com.sp.organizer.api.competition.SaveCompetitionCommand;
+import com.sp.organizer.api.command.competition.SaveCompetitionCommand;
 import com.sp.organizer.command.aggregator.competition.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +21,8 @@ public class CompetitionController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public IdResource registerCompetition(@RequestBody SaveCompetitionCommand competitionCommand) {
-        return competitionService.save(competitionCommand);
+    public String registerCompetition(@RequestBody SaveCompetitionCommand competitionCommand) {
+        return competitionService.save(competitionCommand).toString();
     }
 
 

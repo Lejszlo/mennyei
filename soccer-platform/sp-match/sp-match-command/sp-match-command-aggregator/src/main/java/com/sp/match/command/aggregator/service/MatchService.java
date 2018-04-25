@@ -3,6 +3,7 @@ package com.sp.match.command.aggregator.service;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import com.sp.match.api.value.event.GameEvent;
 import com.sp.match.command.aggregator.domain.MatchAggregator;
 import com.sp.match.command.aggregator.infrastructure.MatchAggregateRepository;
 import com.sp.match.api.command.AddMatchCommand;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import io.eventuate.EntityWithIdAndVersion;
 import com.sp.match.api.value.MatchInfo;
-import com.sp.match.api.value.event.MatchEvent;
 import com.sp.match.api.value.lineup.LineUp;
 import com.sp.organizer.api.value.club.AwayClubId;
 import com.sp.organizer.api.value.club.HomeClubId;
@@ -44,8 +44,14 @@ public class MatchService {
 		return matchAggregateRepository.update(matchId, setMatchCommand);
 	}
 
-	public CompletableFuture<EntityWithIdAndVersion<MatchAggregator>> playMatch(HomeClubId homeClubId, AwayClubId awayClubId, CompetitionId competitionId, StageId stageIndex, String matchId, List<MatchEvent> homeClubEvents, List<MatchEvent> awayClubEvents) {
-		PlayMatchCommand playMatchCommand = PlayMatchCommand.builder(competitionId, homeClubId, awayClubId, stageIndex)
+	public CompletableFuture<EntityWithIdAndVersion<MatchAggregator>> playMatch(HomeClubId homeClubId,
+                                                                                AwayClubId awayClubId,
+                                                                                CompetitionId competitionId,
+																				StageId stageId,
+																				String matchId,
+                                                                                List<GameEvent> homeClubEvents,
+                                                                                List<GameEvent> awayClubEvents) {
+		PlayMatchCommand playMatchCommand = PlayMatchCommand.builder(competitionId, homeClubId, awayClubId, stageId)
 				.homeClubevents(homeClubEvents)
 				.awayClubevents(awayClubEvents)
 				.build();

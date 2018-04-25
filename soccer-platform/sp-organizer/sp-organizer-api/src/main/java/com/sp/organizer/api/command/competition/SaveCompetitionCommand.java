@@ -1,4 +1,4 @@
-package com.sp.organizer.api.competition;
+package com.sp.organizer.api.command.competition;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

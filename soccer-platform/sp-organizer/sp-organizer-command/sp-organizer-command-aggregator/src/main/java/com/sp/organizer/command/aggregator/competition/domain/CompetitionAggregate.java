@@ -1,9 +1,11 @@
 package com.sp.organizer.command.aggregator.competition.domain;
 
-import com.sp.core.backend.exception.MaxClubLimitIsReached;
-import com.sp.organizer.api.competition.AddStageCommand;
-import com.sp.organizer.api.competition.SaveCompetitionCommand;
-import com.sp.organizer.api.competition.CompetitionCommand;
+import com.sp.core.backend.web.resource.IdResource;
+import com.sp.organizer.api.command.competition.AddClubsToStageCommand;
+import com.sp.organizer.api.command.competition.AddStageCommand;
+import com.sp.organizer.api.command.competition.SaveCompetitionCommand;
+import com.sp.organizer.api.command.competition.CompetitionCommand;
+import com.sp.organizer.api.event.competition.ClubsAddedToStage;
 import com.sp.organizer.api.value.competition.CompetitionInfo;
 import com.sp.organizer.api.value.competition.season.Stage;
 import com.sp.organizer.api.event.competition.CompetitionAdded;
@@ -12,6 +14,7 @@ import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CompetitionAggregate extends ReflectiveMutableCommandProcessingAggregate<CompetitionAggregate, CompetitionCommand> {
 
@@ -28,6 +31,24 @@ public class CompetitionAggregate extends ReflectiveMutableCommandProcessingAggr
         return Collections.singletonList(StageAdded.builder()
                 .stage(addStageCommand.getStage())
                 .build());
+    }
+
+    public List<Event> process(AddClubsToStageCommand addClubsToStageCommand) {
+        return Collections.singletonList(ClubsAddedToStage.builder()
+                .stageId(addClubsToStageCommand.getStageId())
+                .clubIds(addClubsToStageCommand.getClubIds())
+                .build());
+    }
+
+    public void apply(AddClubsToStageCommand addClubsToStageCommand) {
+        stages.stream()
+                .filter(stage -> stage.getId().equals(addClubsToStageCommand.getStageId()))
+                .findFirst()
+                .ifPresent(stage -> stage.getClubIds().addAll(addClubsToStageCommand.getClubIds()
+                        .stream()
+                        .map(UUID::toString)
+                        .collect(Collectors.toList()))
+                );
     }
 
     public void apply(CompetitionAdded competitionAdded) {

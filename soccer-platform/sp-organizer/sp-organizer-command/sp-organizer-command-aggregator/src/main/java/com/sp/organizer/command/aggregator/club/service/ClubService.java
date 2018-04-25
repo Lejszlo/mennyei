@@ -3,14 +3,13 @@ package com.sp.organizer.command.aggregator.club.service;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+import com.sp.organizer.api.command.club.AddClubCommand;
 import com.sp.organizer.command.aggregator.club.domain.ClubAggregate;
 import com.sp.organizer.command.aggregator.club.infrastructure.ClubAggregateRepository;
-import com.sp.organizer.api.competition.AddPlayerToClubCommand;
-import com.sp.organizer.api.competition.RemovePlayerFromClub;
+import com.sp.organizer.api.command.player.AddPlayerToClubCommand;
+import com.sp.organizer.api.command.player.RemovePlayerFromClub;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.sp.organizer.api.competition.AddClubCommand;
 
 import io.eventuate.EntityWithIdAndVersion;
 import value.Transfer;

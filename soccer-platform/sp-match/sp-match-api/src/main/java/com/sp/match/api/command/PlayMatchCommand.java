@@ -2,11 +2,11 @@ package com.sp.match.api.command;
 
 import java.util.List;
 
+import com.sp.match.api.value.event.GameEvent;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Singular;
 import lombok.Value;
-import com.sp.match.api.value.event.MatchEvent;
 import com.sp.organizer.api.value.club.AwayClubId;
 import com.sp.organizer.api.value.club.HomeClubId;
 import com.sp.organizer.api.value.competition.CompetitionId;
@@ -26,10 +26,10 @@ public class PlayMatchCommand extends MatchCommand {
 	private StageId stageId;
 
 	@Singular
-	private List<MatchEvent> homeClubevents;
+	private List<GameEvent> homeClubevents;
 	
 	@Singular
-	private List<MatchEvent> awayClubevents;
+	private List<GameEvent> awayClubevents;
 
 	@NotNull
 	private CompetitionId competitionId;

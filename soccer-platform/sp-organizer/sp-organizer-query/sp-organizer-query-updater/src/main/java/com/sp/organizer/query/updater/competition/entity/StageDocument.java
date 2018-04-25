@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-@Builder(builderMethodName="hiddenBuilder")
+@Builder
 @AllArgsConstructor
 public class StageDocument {
 
 	@NotNull
-	private int index;
+	private String id;
 
 	@NotNull
 	private String competitionDocumentId;
@@ -39,12 +39,5 @@ public class StageDocument {
 
 	@NotNull
 	private Interval interval;
-
-	public static StageDocumentBuilder builder(String name, StageRuleSet stageRuleSet, int index) {
-		return hiddenBuilder()
-				.name(name)
-				.stageRuleSet(stageRuleSet)
-				.index(index);
-	}
 
 }

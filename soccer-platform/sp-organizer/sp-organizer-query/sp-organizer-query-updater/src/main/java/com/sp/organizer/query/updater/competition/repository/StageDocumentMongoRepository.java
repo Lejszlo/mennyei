@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StageDocumentMongoRepository extends MongoRepository<StageDocument, String>  {
 
-    @Query("{ $and: [ {'competitionId' : ?0}, {'stageIndex' : ?1} ]}")
-    StageDocument findByCompetitionIdAndStageIndex(@Param("competitionId") String clubId, @Param("stageIndex") int stageIndex);
+    @Query("{ $and: [ {'competitionDocumentId' : ?0}, {'id' : ?1} ]}")
+    StageDocument findByCompetitionIdAndStageIndex(@Param("competitionDocumentId") String competitionId, @Param("id") String stageId);
 
 }

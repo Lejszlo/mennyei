@@ -36,4 +36,16 @@ export class TableComponent implements OnChanges {
         }
     }
 
+    getPromotedPlaces(): number {
+        if(this.selectedStage) {
+            return this.selectedStage.stageRuleSet.promotion;
+        }
+    }
+
+    getRelegationPlaces(): number {
+        if(this.selectedStage) {
+            return this.selectedStage.stageRuleSet.relegation;
+        }
+    }
+
 }

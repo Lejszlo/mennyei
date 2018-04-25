@@ -8,12 +8,28 @@ export interface Club {
 export interface Stage {
     _links : any;
     name: string;
-    index: number;
+    uuiD: number;
     stageRuleSet: StageRuleSet;
 }
 
 export interface StageRuleSet {
-
+    numberOfTeams: number;
+    pointsForWin: number;
+    pointsForDraw: number;
+    pointsForLose: number;
+    numberOfMatches: number;
+    subsNamed: number;
+    subsUsed: number;
+    relegation: number;
+    promotion: number;
+    yellowCardLimit: number;
+    yellowCardsBan: number;
+    redCardsBan: number;
+    oneHalfMinutes: number;
+    hasOverTime: number;
+    numberOfHalfs: number;
+    oneHalfOverTimeMinutes: number;
+    hasPenalties: boolean;
 }
 
 export interface CompetitionResource {

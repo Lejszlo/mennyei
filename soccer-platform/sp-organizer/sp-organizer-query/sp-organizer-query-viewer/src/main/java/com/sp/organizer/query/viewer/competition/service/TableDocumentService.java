@@ -33,8 +33,8 @@ public class TableDocumentService {
         this.turnDocumentResourceAssemblerSupport = turnDocumentResourceAssemblerSupport;
     }
 
-    public TableDocumentResource getTable(String competitionId, int stageIndex) {
-        Optional<StageDocument> stageDocumentOptional = stageDocumentService.getStageQuery(competitionId, stageIndex);
+    public TableDocumentResource getTable(String competitionId, String stageId) {
+        Optional<StageDocument> stageDocumentOptional = stageDocumentService.getStageQuery(competitionId, stageId);
         TableQuery tableQuery = stageDocumentOptional.map(StageDocument::getTableQuery).orElse(null);
         return tableDocumentResourceAssemblerSupport.toResource(tableQuery);
     }

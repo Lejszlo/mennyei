@@ -18,10 +18,10 @@ public class TurnDocumentController {
 
     @GetMapping(value = "/{turnIndex}")
     public TurnDocumentResource getTurn(@PathVariable("competitionId") String competitionId,
-                                                                             @PathVariable("stageIndex") int stageIndex,
+                                                                             @PathVariable("stageId") String stageId,
                                                                              @PathVariable("turnIndex") int turnIndex) {
 
-        return turnDocumentService.getTurn(competitionId, stageIndex, turnIndex);
+        return turnDocumentService.getTurn(competitionId, stageId, turnIndex);
     }
 
 }

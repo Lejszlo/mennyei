@@ -1,23 +1,20 @@
 package com.sp.organizer.api.value.competition;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Getter
 public class StageId {
     private CompetitionId competitionId;
-    private int index;
+    private String id;
 
-    private StageId(CompetitionId value, int index) {
+    private StageId(CompetitionId value, String id) {
         this.competitionId = value;
-        this.index = index;
+        this.id = id;
     }
 
-    public static StageId stageId(CompetitionId competitionId, int index) {
-        return new StageId(competitionId, index);
-    }
-
-    public CompetitionId getCompetitionId() {
-        return competitionId;
-    }
-
-    public int getIndex() {
-        return index;
+    public static StageId stageId(CompetitionId competitionId, String id) {
+        return new StageId(competitionId, id);
     }
 }

@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.Singular;
 import com.sp.match.api.value.event.CardEvent;
 import com.sp.match.api.value.event.GoalEvent;
-import com.sp.match.api.value.event.SubstitutionEvent;
+import com.sp.match.api.value.event.SubstitutionGameEvent;
 import com.sp.match.api.value.lineup.LineUpType;
 
 import java.util.List;
@@ -27,5 +27,5 @@ public class LineUpResource {
 	private List<CardEvent> cardEvents;
 	
 	@Singular
-	private List<SubstitutionEvent> substitutionEvents;
+	private List<SubstitutionGameEvent> substitutionGameEvents;
 }

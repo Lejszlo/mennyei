@@ -1,15 +1,19 @@
 package com.sp.match.api.value.event;
 
 public enum MatchEventType {
-	YELLOW_CARD(CardEvent.class), RED_CARD(CardEvent.class), GOAL(GoalEvent.class), OWN_GOAL(GoalEvent.class), SUBSTITUTION(SubstitutionEvent.class);
+	YELLOW_CARD(CardEvent.class),
+	RED_CARD(CardEvent.class),
+	GOAL(GoalEvent.class),
+	OWN_GOAL(GoalEvent.class),
+	SUBSTITUTION(SubstitutionGameEvent.class);
 	
-	private Class<? extends MatchEvent> eventClass;
+	private Class<? extends GameEvent> eventClass;
 
-	private MatchEventType(Class<? extends MatchEvent> eventClass) {
+	private MatchEventType(Class<? extends GameEvent> eventClass) {
 		this.eventClass = eventClass;
 	}
 	
-	public Class<? extends MatchEvent> getEventClass() {
+	public Class<? extends GameEvent> getEventClass() {
 		return eventClass;
 	}
 }

@@ -26,14 +26,14 @@ public class StageDocumentService {
         this.clubDocumentResourceAssemblerSupport = clubDocumentResourceAssemblerSupport;
     }
 
-    public Resources<ClubDocumentResource> getClubs(String competitionId, int stageIndex) {
-        Optional<StageDocument> stageQueryOptional = getStageQuery(competitionId, stageIndex);
+    public Resources<ClubDocumentResource> getClubs(String competitionId, String stageId) {
+        Optional<StageDocument> stageQueryOptional = getStageQuery(competitionId, stageId);
         Set<ClubDocument> clubQueries = stageQueryOptional.map(StageDocument::getClubs).orElse(Collections.emptySet());
         return new Resources<>(clubDocumentResourceAssemblerSupport.toResources(clubQueries));
     }
 
-    public Optional<StageDocument> getStageQuery(String competitionId, int stageIndex) {
+    Optional<StageDocument> getStageQuery(String competitionId, String stageId) {
         CompetitionDocument competitionQuery = competitionDocumentService.findById(competitionId);
-        return competitionQuery.getStages().stream().filter(stageQuery -> stageQuery.getIndex() == stageIndex).findFirst();
+        return competitionQuery.getStages().stream().filter(stageQuery -> stageQuery.getId().equals(stageId)).findFirst();
     }
 }

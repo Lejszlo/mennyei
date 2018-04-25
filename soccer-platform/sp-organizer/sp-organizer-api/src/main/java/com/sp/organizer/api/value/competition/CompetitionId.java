@@ -1,5 +1,8 @@
 package com.sp.organizer.api.value.competition;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class CompetitionId {
     private String value;
 

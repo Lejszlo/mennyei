@@ -1,6 +1,7 @@
 package com.sp.player.query.player.service;
 
 import com.sp.core.backend.DateUtil;
+import com.sp.organizer.api.value.competition.CompetitionId;
 import com.sp.player.query.player.domain.PlayerQuery;
 import com.sp.player.query.player.infrastructure.PlayerQueryMongoRepository;
 import com.sp.match.api.event.MatchPlayed;
@@ -46,7 +47,7 @@ public class PlayerEventSubscriber {
     public void matchPlayed(DispatchedEvent<MatchPlayed> dispatchedEvent) {
         MatchPlayed matchPlayed = dispatchedEvent.getEvent();
         String matchId = dispatchedEvent.getEntityId();
-        playerMatchStatisticService.updatePlayerStatistics(matchId, matchPlayed.getMatchResultDetailes(), matchPlayed.getCompetitionId());
+        playerMatchStatisticService.updatePlayerStatistics(matchId, matchPlayed.getMatchResultDetailes(), CompetitionId.competitionId(matchPlayed.getCompetitionId()));
     }
 
 }

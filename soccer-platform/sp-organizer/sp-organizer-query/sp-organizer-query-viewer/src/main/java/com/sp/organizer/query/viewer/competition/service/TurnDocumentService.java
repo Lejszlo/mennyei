@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TurnDocumentService {
@@ -26,20 +27,24 @@ public class TurnDocumentService {
         this.turnDocumentResourceAssemblerSupport = turnDocumentResourceAssemblerSupport;
     }
 
-    public Resources<TurnDocumentResource> getTurns(String competitionId, int stageIndex) {
-        Optional<StageDocument> stageDocumentOptional = stageDocumentService.getStageQuery(competitionId, stageIndex);
-        List<TurnDocument> turnDocuments = stageDocumentOptional.map(StageDocument::getTurns).orElseGet(Collections::emptyList);
+    public Resources<TurnDocumentResource> getTurns(String competitionId, String stageId) {
+        Optional<StageDocument> stageDocumentOptional = stageDocumentService.getStageQuery(competitionId, stageId);
+        List<TurnDocument> turnDocuments = stageDocumentOptional.map(stageDocument -> stageDocument.getTurns()
+                    .stream()
+                    .sorted()
+                    .collect(Collectors.toList()))
+                .orElseGet(Collections::emptyList);
         return new Resources<>(turnDocumentResourceAssemblerSupport.toResources(turnDocuments));
     }
 
-    public TurnDocumentResource getTurn(String competitionId, int stageIndex, int turnIndex) {
-        return getTurnDocument(competitionId, stageIndex, turnIndex)
+    public TurnDocumentResource getTurn(String competitionId, String stageId, int turnIndex) {
+        return getTurnDocument(competitionId, stageId, turnIndex)
                 .map(turnDocumentResourceAssemblerSupport::toResource)
                 .orElse(TurnDocumentResource.builder().build());
     }
 
-    private Optional<TurnDocument> getTurnDocument(String competitionId, int stageIndex, int turnIndex) {
-        Optional<StageDocument> stageDocuments = stageDocumentService.getStageQuery(competitionId, stageIndex);
+    private Optional<TurnDocument> getTurnDocument(String competitionId, String stageId, int turnIndex) {
+        Optional<StageDocument> stageDocuments = stageDocumentService.getStageQuery(competitionId, stageId);
         return stageDocuments
                 .flatMap(sd -> sd.getTurns()
                         .stream()

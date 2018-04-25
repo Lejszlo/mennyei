@@ -22,7 +22,7 @@ public class MatchPlayed implements MatchEvent {
 	
 	private boolean played;
 
-	private CompetitionId competitionId;
+	private String competitionId;
 
 	private MatchResultDetails matchResultDetailes;
 
@@ -39,7 +39,7 @@ public class MatchPlayed implements MatchEvent {
                 .homeClubId(homeClubId)
                 .awayClubId(awayClubId)
                 .matchResultDetailes(matchResultDetailes)
-                .competitionId(competitionId)
+                .competitionId(competitionId.getValue())
                 .stageId(stageId);
 	}
 

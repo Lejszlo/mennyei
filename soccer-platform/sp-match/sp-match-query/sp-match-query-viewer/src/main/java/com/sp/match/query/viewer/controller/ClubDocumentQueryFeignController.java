@@ -3,8 +3,7 @@ package com.sp.match.query.viewer.controller;
 import com.sp.organizer.api.controller.ClubQueryClient;
 import com.sp.organizer.api.resource.ClubDocumentResource;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,6 +11,6 @@ import java.util.List;
 public interface ClubDocumentQueryFeignController extends ClubQueryClient {
 
     @Override
-    @GetMapping(value = "/club/{clubIds}")
+    @RequestMapping(value = "/club/{clubIds}", method = RequestMethod.GET)
     List<ClubDocumentResource> getClubs(@PathVariable("clubIds") List<String> clubIds);
 }

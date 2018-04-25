@@ -1,8 +1,10 @@
 package com.sp.organizer.query.updater.competition.service;
 
-import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.sp.organizer.query.updater.club.entity.ClubDocument;
 import com.sp.organizer.query.updater.competition.entity.StageDocument;
 import com.sp.organizer.query.updater.competition.entity.TableQuery;
 import com.sp.organizer.query.updater.competition.entity.TableRowQuery;
@@ -53,12 +55,9 @@ public class CompetitionTableService {
 	}
 
 	public void createTables(StageDocument stageDocument) {
-        List<TableRowQuery> tableRowQueries = stageDocument.getClubs()
-                .stream()
-                .map(TableRowQuery::new)
-                .collect(Collectors.toList());
+		Set<TableRowQuery> tableRowQueries = convertClubDocumentsToRows(stageDocument.getClubs());
 
-        TableQuery tableQuery = TableQuery.builder()
+		TableQuery tableQuery = TableQuery.builder()
                 .rows(tableRowQueries)
                 .build();
 
@@ -66,8 +65,20 @@ public class CompetitionTableService {
 		stageDocument.setTableQuery(tableQuery);
 	}
 
-	public StageDocument getStageTable(StageId stageId) {
-		return stageDocumentMongoRepository.findByCompetitionIdAndStageIndex(stageId.getCompetitionId().getValue(), stageId.getIndex());
+	private Set<TableRowQuery> convertClubDocumentsToRows(Set<ClubDocument> clubDocuments) {
+		return clubDocuments
+					.stream()
+					.map(TableRowQuery::new)
+					.collect(Collectors.toSet());
 	}
 
+	public StageDocument getStageTable(StageId stageId) {
+		return stageDocumentMongoRepository.findByCompetitionIdAndStageIndex(stageId.getCompetitionId().getValue(), stageId.getId());
+	}
+
+	public void updateTables(UUID stageDocumentId, Set<ClubDocument> clubDocuments) {
+		StageDocument stageDocument = stageDocumentMongoRepository.findOne(stageDocumentId.toString());
+		stageDocument.getClubs().addAll(clubDocuments);
+		stageDocumentMongoRepository.save(stageDocument);
+	}
 }

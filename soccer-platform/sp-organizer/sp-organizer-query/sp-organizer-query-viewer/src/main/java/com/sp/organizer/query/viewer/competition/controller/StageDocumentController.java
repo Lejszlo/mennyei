@@ -13,7 +13,7 @@ import com.sp.organizer.api.resource.ClubDocumentResource;
 
 import static org.springframework.http.ResponseEntity.*;
 
-@RequestMapping("/api/competition/{competitionId}/{stageIndex}")
+@RequestMapping("/api/competition/{competitionId}/{stageId}")
 @RestController
 public class StageDocumentController {
 	private final StageDocumentService stageDocumentService;
@@ -28,17 +28,17 @@ public class StageDocumentController {
     }
 
     @GetMapping(value = "/clubs")
-	public ResponseEntity<Resources<ClubDocumentResource>> getClubs(@PathVariable("competitionId") String competitionId, @PathVariable("stageIndex") int stageIndex) {
-    	return ok(stageDocumentService.getClubs(competitionId, stageIndex));
+	public ResponseEntity<Resources<ClubDocumentResource>> getClubs(@PathVariable("competitionId") String competitionId, @PathVariable("stageId") String stageId) {
+    	return ok(stageDocumentService.getClubs(competitionId, stageId));
 	}
 
 	@GetMapping(value = "/tables")
-    public TableDocumentResource getTable(@PathVariable("competitionId") String competitionId, @PathVariable("stageIndex") int stageIndex) {
-        return tableQueryService.getTable(competitionId, stageIndex);
+    public TableDocumentResource getTable(@PathVariable("competitionId") String competitionId, @PathVariable("stageId") String stageId) {
+        return tableQueryService.getTable(competitionId, stageId);
     }
 
     @GetMapping(value = "/turns")
-    public Resources<TurnDocumentResource> getTurns(@PathVariable("competitionId") String competitionId, @PathVariable("stageIndex") int stageIndex) {
-        return turnDocumentService.getTurns(competitionId, stageIndex);
+    public Resources<TurnDocumentResource> getTurns(@PathVariable("competitionId") String competitionId, @PathVariable("stageId") String stageId) {
+        return turnDocumentService.getTurns(competitionId, stageId);
     }
 }

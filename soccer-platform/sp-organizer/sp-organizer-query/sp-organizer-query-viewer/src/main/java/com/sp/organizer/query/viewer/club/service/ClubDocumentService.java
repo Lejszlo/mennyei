@@ -11,6 +11,7 @@ import com.sp.organizer.query.updater.club.repository.ClubQueryMongoRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClubDocumentService {
@@ -23,10 +24,13 @@ public class ClubDocumentService {
         this.clubDocumentResourceAssemblerSupport = clubDocumentResourceAssemblerSupport;
     }
 
-    public List<ClubDocumentResource> findClubs(Collection<String> clubIds) {
+    public List<ClubDocumentResource> findClubs(List<String> clubIds) {
+        String firstId = clubIds.remove(0);
+        clubIds.add(firstId.substring(1));
+        String lastId = clubIds.remove(clubIds.size() - 2);
+        clubIds.add(lastId.substring(0, lastId.length()-1));
         ArrayList<ClubDocument> clubDocuments = Lists.newArrayList(clubQueryMongoRepository.findAll(clubIds));
         return clubDocumentResourceAssemblerSupport.toResources(clubDocuments);
-//        return new Resources<>(clubDocumentResourceAssemblerSupport.toResources(clubDocuments));
     }
 
 }

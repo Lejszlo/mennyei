@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import com.sp.organizer.query.updater.competition.entity.StageDocument;
 import com.sp.organizer.query.viewer.competition.controller.StageDocumentController;
 
+import java.util.UUID;
+
+import static java.util.UUID.*;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @Component
@@ -20,12 +23,12 @@ public class StageQueryResourceAssemblerSupport extends ResourceAssemblerSupport
 
         stageDocumentResource.setInterval(stageDocument.getInterval());
         stageDocumentResource.setStageRuleSet(stageDocument.getStageRuleSet());
-        stageDocumentResource.setIndex(stageDocument.getIndex());
+        stageDocumentResource.setStageId(stageDocument.getId());
         stageDocumentResource.setName(stageDocument.getName());
 
-        stageDocumentResource.add(linkTo(methodOn(StageDocumentController.class).getClubs(stageDocument.getCompetitionDocumentId(), stageDocument.getIndex())).withRel("clubs"));
-        stageDocumentResource.add(linkTo(methodOn(StageDocumentController.class).getTable(stageDocument.getCompetitionDocumentId(), stageDocument.getIndex())).withRel("table"));
-        stageDocumentResource.add(linkTo(methodOn(StageDocumentController.class).getTurns(stageDocument.getCompetitionDocumentId(), stageDocument.getIndex())).withRel("turns"));
+        stageDocumentResource.add(linkTo(methodOn(StageDocumentController.class).getClubs(stageDocument.getCompetitionDocumentId(), stageDocument.getId())).withRel("clubs"));
+        stageDocumentResource.add(linkTo(methodOn(StageDocumentController.class).getTable(stageDocument.getCompetitionDocumentId(), stageDocument.getId())).withRel("table"));
+        stageDocumentResource.add(linkTo(methodOn(StageDocumentController.class).getTurns(stageDocument.getCompetitionDocumentId(), stageDocument.getId())).withRel("turns"));
 
         return stageDocumentResource;
     }

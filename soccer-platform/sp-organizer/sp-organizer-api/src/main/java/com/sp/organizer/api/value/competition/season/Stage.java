@@ -7,11 +7,11 @@ import com.sp.organizer.api.value.competition.rule.StageRuleSet;
 import lombok.*;
 
 @Value
-@Builder(builderMethodName="hiddenBuilder")
+@Builder
 @AllArgsConstructor
 public class Stage {
 
-	private int index;
+	private UUID id = UUID.randomUUID();
 
 	@NonNull
 	private String name;
@@ -19,16 +19,13 @@ public class Stage {
 	@NonNull
 	private StageRuleSet stageRuleSet;
 
-	private List<Turn> turns = new ArrayList<>();
+	@Singular
+	private List<Turn> turns;
 
 	@Singular
 	private Set<String> clubIds;
 
+	@NonNull
 	private Interval interval;
 
-	public static StageBuilder builder(String name, int index) {
-		return hiddenBuilder()
-                .name(name)
-                .index(index);
-	}
 }

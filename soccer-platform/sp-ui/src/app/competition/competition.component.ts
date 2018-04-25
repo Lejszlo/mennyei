@@ -15,7 +15,8 @@ export class CompetitionComponent implements OnInit {
     clubs : Club[];
     selectedStage: Stage;
     turns: TurnResource[];
-    selectedTurn: TurnResource;
+    lastTurn: TurnResource;
+    nextTurn: TurnResource;
 
     constructor (private competitionService : CompetitionService ) {
     }
@@ -49,7 +50,8 @@ export class CompetitionComponent implements OnInit {
                 .getTurns(stage)
                 .subscribe(data => {
                     this.turns = data;
-                    this.selectedTurn = this.turns[0];
+                    this.lastTurn = this.turns[0];
+                    this.nextTurn = this.turns[1];
                 });
         }
     }

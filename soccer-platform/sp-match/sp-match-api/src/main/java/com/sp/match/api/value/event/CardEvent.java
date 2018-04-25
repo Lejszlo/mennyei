@@ -9,7 +9,7 @@ import lombok.Value;
 @Builder
 @EqualsAndHashCode(callSuper=false)
 @AllArgsConstructor
-public class CardEvent extends MatchEvent {
+public class CardEvent extends GameEvent {
 	private String suffererId;
 
 	public static CardEvent yellowCardOf(int minute) {
@@ -22,15 +22,15 @@ public class CardEvent extends MatchEvent {
 
 	public static CardEvent yellowCardOf(String suffererId, int minute) {
 		CardEvent cardEvent = CardEvent.builder().suffererId(suffererId).build();
-		cardEvent.minute = minute;
-		cardEvent.matchEventType = MatchEventType.YELLOW_CARD;
+		cardEvent.setMinute(minute);
+		cardEvent.setMatchEventType(MatchEventType.YELLOW_CARD);
 		return cardEvent;
 	}
 	
 	public static CardEvent redCardOf(String suffererId, int minute) {
 		CardEvent cardEvent = CardEvent.builder().suffererId(suffererId).build();
-		cardEvent.minute = minute;
-		cardEvent.matchEventType = MatchEventType.RED_CARD;
+		cardEvent.setMinute(minute);
+		cardEvent.setMatchEventType(MatchEventType.RED_CARD);
 		return cardEvent;
 	}
 }

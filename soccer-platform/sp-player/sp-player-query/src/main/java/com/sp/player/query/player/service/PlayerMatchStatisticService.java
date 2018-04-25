@@ -12,7 +12,7 @@ import com.sp.match.api.value.MatchResultDetails;
 import com.sp.match.api.value.event.CardEvent;
 import com.sp.match.api.value.event.GoalEvent;
 import com.sp.match.api.value.event.MatchEventType;
-import com.sp.match.api.value.event.SubstitutionEvent;
+import com.sp.match.api.value.event.SubstitutionGameEvent;
 import com.sp.match.api.value.lineup.LineUpType;
 import com.sp.organizer.api.value.competition.CompetitionId;
 
@@ -63,12 +63,12 @@ public class PlayerMatchStatisticService {
 		List<CardEvent> yellowCards = matchResultDetailes.getCardEventsForPlayer(playerQuery.getId(), MatchEventType.YELLOW_CARD);
 		playerMatchStatisticData.incraseScoredGoalAmount(yellowCards.size());
 
-		List<SubstitutionEvent> substitutionIn = matchResultDetailes.getSubstitutionInEventForPlayer(playerQuery.getId());
+		List<SubstitutionGameEvent> substitutionIn = matchResultDetailes.getSubstitutionInEventForPlayer(playerQuery.getId());
 		if(!substitutionIn.isEmpty()) {
 			playerMatchStatisticData.incraseSubstitutionIn(1);
 		}
 
-		List<SubstitutionEvent> substitutionOut = matchResultDetailes.getSubstitutionOutEventForPlayer(playerQuery.getId());
+		List<SubstitutionGameEvent> substitutionOut = matchResultDetailes.getSubstitutionOutEventForPlayer(playerQuery.getId());
 		if(!substitutionOut.isEmpty()) {
 			playerMatchStatisticData.incraseSubstitutionOut(1);
 		}
@@ -79,10 +79,10 @@ public class PlayerMatchStatisticService {
 	}
 
 	//TODO calculate total match time
-	private int calculatePlayedMinutes(LineUpQuery lineUpQuery, List<SubstitutionEvent> substitutionIn, List<SubstitutionEvent> substitutionOut) {
+	private int calculatePlayedMinutes(LineUpQuery lineUpQuery, List<SubstitutionGameEvent> substitutionIn, List<SubstitutionGameEvent> substitutionOut) {
 		if(LineUpType.SUBSTITUTION.equals(lineUpQuery.getLineUpType()) && !substitutionIn.isEmpty()) {
-			SubstitutionEvent substitutionEvent = substitutionIn.get(0);
-			return substitutionEvent.getMinute();
+			SubstitutionGameEvent substitutionGameEvent = substitutionIn.get(0);
+			return substitutionGameEvent.getMinute();
 		}
 
 		if(LineUpType.STARTER.equals(lineUpQuery.getLineUpType())) {
@@ -90,8 +90,8 @@ public class PlayerMatchStatisticService {
 				return 90;
 			}
 
-			SubstitutionEvent substitutionEvent = substitutionOut.get(0);
-			return 90 - substitutionEvent.getMinute();
+			SubstitutionGameEvent substitutionGameEvent = substitutionOut.get(0);
+			return 90 - substitutionGameEvent.getMinute();
 		}
 		return 0;
 	}

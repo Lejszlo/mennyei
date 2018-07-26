@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: second
+    active: dev
   application:
     name: organizer-query
   datasource:
@@ -9,12 +9,29 @@ spring:
     username: mysqluser
     password: mysqlpw
   jackson:
-    date-format: yyyy.MM.dd HH:mm:ss
+    date-format: yyyy-MM-dd HH:mm:ss
     serialization:
       write-dates-as-timestamps: false
+
 eventuateLocal.kafka.bootstrapServers: ${DOCKER_HOST_IP}:9092
 eventuateLocal.zookeeper.connectionString: ${DOCKER_HOST_IP}:2181
 eventuateLocal.cdc.dbUserName: root
 eventuateLocal.cdc.dbPassword: rootpassword
+
 server:
-  port: 8089
+  port: 0
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+  client:
+    registryFetchIntervalSeconds: 5
+
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 10000
+        readTimeout: 10000

@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: zuul
+
+info:
+  component: Zuul Server
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+zuul:
+  routes:
+    organizer-query:
+      path: /api/competition/**
+      strip-prefix: false
+
+server:
+  port: 8765
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true

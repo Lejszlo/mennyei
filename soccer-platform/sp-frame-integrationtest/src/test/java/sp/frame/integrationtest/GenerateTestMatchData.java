@@ -1,18 +1,19 @@
 package sp.frame.integrationtest;
 
-import com.sp.core.backend.web.resource.IdResource;
 import com.sp.core.query.configurations.Interval;
 import com.sp.match.api.value.event.GameEvent;
 import com.sp.match.command.aggregator.domain.MatchAggregator;
 import com.sp.match.command.aggregator.service.MatchService;
 import com.sp.match.command.app.MatchCommandApp;
 import com.sp.match.query.app.MatchQueryApp;
+import com.sp.organizer.api.command.competition.AddStageCompetitionCommand;
 import com.sp.organizer.api.value.competition.StageId;
 import com.sp.organizer.command.aggregator.club.service.ClubService;
 import com.sp.organizer.command.aggregator.competition.service.CompetitionService;
+import com.sp.organizer.command.aggregator.competition.service.StageService;
 import com.sp.organizer.command.app.OrganizerCommandApp;
 import com.sp.organizer.query.app.OrganizerQueryApp;
-import com.sp.organizer.api.command.competition.SaveCompetitionCommand;
+import com.sp.organizer.api.command.competition.CreateCompetitionCommand;
 import io.eventuate.EntityWithIdAndVersion;
 import org.junit.After;
 import org.junit.Test;
@@ -33,7 +34,6 @@ import com.sp.organizer.api.value.club.HomeClubId;
 import com.sp.organizer.api.value.competition.CompetitionInfo;
 import com.sp.organizer.api.value.competition.rule.SortingRule;
 import com.sp.organizer.api.value.competition.rule.StageRuleSet;
-import com.sp.organizer.api.value.competition.season.Stage;
 import com.sp.organizer.api.value.competition.season.Turn;
 
 import java.time.LocalDate;
@@ -58,13 +58,16 @@ public class GenerateTestMatchData {
     private CompetitionService competitionService;
 
     @Autowired
+    private StageService stageService;
+
+    @Autowired
     private ClubService clubService;
 
     @Autowired
     private MatchService matchService;
 
     private String[] firstNames = {"Hajdu", "Kiss", "Nagy", "Szilágyi", "Talpas", "Gera", "Szabó", "Bihari", "Sebestyén", "Pintér", "Kádár", "Jelinek", "Szőllősi", "Gittinger", "Galina", "Bócsi"};
-    private String[] secondNames = {"László", "István", "Zoltán", "Tamás", "Ádám", "János", "Gergő", "Szilárd", "Tibor", "Attila", "Béla","Róbert", "Kálmán", "Albert", "Balázs", "Sándor"};
+    private String[] secondNames = {"László", "István", "Zoltán", "Tamás", "Ádám", "János", "Gergő", "Szilárd", "Tibor", "Attila", "Béla", "Róbert", "Kálmán", "Albert", "Balázs", "Sándor"};
     private Set<String> clubIds = new HashSet<>();
 
     @After
@@ -74,7 +77,10 @@ public class GenerateTestMatchData {
 
     @Test
     public void generateCompetition() throws ExecutionException, InterruptedException {
-        CompetitionInfo competition = new CompetitionInfo("Nyugat Magyarország 6", Interval.from(LocalDate.now().minusMonths(5), LocalDate.now().plusMonths(5)));
+        CompetitionInfo competition = CompetitionInfo.builder()
+                .name("Nyugat Magyarország")
+                .interval(Interval.from(LocalDate.now().minusMonths(5), LocalDate.now().plusMonths(5)))
+                .build();
 
         List<SortingRule> sortingRules = Arrays.asList(SortingRule.GAMES_WON,
                 SortingRule.GOAL_DIFFERENCE,
@@ -89,19 +95,20 @@ public class GenerateTestMatchData {
                 .yellowCardLimit(5)
                 .sortingRules(sortingRules)
                 .build();
-        SaveCompetitionCommand saveCompetitionCommand = SaveCompetitionCommand.builder()
+        CreateCompetitionCommand createCompetitionCommand = CreateCompetitionCommand.builder()
                 .competitionInfo(competition)
                 .build();
-        String competitionId = competitionService.save(saveCompetitionCommand);
 
-        ClubInfo vamosoroszi = new ClubInfo("Vámosoroszi Községi Sport Egyesület","Vámosoroszi KSE 4");
+        ClubInfo vamosoroszi = new ClubInfo("Vámosoroszi Községi Sport Egyesület", "Vámosoroszi KSE");
         String vamosoroszId = clubService.addClub(vamosoroszi).get().getEntityId();
         clubIds.add(vamosoroszId);
     }
 
     @Test
     public void generate() throws InterruptedException, ExecutionException {
-        CompetitionInfo competition = new CompetitionInfo("Kelet Magyarország", Interval.from(LocalDate.now().minusMonths(5), LocalDate.now().plusMonths(5)));
+        CompetitionInfo competition = CompetitionInfo.builder().name("Kelet Magyarország")
+                .interval(Interval.from(LocalDate.now().minusMonths(5), LocalDate.now().plusMonths(5)))
+                .build();
 
         List<SortingRule> sortingRules = Arrays.asList(SortingRule.GAMES_WON,
                 SortingRule.GOAL_DIFFERENCE,
@@ -116,24 +123,36 @@ public class GenerateTestMatchData {
                 .yellowCardLimit(5)
                 .sortingRules(sortingRules)
                 .build();
-        SaveCompetitionCommand saveCompetitionCommand = SaveCompetitionCommand.builder()
+        CreateCompetitionCommand createCompetitionCommand = CreateCompetitionCommand.builder()
                 .competitionInfo(competition)
                 .build();
-        String competitionId = competitionService.save(saveCompetitionCommand);
+        String competitionId = competitionService.save(createCompetitionCommand).get().getEntityId();
 
-        ClubInfo vamosoroszi = new ClubInfo("Vámosoroszi Községi Sport Egyesület","Vámosoroszi KSE");
+        //ADD STAGE
+        UUID stageId = UUID.randomUUID();
+        competitionService.addStage(
+                AddStageCompetitionCommand.builder()
+                        .id(stageId)
+                        .name(competition.getName())
+                        .interval(competition.getInterval())
+                        .stageRuleSet(stageRuleSet)
+                        .build(),
+                competitionId
+        ).get();
+
+        ClubInfo vamosoroszi = new ClubInfo("Vámosoroszi Községi Sport Egyesület", "Vámosoroszi KSE");
         String vamosoroszId = clubService.addClub(vamosoroszi).get().getEntityId();
         clubIds.add(vamosoroszId);
 
-        ClubInfo tarpa = new ClubInfo("Tarpa Sport Club","Tarpa SC");
+        ClubInfo tarpa = new ClubInfo("Tarpa Sport Club", "Tarpa SC");
         String tarpaId = clubService.addClub(tarpa).get().getEntityId();
         clubIds.add(tarpaId);
 
-        ClubInfo tisztaberek = new ClubInfo("Tisztaberek Sport Egyesulet","Tisztaberek SE");
+        ClubInfo tisztaberek = new ClubInfo("Tisztaberek Sport Egyesulet", "Tisztaberek SE");
         String tisztaberekId = clubService.addClub(tisztaberek).get().getEntityId();
         clubIds.add(tisztaberekId);
 
-        ClubInfo szatmarcseke = new ClubInfo("Szatmarcseke Községi Sport Egyesület","Szatmarcseke KSE");
+        ClubInfo szatmarcseke = new ClubInfo("Szatmarcseke Községi Sport Egyesület", "Szatmarcseke KSE");
         String szatmarcsekeId = clubService.addClub(szatmarcseke).get().getEntityId();
         clubIds.add(szatmarcsekeId);
 
@@ -141,60 +160,66 @@ public class GenerateTestMatchData {
         String tyukodId = clubService.addClub(tyukod).get().getEntityId();
         clubIds.add(tyukodId);
 
-        ClubInfo csengersimaert = new ClubInfo("Csengersimaert Községi Sport Egyesület","Csengersimaert KSE");
+        ClubInfo csengersimaert = new ClubInfo("Csengersimaert Községi Sport Egyesület", "Csengersimaert KSE");
         String csengersimaertId = clubService.addClub(csengersimaert).get().getEntityId();
         clubIds.add(csengersimaertId);
 
-        ClubInfo nyirmeggyes = new ClubInfo("Nyirmeggyes Sportklub","Nyirmeggyes SK");
+        ClubInfo nyirmeggyes = new ClubInfo("Nyirmeggyes Sportklub", "Nyirmeggyes SK");
         String nyirmeggyesId = clubService.addClub(nyirmeggyes).get().getEntityId();
         clubIds.add(nyirmeggyesId);
 
-        ClubInfo tiszakorod = new ClubInfo("Tiszakorod Sport Egyesulet","Tiszakorod SE");
+        ClubInfo tiszakorod = new ClubInfo("Tiszakorod Sport Egyesulet", "Tiszakorod SE");
         String tiszakorodId = clubService.addClub(tiszakorod).get().getEntityId();
         clubIds.add(tiszakorodId);
 
-        ClubInfo nabrad = new ClubInfo("Nabrad Sport Egyesulet","Nabrad SE");
+        ClubInfo nabrad = new ClubInfo("Nabrad Sport Egyesulet", "Nabrad SE");
         String nabradId = clubService.addClub(nabrad).get().getEntityId();
         clubIds.add(nabradId);
 
-        ClubInfo Beregdaroc = new ClubInfo("Beregdaroc Sport Egyesulet","Beregdaroc SE");
+        ClubInfo Beregdaroc = new ClubInfo("Beregdaroc Sport Egyesulet", "Beregdaroc SE");
         String beregdarocId = clubService.addClub(Beregdaroc).get().getEntityId();
         clubIds.add(beregdarocId);
 
-        ClubInfo csenger = new ClubInfo("Csenger Footbal Club","Csenger FC");
+        ClubInfo csenger = new ClubInfo("Csenger Footbal Club", "Csenger FC");
         String csengerId = clubService.addClub(csenger).get().getEntityId();
         clubIds.add(csengerId);
 
-        ClubInfo kolcse = new ClubInfo("Kolcse Sport Egyesulet","Kolcse SE");
+        ClubInfo kolcse = new ClubInfo("Kolcse Sport Egyesulet", "Kolcse SE");
         String kolcseId = clubService.addClub(kolcse).get().getEntityId();
         clubIds.add(kolcseId);
 
-        ClubInfo nagydobosi = new ClubInfo("Nagydobosi Labdarugo Sport Egyesulet","Nagydobosi LSE");
+        ClubInfo nagydobosi = new ClubInfo("Nagydobosi Labdarugo Sport Egyesulet", "Nagydobosi LSE");
         String nagydobosiId = clubService.addClub(nagydobosi).get().getEntityId();
         clubIds.add(nagydobosiId);
 
-        ClubInfo milota = new ClubInfo("Milota Sport Egyesulet","Milota SE");
+        ClubInfo milota = new ClubInfo("Milota Sport Egyesulet", "Milota SE");
         String milotaId = clubService.addClub(milota).get().getEntityId();
         clubIds.add(milotaId);
 
-        createTurns(competition, stageRuleSet, competitionId, Lists.from(clubIds.iterator()));
+        stageService.addClubsToStage(
+                competitionId,
+                stageId,
+                clubIds)
+                .get();
+
+        createTurns(competitionId, Lists.from(clubIds.iterator()), stageId);
     }
 
-    private void createTurns(CompetitionInfo competition, StageRuleSet stageRuleSet, String competitionId, List<String> clubIds) throws InterruptedException, ExecutionException {
+    private void createTurns(String competitionId, List<String> clubIds, UUID stageId) throws InterruptedException, ExecutionException {
         List<Turn> turns = new ArrayList<>();
         List<EntityWithIdAndVersion<MatchAggregator>> matchWithIds = new ArrayList<>();
-        LocalDateTime startLocalDateTime = LocalDate.now().atTime(18,0).minusMonths(5);
+        LocalDateTime startLocalDateTime = LocalDate.now().atTime(18, 0).minusMonths(5);
         LocalDateTime endLocalDateTime = null;
-        for(int i=0; i< clubIds.size() - 1; ++i) {
+        for (int i = 0; i < clubIds.size() - 1; ++i) {
             List<String> firstHalfClubIds = new ArrayList<>(clubIds.subList(0, clubIds.size() / 2));
             List<String> seacondHalfClubIds = new ArrayList<>(clubIds.subList(clubIds.size() / 2, clubIds.size()));
             Collections.reverse(seacondHalfClubIds);
-            Turn.TurnBuilder turnBuilder = Turn.builder(i+1);
+            Turn.TurnBuilder turnBuilder = Turn.builder(i + 1);
             List<MatchInfo> matchInfos = new ArrayList<>();
             for (int j = 0; j < firstHalfClubIds.size(); ++j) {
                 HomeClubId homeClubId = homeClubId("");
                 AwayClubId awayClubId = awayClubId("");
-                if(i % 2 == 0) {
+                if (i % 2 == 0) {
                     homeClubId = homeClubId(firstHalfClubIds.get(j));
                     awayClubId = awayClubId(seacondHalfClubIds.get(j));
                 } else {
@@ -228,21 +253,13 @@ public class GenerateTestMatchData {
 
             turns.add(reTurnBuilder.build());
 
-            clubIds.add(1, clubIds.get(clubIds.size()-1));
-            clubIds.remove(clubIds.size()-1);
+            clubIds.add(1, clubIds.get(clubIds.size() - 1));
+            clubIds.remove(clubIds.size() - 1);
         }
 
-        Stage stage = Stage.builder()
-                .name(competition.getName())
-                .interval(competition.getInterval())
-                .stageRuleSet(stageRuleSet)
-                .clubIds(clubIds)
-                .turns(turns)
-                .build();
+        stageService.addTurnsToStage(competitionId, stageId, turns);
 
-        competitionService.addStage(stage, competitionId);
-
-        fillTurnWithRandomEvents(matchWithIds, competitionId, stage.getId());
+        fillTurnWithRandomEvents(matchWithIds, competitionId, stageId);
     }
 
     private void fillTurnWithRandomEvents(List<EntityWithIdAndVersion<MatchAggregator>> matchWithIds, String competitionId, UUID stageId) throws InterruptedException, ExecutionException {
@@ -266,7 +283,13 @@ public class GenerateTestMatchData {
             awayEvents.addAll(randomYellowCardEvents);
             awayEvents.addAll(randomRedCardEvents);
 
-            matchService.playMatch(matchInfo.getHomeClubId(), matchInfo.getAwayClubId(), competitionId(competitionId.toString()), StageId.stageId(competitionId(competitionId.toString()), stageId.toString()), matchWithId.getEntityId(), homeEvents, awayEvents).get();
+            matchService.playMatch(matchInfo.getHomeClubId(),
+                    matchInfo.getAwayClubId(),
+                    competitionId(competitionId),
+                    StageId.stageId(competitionId, UUID.fromString(stageId.toString())),
+                    matchWithId.getEntityId(),
+                    homeEvents,
+                    awayEvents).get();
         }
     }
 

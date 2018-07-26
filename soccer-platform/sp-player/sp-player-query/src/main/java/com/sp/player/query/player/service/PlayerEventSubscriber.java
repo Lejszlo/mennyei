@@ -47,7 +47,7 @@ public class PlayerEventSubscriber {
     public void matchPlayed(DispatchedEvent<MatchPlayed> dispatchedEvent) {
         MatchPlayed matchPlayed = dispatchedEvent.getEvent();
         String matchId = dispatchedEvent.getEntityId();
-        playerMatchStatisticService.updatePlayerStatistics(matchId, matchPlayed.getMatchResultDetailes(), CompetitionId.competitionId(matchPlayed.getCompetitionId()));
+        playerMatchStatisticService.updatePlayerStatistics(matchId, matchPlayed.getMatchResultDetailes(), matchPlayed.getCompetitionId());
     }
 
 }

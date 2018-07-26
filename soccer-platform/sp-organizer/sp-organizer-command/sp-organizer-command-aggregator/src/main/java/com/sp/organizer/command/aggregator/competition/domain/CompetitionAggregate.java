@@ -1,20 +1,17 @@
 package com.sp.organizer.command.aggregator.competition.domain;
 
-import com.sp.core.backend.web.resource.IdResource;
-import com.sp.organizer.api.command.competition.AddClubsToStageCommand;
-import com.sp.organizer.api.command.competition.AddStageCommand;
-import com.sp.organizer.api.command.competition.SaveCompetitionCommand;
 import com.sp.organizer.api.command.competition.CompetitionCommand;
-import com.sp.organizer.api.event.competition.ClubsAddedToStage;
+import com.sp.organizer.api.command.competition.*;
+import com.sp.organizer.api.event.competition.ClubsAdded;
+import com.sp.organizer.api.event.competition.TurnsAdded;
 import com.sp.organizer.api.value.competition.CompetitionInfo;
 import com.sp.organizer.api.value.competition.season.Stage;
-import com.sp.organizer.api.event.competition.CompetitionAdded;
+import com.sp.organizer.api.event.competition.CompetitionCreated;
 import com.sp.organizer.api.event.competition.StageAdded;
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CompetitionAggregate extends ReflectiveMutableCommandProcessingAggregate<CompetitionAggregate, CompetitionCommand> {
 
@@ -22,37 +19,52 @@ public class CompetitionAggregate extends ReflectiveMutableCommandProcessingAggr
 
     private List<Stage> stages = new ArrayList<>();
 
-    public List<Event> process(SaveCompetitionCommand addCompetitionCommand) {
-        return Collections.singletonList(CompetitionAdded.builder()
+    public List<Event> process(CreateCompetitionCommand addCompetitionCommand) {
+        return Collections.singletonList(CompetitionCreated.builder()
                 .competitionInfo(addCompetitionCommand.getCompetitionInfo()).build());
     }
 
-    public List<Event> process(AddStageCommand addStageCommand) {
+    public List<Event> process(AddStageCompetitionCommand addStageCompetitionCommand) {
         return Collections.singletonList(StageAdded.builder()
-                .stage(addStageCommand.getStage())
+                .stage(Stage.builder()
+                        .name(addStageCompetitionCommand.getName())
+                        .interval(addStageCompetitionCommand.getInterval())
+                        .stageRuleSet(addStageCompetitionCommand.getStageRuleSet())
+                        .build())
                 .build());
     }
 
-    public List<Event> process(AddClubsToStageCommand addClubsToStageCommand) {
-        return Collections.singletonList(ClubsAddedToStage.builder()
-                .stageId(addClubsToStageCommand.getStageId())
-                .clubIds(addClubsToStageCommand.getClubIds())
+    public List<Event> process(AddClubsCompetitionCommand addClubsCompetitionCommand) {
+        return Collections.singletonList(ClubsAdded.builder()
+                .stageId(addClubsCompetitionCommand.getStageId().getStageId())
+                .clubIds(addClubsCompetitionCommand.getClubIds())
                 .build());
     }
 
-    public void apply(AddClubsToStageCommand addClubsToStageCommand) {
+    public List<Event> process(AddTurnsCompetitionCommand addClubsToStageCommand) {
+        return Collections.singletonList(TurnsAdded.builder()
+                .stageId(addClubsToStageCommand.getStageId().getStageId())
+                .turns(addClubsToStageCommand.getTurnIds())
+                .build());
+    }
+
+    public void apply(ClubsAdded clubsAdded) {
         stages.stream()
-                .filter(stage -> stage.getId().equals(addClubsToStageCommand.getStageId()))
+                .filter(stage -> stage.getId().equals(clubsAdded.getStageId()))
                 .findFirst()
-                .ifPresent(stage -> stage.getClubIds().addAll(addClubsToStageCommand.getClubIds()
-                        .stream()
-                        .map(UUID::toString)
-                        .collect(Collectors.toList()))
+                .ifPresent(stage -> stage.getClubIds().addAll(new ArrayList<String>(clubsAdded.getClubIds()))
                 );
     }
 
-    public void apply(CompetitionAdded competitionAdded) {
-        competitionInfo = competitionAdded.getCompetitionInfo();
+    public void apply(TurnsAdded clubsAddedToStage) {
+        stages.stream()
+                .filter(stage -> stage.getId().equals(clubsAddedToStage.getStageId()))
+                .findFirst()
+                .ifPresent(stage -> stage.getTurns().addAll(clubsAddedToStage.getTurns()));
+    }
+
+    public void apply(CompetitionCreated competitionCreated) {
+        competitionInfo = competitionCreated.getCompetitionInfo();
     }
 
     public void apply(StageAdded stageAdded) {

@@ -1,8 +1,12 @@
-export interface Club {
+export class Club {
     fullName: string;
-    id: string;
+    clubId: string;
     name: string;
     urlName: string;
+
+    constructor(clubId: string) {
+        this.clubId = clubId;
+    }
 }
 
 export interface Stage {
@@ -41,7 +45,7 @@ export interface CompetitionInfo {
 }
 
 export interface TableResource {
-    rows: Row[];
+    matches: MatchResource[];
 }
 
 export interface TurnResource {
@@ -50,22 +54,37 @@ export interface TurnResource {
     _links : any;
 }
 
-export interface MatchResource {
+export class MatchResource {
     homeClubDocumentResource: Club;
     awayClubDocumentResource: Club;
+    homeClubId: string;
+    awayClubId: string;
     homeGoalAmount: number;
     awayGoalAmount: number;
     matchDate: string;
+    homeYellowCardAmount: number;
+    awayYellowCardAmount: number;
+    homeRedCardAmount: number;
+    awayRedCardAmount: number;
+    played: boolean;
+    winnerType: string;
     _links : any;
+
 }
 
-export interface Row {
+export enum WinnerType {
+    HOME,
+    AWAY,
+    DRAW
+}
+
+export class Row {
     club: Club;
-    concerdGoals: number;
-    draw: number;
-    lose: number;
-    playedMatches: number;
-    point: number;
-    scoredGoals: number;
-    win: number;
+    concerdGoals: number = 0;
+    draw: number = 0;
+    lose: number = 0;
+    playedMatches: number = 0;
+    point: number = 0;
+    scoredGoals: number = 0;
+    win: number = 0;
 }

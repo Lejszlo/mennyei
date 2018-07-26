@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Singular;
 
-@Builder(builderMethodName = "hiddenBuilder")
+@Builder(builderMethodName = "hiddenBuilder", buildMethodName = "hiddenBuild")
 @AllArgsConstructor
 @Data
 public class MatchResultDetails {
@@ -24,40 +24,76 @@ public class MatchResultDetails {
 	@Getter
 	private int awayGoalAmount;
 
+    @Getter
+    private int homeYellowCardAmount;
+
+    @Getter
+    private int awayYellowCardAmount;
+
+    @Getter
+    private int homeRedCardAmount;
+
+    @Getter
+    private int awayRedCardAmount;
+
+	@Getter
+	private WinnerType winner;
+
 	@Singular
 	private List<GameEvent> homeClubEvents;
 
 	@Singular
 	private List<GameEvent> awayClubEvents;
 
-	public MatchResultDetails calculateResult() {
+	private MatchResultDetails calculateResult() {
 		homeGoalAmount = getHomeGoalAmountFromEvent() + getAwayOwnGoalAmountFromEvent();
 		awayGoalAmount = getAwayGoalAmountFromEvent() + getHomeOwnGoalAmountFromEvent();
+		homeYellowCardAmount = getHomeYellowCardAmountFromEvent();
+        awayYellowCardAmount = getAwayYellowCardAmountFromEvent();
+        homeRedCardAmount = getHomeRedCardAmountFromEvent();
+        awayRedCardAmount = getAwayRedCardAmountFromEvent();
+		winner = whoIsTheWinner();
 		return this;
 	}
 
-	public int getHomeGoalAmountFromEvent() {
+	private int getHomeGoalAmountFromEvent() {
 		return filterEvents(homeClubEvents, MatchEventType.GOAL).size();
 	}
 
-	public int getHomeOwnGoalAmountFromEvent() {
+	private int getHomeOwnGoalAmountFromEvent() {
 		return filterEvents(homeClubEvents, MatchEventType.OWN_GOAL).size();
 	}
 
-	public int getAwayGoalAmountFromEvent() {
+	private int getAwayGoalAmountFromEvent() {
 		return filterEvents(awayClubEvents, MatchEventType.GOAL).size();
 	}
 
-	public int getAwayOwnGoalAmountFromEvent() {
+	private int getAwayOwnGoalAmountFromEvent() {
 		return filterEvents(awayClubEvents, MatchEventType.OWN_GOAL).size();
 	}
 
-	public <T extends GameEvent> List<T> filterHomeEvents(Class<T> eventClass, MatchEventType... eventTypes) {
+    private int getAwayYellowCardAmountFromEvent() {
+        return filterEvents(awayClubEvents, MatchEventType.YELLOW_CARD).size();
+    }
+
+    private int getAwayRedCardAmountFromEvent() {
+        return filterEvents(awayClubEvents, MatchEventType.RED_CARD).size();
+    }
+
+    private int getHomeYellowCardAmountFromEvent() {
+        return filterEvents(homeClubEvents, MatchEventType.YELLOW_CARD).size();
+    }
+
+    private int getHomeRedCardAmountFromEvent() {
+        return filterEvents(homeClubEvents, MatchEventType.RED_CARD).size();
+    }
+
+	private <T extends GameEvent> List<T> filterHomeEvents(Class<T> eventClass, MatchEventType... eventTypes) {
 		return filterEvents(homeClubEvents, eventTypes).stream().filter(eventClass::isInstance).map(eventClass::cast)
 				.collect(Collectors.toList());
 	}
 
-	public <T extends GameEvent> List<T> filterAwayEvents(Class<T> eventClass, MatchEventType... eventTypes) {
+	private <T extends GameEvent> List<T> filterAwayEvents(Class<T> eventClass, MatchEventType... eventTypes) {
 		return filterEvents(awayClubEvents, eventTypes).stream().filter(eventClass::isInstance).map(eventClass::cast)
 				.collect(Collectors.toList());
 	}
@@ -112,7 +148,7 @@ public class MatchResultDetails {
 		return events.stream().filter(e -> eventTypeList.contains(e.getMatchEventType())).collect(Collectors.toList());
 	}
 
-	public WinnerType whoIsTheWinner() {
+	private WinnerType whoIsTheWinner() {
 		int result = homeGoalAmount - awayGoalAmount;
 		if (result > 0) {
 			return WinnerType.HOME;
@@ -123,8 +159,8 @@ public class MatchResultDetails {
 		return WinnerType.DRAW;
 	}
 
-	public static MatchResultDetailsBuilder builder(List<GameEvent> homeClubEvents, List<GameEvent> awayClubEvents) {
-		return hiddenBuilder().awayClubEvents(awayClubEvents).homeClubEvents(homeClubEvents);
+	public static MatchResultDetails build(List<GameEvent> homeClubEvents, List<GameEvent> awayClubEvents) {
+		return hiddenBuilder().awayClubEvents(awayClubEvents).homeClubEvents(homeClubEvents).hiddenBuild().calculateResult();
 	}
 
 }

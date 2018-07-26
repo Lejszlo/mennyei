@@ -35,11 +35,11 @@ public class MatchAggregator extends ReflectiveMutableCommandProcessingAggregate
 	}
 
 	public List<Event> process(PlayMatchCommand playMatchCommand) {
-		MatchResultDetails matchResultDetailes = MatchResultDetails.builder(playMatchCommand.getHomeClubevents(), playMatchCommand.getAwayClubevents()).build();
-		MatchResultDetails calculatedResult = matchResultDetailes.calculateResult();
-		return Collections.singletonList(MatchPlayed.builder(playMatchCommand.getHomeClubId(), playMatchCommand.getAwayClubId(), calculatedResult, playMatchCommand.getCompetitionId(), playMatchCommand.getStageId())
-				.played(true)
-				.build());
+		MatchResultDetails matchResultDetailes = MatchResultDetails.build(playMatchCommand.getHomeClubevents(), playMatchCommand.getAwayClubevents());
+		return Collections.singletonList(
+				MatchPlayed.builder(playMatchCommand.getHomeClubId(), playMatchCommand.getAwayClubId(), matchResultDetailes, playMatchCommand.getCompetitionId(), playMatchCommand.getStageId())
+				    .played(true)
+				    .build());
 	}
 	
 	public List<Event> process(SetMatchCommand setMatchCommand) {

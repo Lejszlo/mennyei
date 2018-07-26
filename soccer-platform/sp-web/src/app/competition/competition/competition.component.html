@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{competitionInfo?.name}}</mat-card-title>
+    <mat-card-subtitle>{{competitionInfo?.interval.startDate}} - {{competitionInfo?.interval.endDate}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-grid-list cols="14" rowHeight="100px">
+      <mat-grid-tile
+        *ngFor="let club of clubs"
+        {{club.name}}>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-divider></mat-divider>
+
+  </mat-card-content>
+</mat-card>

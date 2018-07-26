@@ -2,7 +2,7 @@ package com.sp.organizer.query.viewer.club.resource;
 
 import com.sp.organizer.api.resource.ClubDocumentResource;
 import com.sp.organizer.query.updater.club.entity.ClubDocument;
-import com.sp.organizer.query.viewer.club.controller.ClubDocumentController;
+import com.sp.organizer.query.viewer.club.controller.ClubDocumentDocumentController;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class ClubDocumentResourceAssemblerSupport extends ResourceAssemblerSupport<ClubDocument, ClubDocumentResource> {
 
     public ClubDocumentResourceAssemblerSupport() {
-        super(ClubDocumentController.class, ClubDocumentResource.class);
+        super(ClubDocumentDocumentController.class, ClubDocumentResource.class);
     }
 
     @Override

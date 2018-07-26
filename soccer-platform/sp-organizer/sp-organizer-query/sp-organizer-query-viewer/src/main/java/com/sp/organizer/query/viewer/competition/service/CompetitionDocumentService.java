@@ -38,10 +38,7 @@ public class CompetitionDocumentService {
 	}
 
 	public Resources<StageDocumentResource> getStages(String competitionId) {
-		CompetitionDocument competition = findById(competitionId);
-		List<StageDocument> stages = competition.getStages();
-        List<StageDocumentResource> stageDocumentResources = stageQueryResourceAssemblerSupport.toResources(stages);
-        return new Resources<>(stageDocumentResources);
+        return new Resources<>(stageQueryResourceAssemblerSupport.toResources(findById(competitionId).getStages()));
     }
 
 	CompetitionDocument findById(String competitionId) {
@@ -50,5 +47,9 @@ public class CompetitionDocumentService {
 			throw new CompetitionNotFoundException(competitionId);
 		}
 		return findAll.get(0);
+	}
+
+	public Resources<CompetitionDocumentResource> getCompetitions() {
+		return new Resources<>(competitionDocumentResourceAssemblerSupport.toResources(competitionQueryMongoRepository.findAll()));
 	}
 }

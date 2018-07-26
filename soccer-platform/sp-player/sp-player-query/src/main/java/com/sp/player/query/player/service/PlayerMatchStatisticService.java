@@ -22,12 +22,16 @@ import java.util.List;
 @Service
 public class PlayerMatchStatisticService {
 	
-	@Autowired
-	private PlayerQueryMongoRepository playerQueryMongoRepository;
+	private final PlayerQueryMongoRepository playerQueryMongoRepository;
+
+	private final LineUpQueryMongoRepository lineUpQueryMongoRepository;
 
 	@Autowired
-	private LineUpQueryMongoRepository lineUpQueryMongoRepository;
-	
+	public PlayerMatchStatisticService(PlayerQueryMongoRepository playerQueryMongoRepository, LineUpQueryMongoRepository lineUpQueryMongoRepository) {
+		this.playerQueryMongoRepository = playerQueryMongoRepository;
+		this.lineUpQueryMongoRepository = lineUpQueryMongoRepository;
+	}
+
 	public void updatePlayerStatistics(String matchId, MatchResultDetails matchResultDetailes, CompetitionId competitionId) {
         lineUpQueryMongoRepository.findByMatchId(matchId).forEach(lineUp -> process(lineUp, matchResultDetailes, competitionId));
 	}

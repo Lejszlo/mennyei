@@ -1,20 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="collapse navbar-collapse">
-        <nav class="navbar navbar-light bg-primary">
-            <span class="navbar-brand mb-0 h1">SP - Soccer Platform</span>
-        </nav>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active" routerLinkActive="active">
-                <a class="nav-link" routerLink="competition">
-                    Bajnokság<span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="table">Tabella</a></li>
-            <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="matches">Sorsolás</a></li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input type="search" class="form-control mr-sm-2" placeholder="Keresés">
-            <button type="submit" class="btn btn-secondary my-2 my-sm-0">Keresés</button>
-        </form>
-    </div>
-</nav>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>Bajnokság<span class="sr-only">(current)</span></button>
+    <button mat-menu-item>Tabella</button>
+    <button mat-menu-item>Sorsolás</button>
+</mat-menu>

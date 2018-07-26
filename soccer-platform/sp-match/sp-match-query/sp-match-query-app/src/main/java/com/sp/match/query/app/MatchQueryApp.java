@@ -28,7 +28,6 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @EnableDiscoveryClient
 @EnableFeignClients("com.sp.match.query")
-@EnableEurekaClient
 @Import({ EventuateDriverConfiguration.class, BeanConfigurations.class, MongoConfiguration.class})
 public class MatchQueryApp implements ApplicationListener<ContextRefreshedEvent> {
 

@@ -26,7 +26,7 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 @EnableConfigurationProperties
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(value = "com.sp.organizer.query")
 @Import({ EventuateDriverConfiguration.class, BeanConfigurations.class, MongoConfiguration.class})
 public class OrganizerQueryApp implements ApplicationListener<ContextRefreshedEvent> {
 

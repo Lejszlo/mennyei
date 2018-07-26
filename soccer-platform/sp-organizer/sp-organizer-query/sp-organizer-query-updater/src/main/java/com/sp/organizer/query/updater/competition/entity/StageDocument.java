@@ -34,9 +34,6 @@ public class StageDocument {
 	@Singular
 	private Set<ClubDocument> clubs;
 	
-	@DBRef
-	private TableQuery tableQuery;
-
 	@NotNull
 	private Interval interval;
 

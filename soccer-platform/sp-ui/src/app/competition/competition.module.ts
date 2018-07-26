@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'
 import { CompetitionService } from './competition.service';
 import { HttpModule }    from '@angular/http';
-import { TableComponent } from './table/table.component';
+import { TablesContainerComponent } from './tables/tables.container.component';
 import { CompetitionComponent } from './competition.component';
 import { ClubDetailsComponent } from '../club/details/club.details.component';
-import {FirstLetterPipe} from "../pipes/first.letter.pipe";
-import {MatchComponent} from "./match/match.component";
-import {TurnComponent} from "./turn/turn.component";
+import { FirstLetterPipe } from "../pipes/first.letter.pipe";
+import { MatchComponent } from "./match/match.component";
+import { TurnComponent } from "./turn/turn.component";
+import {TableComponent} from "./tables/table/table.component";
+import {TablesContainerService} from "./tables/tables.container.service";
 
 @NgModule({
     imports: [
@@ -15,6 +17,7 @@ import {TurnComponent} from "./turn/turn.component";
         CommonModule
     ],
     declarations: [
+        TablesContainerComponent,
         TableComponent,
         CompetitionComponent,
         ClubDetailsComponent,
@@ -24,7 +27,8 @@ import {TurnComponent} from "./turn/turn.component";
         FirstLetterPipe
     ],
     providers: [
-        CompetitionService
+        CompetitionService,
+        TablesContainerService
     ]
 })
 export class CompetitionModule { }

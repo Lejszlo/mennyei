@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http } from "@angular/http";
 import {Club, CompetitionResource, MatchResource, Stage, TableResource, TurnResource} from "./competition.types";
 import { Observable } from "rxjs/Observable";
+import {Http} from "@angular/http";
 
 @Injectable()
 export class CompetitionService  {
-    private competitionUrl = 'api/competition/1';
+    private competitionUrl = '/organizer-query/api/competition/1';
 
     constructor(private http: Http) { }
 

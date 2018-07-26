@@ -1,7 +1,5 @@
 package com.sp.organizer.query.viewer.competition.service;
 
-import com.sp.match.api.controller.MatchDocumentControllerApi;
-import com.sp.match.api.resource.MatchDocumentResource;
 import com.sp.organizer.query.updater.competition.entity.StageDocument;
 import com.sp.organizer.query.updater.competition.entity.TurnDocument;
 import com.sp.organizer.query.viewer.competition.resource.turn.TurnDocumentResource;

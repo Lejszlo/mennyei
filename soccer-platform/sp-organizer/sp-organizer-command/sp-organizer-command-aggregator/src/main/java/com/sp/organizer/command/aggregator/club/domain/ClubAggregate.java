@@ -4,14 +4,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.sp.organizer.api.command.club.AddClubCommand;
-import com.sp.organizer.api.command.player.AddPlayerToClubCommand;
+import com.sp.organizer.api.command.club.CreateClubCommand;
+import com.sp.organizer.api.command.club.AddPlayerClubCommand;
 import com.sp.organizer.api.command.club.ClubCommand;
-import com.sp.organizer.api.command.player.RemovePlayerFromClub;
+import com.sp.organizer.api.command.club.RemovePlayerClubCommand;
 
 import event.PlayerAddedToClub;
 import event.PlayerRemovedFromClub;
-import com.sp.organizer.api.event.club.ClubAdded;
+import com.sp.organizer.api.event.club.ClubCreated;
 import io.eventuate.Event;
 import io.eventuate.EventUtil;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
@@ -23,20 +23,20 @@ public class ClubAggregate extends ReflectiveMutableCommandProcessingAggregate<C
 
     private Set<String> playerIds = new HashSet<>();
 
-    public List<Event> process(AddClubCommand addClubCommand) {
-        return EventUtil.events(new ClubAdded(addClubCommand.getClubInfo()));
+    public List<Event> process(CreateClubCommand createClubCommand) {
+        return EventUtil.events(new ClubCreated(createClubCommand.getClubInfo()));
     }
 
-    public List<Event> process(AddPlayerToClubCommand addPlayerToClubCommand) {
-        return EventUtil.events(new PlayerAddedToClub(addPlayerToClubCommand.getClubId(), addPlayerToClubCommand.getPlayerId()));
+    public List<Event> process(AddPlayerClubCommand addPlayerClubCommand) {
+        return EventUtil.events(new PlayerAddedToClub(addPlayerClubCommand.getClubId(), addPlayerClubCommand.getPlayerId()));
     }
 
-    public List<Event> process(RemovePlayerFromClub removePlayerFromClub) {
-        return EventUtil.events(PlayerRemovedFromClub.builder().playerId(removePlayerFromClub.getPlayerId()).build());
+    public List<Event> process(RemovePlayerClubCommand removePlayerClubCommand) {
+        return EventUtil.events(PlayerRemovedFromClub.builder().playerId(removePlayerClubCommand.getPlayerId()).build());
     }
 
-    public void apply(ClubAdded clubAdded) {
-        clubInfo = clubAdded.getClubInfo();
+    public void apply(ClubCreated clubCreated) {
+        clubInfo = clubCreated.getClubInfo();
     }
 
     public void apply(PlayerAddedToClub playerAddedToClubEvent) {

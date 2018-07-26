@@ -17,5 +17,14 @@ eventuateLocal.kafka.bootstrapServers: ${DOCKER_HOST_IP}:9092
 eventuateLocal.zookeeper.connectionString: ${DOCKER_HOST_IP}:2181
 eventuateLocal.cdc.dbUserName: root
 eventuateLocal.cdc.dbPassword: rootpassword
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+  client:
+    registryFetchIntervalSeconds: 5
+
 server:
-  port: 8083
+  port: 0

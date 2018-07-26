@@ -1,7 +1,7 @@
 package com.sp.organizer.query.updater.club.handler;
 
 import com.sp.organizer.query.updater.club.repository.ClubQueryMongoRepository;
-import com.sp.organizer.api.event.club.ClubAdded;
+import com.sp.organizer.api.event.club.ClubCreated;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,8 +23,8 @@ public class ClubEventHandler {
 	private ModelMapper modelMapper;
 
 	@EventHandlerMethod
-	public void create(DispatchedEvent<ClubAdded> dispatchedEvent) {
-		ClubAdded event = dispatchedEvent.getEvent();
+	public void create(DispatchedEvent<ClubCreated> dispatchedEvent) {
+		ClubCreated event = dispatchedEvent.getEvent();
 		String clubId = dispatchedEvent.getEntityId();
 		ClubInfo clubInfo = event.getClubInfo();
 		ClubDocument clubDocument = ClubDocument.builder().id(clubId).build();

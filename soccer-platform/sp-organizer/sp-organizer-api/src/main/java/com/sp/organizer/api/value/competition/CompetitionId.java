@@ -1,9 +1,11 @@
 package com.sp.organizer.api.value.competition;
 
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Value;
 
-@NoArgsConstructor
+@Value
 public class CompetitionId {
+    @NonNull
     private String value;
 
     private CompetitionId(String value) {

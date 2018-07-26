@@ -14,6 +14,7 @@ public interface MatchDocumentMongoRepository extends MongoRepository<MatchDocum
 	@Query("{ $or: [ {'homeClub.$id' : ?0}, {'awayClub.$id' : ?0} ]}")
 	List<MatchDocument> findByClubOrderByMatchDate(@Param("clubId") String clubId);
 
-	List<MatchDocument> findByIdIn(@Param("clubId") List<String> matchIds);
+	List<MatchDocument> findByIdIn(List<String> matchIds);
 
+	List<MatchDocument> findByPlayedIsAndIdIn(boolean played, List<String> matchIds);
 }

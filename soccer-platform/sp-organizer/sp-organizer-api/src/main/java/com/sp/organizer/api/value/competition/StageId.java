@@ -3,18 +3,22 @@ package com.sp.organizer.api.value.competition;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
+import static com.sp.organizer.api.value.competition.CompetitionId.competitionId;
+
 @NoArgsConstructor
 @Getter
 public class StageId {
     private CompetitionId competitionId;
-    private String id;
+    private UUID stageId;
 
-    private StageId(CompetitionId value, String id) {
-        this.competitionId = value;
-        this.id = id;
+    private StageId(String competitionId, UUID stageId) {
+        this.competitionId = competitionId(competitionId);
+        this.stageId = stageId;
     }
 
-    public static StageId stageId(CompetitionId competitionId, String id) {
-        return new StageId(competitionId, id);
+    public static StageId stageId(String competitionId, UUID stageId) {
+        return new StageId(competitionId, stageId);
     }
 }

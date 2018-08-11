@@ -1,5 +1,7 @@
 package com.sp.organizer.query.viewer.competition.resource.stage;
 
+import com.sp.organizer.query.viewer.competition.resource.turn.TurnDocumentResourceAssemblerSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 import com.sp.organizer.query.updater.competition.entity.StageDocument;
@@ -8,9 +10,12 @@ import com.sp.organizer.query.viewer.competition.controller.StageDocumentQueryCo
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @Component
-public class StageQueryResourceAssemblerSupport extends ResourceAssemblerSupport<StageDocument, StageDocumentResource> {
+public class StageDocumentResourceAssemblerSupport extends ResourceAssemblerSupport<StageDocument, StageDocumentResource> {
 
-    public StageQueryResourceAssemblerSupport() {
+    @Autowired
+    private TurnDocumentResourceAssemblerSupport turnDocumentResourceAssemblerSupport;
+
+    public StageDocumentResourceAssemblerSupport() {
         super(StageDocumentQueryController.class, StageDocumentResource.class);
     }
 
@@ -22,10 +27,10 @@ public class StageQueryResourceAssemblerSupport extends ResourceAssemblerSupport
         stageDocumentResource.setStageRuleSet(stageDocument.getStageRuleSet());
         stageDocumentResource.setStageId(stageDocument.getId());
         stageDocumentResource.setName(stageDocument.getName());
+        stageDocumentResource.setTurns(turnDocumentResourceAssemblerSupport.toResources(stageDocument.getTurns()));
 
         stageDocumentResource.add(linkTo(methodOn(StageDocumentQueryController.class).getClubs(stageDocument.getCompetitionDocumentId(), stageDocument.getId())).withRel("clubs"));
         stageDocumentResource.add(linkTo(methodOn(StageDocumentQueryController.class).getTable(stageDocument.getCompetitionDocumentId(), stageDocument.getId())).withRel("table"));
-        stageDocumentResource.add(linkTo(methodOn(StageDocumentQueryController.class).getTurns(stageDocument.getCompetitionDocumentId(), stageDocument.getId())).withRel("turns"));
 
         return stageDocumentResource;
     }

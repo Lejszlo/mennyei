@@ -11,7 +11,8 @@ import lombok.*;
 @AllArgsConstructor
 public class Stage {
 
-	private UUID id = UUID.randomUUID();
+	@NonNull
+	private UUID id;
 
 	@NonNull
 	private String name;

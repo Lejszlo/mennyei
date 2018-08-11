@@ -1,10 +1,8 @@
 package com.sp.match.query.viewer.service;
 
-import com.sp.match.api.filter.MatchDocumentResourceFilter;
 import com.sp.match.query.updater.match.entity.MatchDocument;
 import com.sp.match.query.updater.match.repository.MatchDocumentMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Service;
 import com.sp.match.api.resource.MatchDocumentResource;
 import com.sp.match.query.viewer.resource.MatchResourceAssemblerSupport;

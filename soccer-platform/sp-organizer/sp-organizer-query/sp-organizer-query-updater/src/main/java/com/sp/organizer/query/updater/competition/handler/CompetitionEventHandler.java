@@ -75,7 +75,7 @@ public class CompetitionEventHandler {
                 .collect(Collectors.toSet());
 
         competitionDocument.getStages().stream()
-                .filter(stageDocument -> stageDocument.getId().equals(clubsAdded.toString()))
+                .filter(stageDocument -> stageDocument.getId().equals(clubsAdded.getStageId().toString()))
                 .findFirst()
                 .ifPresent(stageDocument -> stageDocument.setClubs(clubDocuments));
 
@@ -95,7 +95,7 @@ public class CompetitionEventHandler {
                 .collect(Collectors.toList());
 
         competitionDocument.getStages().stream()
-                .filter(stageDocument -> stageDocument.getId().equals(turnsAdded.toString()))
+                .filter(stageDocument -> stageDocument.getId().equals(turnsAdded.getStageId().toString()))
                 .findFirst()
                 .ifPresent(stageDocument -> stageDocument.setTurns(turnDocuments));
 

@@ -1,5 +1,7 @@
 package com.sp.organizer.query.viewer.competition.resource.competition;
 
+import com.sp.organizer.query.viewer.competition.resource.stage.StageDocumentResourceAssemblerSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import org.springframework.stereotype.Component;
@@ -12,6 +14,9 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 public class CompetitionDocumentResourceAssemblerSupport
 		extends ResourceAssemblerSupport<CompetitionDocument, CompetitionDocumentResource> {
 
+	@Autowired
+	private StageDocumentResourceAssemblerSupport stageDocumentResourceAssemblerSupport;
+
 	public CompetitionDocumentResourceAssemblerSupport() {
 		super(CompetitionDocumentQueryController.class, CompetitionDocumentResource.class);
 	}
@@ -20,9 +25,8 @@ public class CompetitionDocumentResourceAssemblerSupport
 	public CompetitionDocumentResource toResource(CompetitionDocument competitionDocument) {
 		CompetitionDocumentResource resource = createResourceWithId(competitionDocument.getId(), competitionDocument);
 
-		resource.add(linkTo(methodOn(CompetitionDocumentQueryController.class).getStagesOfCompetition(competitionDocument.getId())).withRel("stages"));
-
 		resource.setCompetitionInfo(competitionDocument.getCompetitionInfo());
+		resource.setStages(stageDocumentResourceAssemblerSupport.toResources(competitionDocument.getStages()));
 
 		return resource;
 	}

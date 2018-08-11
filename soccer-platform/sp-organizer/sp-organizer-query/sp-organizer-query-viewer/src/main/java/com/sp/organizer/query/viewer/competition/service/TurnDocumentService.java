@@ -26,7 +26,7 @@ public class TurnDocumentService {
     }
 
     public Resources<TurnDocumentResource> getTurns(String competitionId, String stageId) {
-        Optional<StageDocument> stageDocumentOptional = stageDocumentService.getStageQuery(competitionId, stageId);
+        Optional<StageDocument> stageDocumentOptional = stageDocumentService.getStageDocument(competitionId, stageId);
         List<TurnDocument> turnDocuments = stageDocumentOptional.map(stageDocument -> stageDocument.getTurns()
                     .stream()
                     .sorted()
@@ -42,7 +42,7 @@ public class TurnDocumentService {
     }
 
     private Optional<TurnDocument> getTurnDocument(String competitionId, String stageId, int turnIndex) {
-        Optional<StageDocument> stageDocuments = stageDocumentService.getStageQuery(competitionId, stageId);
+        Optional<StageDocument> stageDocuments = stageDocumentService.getStageDocument(competitionId, stageId);
         return stageDocuments
                 .flatMap(sd -> sd.getTurns()
                         .stream()

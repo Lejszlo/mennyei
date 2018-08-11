@@ -27,6 +27,7 @@ public class CompetitionAggregate extends ReflectiveMutableCommandProcessingAggr
     public List<Event> process(AddStageCompetitionCommand addStageCompetitionCommand) {
         return Collections.singletonList(StageAdded.builder()
                 .stage(Stage.builder()
+                        .id(addStageCompetitionCommand.getId())
                         .name(addStageCompetitionCommand.getName())
                         .interval(addStageCompetitionCommand.getInterval())
                         .stageRuleSet(addStageCompetitionCommand.getStageRuleSet())

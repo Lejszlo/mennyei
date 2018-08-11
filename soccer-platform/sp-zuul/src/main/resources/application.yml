@@ -18,6 +18,9 @@ zuul:
     organizer-query:
       path: /api/competition/**
       strip-prefix: false
+    match-query:
+      path: /api/matches/**
+      strip-prefix: false
 
 server:
   port: 8765
@@ -31,3 +34,12 @@ eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 60000

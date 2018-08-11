@@ -10,9 +10,10 @@ export class Club {
 }
 
 export interface Stage {
-  links : any;
+  _links : any;
   name: string;
   uuiD: number;
+  turns: TurnResource[];
   stageRuleSet: StageRuleSet;
 }
 
@@ -38,10 +39,13 @@ export interface StageRuleSet {
 
 export interface CompetitionResource {
   competitionInfo : CompetitionInfo;
+  stages: Stage[];
   _links : any;
 }
 
 export interface CompetitionInfo {
+  interval: Interval;
+  name: string;
 }
 
 export interface TableResource {
@@ -50,15 +54,13 @@ export interface TableResource {
 
 export interface TurnResource {
   index: number;
-  interval: string;
+  interval: Interval;
   _links : any;
 }
 
 export class MatchResource {
   homeClubDocumentResource: Club;
   awayClubDocumentResource: Club;
-  homeClubId: string;
-  awayClubId: string;
   homeGoalAmount: number;
   awayGoalAmount: number;
   matchDate: string;
@@ -70,6 +72,11 @@ export class MatchResource {
   winnerType: string;
   _links : any;
 
+}
+
+export interface Interval {
+  startDate: string;
+  endDate: string;
 }
 
 export enum WinnerType {
@@ -87,4 +94,8 @@ export class Row {
   point: number = 0;
   scoredGoals: number = 0;
   win: number = 0;
+}
+
+export enum TableType {
+  NORMAL, HOME, AWAY
 }

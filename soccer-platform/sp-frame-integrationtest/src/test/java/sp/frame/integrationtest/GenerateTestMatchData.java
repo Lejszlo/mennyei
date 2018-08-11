@@ -257,9 +257,9 @@ public class GenerateTestMatchData {
             clubIds.remove(clubIds.size() - 1);
         }
 
-        stageService.addTurnsToStage(competitionId, stageId, turns);
+        stageService.addTurnsToStage(competitionId, stageId, turns).get();
 
-        fillTurnWithRandomEvents(matchWithIds, competitionId, stageId);
+//        fillTurnWithRandomEvents(matchWithIds, competitionId, stageId);
     }
 
     private void fillTurnWithRandomEvents(List<EntityWithIdAndVersion<MatchAggregator>> matchWithIds, String competitionId, UUID stageId) throws InterruptedException, ExecutionException {

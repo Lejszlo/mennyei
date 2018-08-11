@@ -1,17 +1,39 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{competitionInfo?.name}}</mat-card-title>
-    <mat-card-subtitle>{{competitionInfo?.interval.startDate}} - {{competitionInfo?.interval.endDate}}</mat-card-subtitle>
+    <mat-card-title><h2>{{competitionInfo?.name}}</h2></mat-card-title>
+    <mat-card-subtitle>
+      {{competitionInfo?.interval.startDate}} - {{competitionInfo?.interval.endDate}}
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <mat-grid-list cols="14" rowHeight="100px">
-      <mat-grid-tile
-        *ngFor="let club of clubs"
-        {{club.name}}>
-      </mat-grid-tile>
-    </mat-grid-list>
 
-    <mat-divider></mat-divider>
+    <mat-card>
+      <mat-card-content>
+        <mat-grid-list cols="7" rowHeight="100px">
+          <mat-grid-tile
+            *ngFor="let club of clubs">
+            <button mat-stroked-button color="primary">{{club.name}}</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab *ngFor="let turn of turns" label="{{turn.index}}. forduló">
+              <app-turn [turn]="turn"></app-turn>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-content>
+          <app-table-container *ngIf="stages" [stage]="stages[0]"></app-table-container>
+      </mat-card-content>
+    </mat-card>
 
   </mat-card-content>
 </mat-card>

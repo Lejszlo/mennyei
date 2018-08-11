@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class TurnDocument implements Comparable<TurnDocument> {
 
-	@NotNull
 	private int index;
 	
 	@Singular

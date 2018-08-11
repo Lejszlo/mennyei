@@ -20,7 +20,6 @@ public class TurnDocumentQueryController {
     public TurnDocumentResource getTurn(@PathVariable("competitionId") String competitionId,
                                                                              @PathVariable("stageId") String stageId,
                                                                              @PathVariable("turnIndex") int turnIndex) {
-
         return turnDocumentService.getTurn(competitionId, stageId, turnIndex);
     }
 

@@ -9,4 +9,7 @@ public class OrganizerInfo {
 
     String name;
 
+    String phoneNumber;
+
+    String email;
 }

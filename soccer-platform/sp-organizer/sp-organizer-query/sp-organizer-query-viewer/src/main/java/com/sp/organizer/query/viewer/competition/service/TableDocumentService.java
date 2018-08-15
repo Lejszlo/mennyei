@@ -1,5 +1,6 @@
 package com.sp.organizer.query.viewer.competition.service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.sp.match.api.resource.MatchDocumentResource;
 import com.sp.organizer.query.updater.competition.entity.StageDocument;
 import com.sp.organizer.query.updater.competition.entity.TurnDocument;
@@ -30,6 +31,7 @@ public class TableDocumentService {
         this.matchDocumentQueryFeignQueryController = matchDocumentQueryFeignQueryController;
     }
 
+    @HystrixCommand
     public TableResource getTable(String competitionId, String stageId) {
         Optional<StageDocument> stageDocumentOptional = stageDocumentService.getStageDocument(competitionId, stageId);
         List<TurnDocument> turnDocuments = stageDocumentOptional.map(StageDocument::getTurns)

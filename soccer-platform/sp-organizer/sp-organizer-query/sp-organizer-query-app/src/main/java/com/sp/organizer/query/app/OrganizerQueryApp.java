@@ -10,8 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -26,6 +29,8 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 @EnableConfigurationProperties
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @EnableDiscoveryClient
+@EnableCircuitBreaker
+@EnableHystrixDashboard
 @EnableFeignClients(value = "com.sp.organizer.query")
 @Import({ EventuateDriverConfiguration.class, BeanConfigurations.class, MongoConfiguration.class})
 public class OrganizerQueryApp implements ApplicationListener<ContextRefreshedEvent> {

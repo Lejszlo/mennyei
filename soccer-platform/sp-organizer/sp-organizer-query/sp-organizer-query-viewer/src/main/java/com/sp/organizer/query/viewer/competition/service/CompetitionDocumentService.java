@@ -2,6 +2,7 @@ package com.sp.organizer.query.viewer.competition.service;
 
 import java.util.*;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.sp.organizer.query.viewer.competition.resource.competition.CompetitionDocumentResourceAssemblerSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;

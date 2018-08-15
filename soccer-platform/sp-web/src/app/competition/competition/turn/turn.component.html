@@ -1,0 +1,35 @@
+<mat-table [dataSource]="matches" class="mat-elevation-z8">
+  <ng-container matColumnDef="header">
+    <mat-header-cell *matHeaderCellDef colspan="5"> <h5>{{selectedTurn.index}}. forduló</h5> <h6>{{selectedTurn.interval?.startDate}} - {{selectedTurn.interval?.endDate}}</h6> </mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <mat-header-cell  *matHeaderCellDef> Dátum </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.matchDate}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="homeClub">
+    <mat-header-cell *matHeaderCellDef> Hazai csapat </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.homeClubDocumentResource.fullName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="homeGoals">
+    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.homeGoalAmount}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="awayGoals">
+    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.awayGoalAmount}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="awayClub">
+    <mat-header-cell *matHeaderCellDef> Vendég csapat </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.awayClubDocumentResource.fullName}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-header-row *matHeaderRowDef="['header']"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

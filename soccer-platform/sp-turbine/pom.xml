@@ -3,26 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>sp-organizer-query</artifactId>
+        <artifactId>soccer-platform</artifactId>
         <groupId>com.hajdu</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sp-organizer-query-app</artifactId>
+    <artifactId>turbine</artifactId>
+
     <dependencies>
         <dependency>
-            <groupId>com.hajdu</groupId>
-            <artifactId>sp-organizer-query-viewer</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-turbine-stream</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.hajdu</groupId>
-            <artifactId>sp-organizer-query-updater</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <!--EUREKA-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
@@ -32,29 +25,9 @@
             <artifactId>spring-cloud-starter-eureka-server</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!--EVENTUATE-->
-        <dependency>
-            <groupId>io.eventuate.local.java</groupId>
-            <artifactId>eventuate-local-java-jdbc</artifactId>
-        </dependency>
-
-        <!--SPRING-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 

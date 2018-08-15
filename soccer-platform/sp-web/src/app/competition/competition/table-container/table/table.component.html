@@ -1,0 +1,54 @@
+<mat-table [dataSource]="rows" class="mat-elevation-z8">
+  <ng-container matColumnDef="header">
+  </ng-container>
+
+  <ng-container matColumnDef="club">
+    <mat-header-cell  *matHeaderCellDef> Meccsek </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.club.name}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="playedMatches">
+    <mat-header-cell  *matHeaderCellDef> Meccsek </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.playedMatches}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="win">
+    <mat-header-cell *matHeaderCellDef> Győzelemt </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.win}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="draw">
+    <mat-header-cell *matHeaderCellDef> Döntetlen</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.draw}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="lose">
+    <mat-header-cell *matHeaderCellDef> Vereség</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.lose}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="scoredGoals">
+    <mat-header-cell *matHeaderCellDef> Lőtt Gólok </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.scoredGoals}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="concerdGoals">
+    <mat-header-cell *matHeaderCellDef> Lőtt Gólok </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.concerdGoals}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="goalDifferent">
+    <mat-header-cell *matHeaderCellDef> Gól Különbség </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.scoredGoals - element.concerdGoals}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="point">
+    <mat-header-cell *matHeaderCellDef> Pontok </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.point}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-header-row *matHeaderRowDef="['header']"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

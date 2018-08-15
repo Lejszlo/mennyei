@@ -4,11 +4,9 @@ import com.sp.organizer.query.viewer.competition.resource.stage.StageDocumentRes
 import com.sp.organizer.query.viewer.competition.service.CompetitionDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.sp.organizer.query.viewer.competition.resource.competition.CompetitionDocumentResource;
 
-import static org.springframework.http.ResponseEntity.ok;
 
 @RequestMapping("/api/competition/")
 @RestController

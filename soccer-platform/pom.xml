@@ -20,12 +20,10 @@
 	</properties>
 
 	<modules>
-		<module>sp-ui</module>
 		<module>sp-core</module>
 		<module>sp-player</module>
 		<module>sp-organizer</module>
         <module>sp-match</module>
-        <module>sp-gateway</module>
         <module>sp-frame-integrationtest</module>
         <module>sp-eureka</module>
         <module>sp-zuul</module>

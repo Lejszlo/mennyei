@@ -1,5 +1,6 @@
 package com.sp.organizer.query.viewer.competition.resource.stage;
 
+import com.sp.organizer.api.resource.StageDocumentResource;
 import com.sp.organizer.query.viewer.competition.resource.turn.TurnDocumentResourceAssemblerSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
@@ -29,8 +30,15 @@ public class StageDocumentResourceAssemblerSupport extends ResourceAssemblerSupp
         stageDocumentResource.setName(stageDocument.getName());
         stageDocumentResource.setTurns(turnDocumentResourceAssemblerSupport.toResources(stageDocument.getTurns()));
 
-        stageDocumentResource.add(linkTo(methodOn(StageDocumentQueryController.class).getClubs(stageDocument.getCompetitionDocumentId(), stageDocument.getId())).withRel("clubs"));
-        stageDocumentResource.add(linkTo(methodOn(StageDocumentQueryController.class).getTable(stageDocument.getCompetitionDocumentId(), stageDocument.getId())).withRel("table"));
+        stageDocumentResource.add(linkTo(methodOn(StageDocumentQueryController.class).getClubs(
+                stageDocument.getCompetitionDocumentId(),
+                stageDocument.getCompetitionDocumentId(),
+                stageDocument.getId())).withRel("clubs"));
+
+        stageDocumentResource.add(linkTo(methodOn(StageDocumentQueryController.class).getTable(
+                stageDocument.getCompetitionDocumentId(),
+                stageDocument.getSeasonDocumentId(),
+                stageDocument.getId())).withRel("table"));
 
         return stageDocumentResource;
     }

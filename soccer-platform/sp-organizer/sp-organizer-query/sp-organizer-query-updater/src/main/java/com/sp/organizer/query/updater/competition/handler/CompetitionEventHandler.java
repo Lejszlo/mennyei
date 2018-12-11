@@ -1,14 +1,13 @@
 package com.sp.organizer.query.updater.competition.handler;
 
-import com.sp.organizer.api.event.competition.ClubsAdded;
-import com.sp.organizer.api.event.competition.TurnsAdded;
+import com.sp.organizer.api.event.competition.*;
+import com.sp.organizer.api.value.competition.season.Season;
 import com.sp.organizer.query.updater.club.entity.ClubDocument;
 import com.sp.organizer.query.updater.club.repository.ClubQueryMongoRepository;
 import com.sp.organizer.query.updater.competition.entity.CompetitionDocument;
+import com.sp.organizer.query.updater.competition.entity.SeasonDocument;
 import com.sp.organizer.query.updater.competition.entity.TurnDocument;
 import com.sp.organizer.query.updater.competition.repository.CompetitionQueryMongoRepository;
-import com.sp.organizer.api.event.competition.CompetitionCreated;
-import com.sp.organizer.api.event.competition.StageAdded;
 import io.eventuate.DispatchedEvent;
 import com.sp.organizer.query.updater.competition.entity.StageDocument;
 import com.sp.organizer.api.value.competition.season.Stage;
@@ -43,11 +42,24 @@ public class CompetitionEventHandler {
     public void createCompetition(DispatchedEvent<CompetitionCreated> dispatchedEvent) {
         CompetitionCreated competitionCreatedEvent = dispatchedEvent.getEvent();
         String competitionId = dispatchedEvent.getEntityId();
-        CompetitionDocument competitionQuery = CompetitionDocument.builder(competitionCreatedEvent.getCompetitionInfo())
+        CompetitionDocument competitionQuery = CompetitionDocument
+                .builder(competitionCreatedEvent.getCompetitionInfo())
         		.id(competitionId)
-                .stages(Lists.newArrayList())
+                .seasons(Lists.newArrayList())
         		.build();
         competitionMongoRepository.save(competitionQuery);
+    }
+
+    @EventHandlerMethod
+    public void addSeason(DispatchedEvent<SeasonAdded> dispatchedEvent) {
+        SeasonAdded seasonAdded = dispatchedEvent.getEvent();
+        String competitionId = dispatchedEvent.getEntityId();
+        CompetitionDocument competitionDocument = competitionMongoRepository.findOne(competitionId);
+
+        SeasonDocument seasonDocument = convertSeason(seasonAdded.getSeason(), competitionDocument);
+        competitionDocument.getSeasons().add(seasonDocument);
+
+        competitionMongoRepository.save(competitionDocument);
     }
 
     @EventHandlerMethod
@@ -57,13 +69,17 @@ public class CompetitionEventHandler {
         CompetitionDocument competitionDocument = competitionMongoRepository.findOne(competitionId);
 
         StageDocument stageDocument = convertStage(stageAddedEvent.getStage(), competitionDocument);
-        competitionDocument.getStages().add(stageDocument);
+        competitionDocument.getSeasons()
+                .stream()
+                .filter(s -> s.getId().equals(stageAddedEvent.getStage().getId().getSeasonId().getSeasonUuid().toString()))
+                .findFirst()
+                .ifPresent(s -> s.getStages().add(stageDocument));
 
         competitionMongoRepository.save(competitionDocument);
     }
 
     @EventHandlerMethod
-    public void addClubsToStage(DispatchedEvent<ClubsAdded> dispatchedEvent) {
+    public void addClubsToStage(DispatchedEvent<ClubsAdded> dispatchedEvent) throws Exception {
         ClubsAdded clubsAdded = dispatchedEvent.getEvent();
         String competitionId = dispatchedEvent.getEntityId();
         CompetitionDocument competitionDocument = competitionMongoRepository.findOne(competitionId);
@@ -74,7 +90,12 @@ public class CompetitionEventHandler {
                 .map(clubMongoRepository::findOne)
                 .collect(Collectors.toSet());
 
-        competitionDocument.getStages().stream()
+        competitionDocument
+                .getSeasons()
+                .stream().filter(s ->s.getId().equals(clubsAdded.getSeasonId().toString()))
+                .findFirst()
+                .orElseThrow(Exception::new)// TODO másik exception
+                .getStages().stream()
                 .filter(stageDocument -> stageDocument.getId().equals(clubsAdded.getStageId().toString()))
                 .findFirst()
                 .ifPresent(stageDocument -> stageDocument.setClubs(clubDocuments));
@@ -94,12 +115,21 @@ public class CompetitionEventHandler {
                 .map(this::convertTurn)
                 .collect(Collectors.toList());
 
-        competitionDocument.getStages().stream()
-                .filter(stageDocument -> stageDocument.getId().equals(turnsAdded.getStageId().toString()))
-                .findFirst()
-                .ifPresent(stageDocument -> stageDocument.setTurns(turnDocuments));
+//        competitionDocument.getStages().stream()
+//                .filter(stageDocument -> stageDocument.getId().equals(turnsAdded.getStageId().toString()))
+//                .findFirst()
+//                .ifPresent(stageDocument -> stageDocument.setTurns(turnDocuments));
 
         competitionMongoRepository.save(competitionDocument);
+    }
+
+    private SeasonDocument convertSeason(Season season, CompetitionDocument competitionDocument) {
+        return SeasonDocument.builder()
+                .competitionDocumentId(competitionDocument.getId())
+                .id(season.getId().getSeasonUuid().toString())
+                .name(season.getName())
+                .stages(Lists.newArrayList())
+                .build();
     }
 
     private StageDocument convertStage(Stage stage, CompetitionDocument competitionDocument) {

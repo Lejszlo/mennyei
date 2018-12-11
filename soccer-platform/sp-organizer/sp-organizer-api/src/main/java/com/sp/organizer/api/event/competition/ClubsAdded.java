@@ -13,6 +13,9 @@ public class ClubsAdded implements CompetitionEvent {
     @NonNull
     private UUID stageId;
 
+    @NonNull
+    private UUID seasonId;
+
     @Singular
     private Collection<String> clubIds;
 }

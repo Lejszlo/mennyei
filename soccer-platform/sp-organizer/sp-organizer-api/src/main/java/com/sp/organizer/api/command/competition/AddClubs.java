@@ -9,7 +9,7 @@ import java.util.Set;
 @Builder
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
-public class AddClubsCompetitionCommand extends CompetitionCommand {
+public class AddClubs extends CompetitionCommand {
 
     @NonNull
     private StageId stageId;

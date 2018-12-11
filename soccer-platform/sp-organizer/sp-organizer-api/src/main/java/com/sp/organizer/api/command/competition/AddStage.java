@@ -1,6 +1,7 @@
 package com.sp.organizer.api.command.competition;
 
 import com.sp.core.query.configurations.Interval;
+import com.sp.organizer.api.value.competition.StageId;
 import com.sp.organizer.api.value.competition.rule.StageRuleSet;
 import lombok.*;
 
@@ -11,10 +12,10 @@ import java.util.UUID;
 @Value
 @Builder
 @AllArgsConstructor
-public class AddStageCompetitionCommand extends CompetitionCommand {
+public class AddStage extends CompetitionCommand {
 
     @NotNull
-    private UUID id;
+    private StageId stageId;
 
     @NonNull
     private String name;

@@ -16,7 +16,7 @@ public class CompetitionDocument {
 	private String id;
 
 	@Singular
-	private List<StageDocument> stages;
+	private List<SeasonDocument> seasons;
 	
 	private CompetitionInfo competitionInfo;
 

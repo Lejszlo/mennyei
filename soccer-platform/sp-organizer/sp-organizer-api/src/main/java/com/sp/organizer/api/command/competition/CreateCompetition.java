@@ -7,7 +7,7 @@ import com.sp.organizer.api.value.competition.CompetitionInfo;
 @Builder
 @EqualsAndHashCode(callSuper=false)
 @AllArgsConstructor
-public class CreateCompetitionCommand extends CompetitionCommand {
+public class CreateCompetition extends CompetitionCommand {
 	
 	@NonNull
 	private CompetitionInfo competitionInfo;

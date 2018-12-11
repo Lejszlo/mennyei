@@ -1,11 +1,10 @@
 package com.sp.organizer.query.updater.competition.entity;
 
 import com.sp.core.query.configurations.Interval;
+import com.sp.organizer.api.value.competition.rule.StageRuleSet;
 import com.sp.organizer.query.updater.club.entity.ClubDocument;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-import com.sp.organizer.api.value.competition.rule.StageRuleSet;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -21,6 +20,9 @@ public class StageDocument {
 
 	@NotNull
 	private String competitionDocumentId;
+
+	@NotNull
+	private String seasonDocumentId;
 
 	@NonNull
 	private String name;

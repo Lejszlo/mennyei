@@ -1,22 +1,20 @@
 package com.sp.match.query.viewer.resource;
 
+import com.sp.match.api.resource.MatchDocumentResource;
 import com.sp.match.api.value.MatchResultDetails;
+import com.sp.match.query.updater.match.entity.MatchDocument;
 import com.sp.match.query.viewer.controller.ClubDocumentQueryFeignController;
+import com.sp.match.query.viewer.controller.MatchDocumentQueryClient;
 import com.sp.organizer.api.resource.ClubDocumentResource;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
-import org.springframework.stereotype.Component;
-import com.sp.match.api.resource.MatchDocumentResource;
-import com.sp.match.query.viewer.controller.MatchDocumentQueryClient;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
-import com.sp.match.query.updater.match.entity.MatchDocument;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 public class MatchResourceAssemblerSupport extends ResourceAssemblerSupport<MatchDocument, MatchDocumentResource> {
@@ -40,8 +38,8 @@ public class MatchResourceAssemblerSupport extends ResourceAssemblerSupport<Matc
     private List<MatchDocumentResource> getMatchDocumentResources(List<MatchDocument> matchDocuments) {
         Set<String> clubIds = new HashSet<>();
         matchDocuments.forEach(matchDocument -> {
-            clubIds.add(matchDocument.getHomeClubId().getValue());
-            clubIds.add(matchDocument.getAwayClubId().getValue());
+            clubIds.add(matchDocument.getHomeClubId().getId());
+            clubIds.add(matchDocument.getAwayClubId().getId());
         });
 
         List<ClubDocumentResource> clubDocumentResources = clubDocumentQueryFeignController.getClubs(Lists.newArrayList(clubIds));
@@ -50,8 +48,8 @@ public class MatchResourceAssemblerSupport extends ResourceAssemblerSupport<Matc
         matchDocuments
                 .forEach(matchDocument -> {
                     MatchDocumentResource matchDocumentResource = toResource(matchDocument);
-                    matchDocumentResource.setHomeClubDocumentResource(getClubDocumentResource(clubDocumentResources, matchDocument.getHomeClubId().getValue()));
-                    matchDocumentResource.setAwayClubDocumentResource(getClubDocumentResource(clubDocumentResources, matchDocument.getAwayClubId().getValue()));
+                    matchDocumentResource.setHomeClubDocumentResource(getClubDocumentResource(clubDocumentResources, matchDocument.getHomeClubId().getId()));
+                    matchDocumentResource.setAwayClubDocumentResource(getClubDocumentResource(clubDocumentResources, matchDocument.getAwayClubId().getId()));
                     matchDocumentResources.add(matchDocumentResource);
                 });
         return matchDocumentResources;
@@ -79,8 +77,8 @@ public class MatchResourceAssemblerSupport extends ResourceAssemblerSupport<Matc
             resource.setHomeRedCardAmount(matchResultDetails.getHomeRedCardAmount());
             resource.setHomeRedCardAmount(matchResultDetails.getHomeRedCardAmount());
             resource.setWinnerType(matchResultDetails.getWinner());
-            resource.setHomeClubId(matchDocument.getHomeClubId().getValue());
-            resource.setAwayClubId(matchDocument.getAwayClubId().getValue());
+            resource.setHomeClubId(matchDocument.getHomeClubId().getId());
+            resource.setAwayClubId(matchDocument.getAwayClubId().getId());
         }
         return resource;
 	}

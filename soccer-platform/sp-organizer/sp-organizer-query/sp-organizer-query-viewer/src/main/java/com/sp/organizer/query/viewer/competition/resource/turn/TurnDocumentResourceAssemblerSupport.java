@@ -1,5 +1,6 @@
 package com.sp.organizer.query.viewer.competition.resource.turn;
 
+import com.sp.organizer.api.resource.TurnDocumentResource;
 import com.sp.organizer.query.updater.competition.entity.TurnDocument;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;

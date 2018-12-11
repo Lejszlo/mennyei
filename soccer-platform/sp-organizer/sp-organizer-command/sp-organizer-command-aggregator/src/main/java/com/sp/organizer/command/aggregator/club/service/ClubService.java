@@ -1,19 +1,17 @@
 package com.sp.organizer.command.aggregator.club.service;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-
-import com.sp.organizer.api.command.club.CreateClubCommand;
+import com.sp.organizer.api.command.club.AddPlayerClubCommand;
+import com.sp.organizer.api.command.club.CreateClub;
+import com.sp.organizer.api.command.club.RemovePlayerClubCommand;
 import com.sp.organizer.command.aggregator.club.domain.ClubAggregate;
 import com.sp.organizer.command.aggregator.club.infrastructure.ClubAggregateRepository;
-import com.sp.organizer.api.command.club.AddPlayerClubCommand;
-import com.sp.organizer.api.command.club.RemovePlayerClubCommand;
+import io.eventuate.EntityWithIdAndVersion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import io.eventuate.EntityWithIdAndVersion;
 import value.Transfer;
-import com.sp.organizer.api.value.club.ClubInfo;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class ClubService {
@@ -21,8 +19,8 @@ public class ClubService {
 	@Autowired
 	private ClubAggregateRepository clubRepository;
 
-	public CompletableFuture<EntityWithIdAndVersion<ClubAggregate>> addClub(ClubInfo clubInfo) {
-		return clubRepository.save(new CreateClubCommand(clubInfo));
+	public CompletableFuture<EntityWithIdAndVersion<ClubAggregate>> saveClub(CreateClub createClub) {
+		return clubRepository.save(new CreateClub(createClub.getClubInfo()));
 	}
 
 	public void transferPlayer(Transfer transfer) throws ExecutionException, InterruptedException {

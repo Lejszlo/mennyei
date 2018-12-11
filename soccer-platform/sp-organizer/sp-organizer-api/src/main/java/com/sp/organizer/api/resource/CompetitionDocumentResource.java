@@ -1,13 +1,10 @@
-package com.sp.organizer.query.viewer.competition.resource.competition;
+package com.sp.organizer.api.resource;
 
 import com.sp.organizer.api.value.competition.CompetitionInfo;
-import com.sp.organizer.query.viewer.competition.resource.stage.StageDocumentResource;
-import lombok.Singular;
-import org.springframework.hateoas.ResourceSupport;
-
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Singular;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.util.List;
 
@@ -15,6 +12,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper=false)
 public class CompetitionDocumentResource extends ResourceSupport {
 	private CompetitionInfo competitionInfo;
+
 	@Singular
-	private List<StageDocumentResource> stages;
+	private List<SeasonDocumentResource> seasons;
 }

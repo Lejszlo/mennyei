@@ -10,7 +10,7 @@ import java.util.Set;
 @Value
 @Builder
 @AllArgsConstructor
-public class AddTurnsCompetitionCommand extends CompetitionCommand {
+public class AddTurns extends CompetitionCommand {
 
     @NonNull
     private StageId stageId;

@@ -12,7 +12,10 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     serialization:
       write-dates-as-timestamps: false
-
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 eventuateLocal.kafka.bootstrapServers: ${DOCKER_HOST_IP}:9092
 eventuateLocal.zookeeper.connectionString: ${DOCKER_HOST_IP}:2181
 eventuateLocal.cdc.dbUserName: root

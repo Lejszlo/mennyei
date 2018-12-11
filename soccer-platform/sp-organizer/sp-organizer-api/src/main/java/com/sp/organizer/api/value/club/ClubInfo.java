@@ -1,13 +1,14 @@
 package com.sp.organizer.api.value.club;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 import lombok.Value;
 
 @Value
 @AllArgsConstructor
+@Builder
 public class ClubInfo {
-	private String fullName;
+	String fullName;
 
-	private String name;
+	String name;
 }

@@ -1,13 +1,10 @@
-package com.sp.organizer.query.viewer.competition.resource.turn;
+package com.sp.organizer.api.resource;
 
 import com.sp.core.query.configurations.Interval;
-import com.sp.match.api.resource.MatchDocumentResource;
-import lombok.*;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 import org.springframework.hateoas.ResourceSupport;
-
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Collection;
-import java.util.List;
 
 @Value
 @Builder

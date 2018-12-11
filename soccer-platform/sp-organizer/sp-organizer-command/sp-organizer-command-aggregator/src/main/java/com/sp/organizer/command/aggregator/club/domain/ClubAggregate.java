@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.sp.organizer.api.command.club.CreateClubCommand;
+import com.sp.organizer.api.command.club.CreateClub;
 import com.sp.organizer.api.command.club.AddPlayerClubCommand;
 import com.sp.organizer.api.command.club.ClubCommand;
 import com.sp.organizer.api.command.club.RemovePlayerClubCommand;
@@ -23,8 +23,8 @@ public class ClubAggregate extends ReflectiveMutableCommandProcessingAggregate<C
 
     private Set<String> playerIds = new HashSet<>();
 
-    public List<Event> process(CreateClubCommand createClubCommand) {
-        return EventUtil.events(new ClubCreated(createClubCommand.getClubInfo()));
+    public List<Event> process(CreateClub createClub) {
+        return EventUtil.events(new ClubCreated(createClub.getClubInfo()));
     }
 
     public List<Event> process(AddPlayerClubCommand addPlayerClubCommand) {

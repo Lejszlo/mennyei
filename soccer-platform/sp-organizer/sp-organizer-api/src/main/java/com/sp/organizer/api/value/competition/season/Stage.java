@@ -1,10 +1,12 @@
 package com.sp.organizer.api.value.competition.season;
 
-import java.util.*;
-
 import com.sp.core.query.configurations.Interval;
+import com.sp.organizer.api.value.competition.StageId;
 import com.sp.organizer.api.value.competition.rule.StageRuleSet;
 import lombok.*;
+
+import java.util.List;
+import java.util.Set;
 
 @Value
 @Builder
@@ -12,7 +14,7 @@ import lombok.*;
 public class Stage {
 
 	@NonNull
-	private UUID id;
+	private StageId id;
 
 	@NonNull
 	private String name;

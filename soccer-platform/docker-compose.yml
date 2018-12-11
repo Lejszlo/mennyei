@@ -1,14 +1,14 @@
 version: "3.2"
 services:
   zookeeper:
-    image: eventuateio/eventuateio-local-zookeeper:0.16.2.RELEASE
+    image: eventuateio/eventuateio-local-zookeeper:0.13.0
     ports:
       - 2181:2181
       - 2888:2888
       - 3888:3888
 
   kafka:
-    image: eventuateio/eventuateio-local-kafka:0.16.2.RELEASE
+    image: eventuateio/eventuateio-local-kafka:0.13.0
     ports:
       - 9092:9092
     links:
@@ -31,7 +31,7 @@ services:
       KM_ARGS: -Djava.net.preferIPv4Stack=true
 
   mysql:
-    image: eventuateio/eventuateio-local-mysql:0.16.2.RELEASE
+    image: eventuateio/eventuateio-local-mysql:0.13.0
     ports:
       - 3306:3306
     environment:
@@ -40,7 +40,7 @@ services:
       - MYSQL_PASSWORD=mysqlpw
 
   cdcservice:
-    image: eventuateio/eventuateio-local-cdc-service:0.16.2.RELEASE
+    image: eventuateio/eventuateio-local-cdc-service:0.13.0
     ports:
       - 8099:8080
     links:
@@ -69,6 +69,7 @@ services:
        SPRING_DATASOURCE_URL: jdbc:mysql://mysql/eventuate
        SPRING_DATASOURCE_USERNAME: mysqluser
        SPRING_DATASOURCE_PASSWORD: mysqlpw
+       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.jdbc.Driver
        EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING: zookeeper:2181
        DEBUG: kafka-node:*
 
@@ -77,9 +78,9 @@ services:
      ports:
        - "8888:8888"
      environment:
-       DOCKER_HOST_IP: 192.168.0.101
+       DOCKER_HOST_IP: 192.168.1.2
 
   mongo:
-    image: mongo:3.7.2
+    image: mongo:3.5.6
     ports:
       - 27017:27017

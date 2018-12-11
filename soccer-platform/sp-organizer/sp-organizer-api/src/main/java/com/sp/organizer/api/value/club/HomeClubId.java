@@ -1,5 +1,6 @@
 package com.sp.organizer.api.value.club;
 
+import com.sp.organizer.api.value.competition.ClubId;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
-public class AddMatchCompetitionCommand extends CompetitionCommand {
+public class AddMatch extends CompetitionCommand {
 	@NonNull
 	String competitionId;
 	

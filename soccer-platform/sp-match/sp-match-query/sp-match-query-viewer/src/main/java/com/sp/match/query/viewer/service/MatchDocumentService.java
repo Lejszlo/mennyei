@@ -1,11 +1,11 @@
 package com.sp.match.query.viewer.service;
 
+import com.sp.match.api.resource.MatchDocumentResource;
 import com.sp.match.query.updater.match.entity.MatchDocument;
 import com.sp.match.query.updater.match.repository.MatchDocumentMongoRepository;
+import com.sp.match.query.viewer.resource.MatchResourceAssemblerSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.sp.match.api.resource.MatchDocumentResource;
-import com.sp.match.query.viewer.resource.MatchResourceAssemblerSupport;
 
 import java.util.List;
 

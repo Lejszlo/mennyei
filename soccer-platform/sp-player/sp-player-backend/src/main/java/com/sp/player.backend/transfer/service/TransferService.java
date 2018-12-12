@@ -1,12 +1,12 @@
 package com.sp.player.backend.transfer.service;
 
-import java.util.concurrent.ExecutionException;
-
 import com.sp.player.backend.transfer.command.TransferPlayerCommand;
 import com.sp.player.backend.transfer.infrastructure.TransferAggregatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import value.Transfer;
+
+import java.util.concurrent.ExecutionException;
 
 
 @Service

@@ -1,17 +1,13 @@
 package com.sp.match.api.value;
 
+import com.sp.match.api.value.event.*;
+import lombok.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.sp.match.api.value.event.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Singular;
 
 @Builder(builderMethodName = "hiddenBuilder", buildMethodName = "hiddenBuild")
 @AllArgsConstructor

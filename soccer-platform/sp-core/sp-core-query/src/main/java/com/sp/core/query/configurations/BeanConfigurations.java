@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import static org.springframework.http.converter.json.Jackson2ObjectMapperBuilder.*;
+import static org.springframework.http.converter.json.Jackson2ObjectMapperBuilder.json;
 
 @Configuration
 public class BeanConfigurations {

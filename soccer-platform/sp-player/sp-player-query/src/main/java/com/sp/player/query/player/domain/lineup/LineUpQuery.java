@@ -1,12 +1,10 @@
 package com.sp.player.query.player.domain.lineup;
 
+import com.sp.match.api.value.lineup.LineUpType;
 import com.sp.player.query.player.domain.PlayerQuery;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-
-
-import lombok.Data;
-import com.sp.match.api.value.lineup.LineUpType;
 
 @Data
 public class LineUpQuery {

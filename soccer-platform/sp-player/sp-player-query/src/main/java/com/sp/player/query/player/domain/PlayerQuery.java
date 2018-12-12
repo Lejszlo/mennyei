@@ -1,14 +1,13 @@
 package com.sp.player.query.player.domain;
 
-import java.util.Map;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
+import com.sp.organizer.api.value.competition.CompetitionId;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
-import com.sp.organizer.api.value.competition.CompetitionId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Map;
 
 @Document
 @Builder

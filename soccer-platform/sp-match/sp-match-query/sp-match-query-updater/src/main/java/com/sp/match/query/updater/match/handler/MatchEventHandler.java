@@ -1,16 +1,15 @@
 package com.sp.match.query.updater.match.handler;
 
-import com.sp.match.query.updater.match.entity.MatchDocument;
 import com.sp.match.api.event.MatchAdded;
 import com.sp.match.api.event.MatchPlayed;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
+import com.sp.match.api.value.MatchInfo;
+import com.sp.match.query.updater.match.entity.MatchDocument;
+import com.sp.match.query.updater.match.repository.MatchDocumentMongoRepository;
 import io.eventuate.DispatchedEvent;
 import io.eventuate.EventHandlerMethod;
 import io.eventuate.EventSubscriber;
-import com.sp.match.api.value.MatchInfo;
-import com.sp.match.query.updater.match.repository.MatchDocumentMongoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @EventSubscriber
 @Component

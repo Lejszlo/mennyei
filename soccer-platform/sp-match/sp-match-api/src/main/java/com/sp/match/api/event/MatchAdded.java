@@ -1,9 +1,9 @@
 package com.sp.match.api.event;
 
+import com.sp.match.api.value.MatchInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
-import com.sp.match.api.value.MatchInfo;
 
 @Builder(builderMethodName="hiddenBuilder")
 @Value

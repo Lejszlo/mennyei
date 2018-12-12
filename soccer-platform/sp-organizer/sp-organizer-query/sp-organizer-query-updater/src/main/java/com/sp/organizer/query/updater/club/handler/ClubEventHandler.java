@@ -1,16 +1,15 @@
 package com.sp.organizer.query.updater.club.handler;
 
-import com.sp.organizer.query.updater.club.repository.ClubQueryMongoRepository;
 import com.sp.organizer.api.event.club.ClubCreated;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
+import com.sp.organizer.api.value.club.ClubInfo;
+import com.sp.organizer.query.updater.club.entity.ClubDocument;
+import com.sp.organizer.query.updater.club.repository.ClubQueryMongoRepository;
 import io.eventuate.DispatchedEvent;
 import io.eventuate.EventHandlerMethod;
 import io.eventuate.EventSubscriber;
-import com.sp.organizer.query.updater.club.entity.ClubDocument;
-import com.sp.organizer.api.value.club.ClubInfo;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @EventSubscriber
 @Component

@@ -1,5 +1,7 @@
 package sp.frame.integrationtest;
 
+import com.sp.competition.command.aggregator.service.CompetitionService;
+import com.sp.competition.command.aggregator.service.StageService;
 import com.sp.core.query.configurations.Interval;
 import com.sp.match.api.value.MatchInfo;
 import com.sp.match.api.value.event.CardEvent;
@@ -12,10 +14,7 @@ import com.sp.match.query.app.MatchQueryApp;
 import com.sp.organizer.api.value.club.AwayClubId;
 import com.sp.organizer.api.value.club.HomeClubId;
 import com.sp.organizer.api.value.competition.ClubId;
-import com.sp.organizer.api.value.competition.season.Turn;
 import com.sp.organizer.command.aggregator.club.service.ClubService;
-import com.sp.organizer.command.aggregator.competition.service.CompetitionService;
-import com.sp.organizer.command.aggregator.competition.service.StageService;
 import com.sp.organizer.command.app.OrganizerCommandApp;
 import com.sp.organizer.query.app.OrganizerQueryApp;
 import io.eventuate.EntityWithIdAndVersion;
@@ -26,6 +25,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import sp.competition.api.value.season.Turn;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

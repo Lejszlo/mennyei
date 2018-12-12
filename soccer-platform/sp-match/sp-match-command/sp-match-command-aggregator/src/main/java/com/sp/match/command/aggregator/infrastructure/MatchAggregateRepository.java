@@ -1,8 +1,8 @@
 package com.sp.match.command.aggregator.infrastructure;
 
+import com.sp.match.api.command.MatchCommand;
 import com.sp.match.command.aggregator.domain.MatchAggregator;
 import io.eventuate.AggregateRepository;
-import com.sp.match.api.command.MatchCommand;
 import io.eventuate.EventuateAggregateStore;
 import org.springframework.stereotype.Repository;
 

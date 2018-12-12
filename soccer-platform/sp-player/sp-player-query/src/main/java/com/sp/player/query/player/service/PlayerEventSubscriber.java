@@ -1,10 +1,9 @@
 package com.sp.player.query.player.service;
 
 import com.sp.core.backend.DateUtil;
-import com.sp.organizer.api.value.competition.CompetitionId;
+import com.sp.match.api.event.MatchPlayed;
 import com.sp.player.query.player.domain.PlayerQuery;
 import com.sp.player.query.player.infrastructure.PlayerQueryMongoRepository;
-import com.sp.match.api.event.MatchPlayed;
 import event.PlayerAdded;
 import io.eventuate.DispatchedEvent;
 import io.eventuate.EventHandlerMethod;

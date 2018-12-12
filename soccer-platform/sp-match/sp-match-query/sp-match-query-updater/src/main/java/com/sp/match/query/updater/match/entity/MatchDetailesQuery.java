@@ -1,12 +1,11 @@
 package com.sp.match.query.updater.match.entity;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
-
+import com.sp.match.api.value.lineup.LineUp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
-import com.sp.match.api.value.lineup.LineUp;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.List;
 

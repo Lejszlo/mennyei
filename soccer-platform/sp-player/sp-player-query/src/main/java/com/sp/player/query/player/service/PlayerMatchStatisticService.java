@@ -1,13 +1,6 @@
 package com.sp.player.query.player.service;
 
 
-import com.sp.player.query.player.domain.PlayerMatchStatisticData;
-import com.sp.player.query.player.domain.PlayerQuery;
-import com.sp.player.query.player.domain.lineup.LineUpQuery;
-import com.sp.player.query.player.infrastructure.LineUpQueryMongoRepository;
-import com.sp.player.query.player.infrastructure.PlayerQueryMongoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.sp.match.api.value.MatchResultDetails;
 import com.sp.match.api.value.event.CardEvent;
 import com.sp.match.api.value.event.GoalEvent;
@@ -15,6 +8,13 @@ import com.sp.match.api.value.event.MatchEventType;
 import com.sp.match.api.value.event.SubstitutionGameEvent;
 import com.sp.match.api.value.lineup.LineUpType;
 import com.sp.organizer.api.value.competition.CompetitionId;
+import com.sp.player.query.player.domain.PlayerMatchStatisticData;
+import com.sp.player.query.player.domain.PlayerQuery;
+import com.sp.player.query.player.domain.lineup.LineUpQuery;
+import com.sp.player.query.player.infrastructure.LineUpQueryMongoRepository;
+import com.sp.player.query.player.infrastructure.PlayerQueryMongoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

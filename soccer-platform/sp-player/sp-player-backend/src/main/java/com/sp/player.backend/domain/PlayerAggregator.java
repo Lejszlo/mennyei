@@ -1,14 +1,14 @@
 package com.sp.player.backend.domain;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.sp.player.backend.command.AddPlayerCommand;
 import com.sp.player.backend.command.PlayerCommand;
 import event.PlayerAdded;
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 import value.Player;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class PlayerAggregator extends ReflectiveMutableCommandProcessingAggregate<PlayerAggregator, PlayerCommand> {
 

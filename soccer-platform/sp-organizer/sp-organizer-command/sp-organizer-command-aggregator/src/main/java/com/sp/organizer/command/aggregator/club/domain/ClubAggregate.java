@@ -1,21 +1,20 @@
 package com.sp.organizer.command.aggregator.club.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import com.sp.organizer.api.command.club.CreateClub;
 import com.sp.organizer.api.command.club.AddPlayerClubCommand;
 import com.sp.organizer.api.command.club.ClubCommand;
+import com.sp.organizer.api.command.club.CreateClub;
 import com.sp.organizer.api.command.club.RemovePlayerClubCommand;
-
+import com.sp.organizer.api.event.club.ClubCreated;
+import com.sp.organizer.api.value.club.ClubInfo;
 import event.PlayerAddedToClub;
 import event.PlayerRemovedFromClub;
-import com.sp.organizer.api.event.club.ClubCreated;
 import io.eventuate.Event;
 import io.eventuate.EventUtil;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
-import com.sp.organizer.api.value.club.ClubInfo;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ClubAggregate extends ReflectiveMutableCommandProcessingAggregate<ClubAggregate, ClubCommand> {
 

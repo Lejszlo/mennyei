@@ -28,7 +28,8 @@
         <module>sp-eureka</module>
         <module>sp-zuul</module>
         <module>sp-turbine</module>
-    </modules>
+		<module>sp-competition</module>
+	</modules>
 
 	<repositories>
 		<repository>

@@ -1,9 +1,9 @@
 package com.sp.organizer.command.aggregator.organizer.controller.validator;
 
+import com.sp.competition.command.aggregator.infrastructure.CompetitionAggregateRepository;
 import com.sp.core.backend.exception.ValidationException;
 import com.sp.organizer.api.command.organizer.AddCompetitionOrganizerCommand;
 import com.sp.organizer.api.value.competition.CompetitionId;
-import com.sp.organizer.command.aggregator.competition.infrastructure.CompetitionAggregateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

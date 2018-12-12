@@ -7,11 +7,11 @@ import com.sp.match.api.command.SetMatchCommand;
 import com.sp.match.api.event.MatchAdded;
 import com.sp.match.api.event.MatchPlayed;
 import com.sp.match.api.event.MatchSet;
-import io.eventuate.Event;
-import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 import com.sp.match.api.value.MatchInfo;
 import com.sp.match.api.value.MatchResultDetails;
 import com.sp.match.api.value.lineup.LineUp;
+import io.eventuate.Event;
+import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 
 import java.util.ArrayList;
 import java.util.Collections;

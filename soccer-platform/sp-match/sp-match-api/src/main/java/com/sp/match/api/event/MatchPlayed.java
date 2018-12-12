@@ -1,14 +1,14 @@
 package com.sp.match.api.event;
 
 import com.sp.match.api.value.MatchResultDetails;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.Value;
 import com.sp.organizer.api.value.club.AwayClubId;
 import com.sp.organizer.api.value.club.HomeClubId;
 import com.sp.organizer.api.value.competition.CompetitionId;
 import com.sp.organizer.api.value.competition.StageId;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NonNull;
+import lombok.Value;
 
 @Builder(builderMethodName = "hiddenBuilder")
 @Value

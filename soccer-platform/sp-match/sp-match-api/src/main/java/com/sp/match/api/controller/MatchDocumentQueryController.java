@@ -1,6 +1,5 @@
 package com.sp.match.api.controller;
 
-import org.springframework.hateoas.Resources;
 import com.sp.match.api.resource.MatchDocumentResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

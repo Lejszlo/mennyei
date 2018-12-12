@@ -1,18 +1,17 @@
 package com.sp.match.api.command;
 
-import java.util.List;
-
 import com.sp.match.api.value.event.GameEvent;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Singular;
-import lombok.Value;
 import com.sp.organizer.api.value.club.AwayClubId;
 import com.sp.organizer.api.value.club.HomeClubId;
 import com.sp.organizer.api.value.competition.CompetitionId;
 import com.sp.organizer.api.value.competition.StageId;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Singular;
+import lombok.Value;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Builder(builderMethodName = "hiddenBuilder")
 @Value

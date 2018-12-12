@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
+import com.sp.competition.command.aggregator.service.CompetitionService;
 import com.sp.core.query.configurations.Interval;
 import com.sp.organizer.api.command.competition.AddClubs;
 import com.sp.organizer.api.command.competition.AddSeason;
@@ -9,9 +10,7 @@ import com.sp.organizer.api.value.competition.CompetitionId;
 import com.sp.organizer.api.value.competition.CompetitionInfo;
 import com.sp.organizer.api.value.competition.SeasonId;
 import com.sp.organizer.api.value.competition.StageId;
-import com.sp.organizer.api.value.competition.rule.StageRuleSet;
 import com.sp.organizer.api.value.organizer.OrganizerInfo;
-import com.sp.organizer.command.aggregator.competition.service.CompetitionService;
 import com.sp.organizer.command.app.OrganizerCommandApp;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import sp.competition.api.value.rule.StageRuleSet;
 
 import javax.ws.rs.core.MediaType;
 import java.time.LocalDate;
@@ -29,9 +29,9 @@ import java.util.concurrent.TimeUnit;
 
 import static com.sp.organizer.api.value.competition.CompetitionId.competitionId;
 import static com.sp.organizer.api.value.competition.SeasonId.seasonId;
-import static com.sp.organizer.api.value.competition.rule.SortingRule.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static sp.competition.api.value.rule.SortingRule.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(

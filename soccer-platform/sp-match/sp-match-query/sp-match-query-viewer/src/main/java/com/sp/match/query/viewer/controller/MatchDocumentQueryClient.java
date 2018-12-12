@@ -1,11 +1,12 @@
 package com.sp.match.query.viewer.controller;
 
 import com.sp.match.api.controller.MatchDocumentQueryController;
+import com.sp.match.api.resource.MatchDocumentResource;
 import com.sp.match.query.viewer.service.MatchDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resources;
-import org.springframework.web.bind.annotation.*;
-import com.sp.match.api.resource.MatchDocumentResource;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

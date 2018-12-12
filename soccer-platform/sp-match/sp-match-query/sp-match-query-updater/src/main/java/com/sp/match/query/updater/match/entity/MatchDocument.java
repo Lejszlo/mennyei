@@ -1,12 +1,12 @@
 package com.sp.match.query.updater.match.entity;
 
+import com.sp.match.api.value.MatchResultDetails;
+import com.sp.organizer.api.value.club.AwayClubId;
+import com.sp.organizer.api.value.club.HomeClubId;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.springframework.data.mongodb.core.mapping.Document;
-import com.sp.match.api.value.MatchResultDetails;
-import com.sp.organizer.api.value.club.AwayClubId;
-import com.sp.organizer.api.value.club.HomeClubId;
 
 import java.util.Comparator;
 

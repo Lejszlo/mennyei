@@ -1,9 +1,8 @@
 package com.sp.match.api.value;
 
-import lombok.*;
 import com.sp.organizer.api.value.club.AwayClubId;
 import com.sp.organizer.api.value.club.HomeClubId;
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -11,5 +11,11 @@
 
     <artifactId>sp-competition-command-app</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.eventuate.local.java</groupId>
+            <artifactId>eventuate-local-java-jdbc</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

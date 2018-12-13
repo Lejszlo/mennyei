@@ -1,7 +1,7 @@
 package com.sp.organizer.command.aggregator.organizer.controller;
 
-import com.sp.organizer.api.command.organizer.AddCompetitionOrganizerCommand;
-import com.sp.organizer.api.command.organizer.CreateOrganizerCommand;
+import com.sp.organizer.api.command.AddCompetitionOrganizerCommand;
+import com.sp.organizer.api.command.CreateOrganizerCommand;
 import com.sp.organizer.command.aggregator.organizer.service.OrganizerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

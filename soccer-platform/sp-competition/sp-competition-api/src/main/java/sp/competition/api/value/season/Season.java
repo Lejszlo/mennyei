@@ -1,7 +1,7 @@
 package sp.competition.api.value.season;
 
-import com.sp.core.query.configurations.Interval;
 import lombok.*;
+import sp.common.Interval;
 import sp.competition.api.value.SeasonId;
 
 import javax.validation.constraints.NotNull;

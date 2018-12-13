@@ -1,14 +1,14 @@
 package com.sp.organizer.command.aggregator.organizer.domain;
 
-import com.sp.organizer.api.command.organizer.AddCompetitionOrganizerCommand;
-import com.sp.organizer.api.command.organizer.CreateOrganizerCommand;
-import com.sp.organizer.api.command.organizer.OrganizerCommand;
-import com.sp.organizer.api.event.organizer.CompetitionAdded;
-import com.sp.organizer.api.event.organizer.OrganizerCreated;
-import com.sp.organizer.api.value.competition.CompetitionId;
-import com.sp.organizer.api.value.organizer.OrganizerInfo;
+import com.sp.organizer.api.command.AddCompetitionOrganizerCommand;
+import com.sp.organizer.api.command.CreateOrganizerCommand;
+import com.sp.organizer.api.command.OrganizerCommand;
+import com.sp.organizer.api.event.CompetitionAdded;
+import com.sp.organizer.api.event.OrganizerCreated;
+import com.sp.organizer.api.value.OrganizerInfo;
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
+import sp.competition.api.value.CompetitionId;
 
 import java.util.Collections;
 import java.util.HashSet;

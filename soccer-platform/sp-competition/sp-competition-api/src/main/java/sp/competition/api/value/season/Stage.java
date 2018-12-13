@@ -1,7 +1,8 @@
 package sp.competition.api.value.season;
 
-import com.sp.core.query.configurations.Interval;
+import com.sp.club.api.value.ClubId;
 import lombok.*;
+import sp.common.Interval;
 import sp.competition.api.value.StageId;
 import sp.competition.api.value.rule.StageRuleSet;
 
@@ -26,7 +27,7 @@ public class Stage {
 	private List<Turn> turns;
 
 	@Singular
-	private Set<String> clubIds;
+	private Set<ClubId> clubIds;
 
 	@NonNull
 	private Interval interval;

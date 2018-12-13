@@ -1,7 +1,7 @@
 package sp.competition.api.command;
 
-import com.sp.core.query.configurations.Interval;
 import lombok.*;
+import sp.common.Interval;
 import sp.competition.api.value.StageId;
 import sp.competition.api.value.rule.StageRuleSet;
 

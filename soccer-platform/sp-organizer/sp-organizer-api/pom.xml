@@ -13,30 +13,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.hajdu</groupId>
-            <artifactId>sp-core-query</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
             <groupId>io.eventuate.client.java</groupId>
-            <artifactId>eventuate-client-java-spring</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-hystrix</artifactId>
-            <version>1.1.5.RELEASE</version>
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.baeldung.spring.cloud</groupId>-->
-            <!--<artifactId>spring-cloud-hystrix-rest-producer</artifactId>-->
-            <!--<version>1.0.0-SNAPSHOT</version>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
-            <version>1.1.5.RELEASE</version>
+            <artifactId>eventuate-client-java</artifactId>
         </dependency>
     </dependencies>
 

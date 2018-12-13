@@ -1,8 +1,8 @@
 package com.sp.match.query.updater.match.entity;
 
+import com.sp.club.api.value.AwayClubId;
+import com.sp.club.api.value.HomeClubId;
 import com.sp.match.api.value.MatchResultDetails;
-import com.sp.organizer.api.value.club.AwayClubId;
-import com.sp.organizer.api.value.club.HomeClubId;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;

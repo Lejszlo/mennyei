@@ -8,7 +8,7 @@ import lombok.Value;
 
 import java.util.List;
 
-@Builder(builderMethodName="hiddenBuilder")
+@Builder
 @Value
 @AllArgsConstructor
 public class MatchSet implements MatchEvent {
@@ -18,9 +18,5 @@ public class MatchSet implements MatchEvent {
 	
 	@Singular
 	private List<LineUp> awayLineUps;
-	
-	public static MatchSetBuilder builder() {
-		return hiddenBuilder();
-	}
 	
 }

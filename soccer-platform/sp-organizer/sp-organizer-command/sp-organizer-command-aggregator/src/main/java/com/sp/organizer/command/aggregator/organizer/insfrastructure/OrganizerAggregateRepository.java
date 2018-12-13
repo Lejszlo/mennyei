@@ -1,6 +1,6 @@
 package com.sp.organizer.command.aggregator.organizer.insfrastructure;
 
-import com.sp.organizer.api.command.organizer.OrganizerCommand;
+import com.sp.organizer.api.command.OrganizerCommand;
 import com.sp.organizer.command.aggregator.organizer.domain.OrganizerAggregate;
 import io.eventuate.AggregateRepository;
 import io.eventuate.EventuateAggregateStore;

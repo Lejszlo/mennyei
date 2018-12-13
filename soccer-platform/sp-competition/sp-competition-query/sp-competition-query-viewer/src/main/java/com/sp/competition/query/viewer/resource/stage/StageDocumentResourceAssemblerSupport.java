@@ -31,15 +31,15 @@ public class StageDocumentResourceAssemblerSupport extends ResourceAssemblerSupp
         stageDocumentResource.setName(stageDocument.getName());
         stageDocumentResource.setTurns(turnDocumentResourceAssemblerSupport.toResources(stageDocument.getTurns()));
 
-        stageDocumentResource.add(linkTo(methodOn(StageDocumentQueryController.class).getClubs(
-                stageDocument.getCompetitionDocumentId(),
-                stageDocument.getCompetitionDocumentId(),
-                stageDocument.getId())).withRel("clubs"));
+//        stageDocumentResource.add(linkTo(methodOn(StageDocumentQueryController.class).getClubs(
+//                stageDocument.getCompetitionDocumentId(),
+//                stageDocument.getCompetitionDocumentId(),
+//                stageDocument.getId())).withRel("clubs"));
 
         stageDocumentResource.add(linkTo(methodOn(StageDocumentQueryController.class).getTable(
-                stageDocument.getCompetitionDocumentId(),
-                stageDocument.getSeasonDocumentId(),
-                stageDocument.getId())).withRel("table"));
+                stageDocument.getId().getCompetitionId().getValue(),
+                stageDocument.getId().getSeasonId().getSeasonUuid().toString(),
+                stageDocument.getId().getStageUuid().toString())).withRel("table"));
 
         return stageDocumentResource;
     }

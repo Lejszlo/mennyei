@@ -1,10 +1,10 @@
 package sp.competition.api.value.season;
 
-import com.sp.core.query.configurations.Interval;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Singular;
 import lombok.Value;
+import sp.common.Interval;
 
 import java.util.List;
 

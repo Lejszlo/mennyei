@@ -13,11 +13,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.hajdu</groupId>
-            <artifactId>sp-organizer-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>io.eventuate.client.java</groupId>
+            <artifactId>eventuate-client-java</artifactId>
         </dependency>
     </dependencies>
-
 
 </project>

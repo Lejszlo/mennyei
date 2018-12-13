@@ -1,5 +1,6 @@
 package sp.competition.api.command;
 
+import com.sp.club.api.value.ClubId;
 import lombok.*;
 import sp.competition.api.value.StageId;
 
@@ -15,6 +16,6 @@ public class AddClubs extends CompetitionCommand {
     StageId stageId;
 
     @Singular
-    Set<String> clubIds;
+    Set<ClubId> clubIds;
 }
 

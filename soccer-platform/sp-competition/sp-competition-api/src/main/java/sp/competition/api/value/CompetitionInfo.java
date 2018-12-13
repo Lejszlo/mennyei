@@ -1,11 +1,10 @@
 package sp.competition.api.value;
 
-import com.sp.core.query.configurations.Interval;
-import com.sp.organizer.api.value.organizer.OrganizerInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
+import sp.common.Interval;
 
 import javax.validation.constraints.NotNull;
 
@@ -18,9 +17,6 @@ public class CompetitionInfo {
 
 	@NonNull
 	private Interval interval;
-
-	@NotNull
-	private OrganizerInfo organizerInfo;
 
 	@NotNull
 	private String description;

@@ -1,17 +1,11 @@
 package com.sp.match.command.aggregator.service;
 
 import com.sp.match.api.command.AddMatchCommand;
-import com.sp.match.api.command.PlayMatchCommand;
 import com.sp.match.api.command.SetMatchCommand;
 import com.sp.match.api.value.MatchInfo;
-import com.sp.match.api.value.event.GameEvent;
 import com.sp.match.api.value.lineup.LineUp;
 import com.sp.match.command.aggregator.domain.MatchAggregator;
 import com.sp.match.command.aggregator.infrastructure.MatchAggregateRepository;
-import com.sp.organizer.api.value.club.AwayClubId;
-import com.sp.organizer.api.value.club.HomeClubId;
-import com.sp.organizer.api.value.competition.CompetitionId;
-import com.sp.organizer.api.value.competition.StageId;
 import io.eventuate.EntityWithIdAndVersion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,20 +36,4 @@ public class MatchService {
                 .build();
 		return matchAggregateRepository.update(matchId, setMatchCommand);
 	}
-
-	public CompletableFuture<EntityWithIdAndVersion<MatchAggregator>> playMatch(HomeClubId homeClubId,
-                                                                                AwayClubId awayClubId,
-                                                                                CompetitionId competitionId,
-																				StageId stageId,
-																				String matchId,
-                                                                                List<GameEvent> homeClubEvents,
-                                                                                List<GameEvent> awayClubEvents) {
-		PlayMatchCommand playMatchCommand = PlayMatchCommand.builder(competitionId, homeClubId, awayClubId, stageId)
-				.homeClubevents(homeClubEvents)
-				.awayClubevents(awayClubEvents)
-				.build();
-		return matchAggregateRepository.update(matchId, playMatchCommand);
-	}
-
-
 }

@@ -1,12 +1,12 @@
 package com.sp.match.query.viewer.resource;
 
+import com.google.common.collect.Lists;
+import com.sp.club.api.resource.ClubDocumentResource;
 import com.sp.match.api.resource.MatchDocumentResource;
 import com.sp.match.api.value.MatchResultDetails;
 import com.sp.match.query.updater.match.entity.MatchDocument;
 import com.sp.match.query.viewer.controller.ClubDocumentQueryFeignController;
 import com.sp.match.query.viewer.controller.MatchDocumentQueryClient;
-import com.sp.organizer.api.resource.ClubDocumentResource;
-import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;

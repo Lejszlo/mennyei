@@ -1,7 +1,7 @@
 package com.sp.match.query.viewer.controller;
 
-import com.sp.organizer.api.controller.ClubDocumentQueryClient;
-import com.sp.organizer.api.resource.ClubDocumentResource;
+import com.sp.club.api.controller.ClubDocumentQueryClient;
+import com.sp.club.api.resource.ClubDocumentResource;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

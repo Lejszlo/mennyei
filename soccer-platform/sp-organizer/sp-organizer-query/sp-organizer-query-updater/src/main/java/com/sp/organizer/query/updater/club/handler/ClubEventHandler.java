@@ -1,7 +1,7 @@
 package com.sp.organizer.query.updater.club.handler;
 
-import com.sp.organizer.api.event.club.ClubCreated;
-import com.sp.organizer.api.value.club.ClubInfo;
+import com.sp.club.api.event.ClubCreated;
+import com.sp.club.api.value.ClubInfo;
 import com.sp.organizer.query.updater.club.entity.ClubDocument;
 import com.sp.organizer.query.updater.club.repository.ClubQueryMongoRepository;
 import io.eventuate.DispatchedEvent;

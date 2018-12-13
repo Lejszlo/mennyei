@@ -1,15 +1,17 @@
 package com.sp.competition.command.aggregator.service;
 
+import com.sp.club.api.value.ClubId;
 import com.sp.competition.command.aggregator.domain.CompetitionAggregate;
 import com.sp.competition.command.aggregator.infrastructure.CompetitionAggregateRepository;
-import com.sp.organizer.api.command.competition.AddClubs;
-import com.sp.organizer.api.command.competition.AddTurns;
 import io.eventuate.EntityWithIdAndVersion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sp.competition.api.command.AddClubs;
+import sp.competition.api.command.AddTurns;
 import sp.competition.api.value.season.Turn;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -23,7 +25,7 @@ public class StageService {
         this.competitionAggregateRepository = competitionAggregateRepository;
     }
 
-    public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addClubsToStage(String competitionId, UUID stageId, Collection<String> clubIds) {
+    public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addClubsToStage(String competitionId, UUID stageId, Set<ClubId> clubIds) {
         return competitionAggregateRepository.update(competitionId, AddClubs.builder()
                 .clubIds(clubIds)
 //                .stageId(stageId(competitionId, stageId))

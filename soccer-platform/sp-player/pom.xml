@@ -2,16 +2,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>soccer-platform</artifactId>
-        <groupId>com.hajdu</groupId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sp-player</artifactId>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.8.RELEASE</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.hajdu</groupId>
+    <version>${sp.player.version}</version>
     <packaging>pom</packaging>
+    <name>sp-player</name>
+    <artifactId>sp-player</artifactId>
+
+    <properties>
+        <sp.player.version>0.0.1-SNAPSHOT</sp.player.version>
+        <java.version>1.8</java.version>
+        <eventuate.client.version>0.16.0.RELEASE</eventuate.client.version>
+        <eventuate.local.version>0.12.0.RELEASE</eventuate.local.version>
+        <model.mapper.version>0.7.5</model.mapper.version>
+        <lombok.version>1.16.10</lombok.version>
+        <javax.validation.version>1.1.0.Final</javax.validation.version>
+    </properties>
 
     <modules>
         <module>sp-player-backend</module>
@@ -19,5 +32,46 @@
         <module>sp-player-api</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${model.mapper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.eventuate.client.java</groupId>
+                <artifactId>eventuate-client-java</artifactId>
+                <version>${eventuate.client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.eventuate.client.java</groupId>
+                <artifactId>eventuate-client-java-spring</artifactId>
+                <version>${eventuate.client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.eventuate.local.java</groupId>
+                <artifactId>eventuate-local-java-jdbc</artifactId>
+                <version>${eventuate.local.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

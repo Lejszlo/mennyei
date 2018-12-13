@@ -10,14 +10,5 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sp-competition-command-aggregator</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>23.0</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-
 
 </project>

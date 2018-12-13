@@ -1,7 +1,6 @@
 package com.sp.match.query.updater.match.handler;
 
 import com.sp.match.api.event.MatchAdded;
-import com.sp.match.api.event.MatchPlayed;
 import com.sp.match.api.value.MatchInfo;
 import com.sp.match.query.updater.match.entity.MatchDocument;
 import com.sp.match.query.updater.match.repository.MatchDocumentMongoRepository;
@@ -33,17 +32,4 @@ public class MatchEventHandler {
         matchMongoRepository.save(matchDocument);
     }
     
-	@EventHandlerMethod
-    public void matchPlayed(DispatchedEvent<MatchPlayed> dispatchedEvent) {
-    	MatchPlayed matchPlayed = dispatchedEvent.getEvent();
-        String matchId = dispatchedEvent.getEntityId();
-        MatchDocument matchDocument = matchMongoRepository.findOne(matchId);
-        if(matchPlayed.isPlayed()) {
-        	matchDocument.setPlayed(true);
-        	matchDocument.setFans(matchPlayed.getFans());
-        	matchDocument.setMatchResultDetails(matchPlayed.getMatchResultDetailes());
-        }
-        matchMongoRepository.save(matchDocument);
-    }
-	
 }

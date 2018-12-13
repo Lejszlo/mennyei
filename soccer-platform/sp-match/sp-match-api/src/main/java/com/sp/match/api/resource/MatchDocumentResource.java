@@ -1,7 +1,7 @@
 package com.sp.match.api.resource;
 
+import com.sp.club.api.resource.ClubDocumentResource;
 import com.sp.match.api.value.WinnerType;
-import com.sp.organizer.api.resource.ClubDocumentResource;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.ResourceSupport;

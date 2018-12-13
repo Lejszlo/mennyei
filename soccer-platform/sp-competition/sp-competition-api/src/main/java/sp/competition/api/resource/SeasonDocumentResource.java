@@ -1,9 +1,9 @@
 package sp.competition.api.resource;
 
-import com.sp.core.query.configurations.Interval;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.ResourceSupport;
+import sp.common.Interval;
 
 import java.util.List;
 

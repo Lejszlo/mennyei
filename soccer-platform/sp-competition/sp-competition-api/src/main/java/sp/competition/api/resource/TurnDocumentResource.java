@@ -1,10 +1,10 @@
 package sp.competition.api.resource;
 
-import com.sp.core.query.configurations.Interval;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 import org.springframework.hateoas.ResourceSupport;
+import sp.common.Interval;
 
 @Value
 @Builder

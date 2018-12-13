@@ -85,7 +85,7 @@ public class CompetitionAggregate extends ReflectiveMutableCommandProcessingAggr
                 .flatMap(s -> s.getStages().stream())
                 .filter(stage -> stage.getId().getStageUuid().equals(clubsAdded.getStageId()))
                 .findFirst()
-                .ifPresent(stage -> stage.getClubIds().addAll(new ArrayList<String>(clubsAdded.getClubIds()))
+                .ifPresent(stage -> stage.getClubIds().addAll(clubsAdded.getClubIds())
          );
     }
 

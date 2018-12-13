@@ -1,7 +1,7 @@
 package com.sp.match.api.value;
 
-import com.sp.organizer.api.value.club.AwayClubId;
-import com.sp.organizer.api.value.club.HomeClubId;
+import com.sp.club.api.value.AwayClubId;
+import com.sp.club.api.value.HomeClubId;
 import lombok.*;
 
 import java.time.LocalDateTime;

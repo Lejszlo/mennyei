@@ -1,8 +1,9 @@
 package sp.competition.api.event;
 
+import com.sp.club.api.value.ClubId;
 import lombok.*;
 
-import java.util.Collection;
+import java.util.Set;
 import java.util.UUID;
 
 @Builder
@@ -17,5 +18,5 @@ public class ClubsAdded implements CompetitionEvent {
     private UUID seasonId;
 
     @Singular
-    private Collection<String> clubIds;
+    private Set<ClubId> clubIds;
 }

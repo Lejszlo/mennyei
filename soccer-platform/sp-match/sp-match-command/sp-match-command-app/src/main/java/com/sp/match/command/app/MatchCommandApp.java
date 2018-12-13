@@ -1,6 +1,5 @@
 package com.sp.match.command.app;
 
-import com.sp.core.query.configurations.BeanConfigurations;
 import io.eventuate.javaclient.driver.EventuateDriverConfiguration;
 import io.eventuate.javaclient.spring.EnableEventHandlers;
 import org.slf4j.Logger;
@@ -14,7 +13,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 
 @SpringBootApplication(scanBasePackages = "com.sp.match.command")
 @EnableEventHandlers
-@Import({ EventuateDriverConfiguration.class, BeanConfigurations.class})
+@Import({ EventuateDriverConfiguration.class})
 public class MatchCommandApp implements ApplicationListener<ContextRefreshedEvent> {
 
     private static final Logger LOG = LoggerFactory.getLogger(MatchCommandApp.class);

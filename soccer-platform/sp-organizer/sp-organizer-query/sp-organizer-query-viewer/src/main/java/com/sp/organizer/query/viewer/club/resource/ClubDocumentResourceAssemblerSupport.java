@@ -1,6 +1,6 @@
 package com.sp.organizer.query.viewer.club.resource;
 
-import com.sp.organizer.api.resource.ClubDocumentResource;
+import com.sp.club.api.resource.ClubDocumentResource;
 import com.sp.organizer.query.updater.club.entity.ClubDocument;
 import com.sp.organizer.query.viewer.club.controller.ClubDocumentDocumentController;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;

@@ -1,7 +1,7 @@
 package com.sp.organizer.query.viewer.club.controller;
 
-import com.sp.organizer.api.controller.ClubDocumentQueryClient;
-import com.sp.organizer.api.resource.ClubDocumentResource;
+import com.sp.club.api.controller.ClubDocumentQueryClient;
+import com.sp.club.api.resource.ClubDocumentResource;
 import com.sp.organizer.query.viewer.club.service.ClubDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

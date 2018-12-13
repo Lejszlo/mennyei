@@ -1,7 +1,5 @@
 package com.sp.match.query.app;
 
-import com.sp.core.query.configurations.BeanConfigurations;
-import com.sp.core.query.configurations.MongoConfiguration;
 import io.eventuate.javaclient.driver.EventuateDriverConfiguration;
 import io.eventuate.javaclient.spring.EnableEventHandlers;
 import org.slf4j.Logger;
@@ -27,7 +25,7 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @EnableDiscoveryClient
 @EnableFeignClients("com.sp.match.query")
-@Import({ EventuateDriverConfiguration.class, BeanConfigurations.class, MongoConfiguration.class})
+@Import({ EventuateDriverConfiguration.class})
 public class MatchQueryApp implements ApplicationListener<ContextRefreshedEvent> {
 
     private static final Logger LOG = LoggerFactory.getLogger(MatchQueryApp.class);

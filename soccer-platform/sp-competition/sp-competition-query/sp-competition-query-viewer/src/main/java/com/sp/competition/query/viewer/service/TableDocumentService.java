@@ -1,5 +1,6 @@
 package com.sp.competition.query.viewer.service;
 
+import com.google.common.collect.Lists;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.sp.competition.query.updater.entity.StageDocument;
 import com.sp.competition.query.updater.entity.TurnDocument;
@@ -7,7 +8,6 @@ import com.sp.competition.query.viewer.controller.MatchDocumentQueryFeignQueryCo
 import com.sp.competition.query.viewer.resource.table.TableResource;
 import com.sp.competition.query.viewer.resource.table.TableResourceAssemblerSupport;
 import com.sp.match.api.resource.MatchDocumentResource;
-import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sp.competition.api.value.StageId;

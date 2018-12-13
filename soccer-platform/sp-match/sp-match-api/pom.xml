@@ -10,16 +10,5 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sp-match-api</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>io.eventuate.client.java</groupId>
-            <artifactId>eventuate-client-java-spring</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hajdu</groupId>
-            <artifactId>sp-organizer-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 
 </project>

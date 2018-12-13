@@ -2,10 +2,8 @@ package com.sp.match.command.aggregator.domain;
 
 import com.sp.match.api.command.AddMatchCommand;
 import com.sp.match.api.command.MatchCommand;
-import com.sp.match.api.command.PlayMatchCommand;
 import com.sp.match.api.command.SetMatchCommand;
 import com.sp.match.api.event.MatchAdded;
-import com.sp.match.api.event.MatchPlayed;
 import com.sp.match.api.event.MatchSet;
 import com.sp.match.api.value.MatchInfo;
 import com.sp.match.api.value.MatchResultDetails;
@@ -33,15 +31,6 @@ public class MatchAggregator extends ReflectiveMutableCommandProcessingAggregate
 	public List<Event> process(AddMatchCommand addMatchCommand) {
 		return Collections.singletonList(MatchAdded.builder(addMatchCommand.getMatchInfo()).build());
 	}
-
-	public List<Event> process(PlayMatchCommand playMatchCommand) {
-		MatchResultDetails matchResultDetailes = MatchResultDetails.build(playMatchCommand.getHomeClubevents(), playMatchCommand.getAwayClubevents());
-		return Collections.singletonList(
-				MatchPlayed.builder(playMatchCommand.getHomeClubId(), playMatchCommand.getAwayClubId(), matchResultDetailes, playMatchCommand.getCompetitionId(), playMatchCommand.getStageId())
-				    .played(true)
-				    .build());
-	}
-	
 	public List<Event> process(SetMatchCommand setMatchCommand) {
 		return Collections.singletonList(MatchSet.builder()
 				.awayLineUps(setMatchCommand.getAwayLineUps())
@@ -58,8 +47,4 @@ public class MatchAggregator extends ReflectiveMutableCommandProcessingAggregate
 		awayLineUps.addAll(matchSet.getAwayLineUps());
 	}
 
-	public void apply(MatchPlayed matchPlayed) {
-		matchResultDetailes = matchPlayed.getMatchResultDetailes();
-	}
-	
 }

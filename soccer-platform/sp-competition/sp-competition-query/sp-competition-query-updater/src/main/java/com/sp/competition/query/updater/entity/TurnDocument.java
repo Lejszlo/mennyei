@@ -1,10 +1,10 @@
 package com.sp.competition.query.updater.entity;
 
-import com.sp.core.query.configurations.Interval;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
+import sp.common.Interval;
 
 import javax.validation.constraints.NotNull;
 import java.util.Comparator;

@@ -26,9 +26,8 @@
             <artifactId>modelmapper</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.hajdu</groupId>
-            <artifactId>sp-match-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
         </dependency>
     </dependencies>
 

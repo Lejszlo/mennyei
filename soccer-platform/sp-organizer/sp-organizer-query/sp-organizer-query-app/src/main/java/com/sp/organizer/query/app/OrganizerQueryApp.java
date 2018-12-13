@@ -1,7 +1,5 @@
 package com.sp.organizer.query.app;
 
-import com.sp.core.query.configurations.BeanConfigurations;
-import com.sp.core.query.configurations.MongoConfiguration;
 import io.eventuate.javaclient.driver.EventuateDriverConfiguration;
 import io.eventuate.javaclient.spring.EnableEventHandlers;
 import org.slf4j.Logger;
@@ -31,7 +29,7 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 @EnableCircuitBreaker
 @EnableHystrixDashboard
 @EnableFeignClients(value = "com.sp.organizer.query")
-@Import({ EventuateDriverConfiguration.class, BeanConfigurations.class, MongoConfiguration.class})
+@Import({ EventuateDriverConfiguration.class})
 public class OrganizerQueryApp implements ApplicationListener<ContextRefreshedEvent> {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrganizerQueryApp.class);

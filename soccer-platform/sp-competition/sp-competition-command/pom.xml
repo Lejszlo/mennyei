@@ -15,13 +15,13 @@
     <modules>
         <module>sp-competition-command-app</module>
         <module>sp-competition-command-aggregator</module>
+        <module>sp-competition-command-integration-test</module>
     </modules>
 
     <dependencies>
         <dependency>
-            <groupId>com.hajdu</groupId>
-            <artifactId>sp-competition-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>io.eventuate.client.java</groupId>
+            <artifactId>eventuate-client-java-spring</artifactId>
         </dependency>
     </dependencies>
 

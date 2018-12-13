@@ -1,6 +1,7 @@
 package com.sp.competition.command.aggregator.validation;
 
 import com.google.common.collect.Sets;
+import com.sp.club.api.value.ClubId;
 import com.sp.competition.command.aggregator.domain.CompetitionAggregate;
 import org.springframework.stereotype.Service;
 import sp.competition.api.command.AddClubs;
@@ -23,8 +24,7 @@ public class CompetitionAggregateValidator {
                 .findFirst()
                 .orElseThrow(RuntimeException::new); //TODO bad request
 
-        Set<String> newClubIds = addClubs.getClubIds();
-
+        Set<ClubId> newClubIds = addClubs.getClubIds();
 
         if(!Sets.intersection(newClubIds, stage.getClubIds()).isEmpty()) {
             throw new RuntimeException(); // TODO bad request

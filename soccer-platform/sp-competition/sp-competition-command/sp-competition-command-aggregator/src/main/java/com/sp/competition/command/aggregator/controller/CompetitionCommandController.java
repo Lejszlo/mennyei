@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sp.competition.api.command.AddClubs;
-import sp.competition.api.command.AddSeason;
-import sp.competition.api.command.AddStage;
-import sp.competition.api.command.CreateCompetition;
+import sp.competition.api.command.*;
 
 import java.util.concurrent.ExecutionException;
 
@@ -25,7 +22,6 @@ public class CompetitionCommandController {
 
     @PostMapping
     public String createCompetition(@RequestBody CreateCompetition competitionCommand) throws ExecutionException, InterruptedException {
-
         return competitionService.save(competitionCommand).get().getEntityId();
     }
 
@@ -42,6 +38,16 @@ public class CompetitionCommandController {
     @PostMapping("/add/clubs")
     public String addClubs(@RequestBody AddClubs addClubs) throws ExecutionException, InterruptedException {
         return competitionService.addClubs(addClubs).get().getEntityId();
+    }
+
+    @PostMapping("/add/turns")
+    public String addTurns(@RequestBody AddTurns addTurns) throws ExecutionException, InterruptedException {
+        return competitionService.addTurns(addTurns).get().getEntityId();
+    }
+
+    @PostMapping("/add/matches")
+    public String addMatches(@RequestBody AddMatches addMatches) throws ExecutionException, InterruptedException {
+        return competitionService.addMatches(addMatches).get().getEntityId();
     }
 
 }

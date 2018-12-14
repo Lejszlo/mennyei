@@ -1,6 +1,6 @@
 package com.sp.match.command.aggregator.service;
 
-import com.sp.match.api.command.AddMatchCommand;
+import com.sp.match.api.command.CreateMatch;
 import com.sp.match.api.command.SetMatchCommand;
 import com.sp.match.api.value.MatchInfo;
 import com.sp.match.api.value.lineup.LineUp;
@@ -23,9 +23,8 @@ public class MatchService {
 		this.matchAggregateRepository = matchAggregateRepository;
 	}
 
-	public CompletableFuture<EntityWithIdAndVersion<MatchAggregator>> addMatch(MatchInfo matchInfo) {
-		AddMatchCommand addMatchCommand = AddMatchCommand.builder(matchInfo).build();
-		return matchAggregateRepository.save(addMatchCommand);
+	public CompletableFuture<EntityWithIdAndVersion<MatchAggregator>> createMatch(CreateMatch createMatch) {
+		return matchAggregateRepository.save(createMatch);
 	}
 
 	public CompletableFuture<EntityWithIdAndVersion<MatchAggregator>> preMatch(String matchId, List<LineUp> homeLineUps,

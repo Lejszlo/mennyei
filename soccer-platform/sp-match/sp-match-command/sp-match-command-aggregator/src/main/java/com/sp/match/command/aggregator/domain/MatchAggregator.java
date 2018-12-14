@@ -1,6 +1,6 @@
 package com.sp.match.command.aggregator.domain;
 
-import com.sp.match.api.command.AddMatchCommand;
+import com.sp.match.api.command.CreateMatch;
 import com.sp.match.api.command.MatchCommand;
 import com.sp.match.api.command.SetMatchCommand;
 import com.sp.match.api.event.MatchAdded;
@@ -10,6 +10,7 @@ import com.sp.match.api.value.MatchResultDetails;
 import com.sp.match.api.value.lineup.LineUp;
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
+import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,15 +22,11 @@ public class MatchAggregator extends ReflectiveMutableCommandProcessingAggregate
 	private List<LineUp> homeLineUps = new ArrayList<>();
 
 	private List<LineUp> awayLineUps = new ArrayList<>();
-	
-	private MatchResultDetails matchResultDetailes;
 
-	public MatchInfo getMatchInfo() {
-		return matchInfo;
-	}
+	private MatchResultDetails matchResultDetails;
 
-	public List<Event> process(AddMatchCommand addMatchCommand) {
-		return Collections.singletonList(MatchAdded.builder(addMatchCommand.getMatchInfo()).build());
+	public List<Event> process(CreateMatch createMatch) {
+		return Collections.singletonList(MatchAdded.builder(createMatch.getMatchInfo()).build());
 	}
 	public List<Event> process(SetMatchCommand setMatchCommand) {
 		return Collections.singletonList(MatchSet.builder()
@@ -38,6 +35,7 @@ public class MatchAggregator extends ReflectiveMutableCommandProcessingAggregate
 				.build());
 	}
 
+	//	EVENTS PROCESS
 	public void apply(MatchAdded matchAdded) {
 		matchInfo = matchAdded.getMatchInfo();
 	}

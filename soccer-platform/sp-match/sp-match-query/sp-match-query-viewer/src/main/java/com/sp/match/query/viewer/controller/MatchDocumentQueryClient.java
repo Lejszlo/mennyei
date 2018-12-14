@@ -4,6 +4,7 @@ import com.sp.match.api.controller.MatchDocumentQueryController;
 import com.sp.match.api.resource.MatchDocumentResource;
 import com.sp.match.query.viewer.service.MatchDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,5 +26,11 @@ public class MatchDocumentQueryClient implements MatchDocumentQueryController {
     public List<MatchDocumentResource> getMatches(@PathVariable("matchIds") List<String> matchIds) {
         return matchDocumentService.getMatches(matchIds);
     }
+
+    @GetMapping(value = "/generate")
+    public List<MatchDocumentResource> getMatches() {
+        return null;
+    }
+
 
 }

@@ -1,10 +1,9 @@
 package sp.competition.api.value.season;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Singular;
-import lombok.Value;
+import com.sp.match.api.value.MatchId;
+import lombok.*;
 import sp.common.Interval;
+import sp.competition.api.value.TurnId;
 
 import java.util.List;
 
@@ -14,20 +13,17 @@ import static java.util.Comparator.comparing;
 @Builder(builderMethodName="hiddenBuilder")
 @AllArgsConstructor
 public class Turn implements Comparable<Turn> {
-	
-	private int index;
-	
+
+	@NonNull
+	TurnId turnId;
+
 	@Singular
-	private List<String> matches;
+	List<MatchId> matches;
 
-	private Interval interval;
-
-	public static TurnBuilder builder(int index) {
-		return hiddenBuilder().index(index);
-	}
+	Interval interval;
 
 	@Override
 	public int compareTo(Turn that) {
-	    return comparing(Turn::getIndex).compare(this, that);
+	    return comparing(Turn::getTurnId).compare(this, that);
 	}
 }

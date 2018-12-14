@@ -5,10 +5,8 @@ import com.sp.competition.command.aggregator.infrastructure.CompetitionAggregate
 import io.eventuate.EntityWithIdAndVersion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sp.competition.api.command.AddClubs;
-import sp.competition.api.command.AddSeason;
-import sp.competition.api.command.AddStage;
-import sp.competition.api.command.CreateCompetition;
+import sp.competition.api.command.*;
+import sp.competition.api.value.TurnId;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -17,7 +15,7 @@ public class CompetitionService {
 	private CompetitionAggregateRepository competitionAggregateRepository;
 
 	@Autowired
-	CompetitionService(CompetitionAggregateRepository competitionAggregateRepository) {
+	public CompetitionService(CompetitionAggregateRepository competitionAggregateRepository) {
 		this.competitionAggregateRepository = competitionAggregateRepository;
 	}
 
@@ -35,5 +33,13 @@ public class CompetitionService {
 
 	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addClubs(AddClubs addClubs) {
 		return competitionAggregateRepository.update(addClubs.getStageId().getCompetitionId().getValue(), addClubs);
+	}
+
+	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addTurns(AddTurns addTurns) {
+		return competitionAggregateRepository.update(addTurns.getStageId().getCompetitionId().getValue(), addTurns);
+	}
+
+	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addMatches(AddMatches addMatches) {
+		return competitionAggregateRepository.update(addMatches.getTurnId().getCompetitionId().getValue(), addMatches);
 	}
 }

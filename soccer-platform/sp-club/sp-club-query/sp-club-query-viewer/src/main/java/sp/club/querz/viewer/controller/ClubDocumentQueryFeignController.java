@@ -1,4 +1,4 @@
-package com.sp.match.query.viewer.controller;
+package sp.club.querz.viewer.controller;
 
 import com.sp.club.api.controller.ClubDocumentQueryClient;
 import com.sp.club.api.resource.ClubDocumentResource;

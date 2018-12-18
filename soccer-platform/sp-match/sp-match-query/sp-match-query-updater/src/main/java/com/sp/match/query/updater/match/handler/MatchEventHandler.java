@@ -28,7 +28,6 @@ public class MatchEventHandler {
         MatchInfo matchInfo = matchAdded.getMatchInfo();
         MatchDocument matchDocument = MatchDocument.builder(matchId, matchInfo.getHomeClubId(), matchInfo.getAwayClubId()).build();
         matchDocument.setMatchDate(matchInfo.getMatchDate());
-        matchDocument.setMatchResultDetails(matchAdded.getMatchInfo().getMatchResultDetails());
         matchMongoRepository.save(matchDocument);
     }
     

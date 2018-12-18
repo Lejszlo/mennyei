@@ -26,6 +26,10 @@
         <javax.validation.version>1.1.0.Final</javax.validation.version>
         <sp.club.api.version>0.0.1-SNAPSHOT</sp.club.api.version>
         <guava.version>23.0</guava.version>
+        <junit.jupiter.engine.version>5.3.1</junit.jupiter.engine.version>
+        <mockito.core.version>2.21.0</mockito.core.version>
+        <mockito.jupiter.version>2.23.0</mockito.jupiter.version>
+        <hamcrest.version>2.0.0.0</hamcrest.version>
     </properties>
 
     <modules>
@@ -61,6 +65,7 @@
             <version>${sp.club.api.version}</version>
         </dependency>
 
+        <!--3PP-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-hateoas</artifactId>
@@ -80,7 +85,32 @@
             <artifactId>validation-api</artifactId>
             <version>${javax.validation.version}</version>
         </dependency>
-    </dependencies>
 
+        <!--TEST-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.engine.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>java-hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>

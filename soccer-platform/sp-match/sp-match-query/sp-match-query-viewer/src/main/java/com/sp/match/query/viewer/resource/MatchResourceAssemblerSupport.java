@@ -1,11 +1,11 @@
 package com.sp.match.query.viewer.resource;
 
 import com.google.common.collect.Lists;
+import com.sp.club.api.controller.ClubDocumentQueryClient;
 import com.sp.club.api.resource.ClubDocumentResource;
 import com.sp.match.api.resource.MatchDocumentResource;
 import com.sp.match.api.value.MatchResultDetails;
 import com.sp.match.query.updater.match.entity.MatchDocument;
-import com.sp.match.query.viewer.controller.ClubDocumentQueryFeignController;
 import com.sp.match.query.viewer.controller.MatchDocumentQueryClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
@@ -19,10 +19,10 @@ import java.util.Set;
 @Component
 public class MatchResourceAssemblerSupport extends ResourceAssemblerSupport<MatchDocument, MatchDocumentResource> {
 
-    private final ClubDocumentQueryFeignController clubDocumentQueryFeignController;
+    private final ClubDocumentQueryClient clubDocumentQueryFeignController;
 
 	@Autowired
-    public MatchResourceAssemblerSupport(ClubDocumentQueryFeignController clubDocumentQueryFeignController) {
+    public MatchResourceAssemblerSupport(ClubDocumentQueryClient clubDocumentQueryFeignController) {
 		super(MatchDocumentQueryClient.class, MatchDocumentResource.class);
         this.clubDocumentQueryFeignController = clubDocumentQueryFeignController;
     }

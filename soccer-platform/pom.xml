@@ -17,6 +17,7 @@
 		<module>sp-competition</module>
         <module>sp-club</module>
         <module>sp-common</module>
+		<module>sp-auth</module>
     </modules>
 
 </project>

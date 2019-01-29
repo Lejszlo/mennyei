@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.7.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'gs-spring-boot-docker'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Finchley.SR2'
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("com.google.guava:guava:27.0.1-jre")
+    compile("com.hajdu.sp:competition-lib:1.0.0-SNAPSHOT")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.cloud:spring-cloud-starter-config")
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
+    compile("org.springframework.cloud:spring-cloud-starter-oauth2")
+    compile("io.eventuate.client.java:eventuate-client-java-spring:0.20.1.RELEASE")
+    compile("io.eventuate.local.java:eventuate-local-java-jdbc:0.30.0.M8")
+    annotationProcessor("org.projectlombok:lombok:1.18.4")
+    compileOnly("org.projectlombok:lombok:1.18.4")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}

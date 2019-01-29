@@ -1,14 +1,14 @@
 version: "3.2"
 services:
   zookeeper:
-    image: eventuateio/eventuateio-local-zookeeper:0.13.0
+    image: eventuateio/eventuateio-local-zookeeper:latest
     ports:
       - 2181:2181
       - 2888:2888
       - 3888:3888
 
   kafka:
-    image: eventuateio/eventuateio-local-kafka:0.13.0
+    image: eventuateio/eventuateio-local-kafka:latest
     ports:
       - 9092:9092
     links:
@@ -31,7 +31,7 @@ services:
       KM_ARGS: -Djava.net.preferIPv4Stack=true
 
   mysql:
-    image: eventuateio/eventuateio-local-mysql:0.13.0
+    image: eventuateio/eventuateio-local-mysql:latest
     ports:
       - 3306:3306
     environment:
@@ -40,7 +40,7 @@ services:
       - MYSQL_PASSWORD=mysqlpw
 
   cdcservice:
-    image: eventuateio/eventuateio-local-cdc-service:0.13.0
+    image: eventuateio/eventuateio-local-cdc-service:latest
     ports:
       - 8099:8080
     links:
@@ -59,7 +59,7 @@ services:
       EVENTUATELOCAL_CDC_BINLOG_CLIENT_ID: 1234567890
 
   consoleserver:
-     image: eventuateio/eventuateio-local-console:0.15.0
+     image: eventuateio/eventuateio-local-console:latest
      links:
        - mysql
        - zookeeper

@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: organizer-query
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DOCKER_HOST_IP}/eventuate
+    username: mysqluser
+    password: mysqlpw
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write-dates-as-timestamps: false
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+eventuateLocal.kafka.bootstrap.servers: ${DOCKER_HOST_IP}:9092
+eventuateLocal.zookeeper.connection.string: ${DOCKER_HOST_IP}:2181
+eventuateLocal.cdc.db-user-name: root
+eventuateLocal.cdc.db-password: rootpassword
+
+server:
+  port: 0
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+  client:
+    registryFetchIntervalSeconds: 5
+
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 10000
+        readTimeout: 10000

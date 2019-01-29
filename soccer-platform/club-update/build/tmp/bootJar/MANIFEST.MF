@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Start-Class: com.hajdu.sp.club.update.app.ClubUpdateApp
+Main-Class: org.springframework.boot.loader.JarLauncher
+

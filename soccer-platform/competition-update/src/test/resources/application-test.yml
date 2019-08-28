@@ -22,7 +22,7 @@ security:
   oauth2:
     resource:
       jwt:
-        key-value: '123'
+        key-value: 123
 logging:
   level:
     org.springframework.security: TRACE

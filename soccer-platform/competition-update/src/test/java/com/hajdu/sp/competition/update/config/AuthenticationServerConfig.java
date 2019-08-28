@@ -15,12 +15,11 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
-@TestConfiguration
 @EnableAuthorizationServer
+@TestConfiguration
 public class AuthenticationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private AuthenticationManager authenticationManager;
-
 
     @Autowired
     public AuthenticationServerConfig(AuthenticationManager authenticationManager) {
@@ -38,7 +37,7 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("oauth")
-                .secret("oauth")
+                .secret("{noop}oauth")
                 .authorizedGrantTypes("password","authorization_code", "refresh_token")
                 .scopes("read");
     }

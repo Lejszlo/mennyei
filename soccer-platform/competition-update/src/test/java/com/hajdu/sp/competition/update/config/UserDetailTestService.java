@@ -15,7 +15,7 @@ public class UserDetailTestService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-            return new User("dummyUser","dummyPassword",true,true,
+            return new User("dummyUser","{noop}dummyPassword",true,true,
                     true,true, AuthorityUtils.createAuthorityList("USER"));
     }
 }

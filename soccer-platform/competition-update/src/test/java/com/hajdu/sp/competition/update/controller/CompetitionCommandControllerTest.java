@@ -47,9 +47,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class CompetitionCommandControllerTest extends BaseIntegrationTest {
 
-//    @ClassRule
-//    public static DockerComposeContainer compose = new DockerComposeContainer(new File("src/test/resources/docker-compose.yml"));
-
     @Autowired
     private ObjectMapper objectMapper;
 

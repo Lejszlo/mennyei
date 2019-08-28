@@ -1,18 +1,16 @@
 package com.hajdu.sp.competition.update.controller;
 
-import com.hajdu.sp.competition.lib.command.*;
+import com.hajdu.sp.competition.update.command.competition.*;
 import com.hajdu.sp.competition.update.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.ExecutionException;
 
 @RequestMapping("/competition")
 @RestController
 public class CompetitionCommandController {
+
     private CompetitionService competitionService;
 
     @Autowired
@@ -25,27 +23,27 @@ public class CompetitionCommandController {
         return competitionService.save(competitionCommand).get().getEntityId();
     }
 
-    @PostMapping("/add/season")
+    @PatchMapping("/add/season")
     public String addSeason(@RequestBody AddSeason addSeason) throws ExecutionException, InterruptedException {
         return competitionService.addSeason(addSeason).get().getEntityId();
     }
 
-    @PostMapping("/add/stage")
+    @PatchMapping("/add/stage")
     public String addStage(@RequestBody AddStage addStage) throws ExecutionException, InterruptedException {
         return competitionService.addStage(addStage).get().getEntityId();
     }
 
-    @PostMapping("/add/clubs")
-    public String addClubs(@RequestBody AddClubs addClubs) throws ExecutionException, InterruptedException {
-        return competitionService.addClubs(addClubs).get().getEntityId();
+    @PatchMapping("/add/clubs")
+    public String addClubs(@RequestBody AddClub addClub) throws ExecutionException, InterruptedException {
+        return competitionService.addClubs(addClub).get().getEntityId();
     }
 
-    @PostMapping("/add/turns")
-    public String addTurns(@RequestBody AddTurns addTurns) throws ExecutionException, InterruptedException {
-        return competitionService.addTurns(addTurns).get().getEntityId();
+    @PatchMapping("/add/turns")
+    public String addTurns(@RequestBody AddTurn addTurn) throws ExecutionException, InterruptedException {
+        return competitionService.addTurns(addTurn).get().getEntityId();
     }
 
-    @PostMapping("/add/matches")
+    @PatchMapping("/add/matches")
     public String addMatches(@RequestBody AddMatches addMatches) throws ExecutionException, InterruptedException {
         return competitionService.addMatches(addMatches).get().getEntityId();
     }

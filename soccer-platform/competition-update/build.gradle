@@ -13,11 +13,6 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-bootJar {
-    baseName = 'gs-spring-boot-docker'
-    version =  '0.1.0'
-}
-
 repositories {
     mavenLocal()
     mavenCentral()
@@ -30,12 +25,15 @@ dependencyManagement {
     }
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.12
+targetCompatibility = 1.12
 
 dependencies {
+    annotationProcessor("org.projectlombok:lombok:1.18.8")
+
     compile("com.google.guava:guava:27.0.1-jre")
-    compile("com.hajdu.sp:competition-lib:1.0.0-SNAPSHOT")
+    compile("org.springframework.boot:spring-boot-starter-hateoas")
+    compile("org.springframework.boot:spring-boot-starter-aop")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.2.RELEASE')
@@ -43,8 +41,10 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
     compile("io.eventuate.client.java:eventuate-client-java-spring:0.20.1.RELEASE")
     compile("io.eventuate.local.java:eventuate-local-java-jdbc:0.30.0.M8")
-    annotationProcessor("org.projectlombok:lombok:1.18.4")
+
     compileOnly("org.projectlombok:lombok:1.18.4")
+
+    testCompile "org.testcontainers:testcontainers:1.12.0"
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.springframework.security:spring-security-test")
 }

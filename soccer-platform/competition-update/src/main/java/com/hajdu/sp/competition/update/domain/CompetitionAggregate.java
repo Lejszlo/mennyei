@@ -1,28 +1,31 @@
 package com.hajdu.sp.competition.update.domain;
 
-import com.hajdu.sp.competition.lib.command.*;
-import com.hajdu.sp.competition.lib.event.*;
-import com.hajdu.sp.competition.lib.value.CompetitionInfo;
-import com.hajdu.sp.competition.lib.value.season.Season;
-import com.hajdu.sp.competition.lib.value.season.Stage;
+import com.hajdu.sp.competition.update.command.competition.*;
+import com.hajdu.sp.competition.update.event.club.ClubsAdded;
+import com.hajdu.sp.competition.update.event.competition.CompetitionCreated;
+import com.hajdu.sp.competition.update.event.competition.SeasonAdded;
+import com.hajdu.sp.competition.update.event.competition.StageAdded;
+import com.hajdu.sp.competition.update.event.competition.TurnsAdded;
+import com.hajdu.sp.competition.update.util.InvariantValidator;
 import com.hajdu.sp.competition.update.validation.CompetitionAggregateValidator;
+import com.hajdu.sp.competition.update.value.competition.organizer.Organizer;
+import com.hajdu.sp.competition.update.value.competition.season.Seasons;
+import com.hajdu.sp.competition.update.value.competition.season.Season;
+import com.hajdu.sp.competition.update.value.competition.stage.Stage;
 import io.eventuate.Event;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 public class CompetitionAggregate extends ReflectiveMutableCommandProcessingAggregate<CompetitionAggregate, CompetitionCommand> {
+    private Organizer organizer;
+    private Seasons seasons;
 
-    private CompetitionInfo competitionInfo;
-
-    private List<Season> seasons = new ArrayList<>();
-
-    public List<Event> process(CreateCompetition addCompetitionCommand) {
+    public List<Event> process(CreateCompetition command) {
         return Collections.singletonList(CompetitionCreated.builder()
-                .competitionInfo(addCompetitionCommand.getCompetitionInfo()).build());
+                .organizer(command.getOrganizer())
+                .build());
     }
 
     public List<Event> process(AddSeason addSeason) {
@@ -30,8 +33,7 @@ public class CompetitionAggregate extends ReflectiveMutableCommandProcessingAggr
         return Collections.singletonList(SeasonAdded.builder()
                 .season(Season.builder()
                         .id(addSeason.getSeasonId())
-                        .name(addSeason.getName())
-                        .interval(addSeason.getInterval())
+                        .competitionInfo(addSeason.getCompetitionInfo())
                         .build())
                 .build());
     }
@@ -48,25 +50,25 @@ public class CompetitionAggregate extends ReflectiveMutableCommandProcessingAggr
                 .build());
     }
 
-    public List<Event> process(AddClubs addClubs) {
-        CompetitionAggregateValidator.checkClubsInvariant(this, addClubs);
+    @InvariantValidator(clazz = CompetitionAggregateValidator.class)
+    public List<Event> process(AddClub addClub) {
         return Collections.singletonList(ClubsAdded.builder()
-                .stageId(addClubs.getStageId().getStageUuid())
-                .seasonId(addClubs.getStageId().getSeasonId().getSeasonUuid())
-                .clubIds(addClubs.getClubIds())
+                .stageId(addClub.getStageId().getStageUuid())
+                .seasonId(addClub.getStageId().getSeasonId().getSeasonUuid())
+                .club(addClub.getClub())
                 .build());
     }
 
-    public List<Event> process(AddTurns addClubsToStageCommand) {
+    public List<Event> process(AddTurn addClubsToStageCommand) {
         return Collections.singletonList(TurnsAdded.builder()
                 .stageId(addClubsToStageCommand.getStageId().getStageUuid())
-                .turns(addClubsToStageCommand.getTurnIds())
+                .turn(addClubsToStageCommand.getTurn())
                 .build());
     }
 
     //----- EVENTS -----
     public void apply(CompetitionCreated competitionCreated) {
-        competitionInfo = competitionCreated.getCompetitionInfo();
+        this.organizer = competitionCreated.getOrganizer();
     }
 
     public void apply(SeasonAdded seasonAdded) {
@@ -85,12 +87,12 @@ public class CompetitionAggregate extends ReflectiveMutableCommandProcessingAggr
                 .flatMap(s -> s.getStages().stream())
                 .filter(stage -> stage.getId().getStageUuid().equals(clubsAdded.getStageId()))
                 .findFirst()
-                .ifPresent(stage -> stage.getClubIds().addAll(clubsAdded.getClubIds())
-         );
+                .ifPresent(stage -> stage.getClubIds().add(clubsAdded.getClub())
+                );
     }
 
-    public List<Season> getSeasons() {
-        return Collections.unmodifiableList(seasons);
+    public Seasons getSeasons() {
+        return seasons;
     }
 
 }

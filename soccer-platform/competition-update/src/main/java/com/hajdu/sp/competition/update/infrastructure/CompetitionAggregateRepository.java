@@ -1,6 +1,6 @@
 package com.hajdu.sp.competition.update.infrastructure;
 
-import com.hajdu.sp.competition.lib.command.CompetitionCommand;
+import com.hajdu.sp.competition.update.command.competition.CompetitionCommand;
 import com.hajdu.sp.competition.update.domain.CompetitionAggregate;
 import io.eventuate.AggregateRepository;
 import io.eventuate.EventuateAggregateStore;

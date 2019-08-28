@@ -1,0 +1,28 @@
+eventuatelocal:
+  kafka:
+    bootstrap:
+      servers: localhost:9092
+  zookeeper:
+    connection:
+      string: localhost:2181
+eventuatelocal.cdc.db-user-name: root
+eventuatelocal.cdc.db-password: rootpassword
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/eventuate
+    username: mysqluser
+    password: mysqlpw
+
+server:
+  port: 0
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: '123'
+logging:
+  level:
+    org.springframework.security: TRACE

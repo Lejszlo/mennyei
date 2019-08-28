@@ -1,6 +1,6 @@
 package com.hajdu.sp.competition.update.service;
 
-import com.hajdu.sp.competition.lib.command.*;
+import com.hajdu.sp.competition.update.command.competition.*;
 import com.hajdu.sp.competition.update.domain.CompetitionAggregate;
 import com.hajdu.sp.competition.update.infrastructure.CompetitionAggregateRepository;
 import io.eventuate.EntityWithIdAndVersion;
@@ -31,12 +31,12 @@ public class CompetitionService {
         return competitionAggregateRepository.update(addStage.getStageId().getCompetitionId().getValue(), addStage);
 	}
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addClubs(AddClubs addClubs) {
-		return competitionAggregateRepository.update(addClubs.getStageId().getCompetitionId().getValue(), addClubs);
+	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addClubs(AddClub addClub) {
+		return competitionAggregateRepository.update(addClub.getStageId().getCompetitionId().getValue(), addClub);
 	}
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addTurns(AddTurns addTurns) {
-		return competitionAggregateRepository.update(addTurns.getStageId().getCompetitionId().getValue(), addTurns);
+	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addTurns(AddTurn addTurn) {
+		return competitionAggregateRepository.update(addTurn.getStageId().getCompetitionId().getValue(), addTurn);
 	}
 
 	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addMatches(AddMatches addMatches) {

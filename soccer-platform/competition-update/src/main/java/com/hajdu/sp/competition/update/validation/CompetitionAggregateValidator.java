@@ -1,39 +1,53 @@
 package com.hajdu.sp.competition.update.validation;
-import com.google.common.collect.Sets;
-import com.hajdu.sp.club.lib.value.ClubId;
-import com.hajdu.sp.competition.lib.command.AddClubs;
-import com.hajdu.sp.competition.lib.value.StageId;
-import com.hajdu.sp.competition.lib.value.season.Stage;
+
+import com.hajdu.sp.competition.update.command.competition.AddClub;
 import com.hajdu.sp.competition.update.domain.CompetitionAggregate;
+import com.hajdu.sp.competition.update.exceptions.ExceptionValue;
+import com.hajdu.sp.competition.update.exceptions.InvariantException;
+import com.hajdu.sp.competition.update.exceptions.NotFoundException;
+import com.hajdu.sp.competition.update.value.club.ClubId;
+import com.hajdu.sp.competition.update.value.competition.ids.StageId;
+import com.hajdu.sp.competition.update.value.competition.season.Season;
+import com.hajdu.sp.competition.update.value.competition.stage.Stage;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.time.LocalDateTime;
 
 @Service
-public class CompetitionAggregateValidator {
+public class CompetitionAggregateValidator implements Invariant<CompetitionAggregate, AddClub> {
 
-    public static void checkClubsInvariant(CompetitionAggregate aggregate, AddClubs addClubs) {
-        StageId stageId = addClubs.getStageId();
+    @Override
+    public void check(CompetitionAggregate competitionAggregate, AddClub addClub) {
+        Stage stage = checkStage(competitionAggregate, addClub);
 
-        Stage stage = aggregate.getSeasons()
-                .stream()
-                .flatMap(s -> s.getStages()
-                        .stream())
-                .filter(s -> s.getId().equals(stageId))
-                .findFirst()
-                .orElseThrow(RuntimeException::new); //TODO bad request
+        checkExistingClubs(addClub, stage);
 
-        Set<ClubId> newClubIds = addClubs.getClubIds();
+        checkNumberOfClubs(addClub.getClub(), stage);
+    }
 
-        if( !Sets.intersection(newClubIds, stage.getClubIds()).isEmpty()) {
-            throw new RuntimeException(); // TODO bad request
-        }
+    private Stage checkStage(CompetitionAggregate competitionAggregate, AddClub addClub) {
+        StageId stageId = addClub.getStageId();
 
-        int numberOfTeams = stage.getStageRuleSet().getNumberOfTeams();
+        Season latestSeason = competitionAggregate.getSeasons()
+                .findLatestSeason(LocalDateTime.now())
+                .orElseThrow(() -> new NotFoundException("Latest season"));
 
-        if(numberOfTeams < stage.getClubIds().size() + newClubIds.size()) {
-            throw new RuntimeException(); // TODO bad request
+        return latestSeason.getStages()
+                .getByStageId(stageId)
+                .orElseThrow(() -> new NotFoundException(stageId.getSeasonId().getSeasonUuid().toString()));
+    }
+
+    private void checkExistingClubs(AddClub addClub, Stage stage) {
+        if(stage.getClubIds().contains(addClub.getClub())) {
+            throw new InvariantException("The club has been already added", ExceptionValue.builder().value(addClub.getClub().getId()).build());
         }
     }
 
+    private void checkNumberOfClubs(ClubId newClubId, Stage stage) {
+        int numberOfClubs = stage.getStageRuleSet().getNumberOfTeams();
+        int newNumberOfClubs = stage.getClubIds().size() + 1;
+        if(numberOfClubs < newNumberOfClubs) {
+            throw new InvariantException("The number of clubs has reached the maximum", ExceptionValue.builder().value(newNumberOfClubs).build());
+        }
+    }
 }

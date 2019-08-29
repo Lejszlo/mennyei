@@ -16,7 +16,7 @@ public class InvariantAspect {
 
     private final ApplicationContext applicationContext;
 
-    @Before("@annotation(InvariantValidator)")
+    @Before("@annotation(com.hajdu.sp.competition.update.util.InvariantValidator)")
     public void checkInvariant(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Class<? extends Invariant> invariantValidatorClass = signature.getMethod().getAnnotation(InvariantValidator.class).clazz();

@@ -18,18 +18,6 @@ services:
       - KAFKA_HEAP_OPTS=-Xmx320m -Xms320m
       - ZOOKEEPER_SERVERS=zookeeper:2181
 
-  kafka-manager:
-    image: sheepkiller/kafka-manager:latest
-    ports:
-      - "9000:9000"
-    links:
-      - zookeeper
-      - kafka
-    environment:
-      ZK_HOSTS: ${DOCKER_HOST_IP}:2181
-      APPLICATION_SECRET: letmein
-      KM_ARGS: -Djava.net.preferIPv4Stack=true
-
   mysql:
     image: eventuateio/eventuateio-local-mysql:latest
     ports:

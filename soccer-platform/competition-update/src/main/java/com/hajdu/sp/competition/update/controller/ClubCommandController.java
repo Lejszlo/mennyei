@@ -23,6 +23,6 @@ public class ClubCommandController {
 
     @PostMapping
     public String createClub(@RequestBody CreateClub createClub) throws ExecutionException, InterruptedException {
-        return clubService.saveClub(createClub).get().getEntityId();
+        return clubService.saveClub(createClub);
     }
 }

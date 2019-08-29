@@ -11,15 +11,15 @@ import com.hajdu.sp.competition.update.value.club.ClubInfo;
 import io.eventuate.Event;
 import io.eventuate.EventUtil;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
+import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Getter
 public class ClubAggregate extends ReflectiveMutableCommandProcessingAggregate<ClubAggregate, ClubCommand> {
-
     private ClubInfo clubInfo;
-
     private Set<String> playerIds = new HashSet<>();
 
     public List<Event> process(CreateClub createClub) {

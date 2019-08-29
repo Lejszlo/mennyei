@@ -3,8 +3,10 @@ package com.hajdu.sp.competition.update.controller;
 import com.hajdu.sp.competition.update.command.competition.*;
 import com.hajdu.sp.competition.update.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RequestMapping("/competition")
@@ -19,33 +21,33 @@ public class CompetitionCommandController {
     }
 
     @PostMapping
-    public String createCompetition(@RequestBody CreateCompetition competitionCommand) throws ExecutionException, InterruptedException {
-        return competitionService.save(competitionCommand).get().getEntityId();
+    public String createCompetition(@RequestBody @Validated CreateCompetition competitionCommand) throws ExecutionException, InterruptedException {
+        return competitionService.save(competitionCommand);
     }
 
-    @PatchMapping("/add/season")
-    public String addSeason(@RequestBody AddSeason addSeason) throws ExecutionException, InterruptedException {
-        return competitionService.addSeason(addSeason).get().getEntityId();
+    @PatchMapping("/{id}/seasons")
+    public String addSeason(@PathVariable("id") String id, @RequestBody @Validated AddSeason addSeason) throws ExecutionException, InterruptedException {
+        return competitionService.addSeason(id, addSeason);
     }
 
-    @PatchMapping("/add/stage")
-    public String addStage(@RequestBody AddStage addStage) throws ExecutionException, InterruptedException {
-        return competitionService.addStage(addStage).get().getEntityId();
+    @PatchMapping("/{id}/stages")
+    public String addStage(@PathVariable("id") String id, @RequestBody @Validated List<AddStage> addStages) throws ExecutionException, InterruptedException {
+        return competitionService.addStages(id, addStages);
     }
 
-    @PatchMapping("/add/clubs")
-    public String addClubs(@RequestBody AddClub addClub) throws ExecutionException, InterruptedException {
-        return competitionService.addClubs(addClub).get().getEntityId();
+    @PatchMapping("/{id}/clubs")
+    public String addClubs(@PathVariable("id") String id, @RequestBody @Validated List<AddClub> addClubs) throws ExecutionException, InterruptedException {
+        return competitionService.addClubs(id, addClubs);
     }
 
-    @PatchMapping("/add/turns")
-    public String addTurns(@RequestBody AddTurn addTurn) throws ExecutionException, InterruptedException {
-        return competitionService.addTurns(addTurn).get().getEntityId();
+    @PatchMapping("/{id}/turns")
+    public String addTurns(@PathVariable("id") String id, @RequestBody @Validated List<AddTurn> addTurns) throws ExecutionException, InterruptedException {
+        return competitionService.addTurns(id, addTurns);
     }
 
-    @PatchMapping("/add/matches")
-    public String addMatches(@RequestBody AddMatches addMatches) throws ExecutionException, InterruptedException {
-        return competitionService.addMatches(addMatches).get().getEntityId();
+    @PatchMapping("/{id}/matches")
+    public String addMatches(@PathVariable("id") String id, @RequestBody @Validated List<AddMatch> addMatches) throws ExecutionException, InterruptedException {
+        return competitionService.addMatches(id, addMatches);
     }
 
 }

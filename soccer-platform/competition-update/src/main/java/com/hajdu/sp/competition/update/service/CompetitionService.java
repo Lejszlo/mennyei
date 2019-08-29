@@ -1,13 +1,13 @@
 package com.hajdu.sp.competition.update.service;
 
 import com.hajdu.sp.competition.update.command.competition.*;
-import com.hajdu.sp.competition.update.domain.CompetitionAggregate;
 import com.hajdu.sp.competition.update.infrastructure.CompetitionAggregateRepository;
-import io.eventuate.EntityWithIdAndVersion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 
 @Service
@@ -19,27 +19,41 @@ public class CompetitionService {
 		this.competitionAggregateRepository = competitionAggregateRepository;
 	}
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> save(CreateCompetition createCompetition) {
-		return competitionAggregateRepository.save(createCompetition);
+	public String save(CreateCompetition createCompetition) throws ExecutionException, InterruptedException {
+		return competitionAggregateRepository.save(createCompetition)
+				.get()
+				.getEntityId();
 	}
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addSeason(AddSeason addSeason) {
-		return competitionAggregateRepository.update(addSeason.getSeasonId().getCompetitionId().getValue(), addSeason);
+	public String addSeason(String id, AddSeason addSeason) throws ExecutionException, InterruptedException {
+		return competitionAggregateRepository.update(id, addSeason)
+				.get()
+				.getEntityId();
 	}
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addStage(AddStage addStage) {
-        return competitionAggregateRepository.update(addStage.getStageId().getCompetitionId().getValue(), addStage);
+	public String addStages(String id, List<AddStage> addStages) throws ExecutionException, InterruptedException {
+		CompletableFuture.allOf(convert(id, addStages)).get();
+        return id;
 	}
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addClubs(AddClub addClub) {
-		return competitionAggregateRepository.update(addClub.getStageId().getCompetitionId().getValue(), addClub);
+	public String addTurns(String id, List<AddTurn> addTurns) throws ExecutionException, InterruptedException {
+		CompletableFuture.allOf(convert(id, addTurns)).get();
+		return id;
 	}
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addTurns(AddTurn addTurn) {
-		return competitionAggregateRepository.update(addTurn.getStageId().getCompetitionId().getValue(), addTurn);
+	public String addMatches(String id, List<AddMatch> addMatches) throws ExecutionException, InterruptedException {
+		CompletableFuture.allOf(convert(id, addMatches)).get();
+		return id;
 	}
 
-	public CompletableFuture<EntityWithIdAndVersion<CompetitionAggregate>> addMatches(AddMatches addMatches) {
-		return competitionAggregateRepository.update(addMatches.getTurnId().getCompetitionId().getValue(), addMatches);
+	public String addClubs(String id, List<AddClub> addClubs) throws ExecutionException, InterruptedException {
+		CompletableFuture.allOf(convert(id, addClubs)).get();
+		return id;
+	}
+
+	private <T> CompletableFuture[] convert(String id, List<T> commands) {
+		return commands.stream().map(command -> competitionAggregateRepository
+				.update(id, (CompetitionCommand) command))
+				.toArray(CompletableFuture[]::new);
 	}
 }

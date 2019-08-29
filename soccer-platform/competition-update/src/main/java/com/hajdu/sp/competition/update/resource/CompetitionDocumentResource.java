@@ -1,6 +1,6 @@
 package com.hajdu.sp.competition.update.resource;
 
-import com.hajdu.sp.competition.update.value.competition.CompetitionInfo;
+import com.hajdu.sp.competition.update.value.competition.SeasonInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Singular;
@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class CompetitionDocumentResource extends ResourceSupport {
-	private CompetitionInfo competitionInfo;
+	private SeasonInfo seasonInfo;
 
 	@Singular
 	private List<SeasonDocumentResource> seasons;

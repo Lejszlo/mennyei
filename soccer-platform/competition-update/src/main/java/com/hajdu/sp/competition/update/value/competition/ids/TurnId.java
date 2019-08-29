@@ -13,19 +13,12 @@ public class TurnId implements Comparable<TurnId> {
     @NonNull
     Integer index;
 
-    @NonNull
-    StageId stageId;
-
-    public static TurnId turnId(int index, StageId stageId) {
-        return new TurnId(index, stageId);
+    public static TurnId turnId(int index) {
+        return new TurnId(index);
     }
 
     @Override
     public int compareTo(TurnId that) {
         return comparing(TurnId::getIndex).compare(this, that);
-    }
-
-    public CompetitionId getCompetitionId() {
-        return stageId.getCompetitionId();
     }
 }

@@ -1,5 +1,6 @@
 package com.hajdu.sp.competition.update.event.competition;
 
+import com.hajdu.sp.competition.update.value.competition.ids.SeasonId;
 import com.hajdu.sp.competition.update.value.competition.stage.Stage;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,4 +14,7 @@ public class StageAdded implements CompetitionEvent {
 
     @NonNull
     private Stage stage;
+
+    @NonNull
+    private SeasonId seasonId;
 }

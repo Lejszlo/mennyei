@@ -10,7 +10,7 @@ import java.util.List;
 import static java.util.Comparator.comparing;
 
 @Value
-@Builder(builderMethodName="hiddenBuilder")
+@Builder
 @AllArgsConstructor
 public class Turn implements Comparable<Turn> {
 

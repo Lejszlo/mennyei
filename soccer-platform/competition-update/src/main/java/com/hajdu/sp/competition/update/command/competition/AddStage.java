@@ -1,6 +1,7 @@
 package com.hajdu.sp.competition.update.command.competition;
 
 import com.hajdu.sp.competition.update.util.Interval;
+import com.hajdu.sp.competition.update.value.competition.ids.SeasonId;
 import com.hajdu.sp.competition.update.value.competition.ids.StageId;
 import com.hajdu.sp.competition.update.value.competition.rule.StageRuleSet;
 import lombok.*;
@@ -12,6 +13,9 @@ public class AddStage extends CompetitionCommand {
 
     @NonNull
     private StageId stageId;
+
+    @NonNull
+    private SeasonId seasonId;
 
     @NonNull
     private String name;

@@ -13,6 +13,6 @@ public class AddClub extends CompetitionCommand {
     StageId stageId;
 
     @NonNull
-    ClubId club;
+    ClubId clubId;
 }
 

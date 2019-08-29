@@ -26,3 +26,4 @@ security:
 logging:
   level:
     org.springframework.security: TRACE
+    org.springframework.web: INFO

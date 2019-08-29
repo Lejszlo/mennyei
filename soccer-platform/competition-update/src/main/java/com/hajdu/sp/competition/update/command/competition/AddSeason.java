@@ -1,11 +1,12 @@
 package com.hajdu.sp.competition.update.command.competition;
 
-import com.hajdu.sp.competition.update.value.competition.CompetitionInfo;
+import com.hajdu.sp.competition.update.util.Interval;
+import com.hajdu.sp.competition.update.value.competition.SeasonInfo;
 import com.hajdu.sp.competition.update.value.competition.ids.SeasonId;
-import com.hajdu.sp.competition.update.value.competition.stage.Stage;
-import lombok.*;
-
-import java.util.List;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.Value;
 
 @Value
 @Builder
@@ -13,12 +14,11 @@ import java.util.List;
 public class AddSeason extends CompetitionCommand {
 
     @NonNull
-    CompetitionInfo competitionInfo;
+    SeasonInfo seasonInfo;
 
     @NonNull
     SeasonId seasonId;
 
-    @Singular
-    List<Stage> stages;
-
+    @NonNull
+    Interval interval;
 }

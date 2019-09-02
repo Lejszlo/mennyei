@@ -34,11 +34,15 @@ targetCompatibility = 1.12
 ext {
     lombokVersion = '1.18.8'
     testContainersVersion = '1.12.0'
+    eventuateLocal = '0.30.0.M12'
+    eventuateClient = '0.20.1.RELEASE'
 }
 
 dependencies {
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 
+    compile("org.aspectj:aspectjweaver:1.8.9")
+    compile("org.aspectj:aspectjrt:1.8.9")
     compile("org.springframework.boot:spring-boot-starter-hateoas")
     compile("org.springframework.boot:spring-boot-starter-aop")
     compile("org.springframework.boot:spring-boot-starter-web")
@@ -46,8 +50,8 @@ dependencies {
     compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.2.RELEASE')
     compile("org.springframework.cloud:spring-cloud-starter-config")
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
-    compile("io.eventuate.client.java:eventuate-client-java-spring:0.20.1.RELEASE")
-    compile("io.eventuate.local.java:eventuate-local-java-jdbc:0.30.0.M8")
+    compile("io.eventuate.client.java:eventuate-client-java-spring:${eventuateClient}")
+    compile("io.eventuate.local.java:eventuate-local-java-jdbc:${eventuateLocal}")
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.3")
 
     compileOnly("org.projectlombok:lombok:${lombokVersion}")

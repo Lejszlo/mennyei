@@ -2,7 +2,7 @@ package com.hajdu.sp.competition.update.service;
 
 import com.hajdu.sp.competition.update.command.competition.*;
 import com.hajdu.sp.competition.update.infrastructure.CompetitionAggregateRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,14 +11,11 @@ import java.util.concurrent.ExecutionException;
 
 
 @Service
+@AllArgsConstructor
 public class CompetitionService {
-	private CompetitionAggregateRepository competitionAggregateRepository;
+	private final CompetitionAggregateRepository competitionAggregateRepository;
 
-	@Autowired
-	public CompetitionService(CompetitionAggregateRepository competitionAggregateRepository) {
-		this.competitionAggregateRepository = competitionAggregateRepository;
-	}
-
+//	@InvariantValidator(clazz = CompetitionAggregateValidator.class)
 	public String save(CreateCompetition createCompetition) throws ExecutionException, InterruptedException {
 		return competitionAggregateRepository.save(createCompetition)
 				.get()

@@ -3,7 +3,6 @@ package com.hajdu.sp.competition.update.domain;
 import com.hajdu.sp.competition.update.command.competition.*;
 import com.hajdu.sp.competition.update.event.club.ClubAdded;
 import com.hajdu.sp.competition.update.event.competition.*;
-import com.hajdu.sp.competition.update.validation.CompetitionAggregateValidator;
 import com.hajdu.sp.competition.update.value.competition.organizer.Organizer;
 import com.hajdu.sp.competition.update.value.competition.season.Season;
 import com.hajdu.sp.competition.update.value.competition.season.Seasons;
@@ -67,7 +66,6 @@ public class CompetitionAggregate extends ReflectiveMutableCommandProcessingAggr
 
 
     public List<Event> process(AddClub addClub) {
-        CompetitionAggregateValidator.check(this, addClub);
         return EventUtil.events(ClubAdded.builder()
                 .stageId(addClub.getStageId())
                 .clubId(addClub.getClubId())

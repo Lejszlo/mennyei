@@ -10,7 +10,6 @@ import com.hajdu.sp.competition.update.value.match.MatchId;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -49,12 +48,6 @@ public class Seasons extends ArrayList<Season> {
                 .filter(turn -> turn.getTurnId().equals(turnId))
                 .findFirst()
                 .ifPresent(turn -> turn.getMatches().addAll(List.of(matchIds)));
-    }
-
-    public Optional<Season> findLatestSeason(LocalDateTime localDateTime) {
-        return this.stream()
-                .filter(season -> season.getInterval().getContainsPredicate(localDateTime))
-                .findFirst();
     }
 
     public Optional<Stage> findStageById(StageId stageId) {

@@ -1,7 +1,5 @@
 package com.hajdu.sp.competition.update.util;
 
-import com.hajdu.sp.competition.update.validation.Invariant;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

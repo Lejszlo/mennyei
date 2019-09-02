@@ -20,6 +20,7 @@ public class Turn implements Comparable<Turn> {
 	@Singular
 	List<MatchId> matches;
 
+	@NonNull
 	Interval interval;
 
 	@Override

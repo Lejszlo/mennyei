@@ -1,0 +1,8 @@
+<aspectj>
+    <aspects>
+        <aspect name="com.hajdu.sp.competition.update.util.InvariantAspect"/>
+        <weaver options="-verbose -showWeaveInfo">
+            <include within="com.hajdu.sp.*"/>
+        </weaver>
+    </aspects>
+</aspectj>

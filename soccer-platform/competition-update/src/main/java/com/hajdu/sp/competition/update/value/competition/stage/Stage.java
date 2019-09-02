@@ -13,7 +13,7 @@ import java.util.Set;
 @Value
 @Builder
 @AllArgsConstructor
-public class Stage {
+public class Stage implements Comparable<Stage> {
 
 	@NonNull
 	private StageId id;
@@ -33,4 +33,8 @@ public class Stage {
 	@NonNull
 	private Interval interval;
 
+	@Override
+	public int compareTo(Stage that) {
+		return this.interval.compareTo(that.getInterval());
+	}
 }

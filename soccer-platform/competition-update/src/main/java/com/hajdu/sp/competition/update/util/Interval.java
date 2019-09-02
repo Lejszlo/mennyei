@@ -4,27 +4,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import static com.hajdu.sp.competition.update.util.SpDateTime.spDateTime;
 
 @Data
 @AllArgsConstructor
 public final class Interval implements Comparable<Interval> {
 
-    private String startDate;
+    private SpDateTime startDateTime;
 
-    private String endDate;
+    private SpDateTime endDateTime;
 
-    public static Interval from(LocalDateTime startDate, LocalDateTime endDate) {
-        return new Interval(startDate.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME), endDate.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+    public static Interval from(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return new Interval(spDateTime(startDateTime), spDateTime(endDateTime));
     }
 
     public boolean getContainsPredicate(LocalDateTime date) {
-        return LocalDateTime.parse(endDate).isBefore(date) && LocalDateTime.parse(startDate).isAfter(date);
+        return LocalDateTime.parse(endDateTime.getDate()).isBefore(date) && LocalDateTime.parse(startDateTime.getDate()).isAfter(date);
     }
 
     @Override
     public int compareTo(Interval that) {
-        return LocalDateTime.parse(startDate).compareTo(LocalDateTime.parse((that.startDate)));
+        return LocalDateTime.parse(startDateTime.getDate()).compareTo(LocalDateTime.parse((that.startDateTime.getDate())));
     }
 
 }

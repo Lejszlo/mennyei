@@ -7,7 +7,7 @@ import lombok.*;
 @Data
 @Builder
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"matchDate", "homeClubId", "awayClubId"})
+@EqualsAndHashCode
 public class MatchInfo {
 
 	private String matchDate;
